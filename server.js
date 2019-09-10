@@ -1,6 +1,6 @@
 require('./config/config');
 
-const https = require('https');
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -9,8 +9,10 @@ const routes = require('./routes/routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const publicDir = path.join(__dirname + '/public');
 
 app.use(bodyParser.json());
+app.use(express.static(publicDir));
 
 routes(app);
 

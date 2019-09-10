@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
+    <meta name="theme-color" content="#ff3d00" />
+    <title>Push Notifications example</title>
+
+    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link href="/src/css/main.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+    <header>
+      <h3>Push Notification example</h3>
+    </header>
+    
+    <main class="container">
+      <h2>Request permission</h2>
+      <button class="request-button" onclick="requestNotificationPermission()">I want push!</button>
+      <span class="arrow-down"></span>
+      <h2>Request Push Notifications</h2>
+      <span class="clearfix"></span>
+
+      <section>
+        <button onclick="requestNotification('simple')">Simple push</button>
+        <button onclick="requestNotification('image')">Image push</button>
+        <button onclick="requestNotification('action')">Action push</button>
+        <button onclick="requestNotification('data')">Data push</button>
+      </section>
+
+    </main>
+    
+    <footer>
+      <span>Lovely SVG background from <a href="http://www.heropatterns.com/">Hero Patterns</a></span>
+    </footer>
+
+    <script src='./src/js/index.js' type="text/javascript" async defer></script>
+
+  </body>
+</html>

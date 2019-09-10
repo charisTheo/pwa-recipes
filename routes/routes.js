@@ -2,6 +2,9 @@ const userController = require('./../controllers/userController');
 
 module.exports = (app) => {
 
+  app.route('/user/:username/push/:type')
+    .get(userController.sendPush);
+
   app.route('/user/:username')
     .get(userController.getUser)
     .post(userController.setUser);

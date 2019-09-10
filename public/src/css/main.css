@@ -1,0 +1,125 @@
+/* Material Color tool: https://material-ui.com/customization/color/#color-tool */
+:root {
+    --orange80: rgba(255, 99, 51, 0.8);
+    --orange: #ff6333;
+    --dark-orange: #ff3d00;
+    --purple: #673ab7;
+}
+body, html {
+    height: 100%;
+    width: 100vw;
+    max-width: 100vw;
+}
+body {
+    background-color: #ffeae9;
+    background-image: url("./../../img/floating-cogs.svg");
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+header {
+    height: 40px;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    text-align: left;
+    padding: 10px 25px;
+    background-color: var(--purple);
+    margin: 0;
+}
+
+header h3 {
+    text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+    margin-top: 10px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-flow: row;
+    grid-auto-rows: 100px;
+    grid-gap: 20px;
+    height: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 5px;
+}
+
+main h2 {
+    grid-column: 2 / 3;
+    border: 2px solid var(--purple);
+    border-radius: 8px;
+    padding: 10px 15px;
+    color: black;
+    justify-self: center;
+    align-self: center;
+}
+
+main section {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: 100px;
+    grid-auto-flow: row;
+}
+
+button {
+    background-color: var(--orange);
+    color: white;
+    padding: 4px 8px;
+    margin: 5px 10px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+    box-shadow: 0 0 11px rgba(0,0,0,0.5);
+    text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+    transition: all 0.35s;
+    text-transform: capitalize;
+}
+button:hover {
+    box-shadow: 0 0 15px var(--orange);
+}
+button:active {
+    box-shadow: none;
+    background-color: var(--dark-orange);
+}
+
+.request-button, 
+.arrow-down {
+    grid-column: 1 / -1;
+}
+
+footer {
+    background-color: #333333;
+    height: 40px;
+    padding: 25px;
+}
+
+footer a {
+    color: var(--orange);
+}
+
+footer span {
+    font-size: 12px;
+}
+
+.arrow-right {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z' /%3E%3C/svg%3E");
+}
+.arrow-left {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z' /%3E%3C/svg%3E");
+}
+.arrow-down {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M22,11L12,21L2,11H8V3H16V11H22M12,18L17,13H14V5H10V13H7L12,18Z' /%3E%3C/svg%3E");
+}
+.arrow-up {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M16,13V21H8V13H2L12,3L22,13H16M7,11H10V19H14V11H17L12,6L7,11Z' /%3E%3C/svg%3E");
+}
+span[class^="arrow"] {
+    background-repeat: no-repeat no-repeat;
+    background-position: center center;
+}

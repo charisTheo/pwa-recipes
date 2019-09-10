@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
+// ? mLab URL: https://www.mlab.com/databases/heroku_g0j2hnxz/collections/users?saved=1567775813397&q=&s=&f=&pageSize=10&pageNum=0
+
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true
-  
+  useNewUrlParser: true,
+  useFindAndModify: false
 }, (err) => {
   if (err) {
     console.warn("mongoose.connect: err", err);
