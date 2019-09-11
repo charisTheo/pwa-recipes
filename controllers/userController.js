@@ -1,4 +1,3 @@
-const { User } = require('./../models/user');
 const { 
     webPush, 
     simplePushOptions,
@@ -7,41 +6,10 @@ const {
     dataPushOptions 
 } = require('./../util/webPush');
 
-exports.getUser = async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({username});
-  
-    if (!user) {
-        return res.status(404).send(`${username} was not found 🤷`);
-    }
-    
-    res.status(200).send(user);
-};
-
-exports.setUser = async (req, res) => {
-    const { username } = req.params;
-
-    try {
-        const user = new User({username});
-        await user.save();
-
-        res.status(200).send(`${username} has been successfully created and saved!`);
-
-    } catch(error) {
-        console.log("userController.setUser -> error", error);
-        res.status(400).send();
-    }
-
-};
-
-// * GET /user/:username/push/:type
+// * GET /user/push/:type
 exports.sendPush = async (req, res) => {
-    const { username, type } = req.params;
-    const user = await User.findOne({ username });
-
-    if (!user) {
-        return res.status(404).send(`${username} was not found 🤷`);
-    }
+    const { type } = req.params;
+    const { user } = req;
 
     let options = {};
 
@@ -77,29 +45,25 @@ exports.sendPush = async (req, res) => {
     }
 };
 
-// * GET /user/push-subscription/:username
+// * GET /user/push-subscription/
 exports.getUserPushSubscription = async (req, res) => {
-    const { username } = req.params;
-    const user = await User.findOne({username});
+    const { user } = req;
     
     if (!user) {
-        return res.status(404).send(`${username} was not found 🤷`);
+        return res.status(404).send(`No user was found 🤷`);
     }
     
     res.status(200).send(user.pushSubscription);
 };
 
-// * POST /user/push-subscription/:username
+// * POST /user/push-subscription/
 exports.setUserSubscription = async (req, res) => {
-    const { username } = req.params;
     const subscription = req.body;
+    const { user } = req;
 
     try {
-
-        await User.findOneAndUpdate(
-            { username }, 
-            { pushSubscription: subscription });
-            
+        user.pushSubscription = subscription;
+        await user.save();
         res.status(200).send();
 
     } catch(error) {

@@ -48,7 +48,7 @@ window.requestNotification = function(notificationType) {
         }
 
         try {
-            const response = await fetch(`/user/John/push/${notificationType}`, { method: 'GET' });
+            const response = await fetch(`/user/push/${notificationType}`, { method: 'GET' });
             if (response.status === 400) {
                 showSnackBar("Push subscription has been deleted or expired. Try requesting permission again.");
 
@@ -86,7 +86,7 @@ async function subscribeToPushManager(registration) {
     console.log('Sending subscription to the API...');
 
     try {
-        await fetch('/user/push-subscription/John', {
+        await fetch('/user/push-subscription/', {
             method: 'POST',
             body: JSON.stringify(subscription),
             headers: {
@@ -106,12 +106,13 @@ var hideSnackBarTimeout;
 function showSnackBar(message) {
     if (hideSnackBarTimeout) {
         clearTimeout(hideSnackBarTimeout);
+    } 
+    if (snackBar.innerText !== '') {
         snackBar.innerText += '\n' + message;
-
     } else {
         snackBar.innerText = message;
-
     }
+
     snackBar.classList.add('show');
     hideSnackBarTimeout = setTimeout(() => {
         snackBar.classList.remove('show');

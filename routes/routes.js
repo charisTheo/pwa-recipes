@@ -1,16 +1,13 @@
 const userController = require('./../controllers/userController');
+const { authenticate } = require('./../middleware/authenticate');
 
 module.exports = (app) => {
 
-  app.route('/user/:username/push/:type')
-    .get(userController.sendPush);
+  app.route('/user/push/:type')
+    .get(authenticate, userController.sendPush);
 
-  app.route('/user/:username')
-    .get(userController.getUser)
-    .post(userController.setUser);
-
-  app.route('/user/push-subscription/:username')
-    .get(userController.getUserPushSubscription)
-    .post(userController.setUserSubscription);
+  app.route('/user/push-subscription/')
+    .get(authenticate, userController.getUserPushSubscription)
+    .post(authenticate, userController.setUserSubscription);
   
 };
