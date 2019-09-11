@@ -1,8 +1,24 @@
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
+const snackBar = document.getElementById('snackbar');
 
 window.addEventListener('load', function() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js');
+    }
+    const queryString = document.location.search;
+
+    if (!!queryString) {
+        // ? push-notifications-are-cool
+        const pushNotificationsAreCool = getValueFromUrlQueryString(queryString);
+
+        document.body.classList.remove('cool', 'not-cool');
+        void document.body.offsetWidth; // * trigger reflow event
+        document.body.classList.add(pushNotificationsAreCool ? 'cool' : 'not-cool');
+        
+        // remove class after animation has ended (1.5s)
+        setTimeout(() => {
+            document.body.classList.remove('cool', 'not-cool');
+        }, 2500);
     }
 });
 
@@ -10,62 +26,106 @@ window.addEventListener('load', function() {
 window.requestNotificationPermission = function() {
     navigator.serviceWorker.getRegistration('/').then(registration => {
         registration.pushManager.permissionState({userVisibleOnly: true}).then(permission => {
-        // Possible values are 'prompt', 'denied', or 'granted'
-        if (permission === "prompt") {
-            subscribeToPushManager(registration);
-        }
-        });
-    });
-}
-
-window.requestNotification = function(notificationType) {
-    navigator.serviceWorker.getRegistration('/').then(registration => {
-        registration.pushManager.permissionState({userVisibleOnly: true}).then(permission => {
-            if (permission === "granted") {
-                fetch(`/user/John/push/${notificationType}`, { method: 'GET' })
-                .then(function(response) {
-                    if (response.status === 404) {
-                        console.log('Push subscription has been deleted or expired.');
-                        subscribeToPushManager(registration);
-                    } else {
-                        console.log("Push notification sent!");
-                    }
-                  }).catch(function() {
-                    console.warn("error while sending push notification...");
-                  });
-            } else {
-                // * ask for permission
+            // Possible values are 'prompt', 'denied', or 'granted'
+            if (permission === "prompt" || permission === "granted") {
                 subscribeToPushManager(registration);
             }
         });
     });
 }
 
-function subscribeToPushManager(registration) {
-    console.log('Subscribing to the Push Manager');
+window.requestNotification = function(notificationType) {
+    navigator.serviceWorker.getRegistration('/').then(async registration => {
+        if (!registration) {
+            showSnackBar("Push subscription has been deleted or expired.");
+            registration = await navigator.serviceWorker.register('./service-worker.js');
+            await subscribeToPushManager(registration);
+        }
+        const permission = await registration.pushManager.permissionState({userVisibleOnly: true});
+        if (permission !== "granted") {
+            // * ask for permission
+            await subscribeToPushManager(registration);
+        }
 
-    registration.pushManager.subscribe({
+        try {
+            const response = await fetch(`/user/John/push/${notificationType}`, { method: 'GET' });
+            if (response.status === 400) {
+                showSnackBar("Push subscription has been deleted or expired. Try requesting permission again.");
+
+            } else if (response.status === 404) {
+                showSnackBar("Push subscription has been deleted or expired.");
+                await subscribeToPushManager(registration);
+                window.requestNotification(notificationType);
+
+            } else {
+                console.log("Push notification sent!");
+
+            }
+
+        } catch (error) {
+            showSnackBar("Oops! There was an error while hitting the API. Check the console for errors.");
+            console.error(error);
+
+        }
+
+    });
+}
+
+async function subscribeToPushManager(registration) {
+    showSnackBar('Subscribing to the Push Manager...');
+
+    const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
-    }).then(function(subscription) {
-        if (!subscription) {
-            console.warn('Push Subscription not found!');
-            return;
-        }
-        console.log('Sending the subscription to the API');
+    });
 
-        fetch('/user/push-subscription/John', {
+    if (!subscription) {
+        showSnackBar("Couldn't subscribe to the Push Manager!");
+        return;
+    }
+    console.log('Sending subscription to the API...');
+
+    try {
+        await fetch('/user/push-subscription/John', {
             method: 'POST',
             body: JSON.stringify(subscription),
             headers: {
                 'content-type': 'application/json'
             }
-        }).then(function() {
-            console.log("user subscribed");
-        }).catch(function() {
-            console.log("error while subscribing");
         });
-    });
+        showSnackBar("Subscription saved in database by the API");
+
+    } catch (error) {
+        showSnackBar("Oops! There was an error while hitting the API. Check the console for errors.");
+        console.error(error);
+
+    }
+}
+
+var hideSnackBarTimeout;
+function showSnackBar(message) {
+    if (hideSnackBarTimeout) {
+        clearTimeout(hideSnackBarTimeout);
+        snackBar.innerText += '\n' + message;
+
+    } else {
+        snackBar.innerText = message;
+
+    }
+    snackBar.classList.add('show');
+    hideSnackBarTimeout = setTimeout(() => {
+        snackBar.classList.remove('show');
+        snackBar.innerText = '';
+    }, 5000);
+}
+
+function getValueFromUrlQueryString(queryString) {
+    const queryStringCharactersArr = queryString.split('');
+    // ? remove the ? character
+    queryStringCharactersArr.splice(0, 1); 
+    const sanitisedQueryString = queryStringCharactersArr.join('');
+    const pair = sanitisedQueryString.split('=');
+    return decodeURIComponent(pair[1]) === 'true' ? true : false;
 }
 
 function urlBase64ToUint8Array(base64String) {

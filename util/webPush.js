@@ -36,12 +36,12 @@ const actionPushOptions = {
         {
             action: 'cool',
             title: 'Yeay!',
-            icon: "./img/yes.png"
+            icon: "./img/cool.png"
         },
         {
             action: 'not-cool',
             title: 'Nope...',
-            icon: "./img/no.png"
+            icon: "./img/not-cool.png"
         }
     ]
 };

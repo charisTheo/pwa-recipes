@@ -1,6 +1,4 @@
-// TODO configure workbox build
-// ? https://developers.google.com/web/tools/workbox/guides/configure-workbox
-
+// https://developers.google.com/web/tools/workbox/guides/configure-workbox
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 if (workbox) {
@@ -24,8 +22,8 @@ self.addEventListener('push', function(event) {
           ...data,
           icon: './img/chrome-web-icon-96.png',
           chrome_web_icon: './img/chrome-web-icon-96.png',
-          badge: './img/speech-notification-badge-48.png',
-          chrome_web_badge: './img/speech-notification-badge-48.png',
+          badge: './img/speech-notification-badge-inverted-48.png',
+          chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
       }
       self.registration.showNotification(data.title, options);
   }
@@ -43,12 +41,12 @@ self.addEventListener('notificationclick', function(event) {
 
   switch (event.action) {
     case 'cool':
-      event.waitUntil(clients.openWindow(`/&push-notifications-are=${true}`));
+      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${true}`));
 
     break;
     
     case 'not-cool':
-      event.waitUntil(clients.openWindow(`/&push-notifications-are=${false}`));
+      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${false}`));
 
     break;
 

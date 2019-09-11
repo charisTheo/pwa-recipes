@@ -10,37 +10,83 @@
     <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <link href="/src/css/main.css" rel="stylesheet" type="text/css" />
+    <!-- Critical CSS -->
+    <style>
+      .cool-dialog, .not-cool-dialog {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-shadow: 1px 4px 4px black;
+        transform: scale(0);
+        transition: transform 0.5s;
+        font-size: 80px;
+      }
+      #snackbar {
+        position: fixed;
+        transition: bottom 0.5s;
+        min-height: 23px;
+        bottom: -150px;
+        left: calc(50% - 180px);
+        width: 320px;
+        background-color: #444444;
+        border-radius: 5px;
+        box-shadow: 0px 2px 10px rgba(0,0,0,0.3);
+        padding: 10px 20px;
+        margin: 0;
+        font-weight: 300;
+        text-align: center;
+      }
+      #snackbar.show {
+        bottom: 30px;
+      }
+      @media (min-width: 767px) {
+        #snackbar.show {
+          bottom: 120px;
+        }
+      }
+    </style>
 
+    <link href="/src/css/main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
   </head>
   <body>
-    <header>
-      <h3>Push Notification example</h3>
-    </header>
-    
-    <main class="container">
-      <h2>Request permission</h2>
-      <button class="request-button" onclick="requestNotificationPermission()">I want push!</button>
-      <span class="arrow-down"></span>
-      <h2>Request Push Notifications</h2>
-      <span class="clearfix"></span>
-
-      <section>
-        <button onclick="requestNotification('simple')">Simple push</button>
-        <button onclick="requestNotification('image')">Image push</button>
-        <button onclick="requestNotification('action')">Action push</button>
-        <button onclick="requestNotification('data')">Data push</button>
-      </section>
-
-    </main>
-    
-    <footer>
-      <span>Lovely SVG background from <a href="http://www.heropatterns.com/">Hero Patterns</a></span>
-    </footer>
+    <div class="container">
+      <header>
+        <h3>Push Notification example</h3>
+      </header>
+      
+      <main>
+        <h2>Request permission</h2>
+        <button class="request-button" onclick="requestNotificationPermission()">I want push!</button>
+        <span class="arrow-down"></span>
+        <h2>Request Push Notifications</h2>
+        <span class="clearfix"></span>
+  
+        <section>
+          <button onclick="requestNotification('simple')">Simple push</button>
+          <button onclick="requestNotification('image')">Image push</button>
+          <button onclick="requestNotification('action')">Action push</button>
+          <button onclick="requestNotification('data')">Data push</button>
+        </section>
+  
+      </main>
+      
+      <footer>
+        <span>Lovely SVG background from <a href="http://www.heropatterns.com/">Hero Patterns</a></span>
+      </footer>
+    </div>
 
     <script src='./src/js/index.js' type="text/javascript" async defer></script>
 
+    <div class="cool-dialog">😎</div>
+    <div class="not-cool-dialog">👎</div>
+
+    <div id="snackbar">some notification</div>
   </body>
 </html>
