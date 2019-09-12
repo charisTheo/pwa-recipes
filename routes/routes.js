@@ -10,4 +10,6 @@ module.exports = (app) => {
     .get(authenticate, userController.getUserPushSubscription)
     .post(authenticate, userController.setUserSubscription);
   
+  app.route('/user/remove')
+    .get(authenticate, userController.removeUserData)
 };

@@ -11,7 +11,7 @@ const authenticate = async (req, res, next) => {
         const newUserId = mongoose.Types.ObjectId();
         const newUser = new User({_id: newUserId});
         await newUser.save();
-
+        
         req.user = newUser;
         res.cookie('_id', newUserId.toHexString(), {httpOnly: true});
         next();

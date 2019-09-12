@@ -5,6 +5,7 @@ const {
     actionPushOptions,
     dataPushOptions 
 } = require('./../util/webPush');
+const { User } = require('../models/user');
 
 // * GET /user/push/:type
 exports.sendPush = async (req, res) => {
@@ -68,6 +69,24 @@ exports.setUserSubscription = async (req, res) => {
 
     } catch(error) {
         console.log("userController.setUserSubscription -> error", error);
+        res.status(400).send();
+
+    }
+};
+
+exports.removeUserData = async (req, res) => {
+    const { user } = req;
+
+    try {
+        await User.findOneAndRemove({_id: user._id});
+
+        res
+        .cookie('_id', '', { maxAge: 0, path: '/' })
+        .status(200)
+        .send();
+
+    } catch (error) {
+        console.log("userController.removeUserData -> error", error);
         res.status(400).send();
 
     }

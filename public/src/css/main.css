@@ -24,6 +24,7 @@ body {
     grid-template-columns: 1fr;
     grid-template-areas: 
       "header"
+      "wipe-data-btn"
       "main"
       "footer";
     align-content: space-between;
@@ -39,20 +40,36 @@ body.not-cool .not-cool-dialog {
     transform: scale(1);
 }
 
+#fork-me-banner {
+    position: absolute;
+    right: 0;
+    z-index: 99;
+}
+
 header {
     grid-area: header;
-    height: 40px;
-    display: block;
+    min-height: 40px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-content: space-between;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    text-align: left;
-    padding: 10px 25px;
+    padding: 10px 20px;
     background-color: var(--purple);
     margin: 0;
 }
 
 header h3 {
     text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
-    margin-top: 10px;
+    text-align: left;
+    margin: 20px 0 10px;
+}
+
+#wipe-data-btn {
+    background-color: #f44336;
+    padding: 10px 15px;
+    justify-self: start;
+    margin-left: 15px;
+    grid-area: wipe-data-btn;
 }
 
 main {
