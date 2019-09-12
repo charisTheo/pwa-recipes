@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
         // remove class after animation has ended (1.5s)
         setTimeout(() => {
             document.body.classList.remove('cool', 'not-cool');
+            window.history.replaceState({}, document.title, '/');
         }, 2500);
     }
 });
