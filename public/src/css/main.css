@@ -4,6 +4,7 @@
     --orange: #ff6333;
     --dark-orange: #ff3d00;
     --purple: #673ab7;
+    --dark-purple: #4a1a9e;
 }
 body, html {
     min-height: 100vh;
@@ -45,6 +46,38 @@ body.not-cool .not-cool-dialog {
     right: 0;
     z-index: 99;
 }
+#fork-me-banner:hover .octo-arm {
+    -webkit-animation: octocat-wave 560ms ease-in-out;
+    animation: octocat-wave 560ms ease-in-out;
+}
+@-webkit-keyframes octocat-wave {
+    0%,100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    20%,60% { 
+        -webkit-transform: rotate(-25deg);
+        transform: rotate(-25deg);
+    } 
+    40%,80% {
+        -webkit-transform: rotate(10deg);
+        transform: rotate(10deg);
+    }
+}
+@keyframes octocat-wave {
+    0%,100% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    20%,60% {
+        -webkit-transform: rotate(-25deg);
+        transform: rotate(-25deg);
+    }
+    40%,80% {
+        -webkit-transform: rotate(10deg);
+        transform:rotate(10deg);
+    }
+}
 
 header {
     grid-area: header;
@@ -69,6 +102,7 @@ header h3 {
     padding: 10px 15px;
     justify-self: start;
     margin-left: 15px;
+    margin-top: 15px;
     grid-area: wipe-data-btn;
 }
 
@@ -87,7 +121,7 @@ main {
 
 main h2 {
     grid-column: 2 / 3;
-    border: 2px solid var(--purple);
+    border: 2px solid var(--orange);
     border-radius: 8px;
     padding: 10px 15px;
     color: black;
@@ -104,7 +138,7 @@ main section {
 }
 
 button {
-    background-color: var(--orange);
+    background-color: var(--purple);
     color: white;
     padding: 4px 8px;
     margin: 5px 10px;
@@ -118,11 +152,11 @@ button {
     text-transform: capitalize;
 }
 button:hover {
-    box-shadow: 0 0 15px var(--orange);
+    box-shadow: 0 0 15px var(--purple);
 }
 button:active {
     box-shadow: none;
-    background-color: var(--dark-orange);
+    background-color: var(--dark-purple);
 }
 
 .request-button, 
@@ -133,8 +167,10 @@ button:active {
 footer {
     grid-area: footer;
     background-color: #333333;
-    height: 40px;
+    height: 70px;
     padding: 25px;
+    display: grid;
+    align-items: center;
 }
 
 footer a {
@@ -146,16 +182,16 @@ footer span {
 }
 
 .arrow-right {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z' /%3E%3C/svg%3E");
 }
 .arrow-left {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M13,22L3,12L13,2V8H21V16H13V22M6,12L11,17V14H19V10H11V7L6,12Z' /%3E%3C/svg%3E");
 }
 .arrow-down {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M22,11L12,21L2,11H8V3H16V11H22M12,18L17,13H14V5H10V13H7L12,18Z' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M22,11L12,21L2,11H8V3H16V11H22M12,18L17,13H14V5H10V13H7L12,18Z' /%3E%3C/svg%3E");
 }
 .arrow-up {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23673ab7' d='M16,13V21H8V13H2L12,3L22,13H16M7,11H10V19H14V11H17L12,6L7,11Z' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M16,13V21H8V13H2L12,3L22,13H16M7,11H10V19H14V11H17L12,6L7,11Z' /%3E%3C/svg%3E");
 }
 span[class^="arrow"] {
     background-repeat: no-repeat no-repeat;
