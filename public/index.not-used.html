@@ -12,20 +12,6 @@
 
     <!-- Critical CSS -->
     <style>
-      .cool-dialog, .not-cool-dialog {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-shadow: 1px 4px 4px black;
-        transform: scale(0);
-        transition: transform 0.5s;
-        font-size: 80px;
-      }
       #snackbar {
         position: fixed;
         transition: bottom 0.5s;
@@ -51,6 +37,10 @@
       }
     </style>
 
+    <script type="module">
+      import '@polymer/paper-card/paper-card.js';
+      import '@polymer/paper-button/paper-button.js';
+    </script>
     <link href="/src/css/main.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
@@ -67,37 +57,52 @@
   
     <div class="container">
       <header>
-        <h3>Push Notification example</h3>
+        <h3></h3>
       </header>
 
-      <button id="wipe-data-btn" onclick="wipeData()">Wipe my data</button>
-      
       <main>
-        <h2>Request permission</h2>
-        <button class="request-button" onclick="requestNotificationPermission()">I want push!</button>
-        <span class="arrow-down"></span>
-        <h2>Request Push Notifications</h2>
-        <span class="clearfix"></span>
-  
-        <section>
-          <button onclick="requestNotification('simple')">Simple push</button>
-          <button onclick="requestNotification('image')">Image push</button>
-          <button onclick="requestNotification('action')">Action push</button>
-          <button onclick="requestNotification('data')">Data push</button>
-        </section>
-  
+        <h2>Products</h2>
+
+        <div class="products">
+          <paper-card heading="PS4" image="./img/products/ps4.jpg" alt="PS4">
+            <div class="card-content">
+              Playstation 4 console
+            </div>
+            <div class="card-actions">
+              <paper-button>Add to Cart</paper-button>
+              <!-- <paper-button>Explore!</paper-button> -->
+            </div>
+          </paper-card>
+
+          <paper-card heading="PS4" image="./img/products/ps4.jpg" alt="PS4">
+            <div class="card-content">
+              Playstation 4 console
+            </div>
+            <div class="card-actions">
+              <paper-button>Add to Cart</paper-button>
+              <!-- <paper-button>Explore!</paper-button> -->
+            </div>
+          </paper-card>
+
+          <paper-card heading="PS4" image="./img/products/ps4.jpg" alt="PS4">
+            <div class="card-content">
+              Playstation 4 console
+            </div>
+            <div class="card-actions">
+              <paper-button>Add to Cart</paper-button>
+              <!-- <paper-button>Explore!</paper-button> -->
+            </div>
+          </paper-card>
+        </div>
       </main>
       
       <footer>
-        <span>Lovely SVG background from <a href="http://www.heropatterns.com/">Hero Patterns</a></span>
+        
       </footer>
     </div>
 
-    <script src='./src/js/index.js' type="text/javascript" async defer></script>
-
-    <div class="cool-dialog">😎</div>
-    <div class="not-cool-dialog">👎</div>
-
     <div id="snackbar"></div>
+
+    <script src='./src/js/index.js' type="text/javascript" async defer></script>
   </body>
 </html>

@@ -1,13 +1,22 @@
+if (!global._babelPolyfill) {
+	require('babel-polyfill');
+}
+
+import '@polymer/paper-card/paper-card.js';
+import '@polymer/paper-button/paper-button.js';
+import '@polymer/paper-toolbar/paper-toolbar.js';
+
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 const snackBar = document.getElementById('snackbar');
 
 window.addEventListener('load', () => {
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./service-worker.js');
-    }
+    // if ('serviceWorker' in navigator) {
+    //     navigator.serviceWorker.register('./service-worker.js');
+    // }
     const queryString = document.location.search;
 
     if (!!queryString) {
+        // TODO
         // ? get push-notifications-are-cool parameter from the URL bar
         const pushNotificationsAreCool = getValueFromUrlQueryString(queryString);
 

@@ -28,6 +28,7 @@ const dataPushOptions = {
     }
 }
 
+// TODO
 const actionPushOptions = {
     title: `So what do you think?`,
     body: `Are Web Push Notifications cool after all?`,

@@ -40,15 +40,15 @@ self.addEventListener('notificationclick', function(event) {
   }
 
   switch (event.action) {
-    case 'cool':
-      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${true}`));
+    // case 'cool':
+    //   event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${true}`));
 
-    break;
+    // break;
     
-    case 'not-cool':
-      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${false}`));
+    // case 'not-cool':
+    //   event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${false}`));
 
-    break;
+    // break;
 
     default:
         console.warn(`Unknown action clicked: '${event.action}'`);
