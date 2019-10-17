@@ -12,8 +12,8 @@ import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
 
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
-const NOTIFICATIONS_ACTIVE_URL = '/dist/img/notifications-active.svg';
-const NOTIFICATIONS_NONE_URL = '/dist/img/notifications-none.svg';
+const NOTIFICATIONS_ACTIVE_URL = '/img/notifications-active.svg';
+const NOTIFICATIONS_NONE_URL = '/img/notifications-none.svg';
 const snackBar = document.getElementById('snackbar');
 const notificationsRequestButton = document.getElementById('notifications-request-button');
 const shoppingCartButton = document.getElementById('shopping-cart-button');
@@ -53,7 +53,7 @@ window.addEventListener('load', async () => {
 
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/dist/service-worker.js');
+        navigator.serviceWorker.register('/service-worker.js');
     }
 }
 
@@ -271,7 +271,7 @@ window.requestNotification = notificationType => {
     navigator.serviceWorker.getRegistrations().then(async ([ registration ]) => {
         if (!registration) {
             showSnackBar("Push subscription has been deleted or expired.");
-            registration = await navigator.serviceWorker.register('/dist/service-worker.js');
+            registration = await navigator.serviceWorker.register('/service-worker.js');
             await subscribeToPushManager(registration);
         }
         const permission = await registration.pushManager.permissionState({userVisibleOnly: true});
@@ -355,7 +355,7 @@ const showSnackBar = message => {
 
 const addItemDescriptionToShoppingCart = item => {
     const html = ` <paper-icon-item id="shopping-cart-item-${item.name.split(' ').join('_')}">
-        <div class="avatar" style="background-image: url(./dist/img/products/${item.image})" slot="item-icon"></div>
+        <div class="avatar" style="background-image: url(./img/products/${item.image})" slot="item-icon"></div>
         <paper-item-body two-line>
             <div>${item.name}</div>
             <div secondary>${item.price}</div>

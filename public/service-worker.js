@@ -20,10 +20,10 @@ self.addEventListener('push', function(event) {
       const data = event.data.json();
       options = {
           ...data,
-          icon: './dist/img/chrome-web-icon-96.png',
-          chrome_web_icon: './dist/img/chrome-web-icon-96.png',
-          badge: './dist/img/speech-notification-badge-inverted-48.png',
-          chrome_web_badge: './dist/img/speech-notification-badge-inverted-48.png',
+          icon: './img/chrome-web-icon-96.png',
+          chrome_web_icon: './img/chrome-web-icon-96.png',
+          badge: './img/speech-notification-badge-inverted-48.png',
+          chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
       }
       self.registration.showNotification(data.title, options);
   }

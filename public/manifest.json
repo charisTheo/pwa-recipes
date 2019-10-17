@@ -3,26 +3,26 @@
   "name": "Push Example Web App",
   "icons": [
     {
-      "src": "/dist/favicon/favicon.ico",
+      "src": "/favicon/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     { 
-      "src": "/dist/favicon/android-chrome-192x192.png", 
+      "src": "/favicon/android-chrome-192x192.png", 
       "sizes": "192x192", 
       "type": "image/png" 
     },
     { 
-      "src": "/dist/favicon/android-chrome-512x512.png", 
+      "src": "/favicon/android-chrome-512x512.png", 
       "sizes": "512x512", 
       "type": "image/png" 
     } 
   ],
-  "start_url": "/dist",
+  "start_url": ".",
   "display": "standalone",
   "theme_color": "#673ab7",
   "background_color": "#444444",
   "serviceworker": {
-    "src": "/dist/service-worker.js"
+    "src": "service-worker.js"
   }
 }

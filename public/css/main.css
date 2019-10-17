@@ -20,7 +20,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: black;
     text-align: center;
-    background-image: url("./../../dist/img/floating-cogs.svg");
+    background-image: url("./../../img/floating-cogs.svg");
     background-color: #e7f0fc;
 }
 .container {

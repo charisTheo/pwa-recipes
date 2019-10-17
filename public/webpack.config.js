@@ -11,7 +11,7 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src/index.ejs')
   }),
-  // This plugin will copy files over to ‘./dist’ without transforming them.
+  // This plugin will copy files without transforming them.
   // That's important because the custom-elements-es5-adapter.js MUST
   // remain in ES2015. We’ll talk about this a bit later :)
   new CopyWebpackPlugin([{
@@ -41,10 +41,10 @@ const plugins = [
 module.exports = {
   // Tell Webpack which file kicks off our app.
   entry: path.resolve(__dirname, 'src/js/index.js'),
-  // Tell Weback to output our bundle to ./dist/bundle.js
+  // Tell Weback to output our bundle.js
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: __dirname
   },
   // Tell Webpack which directories to look in to resolve import statements.
   // Normally Webpack will look in node_modules by default but since we’re overriding
@@ -83,7 +83,7 @@ module.exports = {
   // Enable the Webpack dev server which will build, serve, and reload our
   // project on changes.
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: __dirname,
     compress: true,
     port: 9000,
     proxy: {
