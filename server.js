@@ -10,7 +10,8 @@ const routes = require('./routes/routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const publicDir = path.join(__dirname + '/public/dist');
+
+const publicDir = path.join(__dirname + `/public${process.env.NODE_ENV === 'dev' ? '' : '/dist'}`);
 
 app.use(bodyParser.json());
 app.use(cookieParser());

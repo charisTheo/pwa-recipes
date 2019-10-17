@@ -1,6 +1,42 @@
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+// var WebpackShellPlugin = require('webpack-shell-plugin');
+// var exec = require('child_process').exec;
 var path = require('path');
+
+const plugins = [
+  // This plugin will generate an index.html file for us that can be used
+  // by the Webpack dev server. We can give it a template file (written in EJS)
+  // and it will handle injecting our bundle for us.
+  new HtmlWebpackPlugin({
+    template: path.resolve(__dirname, 'src/index.ejs')
+  }),
+  // This plugin will copy files over to ‘./dist’ without transforming them.
+  // That's important because the custom-elements-es5-adapter.js MUST
+  // remain in ES2015. We’ll talk about this a bit later :)
+  new CopyWebpackPlugin([{
+    from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
+    to: 'bower_components/webcomponentsjs/[name].[ext]'
+  }])
+];
+
+// if (process.env.NODE_ENV === 'dev') {
+//   plugins.push(
+//     {
+//       apply: (compiler) => {
+//         compiler.hooks.afterEmit.tap('AfterEmitPlugin', (compiler) => {
+//           exec(path.resolve(__dirname,'../start-dev-server.sh'), (err, stdout, stderr) => {
+//             if (stdout) process.stdout.write(stdout);
+//             if (stderr) process.stderr.write(stderr);
+//           });
+//         });
+//       }
+//     }
+//   );
+//     // new WebpackShellPlugin({
+//     //   onBuildEnd: [`cd ${path.resolve(__dirname)} && nodemon server.js`]
+//     // })
+// }
 
 module.exports = {
   // Tell Webpack which file kicks off our app.
@@ -54,19 +90,5 @@ module.exports = {
       '/': 'http://localhost:3000'
     }
   },
-  plugins: [
-    // This plugin will generate an index.html file for us that can be used
-    // by the Webpack dev server. We can give it a template file (written in EJS)
-    // and it will handle injecting our bundle for us.
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/index.ejs')
-    }),
-    // This plugin will copy files over to ‘./dist’ without transforming them.
-    // That's important because the custom-elements-es5-adapter.js MUST
-    // remain in ES2015. We’ll talk about this a bit later :)
-    new CopyWebpackPlugin([{
-      from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
-      to: 'bower_components/webcomponentsjs/[name].[ext]'
-    }])
-  ]
+  plugins: [...plugins]
 };
