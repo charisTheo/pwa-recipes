@@ -74,6 +74,7 @@ exports.setUserSubscription = async (req, res) => {
     }
 };
 
+// * DELETE /user
 exports.removeUserData = async (req, res) => {
     const { user } = req;
 

@@ -4,6 +4,10 @@ var UserSchema = new mongoose.Schema({
     pushSubscription: {
         type: Object
     },
+    cart_items: {
+        type: Array,
+        default: []
+    }
 });
 
 // ? method override for JSON output

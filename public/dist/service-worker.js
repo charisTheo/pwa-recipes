@@ -7,10 +7,10 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precacheAndRoute(['index.html']);
+workbox.precaching.precacheAndRoute(['/'], 'GET');
 
 workbox.routing.registerRoute(
-  /\.(?:html|js|css|webp|png|svg|ico)$/,
+  /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
@@ -20,10 +20,10 @@ self.addEventListener('push', function(event) {
       const data = event.data.json();
       options = {
           ...data,
-          icon: './img/chrome-web-icon-96.png',
-          chrome_web_icon: './img/chrome-web-icon-96.png',
-          badge: './img/speech-notification-badge-inverted-48.png',
-          chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
+          icon: './dist/img/chrome-web-icon-96.png',
+          chrome_web_icon: './dist/img/chrome-web-icon-96.png',
+          badge: './dist/img/speech-notification-badge-inverted-48.png',
+          chrome_web_badge: './dist/img/speech-notification-badge-inverted-48.png',
       }
       self.registration.showNotification(data.title, options);
   }
@@ -35,23 +35,31 @@ self.addEventListener('notificationclick', function(event) {
   const data = event.notification.data;
 
   if (!event.action) {
-      // ? Was a normal notification click
-      return;
+    // ? Was a normal notification click
+
+    if (event.notification.tag === 'cart-abandoned') {
+      const { items } = data;
+
+      event.waitUntil(
+        clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`)
+      );
+    }
+
+    return;
   }
 
   switch (event.action) {
-    // case 'cool':
-    //   event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${true}`));
-
-    // break;
+    case 'checkout':
+      const { items } = data;
+      event.waitUntil(clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
+    break;
     
-    // case 'not-cool':
-    //   event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${false}`));
-
-    // break;
+    case 'clear':
+      event.waitUntil(clients.openWindow(`/?clear-shopping-cart=${true}`));
+    break;
 
     default:
-        console.warn(`Unknown action clicked: '${event.action}'`);
+        console.warn(`service-worker 'notificationclick' event -> Unknown action clicked: '${event.action}'`);
     break;
   }
 });

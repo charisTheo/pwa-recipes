@@ -2,24 +2,25 @@ if (!global._babelPolyfill) {
 	require('babel-polyfill');
 }
 
-import '@polymer/paper-card/paper-card.js';
-import '@polymer/paper-button/paper-button.js';
-import '@polymer/paper-toolbar/paper-toolbar.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@polymer/iron-icons/iron-icons.js';
-import '@polymer/paper-item/paper-item.js';
-import '@polymer/paper-item/paper-item-body.js';
-import '@polymer/paper-item/paper-icon-item.js';
+import '@polymer/paper-card/paper-card';
+import '@polymer/paper-button/paper-button';
+import '@polymer/paper-toolbar/paper-toolbar';
+import '@polymer/paper-icon-button/paper-icon-button';
+import '@polymer/iron-icons/iron-icons';
+import '@polymer/paper-item/paper-item';
+import '@polymer/paper-item/paper-item-body';
+import '@polymer/paper-item/paper-icon-item';
 
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
-const NOTIFICATIONS_ACTIVE_URL = 'img/notifications-active.svg';
-const NOTIFICATIONS_NONE_URL = 'img/notifications-none.svg';
+const NOTIFICATIONS_ACTIVE_URL = '/dist/img/notifications-active.svg';
+const NOTIFICATIONS_NONE_URL = '/dist/img/notifications-none.svg';
 const snackBar = document.getElementById('snackbar');
 const notificationsRequestButton = document.getElementById('notifications-request-button');
 const shoppingCartButton = document.getElementById('shopping-cart-button');
 const numberOfCartItemsEl = document.getElementById('number-of-cart-items');
 const cartItemsContainer = document.getElementById('cart-items-container');
 const cartCloseButton = document.getElementById('cart-close-button');
+const checkoutButton = document.getElementById('checkout-button');
 
 var db;
 
@@ -27,19 +28,22 @@ window.addEventListener('load', async () => {
     // TODO register service worker
     await registerServiceWorker();
 
-    // TODO handle answers from the push notification action clicks 
-    // checkPushNotificationActions();
-
-    configureLocalDatabase();
+    // * handle URL queries from push notification action clicks 
+    const searchQuery = document.location.search;
+    if (!!searchQuery) {
+        checkPushNotificationActions(searchQuery);
+    } else {
+        initialiseNumberOfCartItems()
+    }
+    
 
     const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
     addToCartButtons.forEach(button => button.addEventListener('click', addToCart));
-
     shoppingCartButton.addEventListener('click', toggleShoppingCart);
-    
     cartCloseButton.addEventListener('click', toggleShoppingCart);
+    checkoutButton.addEventListener('click', checkout);
 
-    // initialise notificationsRequestBtn notification icon src after checking the pushManager's permission
+    // * initialise notificationsRequestBtn notification icon src after checking the pushManager's permission
     const pushPermission = await getNotificationPermission();
     const notificationButtonIconSrc = pushPermission === "granted" ? NOTIFICATIONS_ACTIVE_URL : NOTIFICATIONS_NONE_URL;
     notificationsRequestButton.setAttribute('src', notificationButtonIconSrc);
@@ -49,25 +53,48 @@ window.addEventListener('load', async () => {
 
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./service-worker.js');
+        navigator.serviceWorker.register('/dist/service-worker.js');
     }
 }
 
-const checkPushNotificationActions = () => {
-    const queryString = document.location.search;
-    if (!!queryString) {
-        // ? get push-notifications-are-cool parameter from the URL bar
-        const pushNotificationsAreCool = getValueFromUrlQueryString(queryString);
-
-        document.body.classList.remove('cool', 'not-cool');
-        void document.body.offsetWidth; // * trigger reflow event
-        document.body.classList.add(pushNotificationsAreCool ? 'cool' : 'not-cool');
+const checkPushNotificationActions = (searchQuery) => {
+    // * get query params from the URL bar
+    // ? 'checkout' || 'clear-shopping-cart'
+    const params = new URLSearchParams(searchQuery);
+    const checkout = params.get("checkout");
+    const shouldClearShoppingCart = params.get('clear-shopping-cart');
+    
+    if (checkout === 'true') {
+        const itemsString = params.get('items');
+        const items = JSON.parse(itemsString);
+        items.map(item => {
+            addItemDescriptionToShoppingCart(item);
+            toggleShoppingCart(true);
+        });
+        showSnackBar(`Checkout time! 🕺💵`);
         
-        // remove class after animation has ended (1.5s)
-        setTimeout(() => {
-            document.body.classList.remove('cool', 'not-cool');
-            window.history.replaceState({}, document.title, '/');
-        }, 2500);
+    } else if (shouldClearShoppingCart === 'true') {
+        clearShoppingCart();
+
+    }
+
+    // ? remove URL query parameters because on page refresh will go through the process again
+    setTimeout(() => {
+        window.history.replaceState({}, document.title, '/');
+    }, 0);
+}
+
+const clearShoppingCart = async () => {
+    const response = await fetch('/cart/all', { method: 'DELETE' });
+    const items = await response.json();
+    
+    if (response.status === 200) {
+        removeAllItemsDescriptionsFromShoppingCart();
+        showSnackBar(`All items have been removed from your shopping cart 🗑🛒`);
+
+    } else {
+        showSnackBar(`There was an error while clearing your cart 😕`);
+
     }
 }
 
@@ -79,10 +106,9 @@ const configureLocalDatabase = () => {
     };
 
     DBOpenRequest.onsuccess = function(event) {
-        showSnackBar('Database initialised.');
+        // showSnackBar('Database initialised.');
 
         db = DBOpenRequest.result;
-        initialiseNumberOfCartItems();
     };
 
     DBOpenRequest.onupgradeneeded = function(event) {
@@ -92,58 +118,122 @@ const configureLocalDatabase = () => {
             showSnackBar('Error loading database.');          
         };
     
-        let objectStore = db.createObjectStore("shoppingCart", { keyPath: "name" });
-        objectStore.createIndex("name", "name", { unique: false });
-        objectStore.createIndex("price", "price", { unique: false });
-        objectStore.createIndex("image", "image", { unique: false });
+        let toAddObjectStore = db.createObjectStore("toAdd", { keyPath: "name" });
+        toAddObjectStore.createIndex("name", "name", { unique: false });
+        toAddObjectStore.createIndex("price", "price", { unique: false });
+        toAddObjectStore.createIndex("image", "image", { unique: false });
+        
+        let toRemoveObjectStore = db.createObjectStore("toRemove", { keyPath: "name" });
+        toRemoveObjectStore.createIndex("name", "name", { unique: false });
+        toRemoveObjectStore.createIndex("price", "price", { unique: false });
+        toRemoveObjectStore.createIndex("image", "image", { unique: false });
     };
 }
 
-const addToCart = (e) => {
-    const item = JSON.parse(e.target.getAttribute('data-item'));
+const addToCart = async event => {
+    const item = JSON.parse(event.target.getAttribute('data-item'));
     const { name, price, image } = item;
 
-    const transaction = db.transaction(["shoppingCart"], "readwrite");
-    // transaction.onerror = function(error) {
-    //     showSnackBar(`There was an error with the database while adding ${name} to your cart 😕`);
-    // };
-    
-    const objectStore = transaction.objectStore('shoppingCart');
-    const objectStoreRequest = objectStore.add(item);
-    objectStoreRequest.onsuccess = function() {
-        const countRequest = objectStore.count();
-        countRequest.onsuccess = () => {
+    // * add to IndexDB when offline 
+    if (!navigator.connection.downlink && db) {
+        const transaction = db.transaction(["toAdd"], "readwrite");
+        const objectStore = transaction.objectStore('toAdd');
+        const objectStoreRequest = objectStore.add(item);
+        
+        objectStoreRequest.onsuccess = function() {
             // * Update the number of cart items
-            updateNumberOfCartItems(countRequest.result);
+            updateNumberOfCartItems();
+            addItemDescriptionToShoppingCart(item);
+            showSnackBar(`You are offline, but ${name} has been saved for later checkout! 🎊🛒`);
         }
-        addItemDescriptionToShoppingCart(item);
-        showSnackBar(`${name} has been added to your cart! 🎊🛒`);
+        objectStoreRequest.onerror = function(error) {
+            const itemExistsInCart = error.target.error.message === 'Key already exists in the object store.';
+            // ! IndexDB does not take duplicates
+            // TODO increment item in shopping cart else show the error in snack bar
+            showSnackBar(`There was an error while adding ${name} to your cart 😕`);
+        }
+
+    } else {
+        const response = await fetch('/cart', { 
+            method: 'POST', 
+            body: JSON.stringify({item}),
+            headers: {'Content-Type': 'application/json'}
+        });
+        const totalCartItems = await response.json();
+        
+        if (response.status === 200) {
+            addItemDescriptionToShoppingCart(item);        
+            updateNumberOfCartItems(totalCartItems);
+            showSnackBar(`${name} has been added to your cart! 🎊🛒`);
+        } else {
+            showSnackBar(`There was an error while adding ${name} to your cart 😕`);
+        }
+
     }
-    objectStoreRequest.onerror = function(error) {
-        const itemExistsInCart = error.target.error.message === 'Key already exists in the object store.';
-        // TODO increment item in shopping cart else show the error in snack bar
-        showSnackBar(`There was an error while adding ${name} to your cart 😕`);
+}
+
+window.deleteItemFromCart = async item => {
+    const { name, image, price } = item;
+
+    if (!navigator.connection.downlink && db) {
+        const transaction = db.transaction(["toRemove"], "readwrite");
+        const objectStore = transaction.objectStore('toRemove');
+        const objectStoreRequest = objectStore.add(item);
+        objectStoreRequest.onsuccess = () => {
+            removeItemDescriptionFromShoppingCart(name);
+            updateNumberOfCartItems();
+            showSnackBar(`${name} has been removed from your cart! 🗑🛒`);
+        }
+    } else {
+        const response = await fetch(`/cart/${name}`, { method: 'DELETE' });
+        const totalCartItems = await response.json();
+        
+        if (response.status === 200) {
+            removeItemDescriptionFromShoppingCart(name);
+            updateNumberOfCartItems(totalCartItems);
+            showSnackBar(`${name} has been removed from your cart! 🗑🛒`);
+        } else {
+            showSnackBar(`There was an error while removing ${name} from your cart 😕`);
+        }
     }
 }
 
 const initialiseNumberOfCartItems = async () => {
-    const transaction = db.transaction(["shoppingCart"], "readwrite");
-    const objectStore = transaction.objectStore('shoppingCart');
-    const getAllItemsRequest = objectStore.getAll();
-    const countRequest = objectStore.count();
-    countRequest.onsuccess = () => {
-        // * Update the number of cart items
-        updateNumberOfCartItems(countRequest.result);
-    };
-    getAllItemsRequest.onsuccess = () => {
-        const cartItems = getAllItemsRequest.result;
+    if (!navigator.connection.downlink && db) {
+        // if only offline
+        const transaction = db.transaction(["toAdd"], "readwrite");
+        const objectStore = transaction.objectStore('toAdd');
+        const getAllItemsRequest = objectStore.getAll();
+        const countRequest = objectStore.count();
+        countRequest.onsuccess = () => {
+            // * Update the number of cart items
+            updateNumberOfCartItems(countRequest.result);
+        };
+        getAllItemsRequest.onsuccess = () => {
+            const cartItems = getAllItemsRequest.result;
+            cartItems.map(cartItem => {
+                addItemDescriptionToShoppingCart(cartItem);
+            });
+        };
+
+    } else {
+        const response = await fetch('/cart', { method: 'GET'})
+        const cartItems = await response.json();
+        updateNumberOfCartItems(cartItems.length);
         cartItems.map(cartItem => {
             addItemDescriptionToShoppingCart(cartItem);
         });
-    };
+
+    }
 }
 
 const updateNumberOfCartItems = (numberOfCartItems) => {
+    // if no number of items passed to the function
+    // measure the number of elements of id starting with 'shopping-cart-item-'
+    numberOfCartItems = numberOfCartItems !== undefined ? 
+        numberOfCartItems : 
+        document.querySelectorAll('[id^=shopping-cart-item-]').length;
+    
     if (numberOfCartItems === 0) {
         numberOfCartItemsEl.style.visibility = 'hidden';
     } else {
@@ -152,16 +242,16 @@ const updateNumberOfCartItems = (numberOfCartItems) => {
     }
 }
 
-// Possible values: 'prompt', 'denied', or 'granted'
+// * Possible values: 'prompt', 'denied', or 'granted'
 const getNotificationPermission = async () => {
-    const registration = await navigator.serviceWorker.getRegistration('/');
+    const [ registration ] = await navigator.serviceWorker.getRegistrations();
     const permission = await registration.pushManager.permissionState({userVisibleOnly: true});
     return permission;
 }
 
 // ! ask for permission only when the user clicks
 const requestNotificationPermission = () => {
-    navigator.serviceWorker.getRegistration('/').then(registration => {
+    navigator.serviceWorker.getRegistrations().then(([ registration ]) => {
         registration.pushManager.permissionState({userVisibleOnly: true}).then(permission => {
             // Possible values are 'prompt', 'denied', or 'granted'
             if (permission === "prompt" || permission === "granted") {
@@ -178,10 +268,10 @@ const requestNotificationPermission = () => {
 }
 
 window.requestNotification = notificationType => {
-    navigator.serviceWorker.getRegistration('/').then(async registration => {
+    navigator.serviceWorker.getRegistrations().then(async ([ registration ]) => {
         if (!registration) {
             showSnackBar("Push subscription has been deleted or expired.");
-            registration = await navigator.serviceWorker.register('./service-worker.js');
+            registration = await navigator.serviceWorker.register('/dist/service-worker.js');
             await subscribeToPushManager(registration);
         }
         const permission = await registration.pushManager.permissionState({userVisibleOnly: true});
@@ -264,42 +354,76 @@ const showSnackBar = message => {
 }
 
 const addItemDescriptionToShoppingCart = item => {
-    const html = ` <paper-icon-item id="shopping-cart-item-${item.name}">
-        <div class="avatar" style="background-image: url(./img/products/${item.image})" slot="item-icon"></div>
+    const html = ` <paper-icon-item id="shopping-cart-item-${item.name.split(' ').join('_')}">
+        <div class="avatar" style="background-image: url(./dist/img/products/${item.image})" slot="item-icon"></div>
         <paper-item-body two-line>
             <div>${item.name}</div>
             <div secondary>${item.price}</div>
         </paper-item-body>
-        <paper-icon-button icon="delete" alt="remove item from shopping cart"></paper-icon-button>
+        <paper-icon-button onclick='deleteItemFromCart(${JSON.stringify(item).toString()})' icon="delete" alt="remove item from shopping cart"></paper-icon-button>
     </paper-icon-item>`;
 
     document.getElementById('cart-items').innerHTML += html;
 }
 
-const toggleShoppingCart = (event) => {
-    cartItemsContainer.classList.toggle('show');
+const removeItemDescriptionFromShoppingCart = itemName => {
+    document.querySelector(`[id$=${itemName.split(' ').join('_')}]`).remove();
 }
 
-const getValueFromUrlQueryString = queryString => {
-    const queryStringCharactersArr = queryString.split('');
-    // ? remove the ? character
-    queryStringCharactersArr.splice(0, 1); 
-    const sanitisedQueryString = queryStringCharactersArr.join('');
-    const pair = sanitisedQueryString.split('=');
-    return decodeURIComponent(pair[1]) === 'true' ? true : false;
+const removeAllItemsDescriptionsFromShoppingCart = () => {
+    document.getElementById('cart-items').innerHTML = '';
+    updateNumberOfCartItems(0);
+}
+
+const toggleShoppingCart = force => {
+    if (typeof force === 'boolean') {
+        if (force) {
+            cartItemsContainer.classList.add('show');
+        } else {
+            cartItemsContainer.classList.remove('show');
+        }
+    } else {
+        cartItemsContainer.classList.toggle('show');
+    }
+}
+
+const checkout = async event => {
+    const response = await fetch('/checkout', { 
+        method: 'GET', 
+    });
+    const items = await response.json();
+    console.log("checkout: items", items);
+    
+    if (response.status === 200) {
+        removeAllItemsDescriptionsFromShoppingCart();
+        showSnackBar(`🤟 Yeayy!! Checkout 🛒! 🤟`);
+    } else {
+        showSnackBar(`There was an error during the checkout of your cart 😕`);
+    }
 }
 
 const urlBase64ToUint8Array = base64String => {
     const padding = '='.repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
-      .replace(/\-/g, '+')
-      .replace(/_/g, '/');
-   
+        .replace(/\-/g, '+')
+        .replace(/_/g, '/');
+
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
-   
+    
     for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i);
+        outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
 }
+
+window.addEventListener('offline', function() {
+    showSnackBar('You are offline 📴');
+    configureLocalDatabase();
+});
+
+window.addEventListener('online', function() {
+    showSnackBar('You are back online! 🎉');
+
+    // TODO use background sync to add or remove items from IndexDB to the API
+});

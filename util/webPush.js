@@ -47,10 +47,40 @@ const actionPushOptions = {
     ]
 };
 
+const getCartAbandonPushOptions = (items) => {
+    items = Array.isArray(items) ? items : [items];
+
+    const options = {
+        title: `You have ${items.length} goodie(s) in your cart 🛒`,
+        body: `👉 Checkout now by tapping on this notification 👈`,
+        image: `/img/products/${items[0].image}`,
+        tag: "cart-abandoned",
+        data: {
+            items
+        },
+        actions: [
+            {
+                action: 'checkout',
+                title: 'Checkout',
+                icon: "./img/money-with-wings.png"
+            },
+            {
+                action: 'clear',
+                title: 'Clear cart',
+                icon: "./img/bin.png"
+            }
+        ]
+    }
+
+    return options;
+};
+
+
 module.exports = {
     webPush,
     simplePushOptions,
     imagePushOptions,
     dataPushOptions,
-    actionPushOptions
+    actionPushOptions,
+    getCartAbandonPushOptions
 };

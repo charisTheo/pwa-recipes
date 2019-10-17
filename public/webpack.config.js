@@ -49,7 +49,10 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9000
+    port: 9000,
+    proxy: {
+      '/': 'http://localhost:3000'
+    }
   },
   plugins: [
     // This plugin will generate an index.html file for us that can be used
