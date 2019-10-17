@@ -25,13 +25,9 @@ body {
 }
 .container {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas: 
-      "header"
-      "main"
-      "footer";
-    align-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 paper-toolbar {
