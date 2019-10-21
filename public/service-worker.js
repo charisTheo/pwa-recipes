@@ -59,7 +59,7 @@ self.addEventListener('notificationclick', function(event) {
     break;
 
     default:
-        console.warn(`service-worker 'notificationclick' event -> Unknown action clicked: '${event.action}'`);
+        console.warn(`service-worker notificationclick event -> Unknown action clicked: ${event.action}`);
     break;
   }
 });

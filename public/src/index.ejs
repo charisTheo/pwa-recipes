@@ -86,7 +86,17 @@
       </main>
 
       <footer>
-        
+        <custom-style>
+          <style is="custom-style">
+            paper-toggle-button {
+              --paper-toggle-button-label-color:  var(--google-blue-500);
+            }
+            /* paper-toggle-button:checked {
+              --paper-toggle-button-label-color:  var(--primary-color);
+            } */
+          </style>
+        </custom-style>
+        <paper-toggle-button id="page-visibility-push-toggle-button">Page Visibility</paper-toggle-button>
       </footer>
     </div>
 

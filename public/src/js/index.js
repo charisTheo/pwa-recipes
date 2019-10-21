@@ -10,6 +10,7 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/paper-item/paper-item';
 import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
+import '@polymer/paper-toggle-button/paper-toggle-button';
 
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 const NOTIFICATIONS_ACTIVE_URL = '/img/notifications-active.svg';
@@ -21,8 +22,9 @@ const numberOfCartItemsEl = document.getElementById('number-of-cart-items');
 const cartItemsContainer = document.getElementById('cart-items-container');
 const cartCloseButton = document.getElementById('cart-close-button');
 const checkoutButton = document.getElementById('checkout-button');
+const pageVisibilityPushToggleButton = document.getElementById('page-visibility-push-toggle-button');
 
-var db;
+var db, pageVisibilityPushIsEnabled = false;
 
 window.addEventListener('load', async () => {
     // TODO register service worker
@@ -35,13 +37,19 @@ window.addEventListener('load', async () => {
     } else {
         initialiseNumberOfCartItems()
     }
-    
 
+    document.addEventListener('visibilitychange', function() {
+        console.info("visibilitychange: document.hidden", document.hidden);
+        setTabAbandonNotificationTimeout();
+    });
+    
     const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
     addToCartButtons.forEach(button => button.addEventListener('click', addToCart));
     shoppingCartButton.addEventListener('click', toggleShoppingCart);
     cartCloseButton.addEventListener('click', toggleShoppingCart);
     checkoutButton.addEventListener('click', checkout);
+    pageVisibilityPushToggleButton.addEventListener('click', togglePageVisibilityPush);
+    pageVisibilityPushToggleButton.checked = pageVisibilityPushIsEnabled;
 
     // * initialise notificationsRequestBtn notification icon src after checking the pushManager's permission
     const pushPermission = await getNotificationPermission();
@@ -50,6 +58,23 @@ window.addEventListener('load', async () => {
 
     notificationsRequestButton.addEventListener('click', requestNotificationPermission);
 });
+
+var tabAbandonNotificationTimeout;
+const MIN_TIME_FOR_ABANDON_NOTIFICATION = 5000;
+const setTabAbandonNotificationTimeout = () => {
+    if (pageVisibilityPushIsEnabled && document.hidden) {
+        tabAbandonNotificationTimeout = setTimeout(() =>{
+            // * send push notification
+            requestNotification('browser-tab-abandoned');
+        }, MIN_TIME_FOR_ABANDON_NOTIFICATION);
+
+    } else {
+        clearTimeout(tabAbandonNotificationTimeout);
+
+    }
+}
+
+const togglePageVisibilityPush = () => pageVisibilityPushIsEnabled = !pageVisibilityPushIsEnabled;
 
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
@@ -267,7 +292,7 @@ const requestNotificationPermission = () => {
     });
 }
 
-window.requestNotification = notificationType => {
+const requestNotification = notificationType => {
     navigator.serviceWorker.getRegistrations().then(async ([ registration ]) => {
         if (!registration) {
             showSnackBar("Push subscription has been deleted or expired.");
@@ -288,7 +313,7 @@ window.requestNotification = notificationType => {
             } else if (response.status === 404) {
                 showSnackBar("Push subscription has been deleted or expired.");
                 await subscribeToPushManager(registration);
-                window.requestNotification(notificationType);
+                requestNotification(notificationType);
 
             } else {
                 console.log("Push notification sent!");

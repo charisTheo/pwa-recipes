@@ -4,7 +4,7 @@ const {
     imagePushOptions, 
     actionPushOptions,
     dataPushOptions,
-    getCartAbandonPushOptions
+    handleCartAbandoned
 } = require('../util/webPush');
 const { User } = require('../models/user');
 
@@ -75,17 +75,8 @@ exports.addItemToCart = async (req, res) => {
         }
         
         // * set a custom timeout after which to check user's shopping cart
-        const CART_ABANDON_TIMEOUT = 5000;
-        setTimeout(function() {
-            // * check if the user still has not checked out the added items yet
-            if (user.cart_items && user.cart_items.length && user.pushSubscription) {
-                // * send a push notification
-                const options = getCartAbandonPushOptions(user.cart_items);
-                webPush.sendNotification(
-                    user.pushSubscription, JSON.stringify(options)
-                );
-            }
-        }, CART_ABANDON_TIMEOUT);
+        // const CART_ABANDON_TIMEOUT = 5000;
+        // setTimeout(function() { handleCartAbandoned(user); }, CART_ABANDON_TIMEOUT);
 
         await user.save();
         res.status(200).send(user.cart_items.length.toString());

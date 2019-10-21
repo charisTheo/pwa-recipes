@@ -28,7 +28,6 @@ const dataPushOptions = {
     }
 }
 
-// TODO
 const actionPushOptions = {
     title: `So what do you think?`,
     body: `Are Web Push Notifications cool after all?`,
@@ -75,6 +74,16 @@ const getCartAbandonPushOptions = (items) => {
     return options;
 };
 
+const handleCartAbandoned = (user) => {
+    // * check if the user still has not checked out the added items yet
+    if (user.cart_items && user.cart_items.length && user.pushSubscription) {
+        // * send a push notification
+        const options = getCartAbandonPushOptions(user.cart_items);
+        webPush.sendNotification(
+            user.pushSubscription, JSON.stringify(options)
+        );
+    }
+}
 
 module.exports = {
     webPush,
@@ -82,5 +91,6 @@ module.exports = {
     imagePushOptions,
     dataPushOptions,
     actionPushOptions,
-    getCartAbandonPushOptions
+    getCartAbandonPushOptions,
+    handleCartAbandoned
 };

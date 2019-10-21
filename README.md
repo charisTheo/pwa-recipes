@@ -5,9 +5,13 @@
 > You will need an `.env` file at the root of the project
 
 `MONGODB_URI='mongodb://<USERNAME>:<PASSWORD>@<HOSTNAME>:<PORT>/<DATABASE>'` (*required*)
+
 `VAPID_PUBLIC_KEY='<YOUR VAPID PUBLIC KEY>'` (*required*)
+
 `VAPID_PRIVATE_KEY='<YOUR VAPID PRIVATE KEY>'` (*required*)
+
 `PORT=3000` (optional)
+
 
 ### Run the web app
 
