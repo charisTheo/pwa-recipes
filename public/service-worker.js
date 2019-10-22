@@ -7,11 +7,20 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precacheAndRoute(['/'], 'GET');
+// workbox.precaching.precacheAndRoute(['/'], 'GET');
+// workbox.routing.registerRoute(
+//   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
+//   new workbox.strategies.StaleWhileRevalidate()
+// );
+workbox.routing.registerRoute(
+  /\.(?:webp|png|jpg|svg)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);
 
 workbox.routing.registerRoute(
-  /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
-  new workbox.strategies.StaleWhileRevalidate()
+  new RegExp('/.*'), 
+  new workbox.strategies.NetworkFirst(), 
+  'GET'
 );
 
 self.addEventListener('push', function(event) {

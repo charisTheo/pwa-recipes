@@ -40,7 +40,7 @@ window.addEventListener('load', async () => {
 
     document.addEventListener('visibilitychange', function() {
         console.info("visibilitychange: document.hidden", document.hidden);
-        setTabAbandonNotificationTimeout();
+        setAbandonNotificationTimeout();
     });
     
     const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
@@ -61,7 +61,7 @@ window.addEventListener('load', async () => {
 
 var tabAbandonNotificationTimeout;
 const MIN_TIME_FOR_ABANDON_NOTIFICATION = 5000;
-const setTabAbandonNotificationTimeout = () => {
+const setAbandonNotificationTimeout = () => {
     if (pageVisibilityPushIsEnabled && document.hidden) {
         tabAbandonNotificationTimeout = setTimeout(() =>{
             // * send push notification
