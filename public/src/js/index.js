@@ -24,7 +24,7 @@ const cartCloseButton = document.getElementById('cart-close-button');
 const checkoutButton = document.getElementById('checkout-button');
 const pageVisibilityPushToggleButton = document.getElementById('page-visibility-push-toggle-button');
 
-var db, pageVisibilityPushIsEnabled = false;
+var db, pageVisibilityPushIsEnabled = true;
 
 window.addEventListener('load', async () => {
     // TODO register service worker
