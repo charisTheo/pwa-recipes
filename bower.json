@@ -1,0 +1,21 @@
+{
+  "name": "public",
+  "description": "",
+  "main": "js/index.js",
+  "authors": [
+    "charisTheo <dev@charistheo.io>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/charisTheo/ecommerce-example-pwa",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^3.3.0",
+    "webcomponentsjs": "^2.2.10"
+  }
+}

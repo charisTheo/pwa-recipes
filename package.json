@@ -1,32 +1,39 @@
 {
-  "name": "push-handler",
+  "name": "public",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.html",
+  "homepage": "https://charistheo.github.io/ecommerce-example-pwa",
   "scripts": {
-    "start": "node server.js",
-    "build": "./heroku_build_script.sh",
-    "dev": "./start_dev_server.sh",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/charisTheo/push-handler.git"
+    "start": "webpack-dev-server --open",
+    "build": "webpack",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages --dist build/"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/charisTheo/push-handler/issues"
-  },
-  "homepage": "https://github.com/charisTheo/push-handler#readme",
   "dependencies": {
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.4",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
-    "mongodb": "^3.3.2",
-    "mongoose": "^5.6.12",
-    "nodemon": "^1.19.2",
-    "web-push": "^3.3.5"
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "@polymer/iron-icons": "^3.0.1",
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-card": "^3.0.1",
+    "@polymer/paper-icon-button": "^3.0.2",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-toggle-button": "^3.0.1",
+    "@polymer/paper-toolbar": "^3.0.1",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "date-fns": "^2.4.1",
+    "html-webpack-plugin": "^4.0.0-beta.8",
+    "polymer-webpack-loader": "^2.0.3",
+    "webpack": "^4.41.0",
+    "webpack-dev-server": "^3.8.1"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1",
+    "webpack-cli": "^3.3.9",
+    "webpack-shell-plugin": "^0.5.0"
   }
 }
