@@ -443,12 +443,20 @@ const urlBase64ToUint8Array = base64String => {
 }
 
 window.addEventListener('offline', function() {
-    showSnackBar('You are offline 📴');
+    // showSnackBar('You are offline 📴');
     configureLocalDatabase();
 });
 
 window.addEventListener('online', function() {
-    showSnackBar('You are back online! 🎉');
+    // showSnackBar('You are back online! 🎉');
 
     // TODO use background sync to add or remove items from IndexDB to the API
 });
+
+if (window.Offline) {
+    window.Offline.options = {
+        checkOnLoad: true,
+        requests: true,
+        game: true
+    }
+}
