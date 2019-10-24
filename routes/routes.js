@@ -4,10 +4,8 @@ const { authenticate } = require('./../middleware/authenticate');
 
 module.exports = (app) => {
 
-  // TODO: in home directory '/' show the projects/websites available: 
-  // ? push examples, cart abandon and offline requests
   app.route('/')
-    .get((req, res) => {res.status(200).end('💩')});
+    .get((req, res) => {res.redirect('https://www.charistheo.io/ecommerce-example-pwa/')});
 
   app.route('/cart')
     .get(authenticate, cartController.getCartItems)
