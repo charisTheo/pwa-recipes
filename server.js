@@ -16,6 +16,10 @@ const publicDir = path.join(__dirname + `/public`);
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(publicDir));
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://www.charistheo.io");
+    next();
+});
 
 routes(app);
 
