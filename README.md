@@ -1,4 +1,4 @@
-# push-handler
+# e-commerce example PWA
 
 ## Getting started
 

@@ -4,6 +4,9 @@ const { authenticate } = require('./../middleware/authenticate');
 
 module.exports = (app) => {
 
+  // TODO: in home directory '/' show the projects/websites available: 
+  // ? push examples, cart abandon and offline requests
+
   app.route('/cart')
     .get(authenticate, cartController.getCartItems)
     .post(authenticate, cartController.addItemToCart);
