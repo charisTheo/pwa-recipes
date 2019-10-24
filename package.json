@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "NODE_ENV=dev nodemon server.js",
+    "build": "./heroku_build_script.sh",
+    "dev": "./start_dev_server.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

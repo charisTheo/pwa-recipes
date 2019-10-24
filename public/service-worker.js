@@ -7,11 +7,20 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.precaching.precacheAndRoute(['index.html']);
+// workbox.precaching.precacheAndRoute(['/'], 'GET');
+// workbox.routing.registerRoute(
+//   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
+//   new workbox.strategies.StaleWhileRevalidate()
+// );
+workbox.routing.registerRoute(
+  /\.(?:webp|png|jpg|svg)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);
 
 workbox.routing.registerRoute(
-  /\.(?:html|js|css|webp|png|svg|ico)$/,
-  new workbox.strategies.StaleWhileRevalidate()
+  new RegExp('/.*'), 
+  new workbox.strategies.NetworkFirst(), 
+  'GET'
 );
 
 self.addEventListener('push', function(event) {
@@ -35,23 +44,31 @@ self.addEventListener('notificationclick', function(event) {
   const data = event.notification.data;
 
   if (!event.action) {
-      // ? Was a normal notification click
-      return;
+    // ? Was a normal notification click
+
+    if (event.notification.tag === 'cart-abandoned') {
+      const { items } = data;
+
+      event.waitUntil(
+        clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`)
+      );
+    }
+
+    return;
   }
 
   switch (event.action) {
-    case 'cool':
-      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${true}`));
-
+    case 'checkout':
+      const { items } = data;
+      event.waitUntil(clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
     break;
     
-    case 'not-cool':
-      event.waitUntil(clients.openWindow(`/?push-notifications-are-cool=${false}`));
-
+    case 'clear':
+      event.waitUntil(clients.openWindow(`/?clear-shopping-cart=${true}`));
     break;
 
     default:
-        console.warn(`Unknown action clicked: '${event.action}'`);
+        console.warn(`service-worker notificationclick event -> Unknown action clicked: ${event.action}`);
     break;
   }
 });

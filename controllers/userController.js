@@ -3,7 +3,8 @@ const {
     simplePushOptions,
     imagePushOptions, 
     actionPushOptions,
-    dataPushOptions 
+    dataPushOptions,
+    handleCartAbandoned
 } = require('./../util/webPush');
 const { User } = require('../models/user');
 
@@ -26,6 +27,13 @@ exports.sendPush = async (req, res) => {
         break;
         case 'action':
             options = actionPushOptions;
+            break;
+        case 'browser-tab-abandoned':
+            handleCartAbandoned(user);
+            res.status(200).end();
+            return;
+        default:
+            options = simplePushOptions;
             break;
     }
         
@@ -74,6 +82,7 @@ exports.setUserSubscription = async (req, res) => {
     }
 };
 
+// * DELETE /user
 exports.removeUserData = async (req, res) => {
     const { user } = req;
 
