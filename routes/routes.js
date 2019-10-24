@@ -6,6 +6,8 @@ module.exports = (app) => {
 
   // TODO: in home directory '/' show the projects/websites available: 
   // ? push examples, cart abandon and offline requests
+  app.route('/')
+    .get((req, res) => {res.status(200).end('💩')});
 
   app.route('/cart')
     .get(authenticate, cartController.getCartItems)
