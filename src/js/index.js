@@ -13,6 +13,7 @@ import '@polymer/paper-item/paper-icon-item';
 import '@polymer/paper-toggle-button/paper-toggle-button';
 
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
+const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = '/img/notifications-active.svg';
 const NOTIFICATIONS_NONE_URL = '/img/notifications-none.svg';
 const snackBar = document.getElementById('snackbar');
@@ -110,7 +111,7 @@ const checkPushNotificationActions = (searchQuery) => {
 }
 
 const clearShoppingCart = async () => {
-    const response = await fetch('/cart/all', { method: 'DELETE' });
+    const response = await fetch(`${API_URL}/cart/all`, { method: 'DELETE' });
     const items = await response.json();
     
     if (response.status === 200) {
@@ -179,7 +180,7 @@ const addToCart = async event => {
         }
 
     } else {
-        const response = await fetch('/cart', { 
+        const response = await fetch(`${API_URL}/cart`, { 
             method: 'POST', 
             body: JSON.stringify({item}),
             headers: {'Content-Type': 'application/json'}
@@ -210,7 +211,7 @@ window.deleteItemFromCart = async item => {
             showSnackBar(`${name} has been removed from your cart! 🗑🛒`);
         }
     } else {
-        const response = await fetch(`/cart/${name}`, { method: 'DELETE' });
+        const response = await fetch(`${API_URL}/cart/${name}`, { method: 'DELETE' });
         const totalCartItems = await response.json();
         
         if (response.status === 200) {
@@ -242,7 +243,7 @@ const initialiseNumberOfCartItems = async () => {
         };
 
     } else {
-        const response = await fetch('/cart', { method: 'GET'})
+        const response = await fetch(`${API_URL}/cart`, { method: 'GET'})
         const cartItems = await response.json();
         updateNumberOfCartItems(cartItems.length);
         cartItems.map(cartItem => {
@@ -306,7 +307,7 @@ const requestNotification = notificationType => {
         }
 
         try {
-            const response = await fetch(`/user/push/${notificationType}`, { method: 'GET' });
+            const response = await fetch(`${API_URL}/user/push/${notificationType}`, { method: 'GET' });
             if (response.status === 400) {
                 showSnackBar("Push subscription has been deleted or expired. Try requesting permission again.");
 
@@ -344,7 +345,7 @@ const subscribeToPushManager = async registration => {
     console.log('Sending subscription to the API...');
 
     try {
-        await fetch('/user/push-subscription/', {
+        await fetch(`${API_URL}/user/push-subscription/`, {
             method: 'POST',
             body: JSON.stringify(subscription),
             headers: {
@@ -413,7 +414,7 @@ const toggleShoppingCart = force => {
 }
 
 const checkout = async event => {
-    const response = await fetch('/checkout', { 
+    const response = await fetch(`${API_URL}/checkout`, { 
         method: 'GET', 
     });
     const items = await response.json();

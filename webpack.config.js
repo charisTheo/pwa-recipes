@@ -11,13 +11,26 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: path.resolve(__dirname, 'src/index.ejs')
   }),
-  // This plugin will copy files without transforming them.
-  // That's important because the custom-elements-es5-adapter.js MUST
-  // remain in ES2015. We’ll talk about this a bit later :)
-  new CopyWebpackPlugin([{
-    from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
-    to: 'bower_components/webcomponentsjs/[name].[ext]'
-  }])
+  new CopyWebpackPlugin([
+    {
+      from: path.resolve(__dirname, 'bower_components/webcomponentsjs/*.js'),
+      to: 'bower_components/webcomponentsjs/[name].[ext]'
+    },
+    {
+      from: path.resolve(__dirname, 'img'),
+      to: path.resolve(__dirname, 'build/img'),
+    },
+    {
+      from: path.resolve(__dirname, 'css'),
+      to: path.resolve(__dirname, 'build/css'),
+    },
+    {
+      from: path.resolve(__dirname, 'favicon'),
+      to: path.resolve(__dirname, 'build/favicon'),
+    },
+    'service-worker.js',
+    'manifest.json'
+  ])
 ];
 
 // if (process.env.NODE_ENV === 'dev') {
