@@ -61,17 +61,16 @@ exports.getCartItems = async (req, res) => {
     }
 };
 
-// * POST /cart {body: item}
+// * POST /cart { body: { items: [] }}
 exports.addItemToCart = async (req, res) => {
-    const { item } = req.body;
+    const { items } = req.body;
     const { user } = req;
 
     try {
-        
         if (typeof user.cart_items !== 'object') {
-            user.cart_items = [item];
+            user.cart_items = items.splice(0, items.length);
         } else {
-            user.cart_items.push(item);
+            user.cart_items.concat(items);
         }
         
         // * set a custom timeout after which to check user's shopping cart
