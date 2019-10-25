@@ -71,14 +71,9 @@ exports.addItemToCart = async (req, res) => {
         if (typeof user.cart_items !== 'object') {
             user.cart_items = items.splice(0, items.length);
         } else {
-            user.cart_items.concat(items);
+            user.cart_items = [...user.cart_items, ...items];
         }
-        console.log("TCL: addItemToCart -> user.cart_items", user.cart_items);
         
-        // * set a custom timeout after which to check user's shopping cart
-        // const CART_ABANDON_TIMEOUT = 5000;
-        // setTimeout(function() { handleCartAbandoned(user); }, CART_ABANDON_TIMEOUT);
-
         await user.save();
         res.status(200).send(user.cart_items.length.toString());
 
