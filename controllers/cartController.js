@@ -3,10 +3,8 @@ const {
     simplePushOptions,
     imagePushOptions, 
     actionPushOptions,
-    dataPushOptions,
-    handleCartAbandoned
+    dataPushOptions
 } = require('../util/webPush');
-const { User } = require('../models/user');
 
 // * GET /user/push/:type
 exports.sendPush = async (req, res) => {
@@ -84,14 +82,14 @@ exports.addItemToCart = async (req, res) => {
     }
 };
 
-// * DELETE /cart:itemName
+// * DELETE /cart { body: { items: [] }}
 exports.deleteItemFromCart = async (req, res) => {
-    const { itemName } = req.params;
+    const { items } = req.body;
     const { user } = req;
 
     try {
-        const item = user.cart_items.find(cart_item => cart_item.name === itemName);
-        user.cart_items.pull(item);
+        const cart_items = user.cart_items.filter(item => !items.includes(item));
+        user.cart_items = [...cart_items];
 
         await user.save();
         res.status(200).send(user.cart_items.length.toString());

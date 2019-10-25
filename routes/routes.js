@@ -9,16 +9,14 @@ module.exports = (app) => {
 
   app.route('/cart')
     .get(authenticate, cartController.getCartItems)
-    .post(authenticate, cartController.addItemToCart);
+    .post(authenticate, cartController.addItemToCart)
+    .delete(authenticate, cartController.deleteItemFromCart);
   
   app.route('/cart/all')
     .delete(authenticate, cartController.clearCart);
 
   app.route('/checkout')
     .get(authenticate, cartController.checkout);
-
-  app.route('/cart/:itemName')
-    .delete(authenticate, cartController.deleteItemFromCart);
 
   app.route('/user')
     .delete(authenticate, userController.removeUserData);
