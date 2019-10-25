@@ -88,7 +88,8 @@ exports.deleteItemFromCart = async (req, res) => {
     const { user } = req;
 
     try {
-        const cart_items = user.cart_items.filter(item => !items.includes(item));
+        // ! removes all occurances of the item's name
+        const cart_items = user.cart_items.filter(item => !items.find(_item => _item.name === item.name));
         user.cart_items = [...cart_items];
 
         await user.save();
