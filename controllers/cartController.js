@@ -52,7 +52,8 @@ exports.getCartItems = async (req, res) => {
     const { user } = req;
 
     try {
-        res.status(200).send(user.cart_items);
+        console.log("TCL: exports.getCartItems -> user.cart_items", user.cart_items)
+        res.status(200).send(JSON.stringify(user.cart_items || []));
 
     } catch (error) {
         console.log("cartController.getCartItems -> error", error);
@@ -72,6 +73,7 @@ exports.addItemToCart = async (req, res) => {
         } else {
             user.cart_items.concat(items);
         }
+        console.log("TCL: addItemToCart -> user.cart_items", user.cart_items);
         
         // * set a custom timeout after which to check user's shopping cart
         // const CART_ABANDON_TIMEOUT = 5000;
