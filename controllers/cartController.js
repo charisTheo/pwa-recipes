@@ -50,7 +50,7 @@ exports.getCartItems = async (req, res) => {
     const { user } = req;
 
     try {
-        console.log("TCL: exports.getCartItems -> user.cart_items", user.cart_items)
+        console.log("TCL: exports.getCartItems -> user.cart_items", user.cart_items);
         res.status(200).send(JSON.stringify(user.cart_items || []));
 
     } catch (error) {
@@ -68,8 +68,10 @@ exports.addItemToCart = async (req, res) => {
     try {
         if (typeof user.cart_items !== 'object') {
             user.cart_items = items.splice(0, items.length);
-        } else {
+        } else if (items) {
             user.cart_items = [...user.cart_items, ...items];
+        } else {
+            throw new Error(`No items where sent for adding to the cart`, items);
         }
         
         await user.save();
