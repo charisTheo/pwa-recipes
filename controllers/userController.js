@@ -69,11 +69,11 @@ exports.getUserPushSubscription = async (req, res) => {
 
 // * POST /user/push-subscription/
 exports.setUserSubscription = async (req, res) => {
-    const subscription = req.body;
+    const { subscriptionEndpoint } = req.body;
     const { user } = req;
 
     try {
-        user.pushSubscription = subscription;
+        user.pushSubscription = subscriptionEndpoint;
         await user.save();
         res.status(200).send();
 

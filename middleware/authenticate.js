@@ -8,7 +8,9 @@ const authenticate = async (req, res, next) => {
 
     if (!user) {
         // ? create a new one and send an http-only cookie
+        console.log('authenticate: create a new one and send an http-only cookie');
         const newUserId = mongoose.Types.ObjectId();
+        console.log("authenticate: newUserId", newUserId);
         const newUser = new User({_id: newUserId});
         await newUser.save();
         
