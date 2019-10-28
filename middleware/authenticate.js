@@ -3,9 +3,8 @@ var mongoose = require('mongoose');
 const { User } = require('../models/user');
 
 const authenticate = async (req, res, next) => {
-    const { _id } = req.cookies || res.signedCookies;
+    const { _id } = req.cookies;
     console.log("TCL: authenticate -> req.cookies", req.cookies);
-    console.log("authenticate -> res.signedCookies", res.signedCookies);
     const user = await User.findOne({ _id });
 
     if (!user) {
@@ -22,7 +21,8 @@ const authenticate = async (req, res, next) => {
             secure: true,
             httpOnly: true,
             domain: 'charistheo.io',
-            path: '/'
+            path: '/',
+            sameSite: true
         });
         req.user = newUser;
         // res.setHeader('Set-Cookie', [`_id=${newUserId.toHexString()}; HttpOnly`]);
