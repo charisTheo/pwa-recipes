@@ -2,14 +2,16 @@ if (!global._babelPolyfill) {
 	require('babel-polyfill');
 }
 
+import './../css/main.css';
+
 import '@polymer/paper-card/paper-card';
 import '@polymer/paper-button/paper-button';
 import '@polymer/paper-toolbar/paper-toolbar';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-item/paper-item-body';
-import '@polymer/paper-item/paper-icon-item';
+// import '@polymer/paper-icon-button/paper-icon-button';
+// import '@polymer/iron-icons/iron-icons';
+// import '@polymer/paper-item/paper-item';
+// import '@polymer/paper-item/paper-item-body';
+// import '@polymer/paper-item/paper-icon-item';
 
 const snackBar = document.getElementById('snackbar');
 
