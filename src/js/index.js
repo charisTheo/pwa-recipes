@@ -24,20 +24,6 @@ const registerServiceWorker = () => {
     }
 }
 
-const clearShoppingCart = async () => {
-    const response = await fetch(`${API_URL}/cart/all`, { method: 'DELETE' });
-    const items = await response.json();
-    
-    if (response.status === 200) {
-        removeAllItemsDescriptionsFromShoppingCart();
-        showSnackBar(`All items have been removed from your shopping cart 🗑🛒`);
-
-    } else {
-        showSnackBar(`There was an error while clearing your cart 😕`);
-
-    }
-}
-
 var hideSnackBarTimeout;
 const showSnackBar = message => {
     if (hideSnackBarTimeout) {
