@@ -17,7 +17,12 @@ const authenticate = async (req, res, next) => {
         const newUser = new User({_id: newUserId});
         await newUser.save();
         
-        res.cookie('_id', newUserId.toHexString(), { expires: new Date(Date.now() + 900000), httpOnly: true, domain: 'charistheo.io' });
+        res.cookie('_id', newUserId.toHexString(), {
+            expires: new Date(Date.now() + 900000), 
+            httpOnly: true, 
+            domain: 'charistheo.io',
+            secure: true
+        });
         req.user = newUser;
         // res.setHeader('Set-Cookie', [`_id=${newUserId.toHexString()}; HttpOnly`]);
         next();
