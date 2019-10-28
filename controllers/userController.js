@@ -15,7 +15,7 @@ exports.sendPush = async (req, res) => {
 
     if (type === 'browser-tab-abandoned') {
         handleCartAbandoned(user);
-        res.status(200).end();
+        res.status(200).send();
         return;
     }
 
@@ -41,7 +41,7 @@ exports.sendPush = async (req, res) => {
         
     try {
         await webPush.sendNotification(user.pushSubscription, JSON.stringify(options));
-        res.status(200).end();
+        res.status(200).send();
 
     } catch (error) {
         if (error.statusCode === 410 && error.name === 'WebPushError') {
