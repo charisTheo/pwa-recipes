@@ -13,6 +13,12 @@ exports.sendPush = async (req, res) => {
     const { type } = req.params;
     const { user } = req;
 
+    if (type === 'browser-tab-abandoned') {
+        handleCartAbandoned(user);
+        res.status(200).end();
+        return;
+    }
+
     let options = {};
 
     switch (type) {
@@ -28,10 +34,6 @@ exports.sendPush = async (req, res) => {
         case 'action':
             options = actionPushOptions;
             break;
-        case 'browser-tab-abandoned':
-            handleCartAbandoned(user);
-            res.status(200).end();
-            return;
         default:
             options = simplePushOptions;
             break;

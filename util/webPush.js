@@ -46,7 +46,7 @@ const actionPushOptions = {
     ]
 };
 
-const getCartAbandonPushOptions = (items) => {
+const getCartAbandonPushOptions = items => {
     items = Array.isArray(items) ? items : [items];
 
     const options = {
@@ -74,10 +74,11 @@ const getCartAbandonPushOptions = (items) => {
     return options;
 };
 
-const handleCartAbandoned = (user) => {
-    // * check if the user still has not checked out the added items yet
+const handleCartAbandoned = user => {
+    console.log('handleCartAbandoned: Checking if the user has not yet checked out yet');
     if (user.cart_items && user.cart_items.length && user.pushSubscription) {
-        // * send a push notification
+        console.log(`Sending push notification... \nUser cart items:\n`);
+        console.table(user.cart_items);
         const options = getCartAbandonPushOptions(user.cart_items);
         webPush.sendNotification(
             user.pushSubscription, JSON.stringify(options)
