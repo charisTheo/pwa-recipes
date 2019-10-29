@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/charisTheo/ecommerce-example-pwa/blob/master/img/pwa-logo.png?raw=true" alt="PWA unofficial logo"/>
+</p>
+
 # Ecommerce PWA Template 📱
 
 ## [Offline Requests 📴](https://github.com/charisTheo/offline-requests) - [Demo](https://www.charistheo.io/offline-requests)
