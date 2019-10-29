@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     pushSubscription: {
-        type: String
+        type: Object
     },
     cart_items: {
         type: Array,

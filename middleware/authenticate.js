@@ -4,7 +4,6 @@ const { User } = require('../models/user');
 
 const authenticate = async (req, res, next) => {
     const { _id } = req.cookies;
-    console.log("TCL: authenticate -> req.cookies", req.cookies);
     const user = await User.findOne({ _id });
 
     if (!user) {
@@ -24,7 +23,7 @@ const authenticate = async (req, res, next) => {
             sameSite: 'None'
         });
         req.user = newUser;
-        // res.setHeader('Set-Cookie', [`_id=${newUserId.toHexString()}; HttpOnly`]);
+        
         next();
 
     } else {
