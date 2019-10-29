@@ -27,8 +27,8 @@ app.use(session({
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "https://www.charistheo.io");
     res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Headers", "Origin, Accept, Content-Type");
-    res.header("Access-Control-Allow-Methods", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, X-Requested-With");
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE");
     next();
 });
 app.set('trust proxy', 1);
