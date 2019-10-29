@@ -120,18 +120,6 @@ main paper-card {
     --paper-card-header-color: var(--primary-color);
 }
 
-/* --iron-image-width: 60% !important; */
-
-/* main paper-card iron-image {
-    padding: 80px;
-    box-sizing: border-box;
-} */
-
-paper-button {
-    background-color: var(--primary-color);
-    color: white;
-}
-
 footer {
     grid-area: footer;
     background-color: #333333;
