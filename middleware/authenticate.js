@@ -21,7 +21,7 @@ const authenticate = async (req, res, next) => {
             secure: true,
             httpOnly: true,
             path: '/',
-            sameSite: true
+            sameSite: 'None'
         });
         req.user = newUser;
         // res.setHeader('Set-Cookie', [`_id=${newUserId.toHexString()}; HttpOnly`]);
