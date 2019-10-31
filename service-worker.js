@@ -7,6 +7,9 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+workbox.core.skipWaiting();
+workbox.core.clientsClaim();
+
 // workbox.precaching.precacheAndRoute(['/'], 'GET');
 // workbox.routing.registerRoute(
 //   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
