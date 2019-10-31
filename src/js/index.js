@@ -46,15 +46,42 @@ const dismissInstallPwaCard = () => {
 
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js', { scope: '/ecommerce-example-pwa/' });
+        const isNewVersionAvailable = await navigator.serviceWorker
+            .register('/service-worker.js', { scope: '/ecommerce-example-pwa/' })
+            .then(checkForNewVersion);
+
+        if (isNewVersionAvailable) {
+            // TODO
+        }
     }
+}
+
+const checkForNewVersion = registration => {
+	return new Promise((resolve, reject) => {
+        registration.onupdatefound = () => {
+			const installingWorker = registration.installing;
+			installingWorker.onstatechange = () => {
+				switch (installingWorker.state) {
+					case 'installed':
+						if (navigator.serviceWorker.controller) {
+							// new update available
+							resolve(true);
+						} else {
+							// no update available
+							resolve(false);
+						}
+						break;
+				}
+			};
+		};
+    });
 }
 
 // Detects if device is an iOS (including iOS 13) 
 const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
 // Detects if device is in standalone mode
-const isInStandaloneMode = 'standalone' in window.navigator && window.navigator.standalone;
+const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
 // TODO move snackbar function to another module
 var hideSnackBarTimeout;
