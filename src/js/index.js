@@ -44,14 +44,15 @@ const dismissInstallPwaCard = () => {
     setTimeout(() => installPwaCard.remove(), 500);
 }
 
-const registerServiceWorker = () => {
+const registerServiceWorker = async () => {
     if ('serviceWorker' in navigator) {
         const isNewVersionAvailable = await navigator.serviceWorker
             .register('/service-worker.js', { scope: '/ecommerce-example-pwa/' })
             .then(checkForNewVersion);
 
         if (isNewVersionAvailable) {
-            // TODO
+            // show notification and offer a refresh button 
+            showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.location.reload();" class="snackbar-refresh-button">&#x21BB;</a>');
         }
     }
 }
@@ -89,16 +90,16 @@ const showSnackBar = message => {
     if (hideSnackBarTimeout) {
         clearTimeout(hideSnackBarTimeout);
     } 
-    if (snackBar.innerText !== '') {
-        snackBar.innerText += '\n' + message;
+    if (snackBar.innerHTML !== '') {
+        snackBar.innerHTML += '\n' + message;
     } else {
-        snackBar.innerText = message;
+        snackBar.innerHTML = message;
     }
 
     snackBar.classList.add('show');
     hideSnackBarTimeout = setTimeout(() => {
         snackBar.classList.remove('show');
-        snackBar.innerText = '';
+        snackBar.innerHTML = '';
     }, 5000);
 }
 

@@ -154,6 +154,13 @@ footer a {
 #snackbar.show {
     bottom: 30px;
 }
+#snackbar .snackbar-refresh-button {
+    color: var(--google-blue-300); 
+    font-size: 17px;
+    margin: 0;
+    padding: 5px 9px;
+    text-decoration: none;
+}
 
 @media (min-width: 410px) {
     #snackbar {
