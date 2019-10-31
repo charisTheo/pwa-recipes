@@ -46,7 +46,7 @@ const dismissInstallPwaCard = () => {
 
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js');
+        navigator.serviceWorker.register('/service-worker.js', { scope: '/ecommerce-example-pwa/' });
     }
 }
 
@@ -80,7 +80,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
     deferredPromptEvent = e;
 
     // * Check if should display install popup notification:
-    if (isIos && !isInStandaloneMode) {
+    if (!isIos && !isInStandaloneMode) {
         // * show install prompt
         installPwaCard.hidden = false;
     }
