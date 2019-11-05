@@ -10,7 +10,8 @@ import '@polymer/paper-toolbar/paper-toolbar';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
 
-const snackBar = document.getElementById('snackbar');
+import { showSnackBar } from "./snackBar";
+
 const installPwaCard = document.getElementsByClassName('install-pwa-card')[0];
 const installPwaButton = document.getElementsByClassName('install-pwa-button')[0];
 const installPwaDismissButton = document.getElementsByClassName('install-pwa-dismiss-button')[0];
@@ -83,25 +84,6 @@ const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platfor
 
 // Detects if device is in standalone mode
 const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-// TODO move snackbar function to another module
-var hideSnackBarTimeout;
-const showSnackBar = message => {
-    if (hideSnackBarTimeout) {
-        clearTimeout(hideSnackBarTimeout);
-    } 
-    if (snackBar.innerHTML !== '') {
-        snackBar.innerHTML += '\n' + message;
-    } else {
-        snackBar.innerHTML = message;
-    }
-
-    snackBar.classList.add('show');
-    hideSnackBarTimeout = setTimeout(() => {
-        snackBar.classList.remove('show');
-        snackBar.innerHTML = '';
-    }, 5000);
-}
 
 window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault(); 
