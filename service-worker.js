@@ -9,8 +9,6 @@ if (workbox) {
 
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    console.log("service worker message event listener -> event.data", event.data);
-    console.log("service worker message event listener -> event.data.origin", event.data.origin);
     workbox.core.clientsClaim();
     workbox.core.skipWaiting();
   }
