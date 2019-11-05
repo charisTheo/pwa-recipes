@@ -5,5 +5,12 @@
         "browsers": ["last 2 versions"]
       }
     }]
+  ],
+  "plugins": [
+    ["@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ]
 }

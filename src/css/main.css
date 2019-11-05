@@ -81,8 +81,8 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 15px;
     grid-auto-flow: row;
-    /* min-height: 700px; */
-    /* max-width: 900px; */
+    width: 100%;
+    box-sizing: border-box;
     margin: 0 auto;
     padding: 20px;
 }
@@ -127,6 +127,7 @@ footer {
     padding: 25px;
     display: grid;
     align-items: center;
+    text-align: left;
 }
 
 footer a {

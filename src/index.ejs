@@ -22,10 +22,11 @@
     
     <div class="container">
       <paper-toolbar>
+        <div slot="top" style="max-width: 40px;max-height: 40px">
+          <paper-icon-button class="page-share-button" src="./img/share-24px.svg"></paper-icon-button>
+        </div>
+
         <div slot="top" class="title">Ecommerce example PWA 📱</div>
-        <!-- <div slot="top" style="max-width: 40px;max-height: 40px">
-          <paper-icon-button id="shopping-cart-button" icon="shopping-cart"></paper-icon-button>
-        </div> -->
         
         <div slot="top">
           <a 
@@ -118,7 +119,25 @@
       </main>
 
       <footer>
-      
+        <a 
+          href="https://developers.google.com/web/updates/2016/09/navigator-share" 
+          tabindex="-1"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Sharing is caring
+          <custom-style>
+            <style is="custom-style">
+              paper-icon-button.small {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                top: -6px;
+              }
+            </style>
+          </custom-style>
+          <paper-icon-button class="small" icon="open-in-new"></paper-icon-button>
+        </a>
       </footer>
     </div>
 

@@ -13,10 +13,12 @@ import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
 
 import { showSnackBar } from "./snackBar";
+import { sharePage } from "./webShare";
 
 const installPwaCard = document.getElementsByClassName('install-pwa-card')[0];
 const installPwaButton = document.getElementsByClassName('install-pwa-button')[0];
 const installPwaDismissButton = document.getElementsByClassName('install-pwa-dismiss-button')[0];
+const pageShareButton = document.getElementsByClassName('page-share-button')[0];
 
 let deferredPromptEvent, workBox;
 
@@ -28,6 +30,7 @@ window.addEventListener('load', () => {
 const attachClickEventListeners = () => {
     installPwaButton.addEventListener('click', installPwa);
     installPwaDismissButton.addEventListener('click', dismissInstallPwaCard);
+    pageShareButton.addEventListener('click', sharePage);
 }
 
 const installPwa = async () => {
