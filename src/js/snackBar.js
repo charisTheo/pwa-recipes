@@ -5,16 +5,16 @@ const showSnackBar = message => {
     if (hideSnackBarTimeout) {
         clearTimeout(hideSnackBarTimeout);
     } 
-    if (snackBar.innerText !== '') {
-        snackBar.innerText += '\n' + message;
+    if (snackBar.innerHTML !== '') {
+        snackBar.innerHTML += '\n' + message;
     } else {
-        snackBar.innerText = message;
+        snackBar.innerHTML = message;
     }
 
     snackBar.classList.add('show');
     hideSnackBarTimeout = setTimeout(() => {
         snackBar.classList.remove('show');
-        snackBar.innerText = '';
+        snackBar.innerHTML = '';
     }, 5000);
 }
 
