@@ -7,8 +7,12 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.core.skipWaiting();
-workbox.core.clientsClaim();
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'NEW_VERSION') {
+    workbox.core.clientsClaim();
+    workbox.core.skipWaiting();
+  }
+});
 
 // workbox.precaching.precacheAndRoute(['/'], 'GET');
 // workbox.routing.registerRoute(

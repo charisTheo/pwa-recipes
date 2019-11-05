@@ -4,6 +4,8 @@ if (!global._babelPolyfill) {
 
 import './../css/main.css';
 
+import { Workbox } from 'workbox-window';
+
 import '@polymer/paper-card/paper-card';
 import '@polymer/paper-button/paper-button';
 import '@polymer/paper-toolbar/paper-toolbar';
@@ -16,11 +18,10 @@ const installPwaCard = document.getElementsByClassName('install-pwa-card')[0];
 const installPwaButton = document.getElementsByClassName('install-pwa-button')[0];
 const installPwaDismissButton = document.getElementsByClassName('install-pwa-dismiss-button')[0];
 
-let deferredPromptEvent;
+let deferredPromptEvent, workBox;
 
-window.addEventListener('load', async () => {
-    await registerServiceWorker();
-
+window.addEventListener('load', () => {
+    registerServiceWorker();
     attachClickEventListeners();
 });
 
@@ -35,7 +36,7 @@ const installPwa = async () => {
     deferredPromptEvent.prompt();
 
     deferredPromptEvent.userChoice.then(function(choiceResult) {
-        // console.log(choiceResult.outcome) // 'dismissed' or 'accepted'
+        console.log(choiceResult.outcome) // 'dismissed' or 'accepted'
         deferredPromptEvent = null;
     });
 }
@@ -45,38 +46,29 @@ const dismissInstallPwaCard = () => {
     setTimeout(() => installPwaCard.remove(), 500);
 }
 
-const registerServiceWorker = async () => {
+const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        const isNewVersionAvailable = await navigator.serviceWorker
-            .register('/service-worker.js', { scope: '/ecommerce-example-pwa/' })
-            .then(checkForNewVersion);
+        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
 
-        if (isNewVersionAvailable) {
-            // show notification and offer a refresh button 
-            showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.location.reload();" class="snackbar-refresh-button">&#x21BB;</a>');
-        }
+        workBox.addEventListener('waiting' , () => {
+            const updateServiceWorker = event => {
+                event.preventDefault();
+                workBox.addEventListener('controlling', () => {
+                    window.location.reload();
+                });
+                workBox.messageSW({ type: 'NEW_VERSION'});
+            };
+        
+            window.updateServiceWorker = updateServiceWorker;
+        
+            setTimeout(() => 
+                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                , 1500
+            );
+        });
+
+        workBox.register();
     }
-}
-
-const checkForNewVersion = registration => {
-	return new Promise((resolve, reject) => {
-        registration.onupdatefound = () => {
-			const installingWorker = registration.installing;
-			installingWorker.onstatechange = () => {
-				switch (installingWorker.state) {
-					case 'installed':
-						if (navigator.serviceWorker.controller) {
-							// new update available
-							resolve(true);
-						} else {
-							// no update available
-							resolve(false);
-						}
-						break;
-				}
-			};
-		};
-    });
 }
 
 // Detects if device is an iOS (including iOS 13) 
