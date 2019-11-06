@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Ecommerce example PWA 📱</title>
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
-    <meta name="theme-color" content="#3367d6" />
+    <meta name="theme-color" content="#673ab7" />
     
     <link rel="shortcut icon" href="./favicon/favicon.ico" />
     <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png" />
@@ -22,13 +22,23 @@
     
     <div class="container">
       <paper-toolbar>
-        <div slot="top" style="max-width: 40px;max-height: 40px">
+        <div slot="top" class="title">Ecommerce example PWA 📱</div>
+        <custom-style>
+          <style is="custom-style">
+            paper-toolbar paper-icon-button {
+              --iron-icon-fill-color: var(--accent-color);
+            }
+          </style>
+        </custom-style>
+        <div slot="top" style="max-width: 40px;max-height: 40px;margin: 0 5px;">
           <paper-icon-button class="page-share-button" src="./img/share-24px.svg"></paper-icon-button>
         </div>
-
-        <div slot="top" class="title">Ecommerce example PWA 📱</div>
         
-        <div slot="top">
+        <div hidden class="header-install-pwa-container" slot="top" style="max-width: 40px;max-height: 40px;margin: 0 5px;">
+          <paper-icon-button class="install-pwa-button" icon="get-app"></paper-icon-button>
+        </div>
+
+        <div slot="top" style="margin-left: 10vw;">
           <a 
             id="fork-me-banner" 
             href="https://github.com/charisTheo/ecommerce-example-pwa" 
@@ -66,9 +76,6 @@
                   --paper-card-header-color: #ffffff;
                   background-color: var(--primary-color);
                   transition: transform 0.35s;
-                }
-                paper-card.install-pwa-card.hidden {
-                  transform: scale(0);
                 }
                 paper-card.install-pwa-card paper-icon-button {
                   --iron-icon-fill-color: var(--google-blue-300);

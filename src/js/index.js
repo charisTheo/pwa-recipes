@@ -15,8 +15,9 @@ import '@polymer/iron-icons/iron-icons';
 import { showSnackBar } from "./snackBar";
 import { sharePage } from "./webShare";
 
+const headerInstallPwaContainer = document.getElementsByClassName('header-install-pwa-container')[0];
 const installPwaCard = document.getElementsByClassName('install-pwa-card')[0];
-const installPwaButton = document.getElementsByClassName('install-pwa-button')[0];
+const installPwaButtons = document.querySelectorAll('.install-pwa-button');
 const installPwaDismissButton = document.getElementsByClassName('install-pwa-dismiss-button')[0];
 const pageShareButton = document.getElementsByClassName('page-share-button')[0];
 
@@ -28,14 +29,14 @@ window.addEventListener('load', () => {
 });
 
 const attachClickEventListeners = () => {
-    installPwaButton.addEventListener('click', installPwa);
-    installPwaDismissButton.addEventListener('click', dismissInstallPwaCard);
+    installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
+    installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
     pageShareButton.addEventListener('click', sharePage);
 }
 
 const installPwa = async () => {
     // hide install prompt
-    dismissInstallPwaCard();
+    dismissInstallPwaButtons();
     deferredPromptEvent.prompt();
 
     deferredPromptEvent.userChoice.then(function(choiceResult) {
@@ -44,9 +45,12 @@ const installPwa = async () => {
     });
 }
 
-const dismissInstallPwaCard = () => {
+const dismissInstallPwaButtons = () => {
     installPwaCard.classList.add('hidden');
-    setTimeout(() => installPwaCard.remove(), 500);
+    headerInstallPwaContainer.classList.add('hidden');
+    setTimeout(() => {
+        installPwaCard.remove();
+    }, 500);
 }
 
 const registerServiceWorker = () => {
@@ -88,6 +92,7 @@ window.addEventListener('beforeinstallprompt', function(e) {
     if (!isIos && !isInStandaloneMode) {
         // * show install prompt
         installPwaCard.hidden = false;
+        headerInstallPwaContainer.hidden = false;
     }
 });
 

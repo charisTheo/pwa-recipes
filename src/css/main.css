@@ -163,6 +163,10 @@ footer a {
     text-decoration: none;
 }
 
+.hidden {
+    transform: scale(0);
+}
+
 @media (min-width: 410px) {
     #snackbar {
         left: calc(50% - 190px);
