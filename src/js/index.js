@@ -71,7 +71,6 @@ const registerServiceWorker = () => {
 
         workBox.addEventListener('waiting' , () => {
             const updateServiceWorker = event => {
-                event.preventDefault();
                 workBox.addEventListener('controlling', () => {
                     window.location.reload();
                 });
