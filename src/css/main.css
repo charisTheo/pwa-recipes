@@ -224,6 +224,10 @@ footer a {
 
 /* * MEDIA QUERIES */
 @media (max-width: 320px) {
+    #snackbar {
+        left: calc(50% - 150px);
+        width: 280px;
+    }
     #ios-install-banner {
         text-align: left;
         padding: 5px 10px 15px 10px;
