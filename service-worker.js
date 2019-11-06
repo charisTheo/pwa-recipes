@@ -1,5 +1,6 @@
+importScripts("precache-manifest.4530c5f56f13e8ab6deaf32ecf157850.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -79,3 +80,4 @@ self.addEventListener('notificationclick', function(event) {
     break;
   }
 });
+
