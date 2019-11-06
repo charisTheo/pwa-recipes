@@ -1,10 +1,11 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-// var MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// var HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var path = require('path');
-// var WebpackShellPlugin = require('webpack-shell-plugin');
-// var exec = require('child_process').exec;
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const { InjectManifest } = require('workbox-webpack-plugin');
+const path = require('path');
+// const WebpackShellPlugin = require('webpack-shell-plugin');
+// const exec = require('child_process').exec;
 
 const plugins = [
   // This plugin will generate an index.html file for us that can be used
@@ -29,7 +30,8 @@ const plugins = [
     },
     'service-worker.js',
     'manifest.json'
-  ])
+  ]),
+  new InjectManifest({swSrc: 'service-worker.js'})
 ];
 
 module.exports = {
