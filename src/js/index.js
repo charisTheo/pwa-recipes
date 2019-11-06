@@ -15,11 +15,11 @@ import '@polymer/iron-icons/iron-icons';
 import { showSnackBar } from "./snackBar";
 import { sharePage } from "./webShare";
 
-const headerInstallPwaContainer = document.getElementsByClassName('header-install-pwa-container')[0];
-const installPwaCard = document.getElementsByClassName('install-pwa-card')[0];
+const headerInstallPwaContainer = document.querySelector('.header-install-pwa-container');
+const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
-const installPwaDismissButton = document.getElementsByClassName('install-pwa-dismiss-button')[0];
-const pageShareButton = document.getElementsByClassName('page-share-button')[0];
+const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
+const pageShareButton = document.querySelector('.page-share-button');
 
 let deferredPromptEvent, workBox;
 
