@@ -20,6 +20,8 @@ const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
 const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
 const pageShareButton = document.querySelector('.page-share-button');
+const iosInstallBanner = document.querySelector('#ios-install-banner');
+const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
 
 let deferredPromptEvent, workBox;
 
@@ -31,6 +33,7 @@ window.addEventListener('load', () => {
 const attachClickEventListeners = () => {
     installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
     installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
+    iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons)
     pageShareButton.addEventListener('click', sharePage);
 }
 
@@ -46,11 +49,20 @@ const installPwa = async () => {
 }
 
 const dismissInstallPwaButtons = () => {
-    installPwaCard.classList.add('hidden');
-    headerInstallPwaContainer.classList.add('hidden');
-    setTimeout(() => {
-        installPwaCard.remove();
-    }, 500);
+    if (isIos) {
+        iosInstallBanner.classList.add('hidden');
+        setTimeout(() => {
+            iosInstallBanner.remove();
+        }, 500);
+
+    } else {
+        installPwaCard.classList.add('hidden');
+        headerInstallPwaContainer.classList.add('hidden');
+        setTimeout(() => {
+            installPwaCard.remove();
+        }, 500);
+
+    }
 }
 
 const registerServiceWorker = () => {
@@ -88,11 +100,16 @@ window.addEventListener('beforeinstallprompt', function(e) {
     e.preventDefault(); 
     deferredPromptEvent = e;
 
-    // * Check if should display install popup notification:
-    if (!isIos && !isInStandaloneMode) {
+    // * Check if should display install popups
+    if (!isInStandaloneMode) {
+        // * app is not launched as a PWA
         // * show install prompt
-        installPwaCard.hidden = false;
-        headerInstallPwaContainer.hidden = false;
+        if (!isIos) {
+            installPwaCard.hidden = false;
+            headerInstallPwaContainer.hidden = false;
+        } else {
+            iosInstallBanner.hidden = false;
+        }
     }
 });
 
