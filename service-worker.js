@@ -1,4 +1,4 @@
-importScripts("precache-manifest.e8522ad565e1850504b82a776662b528.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.eb138294f8834c2433199918638f7b9b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -15,7 +15,8 @@ self.addEventListener('message', event => {
   }
 });
 
-// workbox.precaching.precacheAndRoute(['/'], 'GET');
+workbox.precaching.precacheAndRoute(['/'], 'GET');
+
 // workbox.routing.registerRoute(
 //   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
 //   new workbox.strategies.StaleWhileRevalidate()
