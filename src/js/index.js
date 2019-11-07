@@ -53,6 +53,10 @@ const dismissInstallPwaButtons = () => {
         iosInstallBanner.classList.add('hidden');
         setTimeout(() => {
             iosInstallBanner.remove();
+            const expiryDate = new Date();
+            // * expire in 7 days
+            expiryDate.setDate(expiryDate.getDate() + 7);
+            setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
         }, 500);
 
     } else {
@@ -107,10 +111,19 @@ window.addEventListener('beforeinstallprompt', function(e) {
             installPwaCard.hidden = false;
             headerInstallPwaContainer.hidden = false;
         } else {
-            iosInstallBanner.hidden = false;
+            if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
+                iosInstallBanner.hidden = false;
+            }
         }
     }
 });
+
+const getCookie = cookieName => {
+    const cookies = document.cookie.split(/=|;/);
+    const cookieValueIndex = cookies.indexOf(cookieName) + 1;
+    return cookies[cookieValueIndex] || '';
+};
+const setCookie = (cookieName, cookieValue) => document.cookie = `${cookieName}=${cookieValue.toString()}`;
 
 window.addEventListener('offline', function() {
     showSnackBar('You are offline 📴');
