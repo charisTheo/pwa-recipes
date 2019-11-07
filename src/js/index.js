@@ -14,8 +14,17 @@ import '@polymer/iron-icons/iron-icons';
 
 import { showSnackBar } from "./snackBar";
 import { sharePage } from "./webShare";
+import { 
+    isIos,
+    isInStandaloneMode,
+    getCookie,
+    setCookie,
+    removeElements,
+    findInCache
+} from "./util";
 
 const headerInstallPwaContainer = document.querySelector('.header-install-pwa-container');
+const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
 const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
@@ -25,9 +34,86 @@ const iosInstallBannerDismissButton = document.querySelector('#ios-install-banne
 
 let deferredPromptEvent, workBox;
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     registerServiceWorker();
     attachClickEventListeners();
+});
+
+window.addEventListener('offline', function() {
+    showSnackBar('You are offline 📴');
+    showOfflineAvailableIcons();
+});
+
+window.addEventListener('online', function() {
+    showSnackBar('You are back online! 🎉');
+    hideOfflineAvailableIcons();
+});
+
+const hideOfflineAvailableIcons = () => {
+    const icons = document.querySelectorAll('.available-offline');
+    icons.forEach(icon => icon.hidden = true);
+    const pageLinks = document.querySelectorAll('.unavailable-offline');
+    pageLinks.forEach(pageLink => pageLink.classList.remove('unavailable-offline'));
+}
+
+const showOfflineAvailableIcons = () => {
+    const pagesArr = Array.from(pageCardLinks);
+    pagesArr.map(async page => {
+        const url = page.getAttribute('href');
+        console.log("showOfflineAvailablePages -> url", url);
+        const cachedItems = await findInCache(url);
+        console.log("showOfflineAvailablePages -> cachedItems", cachedItems);
+        if (cachedItems.length) {
+            // * show available offline icon
+            page.querySelector('.available-offline').hidden = false;
+        } else {
+            // * else grey out page link and make it non-clickable
+            page.classList.add('unavailable-offline');
+        }
+    });
+};
+
+const registerServiceWorker = () => {
+    if ('serviceWorker' in navigator) {
+        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
+
+        workBox.addEventListener('controlling', () => {
+            window.location.reload();
+        });
+
+        workBox.addEventListener('waiting' , () => {
+            const updateServiceWorker = event => {
+                workBox.messageSW({ type: 'NEW_VERSION'});
+            };
+            window.updateServiceWorker = updateServiceWorker;
+        
+            setTimeout(() => 
+                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                , 1500
+            );
+        });
+
+        workBox.register();
+    }
+}
+
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault(); 
+    deferredPromptEvent = e;
+
+    // * Check if should display install popups
+    if (!isInStandaloneMode) {
+        // * app is not launched as a PWA
+        // * show install prompt
+        if (!isIos) {
+            installPwaCard.hidden = false;
+            headerInstallPwaContainer.hidden = false;
+        } else {
+            if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
+                iosInstallBanner.hidden = false;
+            }
+        }
+    }
 });
 
 const attachClickEventListeners = () => {
@@ -50,85 +136,13 @@ const installPwa = async () => {
 
 const dismissInstallPwaButtons = () => {
     if (isIos) {
-        iosInstallBanner.classList.add('hidden');
-        setTimeout(() => {
-            iosInstallBanner.remove();
-            const expiryDate = new Date();
-            // * expire in 7 days
-            expiryDate.setDate(expiryDate.getDate() + 7);
-            setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
-        }, 500);
+        removeElements(iosInstallBanner);
+        const expiryDate = new Date();
+        expiryDate.setDate(expiryDate.getDate() + 7); // * expire in 7 days
+        setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
 
     } else {
-        installPwaCard.classList.add('hidden');
-        headerInstallPwaContainer.classList.add('hidden');
-        setTimeout(() => {
-            installPwaCard.remove();
-        }, 500);
+        removeElements([installPwaCard, headerInstallPwaContainer])
 
     }
 }
-
-const registerServiceWorker = () => {
-    if ('serviceWorker' in navigator) {
-        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
-
-        workBox.addEventListener('waiting' , () => {
-            const updateServiceWorker = event => {
-                workBox.addEventListener('controlling', () => {
-                    window.location.reload();
-                });
-                workBox.messageSW({ type: 'NEW_VERSION'});
-            };
-        
-            window.updateServiceWorker = updateServiceWorker;
-        
-            setTimeout(() => 
-                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
-                , 1500
-            );
-        });
-
-        workBox.register();
-    }
-}
-
-// Detects if device is an iOS (including iOS 13) 
-const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-// Detects if device is in standalone mode
-const isInStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-
-window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault(); 
-    deferredPromptEvent = e;
-
-    // * Check if should display install popups
-    if (!isInStandaloneMode) {
-        // * app is not launched as a PWA
-        // * show install prompt
-        if (!isIos) {
-            installPwaCard.hidden = false;
-            headerInstallPwaContainer.hidden = false;
-        } else {
-            if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
-                iosInstallBanner.hidden = false;
-            }
-        }
-    }
-});
-
-const getCookie = cookieName => {
-    const cookies = document.cookie.split(/=|;/);
-    const cookieValueIndex = cookies.indexOf(cookieName) + 1;
-    return cookies[cookieValueIndex] || '';
-};
-const setCookie = (cookieName, cookieValue) => document.cookie = `${cookieName}=${cookieValue.toString()}`;
-
-window.addEventListener('offline', function() {
-    showSnackBar('You are offline 📴');
-});
-
-window.addEventListener('online', function() {
-    showSnackBar('You are back online! 🎉');
-});
