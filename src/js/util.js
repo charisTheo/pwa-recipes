@@ -22,7 +22,7 @@ export const removeElements = elements => {
     });
 };
 
-export const findInCache = async item => {
+export const findUrlInCache = async item => {
     // Get a list of all of the caches for this origin
     const cacheNames = await caches.keys();
     const result = [];
@@ -32,7 +32,7 @@ export const findInCache = async item => {
         const cache = await caches.open(name);
 
         for (const request of await cache.keys()) {
-            if (request.url.match(item)) {
+            if (request.url.match(`(${item}.+\.html$)|${item}\/$`)) {
                 result.push(await cache.match(request));
             }
         }

@@ -20,7 +20,7 @@ import {
     getCookie,
     setCookie,
     removeElements,
-    findInCache
+    findUrlInCache
 } from "./util";
 
 const headerInstallPwaContainer = document.querySelector('.header-install-pwa-container');
@@ -50,7 +50,7 @@ window.addEventListener('online', function() {
 });
 
 const hideOfflineAvailableIcons = () => {
-    const icons = document.querySelectorAll('.available-offline');
+    const icons = document.querySelectorAll('.available-offline-icon');
     icons.forEach(icon => icon.hidden = true);
     const pageLinks = document.querySelectorAll('.unavailable-offline');
     pageLinks.forEach(pageLink => pageLink.classList.remove('unavailable-offline'));
@@ -61,11 +61,11 @@ const showOfflineAvailableIcons = () => {
     pagesArr.map(async page => {
         const url = page.getAttribute('href');
         console.log("showOfflineAvailablePages -> url", url);
-        const cachedItems = await findInCache(url);
+        const cachedItems = await findUrlInCache(url);
         console.log("showOfflineAvailablePages -> cachedItems", cachedItems);
         if (cachedItems.length) {
             // * show available offline icon
-            page.querySelector('.available-offline').hidden = false;
+            page.querySelector('.available-offline-icon').hidden = false;
         } else {
             // * else grey out page link and make it non-clickable
             page.classList.add('unavailable-offline');

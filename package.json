@@ -6,7 +6,7 @@
   "homepage": "https://charistheo.github.io/ecommerce-example-pwa",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "webpack --mode=production",
+    "build": "rm -r build && webpack --mode=production",
     "predeploy": "npm run build",
     "deploy": "gh-pages --dist build/"
   },

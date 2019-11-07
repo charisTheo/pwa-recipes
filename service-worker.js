@@ -13,7 +13,7 @@ self.addEventListener('message', event => {
   }
 });
 
-workbox.precaching.precacheAndRoute(['/'], 'GET');
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // workbox.routing.registerRoute(
 //   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
