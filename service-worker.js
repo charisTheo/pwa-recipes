@@ -6,7 +6,9 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.core.clientsClaim();
+addEventListener('activate', event => {
+  event.waitUntil(clients.claim());
+});
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
@@ -23,6 +25,11 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 workbox.routing.registerRoute(
   /\.(?:webp|png|jpg|jpeg|svg)$/,
   new workbox.strategies.StaleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+  /(service-worker\.js)$/,
+  new workbox.strategies.NetworkOnly()
 );
 
 workbox.routing.registerRoute(

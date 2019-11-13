@@ -27,15 +27,23 @@ body {
 paper-toolbar {
     background-color: var(--primary-color);
     grid-area: header;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.5);
 }
 paper-toolbar > .title {
     margin: 0;
 }
 
+#fork-me-banner {
+    min-width: 48px;
+    min-height: 48px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 #fork-me-banner > svg > path:not(:first-child) {
     fill: var(--primary-color);
 }
+#fork-me-banner,
 #fork-me-banner > svg {
     height: var(--paper-toolbar-height, 64px);
     width: var(--paper-toolbar-height, 64px);
@@ -268,6 +276,7 @@ footer a {
     }
 }
 @media (max-width: 600px) {
+    #fork-me-banner,
     #fork-me-banner > svg {
         height: var(--calculated-paper-toolbar-sm-height);
         width: var(--calculated-paper-toolbar-sm-height);

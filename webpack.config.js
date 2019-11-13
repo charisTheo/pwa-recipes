@@ -31,7 +31,10 @@ const plugins = [
     'service-worker.js',
     'manifest.json'
   ]),
-  new InjectManifest({swSrc: 'service-worker.js'})
+  new InjectManifest({
+    swSrc: 'service-worker.js',
+    exclude: ['service-worker.js']
+  })
 ];
 
 module.exports = {
