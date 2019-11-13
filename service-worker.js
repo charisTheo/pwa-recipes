@@ -1,4 +1,4 @@
-importScripts("precache-manifest.aa46568fc636678d72581e5fdc89a94b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.3bfae13dee152b4c1490e323fbeeff50.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -8,27 +8,28 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+workbox.core.clientsClaim();
+
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    workbox.core.clientsClaim();
     workbox.core.skipWaiting();
   }
 });
 
-workbox.precaching.precacheAndRoute(['/'], 'GET');
+workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
 // workbox.routing.registerRoute(
 //   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
 //   new workbox.strategies.StaleWhileRevalidate()
 // );
 workbox.routing.registerRoute(
-  /\.(?:webp|png|jpg|svg)$/,
+  /\.(?:webp|png|jpg|jpeg|svg)$/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
   new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
+  new workbox.strategies.CacheFirst(), 
   'GET'
 );
 
