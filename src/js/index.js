@@ -94,13 +94,13 @@ const registerServiceWorker = () => {
         });
 
         workBox.addEventListener('waiting' , () => {
-            const updateServiceWorker = event => {
+            var updateServiceWorker = event => {
                 workBox.messageSW({ type: 'NEW_VERSION'});
             };
             window.updateServiceWorker = updateServiceWorker;
         
             setTimeout(() => 
-                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="window.updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
                 , 1500
             );
         });

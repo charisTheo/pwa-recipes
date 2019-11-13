@@ -8,9 +8,9 @@ if (workbox) {
 
 workbox.core.clientsClaim();
 
-self.addEventListener('message', event => {
+addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    workbox.core.skipWaiting();
+    skipWaiting();
   }
 });
 
@@ -31,7 +31,7 @@ workbox.routing.registerRoute(
   'GET'
 );
 
-self.addEventListener('push', function(event) {
+addEventListener('push', function(event) {
   let options = {};
   if (!!event.data) {
       const data = event.data.json();
@@ -42,11 +42,11 @@ self.addEventListener('push', function(event) {
           badge: './img/speech-notification-badge-inverted-48.png',
           chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
       }
-      self.registration.showNotification(data.title, options);
+      registration.showNotification(data.title, options);
   }
 });
 
-self.addEventListener('notificationclick', function(event) {
+addEventListener('notificationclick', function(event) {
   event.notification.close();
   // * data received from server (dataPushOptions)
   const data = event.notification.data;
