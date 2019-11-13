@@ -1,4 +1,4 @@
-importScripts("precache-manifest.b687833aee76da497c7881ae09363dc0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.8201fcd4f3567fa35c4a08bd030cb8e3.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -29,10 +29,10 @@ workbox.routing.registerRoute(
   new workbox.strategies.StaleWhileRevalidate()
 );
 
-// workbox.routing.registerRoute(
-//   /(service-worker\.js)$/,
-//   new workbox.strategies.NetworkFirst()
-// );
+workbox.routing.registerRoute(
+  /(service-worker\.js)$/,
+  new workbox.strategies.NetworkOnly()
+);
 
 workbox.routing.registerRoute(
   new RegExp('/.*'), 
