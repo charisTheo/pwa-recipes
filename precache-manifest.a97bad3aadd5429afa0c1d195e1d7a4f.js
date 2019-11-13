@@ -11,7 +11,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js"
   },
   {
-    "revision": "ba80c184e5a409632598",
+    "revision": "262173e8936a9bc6bec0",
     "url": "bundle.js"
   },
   {
@@ -75,7 +75,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "439d620eecdd34a26fd1b3c4c22cd69a",
+    "revision": "3c9107d2524a43e0f2253ff92094e5eb",
     "url": "index.html"
   },
   {
@@ -83,7 +83,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "manifest.json"
   },
   {
-    "revision": "5229f8489bf2eb028d1385f99ced1184",
+    "revision": "5954f79903d6df26ce08676588997ed0",
     "url": "service-worker.js"
   }
 ]);
