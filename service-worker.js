@@ -1,4 +1,4 @@
-importScripts("precache-manifest.a97bad3aadd5429afa0c1d195e1d7a4f.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.d65a3ea69e7f213c5724e89a3b2acd65.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -8,7 +8,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-workbox.core.clientsClaim();
+clientsClaim();
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
