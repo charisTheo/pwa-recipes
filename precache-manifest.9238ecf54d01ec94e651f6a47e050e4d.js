@@ -11,7 +11,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js"
   },
   {
-    "revision": "262173e8936a9bc6bec0",
+    "revision": "79d1757b0404a59440ea",
     "url": "bundle.js"
   },
   {
