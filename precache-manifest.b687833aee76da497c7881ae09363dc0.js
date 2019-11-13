@@ -81,9 +81,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "bd6a2e686607accdcfd412f9740e595a",
     "url": "manifest.json"
-  },
-  {
-    "revision": "3f1e864ce7b6a8a9308233ca334b30eb",
-    "url": "service-worker.js"
   }
 ]);
