@@ -12,14 +12,18 @@
 
     <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <link rel="preconnect" href="https://ecommerce-pwa.herokuapp.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://developers.google.com" crossorigin />
     
+    <!-- ? Prefetch and prerender external pages to show even when offline -->
     <link rel="prerender" href="https://developers.google.com/web/updates/2016/09/navigator-share" />
     <link rel="prefetch" href="https://developers.google.com/web/updates/2016/09/navigator-share" />
     <link rel="prerender" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" />
     <link rel="prefetch" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" />
 
     <!-- <link href="./css/main.css" rel="stylesheet" type="text/css" /> -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- ! Download Google fonts only if launched in the browser -> Else use system fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" media="all and (display-mode: browser)" />
 
   </head>
 

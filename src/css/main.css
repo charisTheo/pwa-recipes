@@ -12,7 +12,6 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    font-family: 'Open Sans', sans-serif;
     color: black;
     text-align: center;
     background-image: url("./../../img/floating-cogs.svg");
@@ -281,5 +280,17 @@ footer a {
     }
     #snackbar.show {
         bottom: 120px;
+    }
+}
+
+@media all and (display-mode: browser) {
+    body {
+        font-family: 'Open Sans', sans-serif;
+    }
+}
+/* * If launched in standalone mode use system fonts */
+@media all and (display-mode: standalone) {
+    body {
+        font-family: "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     }
 }

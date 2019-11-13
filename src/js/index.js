@@ -37,26 +37,38 @@ let deferredPromptEvent, workBox;
 window.addEventListener('load', async () => {
     registerServiceWorker();
     attachClickEventListeners();
+    if (!navigator.onLine) {
+        handleOfflineEvent();    
+    }
 });
 
 window.addEventListener('offline', function() {
-    showSnackBar('You are offline 📴');
-    showOfflineAvailableIcons();
+    handleOfflineEvent();
 });
 
 window.addEventListener('online', function() {
-    showSnackBar('You are back online! 🎉');
-    hideOfflineAvailableIcons();
+    handleOnlineEvent();
 });
 
-const hideOfflineAvailableIcons = () => {
+// * shows an offline prompt and marks the offline available content
+const handleOfflineEvent = () => {
+    showSnackBar('You are offline 📴');
+    markOfflineAvailableContent();
+};
+// * shows an online prompt and unmarks offline avaialble content
+const handleOnlineEvent = () => {
+    showSnackBar('You are back online! 🎉');
+    unmarkOfflineAvailableContent();
+};
+
+const unmarkOfflineAvailableContent = () => {
     const icons = document.querySelectorAll('.available-offline-icon');
     icons.forEach(icon => icon.hidden = true);
     const pageLinks = document.querySelectorAll('.unavailable-offline');
     pageLinks.forEach(pageLink => pageLink.classList.remove('unavailable-offline'));
 }
 
-const showOfflineAvailableIcons = () => {
+const markOfflineAvailableContent = () => {
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');

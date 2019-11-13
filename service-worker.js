@@ -6,9 +6,10 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+workbox.core.clientsClaim();
+
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    workbox.core.clientsClaim();
     workbox.core.skipWaiting();
   }
 });
@@ -20,13 +21,13 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 //   new workbox.strategies.StaleWhileRevalidate()
 // );
 workbox.routing.registerRoute(
-  /\.(?:webp|png|jpg|svg)$/,
+  /\.(?:webp|png|jpg|jpeg|svg)$/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
   new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
+  new workbox.strategies.CacheFirst(), 
   'GET'
 );
 
