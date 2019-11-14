@@ -23,6 +23,7 @@ import {
     findUrlInCache
 } from "./util";
 
+const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/cart-abandon-notification/';
 const headerInstallPwaContainer = document.querySelector('.header-install-pwa-container');
 const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
@@ -32,7 +33,7 @@ const pageShareButton = document.querySelector('.page-share-button');
 const iosInstallBanner = document.querySelector('#ios-install-banner');
 const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
 
-let deferredPromptEvent, workBox;
+let deferredPromptEvent;
 
 window.addEventListener('load', async () => {
     registerServiceWorker();
@@ -85,9 +86,10 @@ const markOfflineAvailableContent = () => {
     });
 };
 
+var workBox;
 const registerServiceWorker = () => {
     if ('serviceWorker' in navigator) {
-        workBox = new Workbox('./service-worker.js', { scope: '/ecommerce-example-pwa/' });
+        workBox = new Workbox('./service-worker.js', { scope: SERVICE_WORKER_SCOPE });
 
         workBox.addEventListener('controlling', () => {
             window.location.reload();
@@ -101,7 +103,7 @@ const registerServiceWorker = () => {
         
             setTimeout(() => 
                 showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
-                , 1500
+                , 0
             );
         });
 
