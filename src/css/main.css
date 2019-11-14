@@ -93,6 +93,9 @@ main {
     margin: 0 auto;
     padding: 20px;
 }
+main .page-title {
+    grid-column: 1 / -1;
+}
 .page-card-link {
     color: var(--accent-color);
     position: relative;
