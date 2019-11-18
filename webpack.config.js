@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MediaQueryPlugin = require('media-query-plugin');
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -34,6 +35,12 @@ const plugins = [
   new InjectManifest({
     swSrc: 'service-worker.js',
     exclude: ['service-worker.js']
+  }),
+  new MediaQueryPlugin({
+    include: true,
+    queries: {
+      'screen and (min-width: 767px)': ''
+    }
   })
 ];
 
@@ -87,7 +94,8 @@ module.exports = {
               injectType: 'singletonStyleTag'
             },
           },
-          "css-loader"
+          "css-loader",
+          MediaQueryPlugin.loader
         ]
       },
       {

@@ -21,7 +21,9 @@
     <link rel="prerender" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" />
     <link rel="prefetch" href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile" />
 
+    <!-- * Inlined when imported from index.js:5 -->
     <!-- <link href="./css/main.css" rel="stylesheet" type="text/css" /> -->
+
     <!-- ! Download Google fonts only if launched in the browser -> Else use system fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" media="all and (display-mode: browser)" />
 
@@ -36,16 +38,13 @@
             paper-toolbar paper-icon-button {
               --iron-icon-fill-color: var(--accent-color);
             }
+            paper-toolbar {
+              --paper-toolbar-background: var(--primary-color);
+              box-shadow: var(--shadow-elevation-16dp_-_box-shadow);
+            }
           </style>
         </custom-style>
-        <div slot="top" style="max-width: 40px;max-height: 40px;margin: 0 5px;">
-          <paper-icon-button class="page-share-button" src="./img/share-24px.svg"></paper-icon-button>
-        </div>
         
-        <div hidden class="header-install-pwa-container" slot="top" style="max-width: 40px;max-height: 40px;margin: 0 5px;">
-          <paper-icon-button class="install-pwa-button" icon="get-app"></paper-icon-button>
-        </div>
-
         <div slot="top" style="margin-left: 10vw;">
           <a 
             id="fork-me-banner" 
@@ -58,6 +57,51 @@
           </a>
         </div>
       </paper-toolbar>
+
+      <nav>
+        <paper-tabs selected="1" align-bottom>
+          <custom-style>
+            <style is="custom-style">
+              paper-tabs {
+                box-shadow: var(--shadow-elevation-24dp_-_box-shadow);
+                height: 60px;
+              }
+              paper-tabs iron-icon {
+                transition: transform 0.35s ease-out;
+                transform-origin: 50% 50%;
+                --iron-icon-fill-color: var(--primary-color);
+              }
+              paper-tabs paper-tab {
+                @apply --layout-vertical;
+                @apply --layout-center-center;
+                flex-direction: column;
+              }
+              paper-tabs paper-tab.iron-selected iron-icon {
+                transform: scale(1.2);
+              }
+              paper-tabs paper-tab:focus .nav-tab-label {
+                color: var(--paper-tabs-selection-bar-color, var(--accent-color));
+              }
+              :root {
+                --paper-tab-ink: var(--accent-color);
+                --paper-tabs-selection-bar-color: var(--accent-color);
+              }
+            </style>
+          </custom-style>
+          <paper-tab>
+            <iron-icon icon="icons:face"></iron-icon>
+            <span class="nav-tab-label">Profile</span>
+          </paper-tab>
+          <paper-tab>
+            <iron-icon icon="icons:apps"></iron-icon>
+            <span class="nav-tab-label">Apps</span>
+          </paper-tab>
+          <paper-tab>
+            <iron-icon icon="icons:settings"></iron-icon>
+            <span class="nav-tab-label">Settings</span>
+          </paper-tab>
+        </paper-tabs>     
+      </nav>
 
       <main>
         <h2 class="page-title">Ecommerce example PWA 📱</h2>
@@ -138,6 +182,8 @@
           
       </main>
 
+      <div class="flex-stretch"></div>
+
       <footer>
         <a 
           href="https://developers.google.com/web/updates/2016/09/navigator-share" 
@@ -158,7 +204,9 @@
           <paper-icon-button class="small" icon="open-in-new"></paper-icon-button>
         </a>
       </footer>
-    </div>
+    </div> <!-- ? end of container -->
+    
+    <paper-fab class="page-share-button" src="./img/share-24px.svg" title="heart"></paper-fab>
 
     <div id="snackbar"></div>
 

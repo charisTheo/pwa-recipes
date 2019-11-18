@@ -9,8 +9,12 @@ import { Workbox } from 'workbox-window';
 import '@polymer/paper-card/paper-card';
 import '@polymer/paper-button/paper-button';
 import '@polymer/paper-toolbar/paper-toolbar';
+import '@polymer/paper-fab/paper-fab';
 import '@polymer/paper-icon-button/paper-icon-button';
 import '@polymer/iron-icons/iron-icons';
+import '@polymer/iron-icon/iron-icon';
+import '@polymer/paper-tabs/paper-tabs';
+import '@polymer/paper-tabs/paper-tab';
 
 import { showSnackBar } from "./snackBar";
 import { sharePage } from "./webShare";
@@ -24,7 +28,6 @@ import {
 } from "./util";
 
 const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/cart-abandon-notification/';
-const headerInstallPwaContainer = document.querySelector('.header-install-pwa-container');
 const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
@@ -36,6 +39,8 @@ const iosInstallBannerDismissButton = document.querySelector('#ios-install-banne
 let deferredPromptEvent;
 
 window.addEventListener('load', async () => {
+    applyMediaQueriesOnDeviceWidth();
+    window.addEventListener('resize', applyMediaQueriesOnDeviceWidth);
     registerServiceWorker();
     attachClickEventListeners();
     if (!navigator.onLine) {
@@ -121,7 +126,6 @@ window.addEventListener('beforeinstallprompt', function(e) {
         // * show install prompt
         if (!isIos) {
             installPwaCard.hidden = false;
-            headerInstallPwaContainer.hidden = false;
         } else {
             if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
                 iosInstallBanner.hidden = false;
@@ -129,6 +133,16 @@ window.addEventListener('beforeinstallprompt', function(e) {
         }
     }
 });
+
+const applyMediaQueriesOnDeviceWidth = () => {
+    if (window.innerWidth > 767) {
+        import('./../css/tablets-and-above.css');
+        document.querySelector('paper-tabs').alignBottom = false;
+    }
+    if (window.innerWidth > 959) {
+        import('./../css/desktops.css');
+    }
+}
 
 const attachClickEventListeners = () => {
     installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
@@ -156,7 +170,7 @@ const dismissInstallPwaButtons = () => {
         setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
 
     } else {
-        removeElements([installPwaCard, headerInstallPwaContainer])
+        removeElements(installPwaCard);
 
     }
 }

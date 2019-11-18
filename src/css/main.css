@@ -23,14 +23,18 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
-
-paper-toolbar {
-    background-color: var(--primary-color);
-    grid-area: header;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.5);
+nav {
+    background-color: #ffffff;
+    width: 100vw;
+    position: sticky;
+    order: 11;
+    z-index: 11;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
-paper-toolbar > .title {
-    margin: 0;
+nav .nav-tab-label {
+    display: none;
 }
 
 #fork-me-banner {
@@ -83,7 +87,6 @@ paper-toolbar > .title {
 }
 
 main {
-    grid-area: main;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 15px;
@@ -157,9 +160,8 @@ main paper-card {
 }
 
 footer {
-    grid-area: footer;
     background-color: #333333;
-    height: 70px;
+    min-height: 100px;
     padding: 25px;
     display: grid;
     align-items: center;
@@ -172,7 +174,7 @@ footer a {
 
 #snackbar {
     position: fixed;
-    z-index: 5;
+    z-index: 15;
     transition: bottom 0.5s ease-out;
     min-height: 23px;
     bottom: -150px;
@@ -253,13 +255,23 @@ footer a {
     color: #004ba0;
 }
 
+paper-fab {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+}
+
 .hidden {
     transition: transform 0.35s ease-out;
     transform: scale(0);
 }
 
+.flex-stretch {
+    flex: 1;
+}
+
 /* * MEDIA QUERIES */
-@media (max-width: 320px) {
+@media screen and (max-width: 320px) {
     #snackbar {
         left: calc(50% - 150px);
         width: 280px;
@@ -272,26 +284,17 @@ footer a {
         text-align: center;
     }
 }
-@media (min-width: 410px) {
+@media screen and (min-width: 410px) {
     #snackbar {
         left: calc(50% - 190px);
         width: 360px;
     }
 }
-@media (max-width: 600px) {
+@media screen and (max-width: 600px) {
     #fork-me-banner,
     #fork-me-banner > svg {
         height: var(--calculated-paper-toolbar-sm-height);
         width: var(--calculated-paper-toolbar-sm-height);
-    }
-}
-@media (min-width: 767px) {
-    #snackbar {
-        width: 400px;
-        left: calc(50% - 195px);
-    }
-    #snackbar.show {
-        bottom: 120px;
     }
 }
 

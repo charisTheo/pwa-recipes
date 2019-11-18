@@ -1,0 +1,39 @@
+@media screen and (min-width: 767px) {
+    .container {
+        justify-content: start;
+    }
+    nav {
+        position: relative;
+        order: initial;
+        background-color: transparent;
+        width: auto;
+    }
+    nav .nav-tab-label {
+        display: block;
+    }
+    nav paper-tabs {
+        box-shadow: none;
+        width: fit-content;
+        margin-left: auto;
+    }
+    nav paper-tabs paper-tab {
+        margin: 0 10px;
+    }
+    nav .nav-tab-label {
+        font-size: 1.2rem;
+        margin: 0 4px;
+    }
+    nav paper-tabs iron-icon {
+        --iron-icon-fill-color: var(--accent-color);
+    }
+    #snackbar {
+        width: 400px;
+        left: calc(50% - 195px);
+    }
+    #snackbar.show {
+        bottom: 120px;
+    }
+    .flex-stretch-tablets-and-above {
+        flex: 1;
+    }
+}
