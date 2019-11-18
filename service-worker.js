@@ -1,6 +1,7 @@
-importScripts("precache-manifest.8201fcd4f3567fa35c4a08bd030cb8e3.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.79d06cedbd3faeb769e9882418c0c85c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
+const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -20,18 +21,42 @@ addEventListener('message', event => {
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
 
-// workbox.routing.registerRoute(
-//   /\.(?:html|js|css|webp|png|jpg|svg|ico)$/,
-//   new workbox.strategies.StaleWhileRevalidate()
-// );
 workbox.routing.registerRoute(
-  /\.(?:webp|png|jpg|jpeg|svg)$/,
+  /(https:\/\/fonts.googleapis.com)/,
+  new workbox.strategies.StaleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+  /(https:\/\/fonts.gstatic.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
   /(service-worker\.js)$/,
   new workbox.strategies.NetworkOnly()
+);
+
+workbox.routing.registerRoute(
+  /\.(?:js|css)$/,
+  new workbox.strategies.StaleWhileRevalidate()
+);
+
+workbox.routing.registerRoute(
+  /\.(?:webp|png|jpg|jpeg|svg)$/,
+  async ({url, event, params}) => {
+    const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
+    const response = await fetch(url, { method: 'GET' }) || await caches.match(event.request);
+    
+    if (response && response.status === 404) {
+      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in network or in cache! Responding with placeholder image instead...`);
+      // * respond with placeholder image
+      return await fetch(placeholderURL, { method: 'GET' });
+
+    } else {
+      return await staleWhileRevalidate.handle({event});
+      
+    }
+  }
 );
 
 workbox.routing.registerRoute(

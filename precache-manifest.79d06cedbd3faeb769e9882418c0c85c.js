@@ -1,5 +1,13 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "9a9bdd193f881ab8a832",
+    "url": "1.bundle.js"
+  },
+  {
+    "revision": "4e1300af6f121401039e",
+    "url": "2.bundle.js"
+  },
+  {
     "url": "2fa446e9ef97056dae09c2b2f718b6b5.svg"
   },
   {
@@ -11,7 +19,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js"
   },
   {
-    "revision": "814cbbfbd1290dd56591",
+    "revision": "8d159cf54a493dc07efa",
     "url": "bundle.js"
   },
   {
@@ -63,6 +71,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/offline-requests.png"
   },
   {
+    "revision": "1d9a793c6dc1692e45ec527f92fdb646",
+    "url": "img/placeholder-image.png"
+  },
+  {
     "revision": "85b0544b16b9d11c924be85f6da54821",
     "url": "img/push-examples.png"
   },
@@ -71,11 +83,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/pwa-logo.png"
   },
   {
-    "revision": "fb5805951291e5b66a36cc80c5fc3300",
+    "revision": "c450453e2e1948cfb64b9ac801cd786b",
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "f567beda06c25ab61ba90aa3c3c75070",
+    "revision": "304f8f487d8f86fbaa89274238520fb2",
     "url": "index.html"
   },
   {
