@@ -27,7 +27,7 @@ import {
     findUrlInCache
 } from "./util";
 
-const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/cart-abandon-notification/';
+const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/ecommerce-example-pwa/';
 const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
@@ -35,25 +35,15 @@ const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-but
 const pageShareButton = document.querySelector('.page-share-button');
 const iosInstallBanner = document.querySelector('#ios-install-banner');
 const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
-
-let deferredPromptEvent;
+const tabbedNavigation = document.querySelector('paper-tabs');
 
 window.addEventListener('load', async () => {
     applyMediaQueriesOnDeviceWidth();
-    window.addEventListener('resize', applyMediaQueriesOnDeviceWidth);
     registerServiceWorker();
-    attachClickEventListeners();
+    attachEventListeners();
     if (!navigator.onLine) {
         handleOfflineEvent();    
     }
-});
-
-window.addEventListener('offline', function() {
-    handleOfflineEvent();
-});
-
-window.addEventListener('online', function() {
-    handleOnlineEvent();
 });
 
 // * shows an offline prompt and marks the offline available content
@@ -116,41 +106,6 @@ const registerServiceWorker = () => {
     }
 }
 
-window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault(); 
-    deferredPromptEvent = e;
-
-    // * Check if should display install popups
-    if (!isInStandaloneMode) {
-        // * app is not launched as a PWA
-        // * show install prompt
-        if (!isIos) {
-            installPwaCard.hidden = false;
-        } else {
-            if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
-                iosInstallBanner.hidden = false;
-            }
-        }
-    }
-});
-
-const applyMediaQueriesOnDeviceWidth = () => {
-    if (window.innerWidth > 767) {
-        import('./../css/tablets-and-above.css');
-        document.querySelector('paper-tabs').alignBottom = false;
-    }
-    if (window.innerWidth > 959) {
-        import('./../css/desktops.css');
-    }
-}
-
-const attachClickEventListeners = () => {
-    installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
-    installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
-    iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons)
-    pageShareButton.addEventListener('click', sharePage);
-}
-
 const installPwa = async () => {
     // hide install prompt
     dismissInstallPwaButtons();
@@ -174,3 +129,56 @@ const dismissInstallPwaButtons = () => {
 
     }
 }
+
+const applyMediaQueriesOnDeviceWidth = () => {
+    if (window.innerWidth > 767) {
+        import('./../css/tablets-and-above.css');
+        tabbedNavigation.alignBottom = false;
+    }
+    if (window.innerWidth > 959) {
+        import('./../css/desktops.css');
+    }
+}
+
+const navigationTabSelected = event => {
+    const navigateTo = event.detail.item.getAttribute('data-navigate-to');
+    window.history.pushState({}, document.title, navigateTo);
+}
+
+const attachEventListeners = () => {
+    // ? clicks
+    installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
+    installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
+    iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons)
+    pageShareButton.addEventListener('click', sharePage);
+
+    // ? Window
+    window.addEventListener('resize', applyMediaQueriesOnDeviceWidth);
+    window.addEventListener('offline', handleOfflineEvent);
+    window.addEventListener('online', handleOnlineEvent);
+    window.onpopstate =  event => {
+        // TODO has navigated back
+    };
+
+    // ? Navigation
+    tabbedNavigation.addEventListener('iron-select', navigationTabSelected);
+}
+
+let deferredPromptEvent;
+window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault(); 
+    deferredPromptEvent = e;
+
+    // * Check if should display install popups
+    if (!isInStandaloneMode) {
+        // * app is not launched as a PWA
+        // * show install prompt
+        if (!isIos) {
+            installPwaCard.hidden = false;
+        } else {
+            if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
+                iosInstallBanner.hidden = false;
+            }
+        }
+    }
+});

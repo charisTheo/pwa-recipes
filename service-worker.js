@@ -17,7 +17,7 @@ addEventListener('message', event => {
   }
 });
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [placeholderURL]);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,
@@ -78,37 +78,21 @@ addEventListener('push', function(event) {
   }
 });
 
-addEventListener('notificationclick', function(event) {
-  event.notification.close();
-  // * data received from server (dataPushOptions)
-  const data = event.notification.data;
+// addEventListener('notificationclick', function(event) {
+//   event.notification.close();
+//   // * data received from server (dataPushOptions)
+//   const data = event.notification.data;
 
-  if (!event.action) {
-    // ? Was a normal notification click
+//   if (!event.action) {
+//     // ? Was a normal notification click
+//     return;
+//   }
 
-    if (event.notification.tag === 'cart-abandoned') {
-      const { items } = data;
+//   switch (event.action) {
+//     // ? Handle push notification actions here
 
-      event.waitUntil(
-        clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`)
-      );
-    }
-
-    return;
-  }
-
-  switch (event.action) {
-    case 'checkout':
-      const { items } = data;
-      event.waitUntil(clients.openWindow(`/?checkout=${true}&items=${encodeURIComponent(JSON.stringify(items))}`));
-    break;
-    
-    case 'clear':
-      event.waitUntil(clients.openWindow(`/?clear-shopping-cart=${true}`));
-    break;
-
-    default:
-        console.warn(`service-worker notificationclick event -> Unknown action clicked: ${event.action}`);
-    break;
-  }
-});
+//     default:
+//         console.warn(`service-worker notificationclick event -> Unknown action clicked: ${event.action}`);
+//     break;
+//   }
+// });

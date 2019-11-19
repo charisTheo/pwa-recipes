@@ -255,10 +255,10 @@ footer a {
     color: #004ba0;
 }
 
-paper-fab {
+paper-fab.page-share-button {
     position: fixed;
     bottom: 100px;
-    right: 50px;
+    right: 36px;
 }
 
 .hidden {
