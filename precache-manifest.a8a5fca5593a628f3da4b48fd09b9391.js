@@ -1,11 +1,15 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "3562f5e44c5ce5b9ff95ba9e76f5e155",
+    "url": ".CNAME"
+  },
+  {
     "revision": "9a9bdd193f881ab8a832",
-    "url": "1.bundle.js"
+    "url": "1.js"
   },
   {
     "revision": "4e1300af6f121401039e",
-    "url": "2.bundle.js"
+    "url": "2.js"
   },
   {
     "url": "2fa446e9ef97056dae09c2b2f718b6b5.svg"
@@ -19,8 +23,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js"
   },
   {
-    "revision": "dd4d8024d472b9307040",
-    "url": "bundle.js"
+    "revision": "b9128d2b62f7045360553516f9a3b673",
+    "url": "favicon.ico"
   },
   {
     "revision": "9b3752dd15ec9c329721d88129e6b5b4",
@@ -45,6 +49,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "b9128d2b62f7045360553516f9a3b673",
     "url": "favicon/favicon.ico"
+  },
+  {
+    "revision": "68d0e99b964ea9290a39",
+    "url": "home.js"
   },
   {
     "revision": "42865eb90c8c5d904b4b30d8da806bf1",
@@ -87,7 +95,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "4f5c95812ee700e0af949ef76ce04308",
+    "revision": "17bf38b6c6e4a431ce2c5c6ce5ed335a",
     "url": "index.html"
   },
   {
