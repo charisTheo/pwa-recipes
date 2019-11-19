@@ -19,7 +19,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "bower_components/webcomponentsjs/webcomponents-loader.js"
   },
   {
-    "revision": "a22b705e0cd37cabcd1c",
+    "revision": "dd4d8024d472b9307040",
     "url": "bundle.js"
   },
   {
@@ -87,7 +87,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "7cce7f3a3987589d65bc76f46bad3ad4",
+    "revision": "4f5c95812ee700e0af949ef76ce04308",
     "url": "index.html"
   },
   {
