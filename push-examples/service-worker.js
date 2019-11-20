@@ -1,7 +1,6 @@
-importScripts("precache-manifest.e42563826c2123af53683dade8187ee2.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.5b9ff7f545e04f5ac2516a287b5c410a.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -19,7 +18,8 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-workbox.precaching.precacheAndRoute(['index.html', 'js/index.js', 'manifest.json', 'css/main.css', 'favicon/favicon.ico'], 'GET');
+workbox.precaching.precacheAndRoute(self.__precacheManifest || ['/', 'index.html', 'manifest.json']);
+// workbox.precaching.precacheAndRoute(['index.html', 'manifest.json', 'css/main.css', 'favicon/favicon.ico'], 'GET');
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,
@@ -34,6 +34,11 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /\.(?:js|css|png|gif|jpg|svg|jpeg|webp)$/,
   new workbox.strategies.CacheFirst()
+);
+
+workbox.routing.registerRoute(
+  /(\/|index\.html)$/,
+  new workbox.strategies.StaleWhileRevalidate()
 );
 
 self.addEventListener('push', function(event) {
