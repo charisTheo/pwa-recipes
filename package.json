@@ -1,5 +1,5 @@
 {
-  "name": "push-handler",
+  "name": "pwa-recipes-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/charisTheo/push-handler.git"
+    "url": "git+https://github.com/charisTheo/pwa-recipes.git"
   },
-  "author": "",
+  "author": "charisTheo",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/charisTheo/push-handler/issues"
+    "url": "https://github.com/charisTheo/pwa-recipes/issues"
   },
-  "homepage": "https://github.com/charisTheo/push-handler#readme",
+  "homepage": "https://github.com/charisTheo/pwa-recipes/tree/api#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",

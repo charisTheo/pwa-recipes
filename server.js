@@ -25,7 +25,7 @@ app.use(session({
     cookie: {httpOnly: true, secure: true}
 }));
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://www.charistheo.io");
+    res.header("Access-Control-Allow-Origin", "https://www.pwa.recipes");
     res.header("Access-Control-Allow-Credentials", true);
     res.header("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, X-Requested-With");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, DELETE");
