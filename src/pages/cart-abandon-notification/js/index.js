@@ -36,7 +36,8 @@ import {
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';
 const NOTIFICATIONS_NONE_URL = './img/notifications-none.svg';
-const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/cart-abandon-notification/';
+const SERVICE_WORKER_SCOPE = '/cart-abandon-notification/';
+// const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/cart-abandon-notification/';
 const notificationsRequestButton = document.getElementById('notifications-request-button');
 const shoppingCartButton = document.getElementById('shopping-cart-button');
 const cartCloseButton = document.getElementById('cart-close-button');

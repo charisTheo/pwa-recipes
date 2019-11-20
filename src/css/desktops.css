@@ -6,5 +6,12 @@
 @media screen and (min-width: 1281px) {
     main {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        max-width: 1100px;
+    }
+}
+@media screen and (min-width: 2559px) {
+    main {
+        padding: 20px 0px;
+        max-width: 1450px;
     }
 }

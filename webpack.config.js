@@ -39,7 +39,7 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: 'service-worker.js',
-    exclude: ['service-worker.js']
+    exclude: ['service-worker.js', 'CNAME']
   }),
   new MediaQueryPlugin({
     include: true,

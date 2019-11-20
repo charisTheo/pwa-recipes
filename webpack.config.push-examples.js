@@ -29,7 +29,7 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: `${INPUT_DIRECTORY}/service-worker.js`,
-    exclude: [`${INPUT_DIRECTORY}/service-worker.js`]
+    exclude: [`${INPUT_DIRECTORY}/service-worker.js`, `${INPUT_DIRECTORY}/js/index.js`]
   })
 ];
 
@@ -41,7 +41,7 @@ module.exports = {
     // filename: ({ chunk }) => {
     //   chunk.name === CHUNK_NAME ? DIRECTORY_NAME + '/[name].js' : '[name].js'
     // },
-    filename: 'bundle.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, OUTPUT_DIRECTORY)
   },
   // Tell Webpack which directories to look in to resolve import statements.
