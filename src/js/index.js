@@ -27,7 +27,7 @@ import {
     findUrlInCache
 } from "./util";
 
-const SERVICE_WORKER_SCOPE = process.env.NODE_ENV === 'development' ? '/' : '/ecommerce-example-pwa/';
+const SERVICE_WORKER_SCOPE = '/';
 const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');

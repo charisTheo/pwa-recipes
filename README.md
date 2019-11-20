@@ -1,22 +1,29 @@
 <p align="center">
-  <img src="https://github.com/charisTheo/ecommerce-example-pwa/blob/master/img/pwa-logo.png?raw=true" alt="PWA unofficial logo"/>
+  <img width="300" src="https://github.com/charisTheo/pwa-recipes/blob/master/img/pwa-logo.png?raw=true" alt="PWA unofficial logo"/>
 </p>
 
-# Ecommerce PWA Template 📱
+# PWA Recipes 🥘 for every chef developer 👨‍🍳👩‍🍳
+## [Demo](https://pwa.recipes/)
 
-## [Offline Requests 📴](https://github.com/charisTheo/offline-requests) - [Demo](https://www.charistheo.io/offline-requests)
+## [Offline Requests 📴](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/offline-requests) - [Demo](https://www.pwa.recipes/offline-requests/)
 
-## [Cart Abandon 🛒](https://github.com/charisTheo/cart-abandon-notification) - [Demo](https://www.charistheo.io/cart-abandon-notification)
+## [Cart Abandon Notification 🛒](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/cart-abandon-notification) - [Demo](https://www.pwa.recipes/cart-abandon-notification/)
 
-## [Push Notifications 🔔](https://github.com/charisTheo/push-examples) - [Demo](https://www.charistheo.io/push-examples)
+## [Push Example Notifications 🔔](https://github.com/charisTheo/pwa-recipes/blob/master/src/pages/push-examples) - [Demo](https://www.pwa.recipes/push-examples/)
 
----
+<br>
 
-## Getting started
+# Getting started 
 
-### Run the web app
+## Clone this repository 🛒
+```git clone https://github.com/charisTheo/pwa-recipes.git```
 
-#### From the root directory of the project run:
+## Navigate into the project's root directory 🍽
+```cd pwa-recipes```
 
-```npm start```
+## Run the web app 🍲
 
+### From the root directory of the project run:
+```npm i && npm start```
+
+# <p align="center">😋</p>

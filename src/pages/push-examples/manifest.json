@@ -1,6 +1,6 @@
 {
-  "short_name": "PWAr",
-  "name": "PWA Recipes",
+  "short_name": "Push Example",
+  "name": "Push Example Web App",
   "icons": [
     {
       "src": "./favicon/favicon.ico",
@@ -18,9 +18,9 @@
       "type": "image/png" 
     } 
   ],
-  "start_url": ".",
+  "start_url": "/push-examples/",
   "display": "standalone",
-  "theme_color": "#3367d6",
+  "theme_color": "#673ab7",
   "background_color": "#444444",
   "serviceworker": {
     "src": "./service-worker.js"

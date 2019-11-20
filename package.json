@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "homepage": "https://charistheo.github.io/ecommerce-example-pwa",
+  "homepage": "https://pwa.recipes",
   "scripts": {
     "start": "webpack-dev-server --open",
     "build": "rm -r build && webpack --mode=production",

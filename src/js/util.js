@@ -27,6 +27,8 @@ export const findUrlInCache = async item => {
     const cacheNames = await caches.keys();
     const result = [];
 
+    // TODO check cache name instead
+    
     for (const name of cacheNames) {
         // Open the cache
         const cache = await caches.open(name);
