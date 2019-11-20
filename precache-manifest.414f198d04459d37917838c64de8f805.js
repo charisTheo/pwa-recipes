@@ -51,7 +51,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "d28e66e5482c3a2bda3f",
+    "revision": "dcef39e7cdfab6c04333",
     "url": "home.js"
   },
   {
@@ -95,11 +95,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "17bf38b6c6e4a431ce2c5c6ce5ed335a",
+    "revision": "16ae92b9ffab97e826590c1a9d79d401",
     "url": "index.html"
   },
   {
-    "revision": "08301417e26433dedbd73b289b6f1876",
+    "revision": "314a84a3dcf001d1c89163257f7f100b",
     "url": "manifest.json"
   }
 ]);

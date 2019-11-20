@@ -1,6 +1,6 @@
 {
-  "short_name": "Ecommerce example",
-  "name": "Ecommerce example PWA",
+  "short_name": "PWAr",
+  "name": "PWA Recipes",
   "icons": [
     {
       "src": "./favicon/favicon.ico",
