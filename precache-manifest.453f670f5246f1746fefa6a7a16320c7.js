@@ -11,6 +11,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "2fa446e9ef97056dae09c2b2f718b6b5.svg"
   },
   {
+    "revision": "3562f5e44c5ce5b9ff95ba9e76f5e155",
+    "url": "CNAME"
+  },
+  {
     "revision": "1ca5997b2cc7ce31e2859f128d8a050d",
     "url": "bower_components/webcomponentsjs/gulpfile.js"
   },
