@@ -16,7 +16,8 @@ body {
     padding: 0;
     color: white;
     text-align: center;
-    background-image: url("./../img/floating-cogs.svg");
+    /* TODO */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%ff6333' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
     background-color: #ffeae9;
 }
 .container {
@@ -199,22 +200,26 @@ button:active {
     grid-column: 1 / -1;
 }
 
+
+
 footer {
     grid-area: footer;
     background-color: #333333;
-    height: 70px;
     padding: 25px;
     display: grid;
-    align-items: center;
+    grid-gap: 30px;
+    grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
 }
-
+footer span {
+    text-align: left;
+    font-size: 14px;
+}
 footer a {
     color: var(--orange);
+    display: inline-block;
+    padding: 10px 0;
 }
 
-footer span {
-    font-size: 12px;
-}
 
 .arrow-right {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z' /%3E%3C/svg%3E");

@@ -105,7 +105,7 @@ const checkout = async event => {
 }
 
 window.addEventListener('offline', async () => {
-    // showSnackBar('You are offline 📴');
+    showSnackBar('You are offline 📴');
     configureLocalDatabase();
     const registration = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_SCOPE);
     // * register Background Sync event
@@ -113,7 +113,7 @@ window.addEventListener('offline', async () => {
 });
 
 window.addEventListener('online', function() {
-    // showSnackBar('You are back online! 🎉');
+    showSnackBar('You are back online! 🎉');
     // TODO use background sync to add or remove items from IndexDB to the API
 });
 

@@ -90,16 +90,28 @@
       </main>
 
       <footer>
-        <custom-style>
-          <style is="custom-style">
-            paper-toggle-button {
-              --paper-toggle-button-label-color:  var(--accent-color);
-            }
-            /* paper-toggle-button:checked {
-              --paper-toggle-button-label-color:  var(--primary-color);
-            } */
-          </style>
-        </custom-style>
+        <span> 
+          <custom-style>
+            <style is="custom-style">
+              paper-icon-button.small {
+                width: 20px;
+                height: 20px;
+                padding: 0;
+                top: -6px;
+              }
+            </style>
+          </custom-style>
+          <a 
+            href="https://www.heropatterns.com/" 
+            rel="noopener noreferrer" 
+            target="_blank" 
+            aria-label="Lovely backgrounds by Hero Patterns dot com"
+          >
+            Hero Patterns
+            <paper-icon-button tabindex="-1" class="small" icon="open-in-new"></paper-icon-button>
+          </a>
+          👈 Lovely backgrounds
+        </span>
       </footer>
     </div>
 

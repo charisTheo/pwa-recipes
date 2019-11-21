@@ -16,8 +16,8 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || ['/', 'index.html', 'manifest.json']);
-// workbox.precaching.precacheAndRoute(['index.html', 'manifest.json', 'css/main.css', 'favicon/favicon.ico'], 'GET');
+self.__precacheManifest = (self.__precacheManifest || []).concat(['/', 'index.html', 'manifest.json']);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,

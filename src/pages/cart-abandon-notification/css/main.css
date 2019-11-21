@@ -20,6 +20,7 @@ body {
     color: black;
     text-align: center;
     background-color: #e7f0fc;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%3367d6' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 .container {
     min-height: 100vh;
@@ -30,7 +31,6 @@ body {
 
 paper-toolbar {
     background-color: var(--primary-color);
-    grid-area: header;
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 paper-toolbar > .title {
@@ -87,7 +87,6 @@ paper-toolbar > .title {
 }
 
 main {
-    grid-area: main;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 15px;
@@ -128,16 +127,19 @@ paper-button {
 }
 
 footer {
-    grid-area: footer;
     background-color: #333333;
-    height: 70px;
     padding: 25px;
     display: grid;
-    align-items: center;
+    grid-gap: 30px;
+    grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
 }
-
+footer span {
+    text-align: left;
+}
 footer a {
-    color: var(--orange);
+    color: var(--google-blue-500);
+    display: inline-block;
+    padding: 10px 0;
 }
 
 paper-toolbar paper-button {

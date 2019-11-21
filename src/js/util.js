@@ -24,6 +24,7 @@ export const removeElements = elements => {
 
 export const findUrlInCache = async item => {
     // Get a list of all of the caches for this origin
+    console.log('Get a list of all of the caches for this origin');
     const cacheNames = await caches.keys();
     const result = [];
 

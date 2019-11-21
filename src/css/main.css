@@ -14,7 +14,7 @@ body {
     padding: 0;
     color: black;
     text-align: center;
-    background-image: url("./../../img/floating-cogs.svg");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%673ab7' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
     background-color: #e7f0fc;
 }
 .container {
@@ -164,15 +164,20 @@ main paper-card {
 
 footer {
     background-color: #333333;
-    min-height: 100px;
+    color: #aaa;
     padding: 25px;
     display: grid;
-    align-items: center;
+    grid-gap: 30px;
+    text-align: left;
+    grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
+}
+footer span {
     text-align: left;
 }
-
 footer a {
     color: var(--accent-color);
+    display: inline-block;
+    padding: 10px 0;
 }
 
 #snackbar {

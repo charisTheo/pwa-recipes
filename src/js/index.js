@@ -32,7 +32,6 @@ import {
 } from "./tabs";
 
 const SERVICE_WORKER_SCOPE = '/';
-const pageCardLinks = document.querySelectorAll('.page-card-link');
 const installPwaCard = document.querySelector('.install-pwa-card');
 const installPwaButtons = document.querySelectorAll('.install-pwa-button');
 const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
@@ -49,7 +48,7 @@ window.addEventListener('load', async () => {
     renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo);
 
     if (!navigator.onLine) {
-        handleOfflineEvent();    
+        handleOfflineEvent();
     }
 });
 
@@ -72,6 +71,9 @@ const unmarkOfflineAvailableContent = () => {
 }
 
 const markOfflineAvailableContent = () => {
+    // ! if only in the apps tab
+    // TODO make this work cross tab 
+    const pageCardLinks = document.querySelectorAll('.page-card-link');
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');

@@ -17,7 +17,6 @@ addEventListener('message', event => {
   }
 });
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || [placeholderURL]);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,
@@ -43,16 +42,20 @@ workbox.routing.registerRoute(
   /\.(?:webp|png|jpg|jpeg|svg)$/,
   async ({url, event, params}) => {
     const staleWhileRevalidate = new workbox.strategies.StaleWhileRevalidate();
-    const response = await fetch(url, { method: 'GET' }) || await caches.match(event.request);
-    
-    if (response && response.status === 404) {
-      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in network or in cache! Responding with placeholder image instead...`);
-      // * respond with placeholder image
-      return await fetch(placeholderURL, { method: 'GET' });
 
-    } else {
-      return await staleWhileRevalidate.handle({event});
-      
+    try {
+      const response = await caches.match(event.request) || await fetch(url, { method: 'GET' });
+      if (!response || response.status === 404) {
+        throw new Error(response.status);
+      } else {
+        return await staleWhileRevalidate.handle({event});
+      }
+
+    } catch (error) {
+      console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
+      // * get placeholder image from cache || get placeholder image from network
+      return await caches.match(placeholderURL) || await fetch(placeholderURL, { method: 'GET' });
+
     }
   }
 );
@@ -63,20 +66,20 @@ workbox.routing.registerRoute(
   'GET'
 );
 
-addEventListener('push', function(event) {
-  let options = {};
-  if (!!event.data) {
-      const data = event.data.json();
-      options = {
-          ...data,
-          icon: './img/chrome-web-icon-96.png',
-          chrome_web_icon: './img/chrome-web-icon-96.png',
-          badge: './img/speech-notification-badge-inverted-48.png',
-          chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
-      }
-      registration.showNotification(data.title, options);
-  }
-});
+// addEventListener('push', function(event) {
+//   let options = {};
+//   if (!!event.data) {
+//       const data = event.data.json();
+//       options = {
+//           ...data,
+//           icon: './img/chrome-web-icon-96.png',
+//           chrome_web_icon: './img/chrome-web-icon-96.png',
+//           badge: './img/speech-notification-badge-inverted-48.png',
+//           chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
+//       }
+//       registration.showNotification(data.title, options);
+//   }
+// });
 
 // addEventListener('notificationclick', function(event) {
 //   event.notification.close();
