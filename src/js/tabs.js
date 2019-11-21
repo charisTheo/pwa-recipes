@@ -1,3 +1,11 @@
+import { 
+    isIos,
+    isInStandaloneMode
+} from "./util";
+import { 
+    installPwa,
+    dismissInstallPwaButtons
+} from "./index";
 
 const pageMainElement = document.querySelector('main');
 
@@ -56,5 +64,21 @@ export const animatePageLeave = degrees => {
 export const renderHtmlForTabSelected = async navigateTo => {
     const html = await import(`!!raw-loader!./../partials/${navigateTo}.html`);
     pageMainElement.innerHTML = html.default;
+    if (navigateTo === 'apps') {
+        // TODO
+        if (!isIos && !isInStandaloneMode) {
+            // * navigated to apps tab AND is not launched as a PWA AND is not an iOS
+            document.querySelector('.install-pwa-card').hidden = false;
+        }
+
+        // TODO
+        // ? apps tab specific event listeners
+        document.querySelectorAll('.install-pwa-button').forEach(
+            button => button.addEventListener('click', installPwa)
+        );
+        document.querySelector('.install-pwa-dismiss-button').addEventListener(
+            'click', dismissInstallPwaButtons
+        );
+    }
     // window.history.pushState({}, document.title, navigateTo);
 }

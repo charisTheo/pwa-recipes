@@ -32,9 +32,9 @@ import {
 } from "./tabs";
 
 const SERVICE_WORKER_SCOPE = '/';
-const installPwaCard = document.querySelector('.install-pwa-card');
-const installPwaButtons = document.querySelectorAll('.install-pwa-button');
-const installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
+let installPwaCard = document.querySelector('.install-pwa-card');
+let installPwaButtons = document.querySelectorAll('.install-pwa-button');
+let installPwaDismissButton = document.querySelector('.install-pwa-dismiss-button');
 const pageShareButton = document.querySelector('.page-share-button');
 const iosInstallBanner = document.querySelector('#ios-install-banner');
 const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
@@ -115,7 +115,7 @@ const registerServiceWorker = () => {
     }
 }
 
-const installPwa = async () => {
+export const installPwa = async () => {
     // hide install prompt
     dismissInstallPwaButtons();
     deferredPromptEvent.prompt();
@@ -126,7 +126,7 @@ const installPwa = async () => {
     });
 }
 
-const dismissInstallPwaButtons = () => {
+export const dismissInstallPwaButtons = () => {
     if (isIos) {
         removeElements(iosInstallBanner);
         const expiryDate = new Date();
@@ -134,6 +134,8 @@ const dismissInstallPwaButtons = () => {
         setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
 
     } else {
+        // TODO
+        installPwaCard = document.querySelector('.install-pwa-card');
         removeElements(installPwaCard);
 
     }
@@ -152,7 +154,7 @@ const applyMediaQueriesOnDeviceWidth = () => {
 const attachEventListeners = () => {
     // ? clicks
     try {
-        // ? main tab specific event listeners
+        // ? apps tab specific event listeners
         installPwaButtons.forEach(button => button.addEventListener('click', installPwa));
         installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
         iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons);
@@ -183,7 +185,13 @@ window.addEventListener('beforeinstallprompt', function(e) {
         // * app is not launched as a PWA
         // * show install prompt
         if (!isIos) {
-            installPwaCard.hidden = false;
+            // TODO
+            setTimeout(() => {
+                if (!installPwaCard) {
+                    installPwaCard = document.querySelector('.install-pwa-card');
+                }
+                installPwaCard.hidden = false
+            }, 1000);
         } else {
             if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
                 iosInstallBanner.hidden = false;

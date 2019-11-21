@@ -24,16 +24,16 @@ export const removeElements = elements => {
 
 export const findUrlInCache = async item => {
     // Get a list of all of the caches for this origin
-    console.log('Get a list of all of the caches for this origin');
     const cacheNames = await caches.keys();
     const result = [];
 
-    // TODO check cache name instead
+    // TODO check by cache name?
     
     for (const name of cacheNames) {
         // Open the cache
         const cache = await caches.open(name);
 
+        // * Check for any html files inside each cache under item's name
         for (const request of await cache.keys()) {
             if (request.url.match(`(${item}.+\.html$)|${item}\/$`)) {
                 result.push(await cache.match(request));
