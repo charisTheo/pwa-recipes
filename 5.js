@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{398:function(n,o,e){"use strict";e.r(o),o.default='<div class="offline-content">\n    <h2>Some offline content</h2>\n</div>'}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{402:function(n,o,e){"use strict";e.r(o),o.default='<div class="offline-content">\n    <h2>Some offline content</h2>\n</div>'}}]);
