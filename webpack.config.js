@@ -54,6 +54,7 @@ module.exports = [
   CartAbandonNotificationWebpackConfig,
   PushExamplesWebpackConfig,
   {
+    mode: 'none',
     // Tell Webpack which file kicks off our app.
     entry: {
       home: path.resolve(__dirname, 'src/js/index.js'),
@@ -90,7 +91,8 @@ module.exports = [
           // babel-loader. This let's us transpile JS in our `<script>` elements.
           use: [
             { loader: 'babel-loader' },
-            { loader: 'polymer-webpack-loader' }
+            { loader: 'polymer-webpack-loader' },
+            { loader: 'raw-loader' }
           ]
         },
         {

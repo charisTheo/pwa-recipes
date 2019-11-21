@@ -34,6 +34,7 @@ const plugins = [
 ];
 
 module.exports = {
+  mode: 'none',
   entry: {
     [CHUNK_NAME]: path.resolve(__dirname, `${INPUT_DIRECTORY}/js/index.js`),
   },

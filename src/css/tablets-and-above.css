@@ -39,4 +39,7 @@
     .flex-stretch-tablets-and-above {
         flex: 1;
     }
+    .animate-page {
+        transform-origin: center top;
+    }
 }

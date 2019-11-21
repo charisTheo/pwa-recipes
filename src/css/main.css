@@ -96,6 +96,8 @@ main {
     margin: 0 auto;
     padding: 20px;
     max-width: 1000px;
+    will-change: transform;
+    transform: translateZ(0);
 }
 main .page-title {
     grid-column: 1 / -1;
@@ -262,11 +264,13 @@ paper-fab.page-share-button {
     right: 36px;
 }
 
+.animate-page {
+    transform-origin: bottom center;
+}
 .hidden {
     transition: transform 0.35s ease-out;
     transform: scale(0);
 }
-
 .flex-stretch {
     flex: 1;
 }

@@ -26,6 +26,10 @@ import {
     removeElements,
     findUrlInCache
 } from "./util";
+import { 
+    navigationTabSelected,
+    renderHtmlForTabSelected
+} from "./tabs";
 
 const SERVICE_WORKER_SCOPE = '/';
 const pageCardLinks = document.querySelectorAll('.page-card-link');
@@ -41,6 +45,9 @@ window.addEventListener('load', async () => {
     applyMediaQueriesOnDeviceWidth();
     registerServiceWorker();
     attachEventListeners();
+    // * load the html based on the initially selected tab
+    renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo);
+
     if (!navigator.onLine) {
         handleOfflineEvent();    
     }
@@ -140,16 +147,16 @@ const applyMediaQueriesOnDeviceWidth = () => {
     }
 }
 
-const navigationTabSelected = event => {
-    const navigateTo = event.detail.item.getAttribute('data-navigate-to');
-    window.history.pushState({}, document.title, navigateTo);
-}
-
 const attachEventListeners = () => {
     // ? clicks
-    installPwaButtons.forEach(button => button.addEventListener('click', installPwa))
-    installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
-    iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons)
+    try {
+        // ? main tab specific event listeners
+        installPwaButtons.forEach(button => button.addEventListener('click', installPwa));
+        installPwaDismissButton.addEventListener('click', dismissInstallPwaButtons);
+        iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons);
+    } catch (error) {
+
+    }
     pageShareButton.addEventListener('click', sharePage);
 
     // ? Window

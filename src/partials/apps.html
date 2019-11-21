@@ -1,0 +1,75 @@
+<h2 class="page-title">PWA Recipes 📱🥘</h2>
+
+<a class="page-card-link" href="/push-examples/">
+    <paper-icon-button hidden class="available-offline-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
+    <paper-card heading="Push examples" tabIndex="-1">
+    <img src="./img/push-examples.png" alt="Message bubble emoji"/>
+    </paper-card>
+</a>  
+
+<a class="page-card-link" href="/cart-abandon-notification/">
+    <paper-icon-button hidden class="available-offline-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
+    <paper-card heading="Cart Abandon example" tabIndex="-1">
+    <img src="./img/cart-abandon.png" alt="Shopping cart emoji"/>            
+    </paper-card>
+</a>
+
+<paper-card 
+    class="install-pwa-card"
+    heading="Browse products even when you're on the train!" 
+    tabIndex="0"
+    hidden
+>
+    <custom-style>
+    <style is="custom-style">
+        paper-card.install-pwa-card {
+        --paper-card-header-color: #ffffff;
+        background-color: var(--primary-color);
+        transition: transform 0.35s;
+        }
+        paper-card.install-pwa-card paper-icon-button {
+        --iron-icon-fill-color: var(--google-blue-300);
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 35px;
+        height: 35px;
+        }
+        paper-card.install-pwa-card .card-actions {
+        margin-left: auto;
+        padding-bottom: 12px;
+        }
+        paper-card.install-pwa-card paper-button {
+        color: #ffffff;
+        }
+        paper-card.install-pwa-card .install-pwa-button {
+        background-color: var(--accent-color);
+        }
+        paper-card.install-pwa-card .install-pwa-button > iron-icon {
+        margin-left: 4px;
+        }
+    </style>
+    </custom-style>
+
+    <!-- * Learn more - Reference -->
+    <a 
+    href="https://developers.google.com/web/fundamentals/app-install-banners/promoting-install-mobile"
+    tabindex="-1" 
+    target="_blank"
+    rel="noopener noreferrer"
+    >
+    <paper-icon-button icon="open-in-new"></paper-icon-button>
+    </a>
+
+    <div class="card-actions horizontal justified">
+    <paper-button class="install-pwa-dismiss-button">Not now</paper-button>
+    <paper-button class="install-pwa-button">Install <iron-icon icon="get-app"></iron-icon></paper-button>
+    </div>
+</paper-card>
+
+<a class="page-card-link" href="/offline-requests/">
+    <paper-icon-button hidden class="available-offline-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
+    <paper-card heading="Offline requests example" tabIndex="-1">
+    <img src="./img/offline-requests.png" alt="Mobile off network emoji"/>            
+    </paper-card>
+</a>
