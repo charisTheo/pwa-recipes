@@ -1,8 +1,5 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "url": "f0dd6d98a23d88ccbd54237ef96f2776.svg"
-  },
-  {
     "revision": "c7d1d544f23717242046802b50ad58e8",
     "url": "favicon.ico"
   },
@@ -31,20 +28,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "4981b0fb16e9e3523838ab5cffc7cf8b",
-    "url": "img/.DS_Store"
-  },
-  {
     "revision": "7616f2454346cd2eb7fc4cfdc1688921",
     "url": "img/chrome-web-icon-96.png"
   },
   {
     "revision": "e503834e8032fa06845c83d1bfee3fb8",
     "url": "img/cool.png"
-  },
-  {
-    "revision": "f0dd6d98a23d88ccbd54237ef96f2776",
-    "url": "img/floating-cogs.svg"
   },
   {
     "revision": "36775ebdb88cc0ed93cd40e63e244e78",
@@ -63,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "b5a301470014396bfb82f69fa0d3ed00",
+    "revision": "d9672bfd3a1f52c1aeb02cc818e7e3b4",
     "url": "index.html"
   },
   {
@@ -71,11 +60,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "manifest.json"
   },
   {
-    "revision": "d31401726224e65664c0",
+    "revision": "fbf83caa6106cff9b8d7",
     "url": "pushExamples.js"
   },
   {
-    "revision": "db6facc4a348c8778a72ff7bc7ce5046",
+    "revision": "8dc54e34470986f0ac8fb8e4b80f064b",
     "url": "service-worker.js"
   }
 ]);

@@ -1,4 +1,4 @@
-importScripts("precache-manifest.5b9ff7f545e04f5ac2516a287b5c410a.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.bf7e9b594274192641906106a363c455.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -18,8 +18,8 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || ['/', 'index.html', 'manifest.json']);
-// workbox.precaching.precacheAndRoute(['index.html', 'manifest.json', 'css/main.css', 'favicon/favicon.ico'], 'GET');
+self.__precacheManifest = (self.__precacheManifest || []).concat(['/', 'index.html', 'manifest.json']);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,

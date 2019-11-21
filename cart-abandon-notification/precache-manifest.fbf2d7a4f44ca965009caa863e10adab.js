@@ -1,34 +1,34 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "843196a9d41c4d8f7860",
+    "revision": "fcaa5b27cd05f0c85253",
     "url": "bundle.js"
   },
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon.ico"
   },
   {
-    "revision": "a4d680aca3b2322207ade82213b9d01c",
+    "revision": "db8de568835d37a7e19a240cdfb504fe",
     "url": "favicon/android-chrome-192x192.png"
   },
   {
-    "revision": "68d07494c05d1f8fed0614b4f4c419ae",
+    "revision": "0b14c98f83e8eac028f6d77adb68b486",
     "url": "favicon/android-chrome-512x512.png"
   },
   {
-    "revision": "e05ab28febe419e56c7b30369d556efe",
+    "revision": "02a6c2b1021dd44a59bded6837a2a552",
     "url": "favicon/apple-touch-icon.png"
   },
   {
-    "revision": "df80aaf70ec51b386d5e95c2913ab4a1",
+    "revision": "f142430e8755cdb92e119365f38fd1f4",
     "url": "favicon/favicon-16x16.png"
   },
   {
-    "revision": "edcfef953c61f72b766db69b1fe0c885",
+    "revision": "e6d03c5c1c15b32a5bcfc96e5f544f59",
     "url": "favicon/favicon-32x32.png"
   },
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon/favicon.ico"
   },
   {
@@ -42,10 +42,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "7616f2454346cd2eb7fc4cfdc1688921",
     "url": "img/chrome-web-icon-96.png"
-  },
-  {
-    "revision": "2fa446e9ef97056dae09c2b2f718b6b5",
-    "url": "img/floating-cogs.svg"
   },
   {
     "revision": "d9762193c259d4c0600fa8968fbfde80",
@@ -68,12 +64,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/headphones.jpg"
   },
   {
+    "revision": "bd8b9d046a6aae041919c536fc4f106f",
+    "url": "img/products/headphones.webp"
+  },
+  {
     "revision": "c4270d80517c1e134577953ff9998a85",
     "url": "img/products/ps4.jpg"
   },
   {
+    "revision": "df6b315bd8af9901b20a1efbde705934",
+    "url": "img/products/ps4.webp"
+  },
+  {
     "revision": "345bebf82da657d4b7d8b5e9707b57bf",
     "url": "img/products/smart-watch.jpg"
+  },
+  {
+    "revision": "a339abc1cb99d8e9dbcb8e1533ec8fbb",
+    "url": "img/products/smart-watch.webp"
   },
   {
     "revision": "ce1a303cf8c6fdf8dfad494bb4507f08",
@@ -84,15 +92,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "855ac27c2f7662de39d22b54b85cbc3f",
+    "revision": "68035bfb584c2ccff3c4ae0c2f6b6488",
     "url": "index.html"
   },
   {
-    "revision": "661a6a70e046997f108ff57629e6e1e1",
+    "revision": "2cab2f01550ace81a3628dd67fffdcce",
     "url": "manifest.json"
   },
   {
-    "revision": "eff46e883dda9e155c41e0038da2fb9e",
+    "revision": "92208d6f6dd3a948366be34a95102944",
     "url": "service-worker.js"
   }
 ]);
