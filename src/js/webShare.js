@@ -1,4 +1,4 @@
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "../global/snackBar";
 
 export const sharePage = async () => {
     if (navigator.share) {

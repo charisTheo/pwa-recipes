@@ -32,18 +32,6 @@
   <body>
     <div class="container">
       <paper-toolbar>
-        <custom-style>
-          <style is="custom-style">
-            paper-toolbar paper-icon-button {
-              --iron-icon-fill-color: var(--accent-color);
-            }
-            paper-toolbar {
-              --paper-toolbar-background: var(--primary-color);
-              box-shadow: var(--shadow-elevation-16dp_-_box-shadow);
-            }
-          </style>
-        </custom-style>
-        
         <div slot="top" style="margin-left: 10vw;">
           <a 
             id="fork-me-banner" 
@@ -80,6 +68,9 @@
               }
               paper-tabs paper-tab:focus .nav-tab-label {
                 color: var(--paper-tabs-selection-bar-color, var(--accent-color));
+              }
+              paper-tabs paper-tab:focus iron-icon {
+                --iron-icon-fill-color: var(--accent-color);
               }
               :root {
                 --paper-tab-ink: var(--accent-color);

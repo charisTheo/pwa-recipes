@@ -3,6 +3,8 @@ if (!global._babelPolyfill) {
 }
 
 import './../css/main.css';
+import './../global/styles.css';
+import './../global/iosInstallBanner.css';
 
 import { Workbox } from 'workbox-window';
 
@@ -16,7 +18,7 @@ import '@polymer/iron-icon/iron-icon';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
 
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "../global/snackBar";
 import { sharePage } from "./webShare";
 import { 
     isIos,
@@ -25,7 +27,7 @@ import {
     setCookie,
     removeElements,
     findUrlInCache
-} from "./util";
+} from "../global/util";
 import { 
     navigationTabSelected,
     renderHtmlForTabSelected

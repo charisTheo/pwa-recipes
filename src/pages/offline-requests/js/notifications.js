@@ -1,4 +1,4 @@
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "./../../../global/snackBar";
 
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';

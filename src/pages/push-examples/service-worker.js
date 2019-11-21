@@ -16,7 +16,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-self.__precacheManifest = (self.__precacheManifest || []).concat(['/', 'index.html', 'manifest.json']);
+self.__precacheManifest = (self.__precacheManifest || []).concat(['/', '/push-examples/', 'manifest.json']);
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(

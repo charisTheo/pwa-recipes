@@ -1,4 +1,4 @@
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "./../../../global/snackBar";
 import {
     addItemDescriptionToShoppingCart,
     clearShoppingCart,

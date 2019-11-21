@@ -1,7 +1,7 @@
 import { 
     isIos,
     isInStandaloneMode
-} from "./util";
+} from "../global/util";
 import { 
     installPwa,
     dismissInstallPwaButtons

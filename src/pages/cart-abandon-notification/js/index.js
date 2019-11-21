@@ -5,6 +5,7 @@ if (!global._babelPolyfill) {
 import { Workbox } from 'workbox-window';
 
 import './../css/main.css';
+import './../../../global/styles.css';
 
 import '@polymer/paper-card/paper-card';
 import '@polymer/paper-button/paper-button';
@@ -16,7 +17,7 @@ import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
 import '@polymer/paper-toggle-button/paper-toggle-button';
 
-import { showSnackBar } from "./snackBar";
+import { showSnackBar } from "./../../../global/snackBar";
 import {
     getNotificationPermission,
     requestNotificationPermission,

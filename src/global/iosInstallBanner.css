@@ -1,0 +1,63 @@
+#ios-install-banner {
+    position: fixed;
+    box-sizing: border-box;
+    width: 95vw;
+    padding: 5px 5px 15px 5px;
+    margin: 10px 2.5vw;
+    bottom: 60px;
+    border-radius: 10px;
+    background-color: #e6eef7;
+    font-size: 12px;
+    box-shadow: 2px -1px 7px 0px rgba(0,0,0,0.6);
+}
+#ios-install-banner:before {
+    content: "";
+    background-color: #e6eef7;
+    position: absolute;
+    bottom: 0;
+    left: calc(50vw - 10px);
+    width: 20px;
+    height: 20px;
+    transform: rotateZ(45deg);
+    transform-origin: left bottom;
+}
+#ios-install-banner > img {
+    display: inline-block;
+    width: 18px;
+    object-fit: contain;
+    margin: 0 5px -6px 5px;
+}
+#ios-install-banner > .add-ios-container {
+    display: inline-block;
+    border-radius: 5px;
+    background-color: rgb(104, 104, 112);
+    padding: 6px 3px 0 3px;
+    width: 24px;
+    height: 24px;
+    margin: 0 5px -6px 5px;
+}
+#ios-install-banner > .add-ios-container > img.add-ios {
+    filter: invert(1);
+    object-fit: contain;
+    width: 12px;
+}
+#ios-install-banner > img.share-ios {
+    filter: invert(64%) sepia(76%) saturate(3603%) hue-rotate(197deg) brightness(102%) contrast(93%);
+}
+#ios-install-banner > #ios-install-banner-dismiss-button {
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    font-size: 14px;
+    color: #004ba0;
+}
+
+@media (max-width: 320px) {
+    #ios-install-banner {
+        text-align: left;
+        padding: 5px 10px 15px 10px;
+    }
+    #ios-install-banner > .add-ios-container {
+        text-align: center;
+    }
+}
