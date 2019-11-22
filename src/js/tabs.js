@@ -5,7 +5,8 @@ import {
 } from "../global/util";
 import { 
     installPwa,
-    dismissInstallPwaButtons
+    dismissInstallPwaButtons,
+    markOfflineAvailableContent
 } from "./index";
 
 const pageMainElement = document.querySelector('main');
@@ -80,13 +81,20 @@ export const renderHtmlForTabSelected = async navigateTo => {
         document.querySelector('.install-pwa-dismiss-button').addEventListener(
             'click', dismissInstallPwaButtons
         );
+
+        if (!navigator.onLine) {
+            markOfflineAvailableContent();
+        }
+
     } else if (navigateTo === 'offline-content') {
+        const offlineContentTitle = document.querySelector('.offline-content-title');
+        const offlineContentContainer = document.querySelector('.offline-content');
         const pagesUrlArr = ['/cart-abandon-notification', '/offline-requests', '/push-examples'];
         const promises = pagesUrlArr.map(async url => {
-            // console.log("showOfflineAvailablePages -> url", url);
+            // console.log("renderHtmlForTabSelected -> url", url);
             const cachedDocuments = await findUrlInCache(url);
             if (cachedDocuments.length) {
-                // console.log("showOfflineAvailablePages -> cachedItems", cachedDocuments);
+                // console.log("renderHtmlForTabSelected -> cachedDocuments", cachedDocuments);
                 const offlineUrl = cachedDocuments[0].url;
                 // * show available offline icon
                 const html = ` <paper-icon-item class="offline-available-page">
@@ -98,14 +106,15 @@ export const renderHtmlForTabSelected = async navigateTo => {
                     </paper-item-body>
                 </paper-icon-item>`;
 
-                document.querySelector('.offline-content').innerHTML += html;
+                offlineContentContainer.innerHTML += html;
             }
         });
         Promise.all(promises).then(() => {
             if (!document.querySelectorAll('.offline-available-page').length) {
-                document.querySelector('.offline-content-title').innerHTML = 'No offline pages available 🤷‍♂';
+                offlineContentTitle.innerHTML = 'No offline pages available 🤷‍♂';
+                offlineContentContainer.remove();
             } else {
-                document.querySelector('.offline-content-title').innerHTML = 'Offline available pages';
+                offlineContentTitle.innerHTML = 'Offline available pages';
             }
         })
     }

@@ -87,8 +87,12 @@ main paper-card {
     justify-content: space-between;
     transition: box-shadow 0.35s ease-out;
 }
+main .page-card-link:focus {
+    outline: none;
+}
 main paper-card:hover,
-main paper-card:focus {
+main .page-card-link:focus paper-card {
+    outline: none;
     box-shadow: var(--paper-material-elevation-5_-_box-shadow);
 }
 main paper-card .card-actions {
@@ -170,6 +174,14 @@ paper-toolbar paper-button {
     margin: 0;
     padding: 5px 9px;
     text-decoration: none;
+}
+
+.focus-outline:focus,
+.focus-outline.yellow-outline:focus {
+    outline: 3px solid var(--yellow);
+}
+.focus-outline.accent-outline:focus {
+    outline: 3px solid var(--accent-color);
 }
 
 @media (max-width: 320px) {

@@ -75,10 +75,17 @@ const unmarkOfflineAvailableContent = () => {
     pageLinks.forEach(pageLink => pageLink.classList.remove('unavailable-offline'));
 }
 
-const markOfflineAvailableContent = () => {
+export const markOfflineAvailableContent = () => {
     // ! if only in the apps tab
     // TODO make this work cross tab 
     const pageCardLinks = document.querySelectorAll('.page-card-link');
+    if (!pageCardLinks.length && tabbedNavigation.selectedItem.dataset.navigateTo === 'apps') {
+        // ! is in apps tab but the content has not been loaded yet
+        // * schedule for 200ms later
+        setTimeout(markOfflineAvailableContent, 200);
+        return;
+    }
+
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');

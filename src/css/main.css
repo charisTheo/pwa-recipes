@@ -87,6 +87,12 @@ main > a:nth-child(2) img {
     top: 0;
     color: var(--google-green-500);
 }
+.offline-content {
+    grid-row: 2;
+    justify-self: center;
+    width: 100%;
+    max-width: 500px;
+}
 .offline-available-pages-icon {
     width: 40px;
     height: 40px;
@@ -98,7 +104,12 @@ main > a:nth-child(2) img {
     position: relative;
     margin: 20px 0;
     background-color: var(--google-green-100);
+    transition: box-shadow 0.35s ease-out;
     box-shadow: var(--shadow-elevation-4dp_-_box-shadow);
+}
+.offline-available-page:hover,
+.offline-available-page:focus {
+    box-shadow: var(--shadow-elevation-8dp_-_box-shadow);
 }
 .offline-available-page .avatar {
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
@@ -110,10 +121,6 @@ main > a:nth-child(2) img {
     padding-left: 8px;
 }
 
-*:focus {
-    outline: 3px solid var(--yellow);
-}
-
 footer a {
     color: var(--accent-color);
 }
@@ -122,6 +129,10 @@ paper-fab.page-share-button {
     position: fixed;
     bottom: 100px;
     right: 36px;
+    transition: box-shadow 0.35s ease-out;
+}
+paper-fab.page-share-button.keyboard-focus {
+    background-color: var(--dark-accent-color);
 }
 
 .animate-page {

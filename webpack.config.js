@@ -34,12 +34,14 @@ const plugins = [
       to: path.resolve(__dirname, 'build/favicon'),
     },
     'service-worker.js',
+    'offline.html',
     'manifest.json',
     'CNAME'
   ]),
   new InjectManifest({
     swSrc: 'service-worker.js',
-    exclude: ['service-worker.js', 'CNAME']
+    exclude: ['service-worker.js', 'CNAME'],
+    chunks: ['home']
   }),
   new MediaQueryPlugin({
     include: true,

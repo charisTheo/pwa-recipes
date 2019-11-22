@@ -196,10 +196,10 @@ const updateNumberOfCartItems = numberOfCartItems => {
         document.querySelectorAll('[id^=shopping-cart-item-]').length;
     
     if (numberOfCartItems === 0) {
-        numberOfCartItemsEl.style.visibility = 'hidden';
+        numberOfCartItemsEl.hidden = true;
     } else {
-        numberOfCartItemsEl.style.visibility = 'visible';
         numberOfCartItemsEl.innerText = numberOfCartItems;
+        numberOfCartItemsEl.hidden = false;
     }
 }
 

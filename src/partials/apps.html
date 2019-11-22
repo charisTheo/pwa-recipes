@@ -23,30 +23,36 @@
     <custom-style>
     <style is="custom-style">
         paper-card.install-pwa-card {
-        --paper-card-header-color: #ffffff;
-        background-color: var(--primary-color);
-        transition: transform 0.35s;
+            --paper-card-header-color: #ffffff;
+            background-color: var(--primary-color);
+            transition: transform 0.35s ease-in, box-shadow 0.35s ease-out;
+            
+        }
+        main paper-card.install-pwa-card:hover,
+        main paper-card.install-pwa-card:focus {
+            outline: none;
+            box-shadow: var(--paper-material-elevation-5_-_box-shadow);
         }
         paper-card.install-pwa-card paper-icon-button {
         --iron-icon-fill-color: var(--google-blue-300);
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 35px;
-        height: 35px;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
         }
         paper-card.install-pwa-card .card-actions {
-        margin-left: auto;
-        padding-bottom: 12px;
+            margin-left: auto;
+            padding-bottom: 12px;
         }
         paper-card.install-pwa-card paper-button {
-        color: #ffffff;
+            color: #ffffff;
         }
         paper-card.install-pwa-card .install-pwa-button {
-        background-color: var(--accent-color);
+            background-color: var(--accent-color);
         }
         paper-card.install-pwa-card .install-pwa-button > iron-icon {
-        margin-left: 4px;
+            margin-left: 4px;
         }
     </style>
     </custom-style>
@@ -62,8 +68,8 @@
     </a>
 
     <div class="card-actions horizontal justified">
-    <paper-button class="install-pwa-dismiss-button">Not now</paper-button>
-    <paper-button class="install-pwa-button">Install <iron-icon icon="get-app"></iron-icon></paper-button>
+    <paper-button class="install-pwa-dismiss-button focus-outline">Not now</paper-button>
+    <paper-button class="install-pwa-button focus-outline">Install <iron-icon icon="get-app"></iron-icon></paper-button>
     </div>
 </paper-card>
 

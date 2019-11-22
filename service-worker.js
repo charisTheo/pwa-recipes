@@ -17,6 +17,8 @@ addEventListener('message', event => {
   }
 });
 
+self.__precacheManifest = (self.__precacheManifest || []).concat([placeholderURL]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,
