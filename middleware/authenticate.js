@@ -4,6 +4,7 @@ const { User } = require('../models/user');
 
 const authenticate = async (req, res, next) => {
     const { _id } = req.cookies;
+    console.log("TCL: authenticate -> req.cookies._id", _id);
     const user = await User.findOne({ _id });
 
     if (!user) {
