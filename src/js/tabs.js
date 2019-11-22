@@ -9,6 +9,10 @@ import {
     markOfflineAvailableContent
 } from "./index";
 
+const appsHtml = import(`!!raw-loader!./../partials/apps.html`);
+const offlineContentHtml = import(`!!raw-loader!./../partials/offline-content.html`);
+const infoHtml = import(`!!raw-loader!./../partials/info.html`);
+
 const pageMainElement = document.querySelector('main');
 
 export const navigationTabSelected = async event => {
@@ -64,7 +68,19 @@ export const animatePageLeave = degrees => {
  * @param {String} navigateTo - the name of the html file to load
  */
 export const renderHtmlForTabSelected = async navigateTo => {
-    const html = await import(`!!raw-loader!./../partials/${navigateTo}.html`);
+    var html;
+
+    switch(navigateTo) {
+        case 'apps':
+            html = await appsHtml;
+            break;
+        case 'offline-content':
+            html = await offlineContentHtml;
+            break;
+        case 'info':
+            html = await infoHtml;
+            break;
+    }
     pageMainElement.innerHTML = html.default;
     if (navigateTo === 'apps') {
         // TODO

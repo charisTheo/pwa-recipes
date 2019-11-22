@@ -41,7 +41,8 @@ const plugins = [
   new InjectManifest({
     swSrc: 'service-worker.js',
     exclude: ['service-worker.js', 'CNAME'],
-    chunks: ['home']
+    chunks: ['home', 'tabs'],
+    include: ['\/.js$']
   }),
   new MediaQueryPlugin({
     include: true,
@@ -60,9 +61,7 @@ module.exports = [
     // Tell Webpack which file kicks off our app.
     entry: {
       home: path.resolve(__dirname, 'src/js/index.js'),
-      // offlineRequests: path.resolve(__dirname, 'src/offline-requests/js/index.js'),
-      // cartAbandonNotification: path.resolve(__dirname, 'src/cart-abandon-notification/js/index.js'),
-      // pushExamples: path.resolve(__dirname, 'src/push-examples/js/index.js'),
+      tabs: path.resolve(__dirname, 'src/js/tabs.js')
     },
     // Tell Weback to output our bundle.js
     output: {
