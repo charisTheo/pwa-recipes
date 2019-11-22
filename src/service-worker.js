@@ -1,5 +1,7 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
+// ? Both images are precached in the __precacheManifest file
+const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
+const PAGE_ICON_URL = '/favicon/android-chrome-192x192.png';
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -17,16 +19,11 @@ addEventListener('message', event => {
   }
 });
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([placeholderURL]);
+self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.googleapis.com)/,
-  new workbox.strategies.StaleWhileRevalidate()
-);
-
-workbox.routing.registerRoute(
-  /(https:\/\/fonts.gstatic.com)/,
+  /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
@@ -56,7 +53,7 @@ workbox.routing.registerRoute(
     } catch (error) {
       console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
       // * get placeholder image from cache || get placeholder image from network
-      return await caches.match(placeholderURL) || await fetch(placeholderURL, { method: 'GET' });
+      return await caches.match(PLACEHOLDER_IMAGE_URL) || await fetch(PLACEHOLDER_IMAGE_URL, { method: 'GET' });
 
     }
   }

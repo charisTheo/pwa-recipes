@@ -29,7 +29,8 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: `${INPUT_DIRECTORY}/service-worker.js`,
-    exclude: [`${INPUT_DIRECTORY}/service-worker.js`]
+    exclude: [`${INPUT_DIRECTORY}/service-worker.js`],
+    chunks: [CHUNK_NAME]
   })
 ];
 

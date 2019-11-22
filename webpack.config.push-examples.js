@@ -29,7 +29,7 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: `${INPUT_DIRECTORY}/service-worker.js`,
-    exclude: [`${INPUT_DIRECTORY}/service-worker.js`, `${INPUT_DIRECTORY}/js/index.js`]
+    exclude: [`${INPUT_DIRECTORY}/service-worker.js`, `${INPUT_DIRECTORY}/js/index.js`],
   })
 ];
 
@@ -60,18 +60,17 @@ module.exports = {
   // CSS, and (thanks to our loader) HTML.
   module: {
     rules: [
-      // {
-      //   // If you see a file that ends in .html, send it to these loaders.
-      //   test: /\.html$/,
-      //   // This is an example of chained loaders in Webpack.
-      //   // Chained loaders run last to first. So it will run
-      //   // polymer-webpack-loader, and hand the output to
-      //   // babel-loader. This let's us transpile JS in our `<script>` elements.
-      //   use: [
-      //     { loader: 'babel-loader' },
-      //     { loader: 'polymer-webpack-loader' }
-      //   ]
-      // },
+      {
+        // If you see a file that ends in .html, send it to these loaders.
+        test: /\.html$/,
+        // This is an example of chained loaders in Webpack.
+        // Chained loaders run last to first. So it will run
+        // polymer-webpack-loader, and hand the output to
+        // babel-loader. This let's us transpile JS in our `<script>` elements.
+        use: [
+          { loader: 'html-loader' },
+        ]
+      },
       {
         // If you see a file that ends in .js, just send it to the babel-loader.
         test: /(^@polymer|\.js$)/,

@@ -105,7 +105,7 @@ export const renderHtmlForTabSelected = async navigateTo => {
     } else if (navigateTo === 'offline-content') {
         const offlineContentTitle = document.querySelector('.offline-content-title');
         const offlineContentContainer = document.querySelector('.offline-content');
-        const pagesUrlArr = ['/cart-abandon-notification', '/offline-requests', '/push-examples'];
+        const pagesUrlArr = ['/cart-abandon-notification/', '/offline-requests/', '/push-examples/'];
         const promises = pagesUrlArr.map(async url => {
             // console.log("renderHtmlForTabSelected -> url", url);
             const cachedDocuments = await findUrlInCache(url);
@@ -113,14 +113,16 @@ export const renderHtmlForTabSelected = async navigateTo => {
                 // console.log("renderHtmlForTabSelected -> cachedDocuments", cachedDocuments);
                 const offlineUrl = cachedDocuments[0].url;
                 // * show available offline icon
-                const html = ` <paper-icon-item class="offline-available-page">
-                    <paper-icon-button class="offline-available-pages-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
-                    <div class="avatar" style="background-image: url(${url}/favicon/android-chrome-192x192.png)" slot="item-icon"></div>
-                    <paper-item-body two-line>
-                        <div>${url}</div>
-                        <div secondary>${offlineUrl}</div>
-                    </paper-item-body>
-                </paper-icon-item>`;
+                const html = ` <a href="${url}">
+                    <paper-icon-item class="offline-available-page">
+                        <paper-icon-button class="offline-available-pages-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
+                        <div class="avatar" style="background-image: url(${url}/favicon/android-chrome-192x192.png)" slot="item-icon"></div>
+                        <paper-item-body two-line>
+                            <div>${url}</div>
+                            <div secondary>${offlineUrl}</div>
+                        </paper-item-body>
+                    </paper-icon-item>
+                </a>`;
 
                 offlineContentContainer.innerHTML += html;
             }

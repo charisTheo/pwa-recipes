@@ -15,7 +15,7 @@ const PushExamplesWebpackConfig = require('./webpack.config.push-examples');
 const plugins = [
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    favicon: 'favicon/favicon.ico',
+    favicon: 'src/favicon/favicon.ico',
     template: path.resolve(__dirname, 'src/index.ejs'),
     chunks: ['home'],
     inlineSource: 'src\/css\/.css$'
@@ -26,21 +26,20 @@ const plugins = [
       to: 'bower_components/webcomponentsjs/[name].[ext]'
     },
     {
-      from: path.resolve(__dirname, 'img'),
+      from: path.resolve(__dirname, 'src/img'),
       to: path.resolve(__dirname, 'build/img'),
     },
     {
-      from: path.resolve(__dirname, 'favicon'),
+      from: path.resolve(__dirname, 'src/favicon'),
       to: path.resolve(__dirname, 'build/favicon'),
     },
-    'service-worker.js',
-    'offline.html',
-    'manifest.json',
-    'CNAME'
+    'src/offline.html',
+    'src/manifest.json',
+    'src/CNAME'
   ]),
   new InjectManifest({
-    swSrc: 'service-worker.js',
-    exclude: ['service-worker.js', 'CNAME'],
+    swSrc: 'src/service-worker.js',
+    exclude: ['src/service-worker.js', 'src/CNAME'],
     chunks: ['home', 'tabs'],
     include: ['\/.js$']
   }),

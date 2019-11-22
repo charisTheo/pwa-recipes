@@ -35,7 +35,7 @@ export const findUrlInCache = async item => {
 
         // * Check for any html files inside each cache under item's name
         for (const request of await cache.keys()) {
-            if (request.url.match(`(${item}.+\.html$)|${item}\/$`)) {
+            if (request.url.match(`(${item}.+\.html)|${item}$`)) {
                 result.push(await cache.match(request));
             }
         }
