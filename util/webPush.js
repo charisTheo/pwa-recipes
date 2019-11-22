@@ -15,7 +15,7 @@ const simplePushOptions = {
 const imagePushOptions = {
     title: `Image Notification`,
     body: `If on mobile expand 👌 this to view the image`,
-    image: '/img/funny-cat.jpg',
+    image: '/img/push-examples/funny-cat.jpg',
     tag: "image-push"
 };
 
@@ -36,12 +36,12 @@ const actionPushOptions = {
         {
             action: 'cool',
             title: 'Yeay!',
-            icon: "./img/cool.png"
+            icon: "./img/push-examples/cool.png"
         },
         {
             action: 'not-cool',
             title: 'Nope...',
-            icon: "./img/not-cool.png"
+            icon: "./img/push-examples/not-cool.png"
         }
     ]
 };
