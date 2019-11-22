@@ -20,7 +20,7 @@ const authenticate = async (req, res, next) => {
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
             secure: true,
             httpOnly: true,
-            domain: 'www.pwa.recipes',
+            domain: '.pwa.recipes.',
             path: '/',
             sameSite: 'None'
         });
