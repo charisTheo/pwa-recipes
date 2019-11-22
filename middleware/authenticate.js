@@ -21,8 +21,7 @@ const authenticate = async (req, res, next) => {
             secure: true,
             httpOnly: true,
             domain: '.pwa.recipes',
-            path: '/',
-            sameSite: 'None'
+            path: '/'
         });
         req.user = newUser;
         
