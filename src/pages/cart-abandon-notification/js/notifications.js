@@ -107,7 +107,7 @@ const subscribeToPushManager = async registration => {
             credentials: 'include',
             body: JSON.stringify({ subscription }),
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
             }
         });
         showSnackBar("Subscription saved in database by the API");

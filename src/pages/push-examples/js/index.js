@@ -132,7 +132,7 @@ const subscribeToPushManager = async registration => {
         await fetch(`${API_URL}/user/push-subscription/`, {
             method: 'POST',
             credentials: 'include',
-            body: JSON.stringify(subscription),
+            body: JSON.stringify({ subscription }),
             headers: {
                 'content-type': 'application/json'
             }
