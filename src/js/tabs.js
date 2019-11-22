@@ -116,7 +116,7 @@ export const renderHtmlForTabSelected = async navigateTo => {
                 const html = ` <a href="${url}">
                     <paper-icon-item class="offline-available-page">
                         <paper-icon-button class="offline-available-pages-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
-                        <div class="avatar" style="background-image: url(${url}/favicon/android-chrome-192x192.png)" slot="item-icon"></div>
+                        <div class="avatar" style="background-image: url(${url}favicon/android-chrome-192x192.png)" slot="item-icon"></div>
                         <paper-item-body two-line>
                             <div>${url}</div>
                             <div secondary>${offlineUrl}</div>
