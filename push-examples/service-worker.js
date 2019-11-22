@@ -1,4 +1,4 @@
-importScripts("precache-manifest.17ebde08a1455bf34f2ed53cdb2e70b1.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.3f3f6342e28a24451705b5b644dc696d.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 
@@ -18,7 +18,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-self.__precacheManifest = (self.__precacheManifest || []).concat(['/', '/push-examples/', 'manifest.json']);
+self.__precacheManifest = (self.__precacheManifest || []).concat(['/push-examples/', 'manifest.json']);
 workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
