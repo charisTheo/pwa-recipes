@@ -1,6 +1,7 @@
-importScripts("precache-manifest.3f3f6342e28a24451705b5b644dc696d.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.7fb450fbacec0d513775f87f84f16a2f.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
+const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';
 
 if (workbox) {
   console.log(`Yay! Workbox is loaded 🎉`);
@@ -18,27 +19,21 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-self.__precacheManifest = (self.__precacheManifest || []).concat(['/push-examples/', 'manifest.json']);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || ['index.html', 'pushExamples.js', PAGE_ICON_URL]);
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.googleapis.com)/,
+  /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.gstatic.com)/,
-  new workbox.strategies.StaleWhileRevalidate()
-);
-
-workbox.routing.registerRoute(
-  /\.(?:js|css|png|gif|jpg|svg|jpeg|webp)$/,
+  /\.(?:png|gif|jpg|svg|jpeg|webp)$/,
   new workbox.strategies.CacheFirst()
 );
 
 workbox.routing.registerRoute(
-  /(\/|index\.html)$/,
-  new workbox.strategies.StaleWhileRevalidate()
+  /(index\.html)/g,
+  new workbox.strategies.CacheFirst()
 );
 
 self.addEventListener('push', function(event) {

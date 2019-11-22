@@ -1,7 +1,8 @@
-importScripts("precache-manifest.82afc800e40eaa7f52e0b59744fb4208.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.34187ff5e236ec0ee956d83dfaca0c06.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
+const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
+const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 var db;
 
@@ -11,8 +12,8 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-self.__precacheManifest.push(placeholderURL);
-workbox.precaching.precacheAndRoute(self.__precacheManifest || []);
+self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -25,12 +26,7 @@ addEventListener('message', event => {
 });
 
 workbox.routing.registerRoute(
-  /(https:\/\/fonts.googleapis.com)/,
-  new workbox.strategies.StaleWhileRevalidate()
-);
-
-workbox.routing.registerRoute(
-  /(https:\/\/fonts.gstatic.com)/,
+  /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
   new workbox.strategies.StaleWhileRevalidate()
 );
 
@@ -60,7 +56,7 @@ workbox.routing.registerRoute(
     } catch (error) {
       console.warn(`\nServiceWorker: Image [${url.href}] was not found either in the network or the cache. Responding with placeholder image instead.\n`);
       // * get placeholder image from cache || get placeholder image from network
-      return await caches.match(placeholderURL) || await fetch(placeholderURL, { method: 'GET' });
+      return await caches.match(PLACEHOLDER_IMAGE_URL) || await fetch(PLACEHOLDER_IMAGE_URL, { method: 'GET' });
 
     }
   }
