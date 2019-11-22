@@ -1,4 +1,4 @@
-importScripts("precache-manifest.9ab3056746fff223b7eb79585a41cbf3.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.ff8172f17ffd95b999982cfb435f85a9.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file

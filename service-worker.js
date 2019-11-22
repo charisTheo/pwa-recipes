@@ -1,4 +1,4 @@
-importScripts("precache-manifest.70c5814967e09e6fd734b232a80457e0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.282c656560403eb23849d53e5ec7d603.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const placeholderURL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
@@ -19,6 +19,8 @@ addEventListener('message', event => {
   }
 });
 
+self.__precacheManifest = (self.__precacheManifest || []).concat([placeholderURL]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts.googleapis.com)/,
