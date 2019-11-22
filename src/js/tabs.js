@@ -1,6 +1,7 @@
 import { 
     isIos,
-    isInStandaloneMode
+    isInStandaloneMode,
+    findUrlInCache
 } from "../global/util";
 import { 
     installPwa,
@@ -79,6 +80,33 @@ export const renderHtmlForTabSelected = async navigateTo => {
         document.querySelector('.install-pwa-dismiss-button').addEventListener(
             'click', dismissInstallPwaButtons
         );
+    } else if (navigateTo === 'offline-content') {
+        const pagesUrlArr = ['/cart-abandon-notification', '/offline-requests', '/push-examples'];
+        const promises = pagesUrlArr.map(async url => {
+            // console.log("showOfflineAvailablePages -> url", url);
+            const cachedDocuments = await findUrlInCache(url);
+            if (cachedDocuments.length) {
+                // console.log("showOfflineAvailablePages -> cachedItems", cachedDocuments);
+                const offlineUrl = cachedDocuments[0].url;
+                // * show available offline icon
+                const html = ` <paper-icon-item class="offline-available-page">
+                    <paper-icon-button class="offline-available-pages-icon" tabIndex="-1" icon="offline-pin"></paper-icon-button>
+                    <div class="avatar" style="background-image: url(${url}/favicon/android-chrome-192x192.png)" slot="item-icon"></div>
+                    <paper-item-body two-line>
+                        <div>${url}</div>
+                        <div secondary>${offlineUrl}</div>
+                    </paper-item-body>
+                </paper-icon-item>`;
+
+                document.querySelector('.offline-content').innerHTML += html;
+            }
+        });
+        Promise.all(promises).then(() => {
+            if (!document.querySelectorAll('.offline-available-page').length) {
+                document.querySelector('.offline-content-title').innerHTML = 'No offline pages available 🤷‍♂';
+            } else {
+                document.querySelector('.offline-content-title').innerHTML = 'Offline available pages';
+            }
+        })
     }
-    // window.history.pushState({}, document.title, navigateTo);
 }

@@ -38,10 +38,27 @@ nav .nav-tab-label {
     fill: var(--primary-color);
 }
 
+/* * Paper Style Overrides */
 main {
     will-change: transform;
     transform: translateZ(0);
 }
+main paper-card {
+    height: 100%;
+    --paper-card-header-color: var(--primary-color);
+}
+main paper-card img {
+    width: 50%;
+    height: 50%;
+    order: -1;
+    margin: 30px auto 0;
+    object-fit: contain;
+    transform: rotate(10deg);
+}
+main > a:nth-child(2) img {
+    transform: rotate(-10deg);
+}
+
 .page-card-link {
     color: var(--accent-color);
     position: relative;
@@ -61,7 +78,7 @@ main {
 .unavailable-offline {
     pointer-events: none;
 } 
-.available-offline-icon {
+.available-offline-icon, .offline-available-pages-icon {
     position: absolute;
     z-index: 1;
     width: 50px;
@@ -70,24 +87,27 @@ main {
     top: 0;
     color: var(--google-green-500);
 }
-
-/* * Paper Style Overrides */
-main paper-card {
-    height: 100%;
+.offline-available-pages-icon {
+    width: 40px;
+    height: 40px;
+    top: -20px;
+    left: -20px;
 }
-main paper-card img {
-    width: 50%;
-    height: 50%;
-    order: -1;
-    margin: 30px auto 0;
-    object-fit: contain;
-    transform: rotate(10deg);
+.offline-available-page {
+    text-align: left;
+    position: relative;
+    margin: 20px 0;
+    background-color: var(--google-green-100);
+    box-shadow: var(--shadow-elevation-4dp_-_box-shadow);
 }
-main > a:nth-child(2) img {
-    transform: rotate(-10deg);
+.offline-available-page .avatar {
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.5));
+    padding: 25px;
+    background-size: contain;
+    background-repeat: no-repeat no-repeat;
 }
-main paper-card {
-    --paper-card-header-color: var(--primary-color);
+.offline-available-page paper-item-body {
+    padding-left: 8px;
 }
 
 *:focus {

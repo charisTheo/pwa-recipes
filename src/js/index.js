@@ -17,6 +17,9 @@ import '@polymer/iron-icons/iron-icons';
 import '@polymer/iron-icon/iron-icon';
 import '@polymer/paper-tabs/paper-tabs';
 import '@polymer/paper-tabs/paper-tab';
+import '@polymer/paper-item/paper-item';
+import '@polymer/paper-item/paper-item-body';
+import '@polymer/paper-item/paper-icon-item';
 
 import { showSnackBar } from "../global/snackBar";
 import { sharePage } from "./webShare";
