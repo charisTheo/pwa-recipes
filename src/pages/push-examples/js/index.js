@@ -38,6 +38,7 @@ window.wipeData = async () => {
     // * Removes user data from the database
     //  * Also removes the httpOnly cookie 
     const response = await fetch(`${API_URL}/user/remove`, { 
+        mode: 'same-origin',
         credentials: 'include',
         method: 'GET' 
     });
@@ -89,6 +90,7 @@ window.requestNotification = notificationType => {
 
         try {
             const response = await fetch(`${API_URL}/user/push/${notificationType}`, { 
+                mode: 'same-origin',
                 credentials: 'include',
                 method: 'GET' 
             });
@@ -131,6 +133,7 @@ const subscribeToPushManager = async registration => {
     try {
         await fetch(`${API_URL}/user/push-subscription/`, {
             method: 'POST',
+            mode: 'same-origin',
             credentials: 'include',
             body: JSON.stringify(subscription),
             headers: {
