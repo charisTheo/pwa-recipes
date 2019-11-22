@@ -37,7 +37,10 @@ window.addEventListener('load', () => {
 window.wipeData = async () => {
     // * Removes user data from the database
     //  * Also removes the httpOnly cookie 
-    const response = await fetch(`${API_URL}/user/remove`, { method: 'GET' });
+    const response = await fetch(`${API_URL}/user/remove`, { 
+        credentials: 'include',
+        method: 'GET' 
+    });
     if (response.status === 400) {
         showSnackBar("There was an error while deleting your data 😕. Please Try again.");
         return;
@@ -85,7 +88,10 @@ window.requestNotification = notificationType => {
         }
 
         try {
-            const response = await fetch(`${API_URL}/user/push/${notificationType}`, { method: 'GET' });
+            const response = await fetch(`${API_URL}/user/push/${notificationType}`, { 
+                credentials: 'include',
+                method: 'GET' 
+            });
             if (response.status === 400) {
                 showSnackBar("Push subscription has been deleted or expired. Try requesting permission again.");
 
@@ -125,6 +131,7 @@ const subscribeToPushManager = async registration => {
     try {
         await fetch(`${API_URL}/user/push-subscription/`, {
             method: 'POST',
+            credentials: 'include',
             body: JSON.stringify(subscription),
             headers: {
                 'content-type': 'application/json'
