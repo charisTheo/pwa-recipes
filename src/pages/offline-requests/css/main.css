@@ -3,6 +3,7 @@
     /* Polymer theme styles */
     /* --google-green-500 = #0f9d58 */
     --primary-color: var(--google-green-500);
+    --accent-color: var(--google-yellow-500);
 }
 body {
     color: black;
@@ -15,9 +16,6 @@ body {
 }
 
 /* * Paper Style Overrides */
-paper-toolbar {
-    --paper-toolbar-background: var(--primary-color);
-}
 /* paper-toolbar paper-icon-button {
     --iron-icon-fill-color: var(--accent-color);
 } */

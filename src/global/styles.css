@@ -61,6 +61,7 @@ body {
 }
 
 paper-toolbar {
+    --paper-toolbar-background: var(--primary-color);
     box-shadow: var(--shadow-elevation-16dp_-_box-shadow);
 }
 paper-toolbar > .title {
@@ -102,6 +103,7 @@ main paper-card .card-actions {
 footer {
     text-align: left;
     background-color: #333333;
+    color: var(--google-grey-500);
     padding: 25px;
     display: grid;
     grid-gap: 30px;
@@ -174,6 +176,13 @@ paper-toolbar paper-button {
     margin: 0;
     padding: 5px 9px;
     text-decoration: none;
+    transition: all 0.35s ease-out;
+}
+#snackbar .snackbar-refresh-button:focus {
+    outline: none;
+    font-size: 20px;
+    color: var(--accent-color);
+    text-shadow: 0px 3px 2px rgba(0,0,0,0.7);
 }
 
 .focus-outline:focus,

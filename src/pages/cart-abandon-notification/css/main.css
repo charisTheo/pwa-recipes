@@ -9,6 +9,7 @@
     /* Polymer theme styles */
     /* #3f51b5 */
     --primary-color: var(--google-blue-700);
+    --accent-color: var(--paper-pink-a200);
 }
 body {
     color: black;
@@ -20,9 +21,6 @@ body {
     fill: var(--primary-color);
 }
 
-paper-toolbar {
-    --paper-toolbar-background: var(--primary-color);
-}
 /* paper-toolbar paper-icon-button {
     --iron-icon-fill-color: var(--accent-color);
 } */
