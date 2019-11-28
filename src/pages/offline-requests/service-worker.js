@@ -10,8 +10,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -31,11 +30,6 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /(service-worker\.js)$/,
   new workbox.strategies.NetworkOnly()
-);
-
-workbox.routing.registerRoute(
-  /\.(?:js|css)$/,
-  new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
@@ -61,8 +55,13 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
+  /(index\.html|\/)/g,
+  new workbox.strategies.CacheFirst(),
+  'GET'
+);
+workbox.routing.registerRoute(
+  /\.(?:css|js)$/,  
+  new workbox.strategies.CacheFirst(),
   'GET'
 );
 

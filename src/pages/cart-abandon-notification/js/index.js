@@ -60,6 +60,10 @@ window.addEventListener('load', async () => {
         initialiseNumberOfCartItems()
     }
 
+    if (!navigator.onLine) {
+        handleOfflineEvent();
+    }
+
     attachClickEventListeners();
 
     document.addEventListener('visibilitychange', function() {
@@ -72,6 +76,16 @@ window.addEventListener('load', async () => {
     const notificationButtonIconSrc = pushPermission === "granted" ? NOTIFICATIONS_ACTIVE_URL : NOTIFICATIONS_NONE_URL;
     notificationsRequestButton.setAttribute('src', notificationButtonIconSrc);
 });
+
+// * shows an offline prompt and marks the offline available content
+const handleOfflineEvent = () => {
+    showSnackBar('You are offline 📴');
+    configureLocalDatabase();
+};
+// * shows an online prompt and unmarks offline avaialble content
+const handleOnlineEvent = () => {
+    showSnackBar('You are back online! 🎉');
+};
 
 const attachClickEventListeners = () => {
     addToCartButtons.forEach(button => button.addEventListener('click', addToCart));
@@ -141,12 +155,6 @@ const checkout = async event => {
     }
 }
 
-window.addEventListener('offline', function() {
-    showSnackBar('You are offline 📴');
-    configureLocalDatabase();
-});
+window.addEventListener('offline', handleOfflineEvent);
 
-window.addEventListener('online', function() {
-    showSnackBar('You are back online! 🎉');
-
-});
+window.addEventListener('online', handleOnlineEvent);

@@ -39,7 +39,7 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: 'src/service-worker.js',
-    exclude: ['src/service-worker.js', 'src/CNAME'],
+    exclude: [/(service-worker|index)\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
     chunks: ['home', 'tabs'],
     include: ['\/.js$']
   }),
@@ -60,11 +60,12 @@ module.exports = [
     // Tell Webpack which file kicks off our app.
     entry: {
       home: path.resolve(__dirname, 'src/js/index.js'),
-      tabs: path.resolve(__dirname, 'src/js/tabs.js')
+      // tabs: path.resolve(__dirname, 'src/js/tabs.js'),
     },
     // Tell Weback to output our bundle.js
     output: {
       filename: '[name].js',
+      chunkFilename: '[name].js',
       path: path.resolve(__dirname, 'build')
     },
     // Tell Webpack which directories to look in to resolve import statements.

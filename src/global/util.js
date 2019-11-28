@@ -22,24 +22,62 @@ export const removeElements = elements => {
     });
 };
 
-export const findUrlInCache = async item => {
-    // Get a list of all of the caches for this origin
-    const cacheNames = await caches.keys();
-    const result = [];
+// check by cache name
+export const findUrlInCache = page => {
+    return new Promise(async (resolve, reject) => {
+        // Get a list of all of the caches for this origin
+        const pageCaches = await getPageCaches(page);
 
-    // TODO check by cache name?
-    
-    for (const name of cacheNames) {
-        // Open the cache
-        const cache = await caches.open(name);
-
-        // * Check for any html files inside each cache under item's name
-        for (const request of await cache.keys()) {
-            if (request.url.match(`(${item}.+\.html)|${item}$`)) {
-                result.push(await cache.match(request));
+        const results = await Promise.all(pageCaches.map(async pageCache => {
+            console.log(`findUrlInCache: Checking cache for ${page}: pageCache`, pageCache);
+            const cachedResources = await pageCache.keys();
+            
+            // * Check for any html files inside each cache under item's name
+            for (const request of cachedResources) {
+                if (request.url.match(`(${page}.+\.html)|${page}$`)) {
+                    // * return the cached page and exit
+                    // resolve(request);
+                    return request;
+                }
             }
-        }
-    }
 
-    return result;
-}
+            return false;
+        }));
+        const cachedRequest = results.find(request => !!request);
+        resolve(cachedRequest);
+    });
+};
+
+export const removeCachedPage = async url => {
+    const pageCaches = await getPageCaches(url);
+    const promises = pageCaches.map(async pageCache => {
+        const cachedResources = await pageCache.keys();
+    
+        const promises = cachedResources.map(async resource => await pageCache.delete(resource));
+        await Promise.all(promises);
+    });
+
+    return Promise.all(promises).then(() => {
+        console.log(url + 'has(ve) been successfully deleted and the page is not available offline anymore.');
+        return true; 
+    }).catch(error => {
+        console.warn("removeCachedPage: error", error);
+        return false;
+    });
+};
+
+export const getPageCaches = page => {
+    return new Promise(async (resolve, reject) => {
+        // Get a list of all of the caches for this origin
+        const pageCacheNames = await caches.keys().then(keys => keys.filter(key => key.match(page)));
+
+        const promises = pageCacheNames.map(async cacheName => await caches.open(cacheName));
+
+        const results = await Promise.all(promises); 
+        resolve(results);
+    });
+};
+
+export const requestToElementId = request => request.url.split(/:|\/|\./).join('-');
+
+export const removeSearchParamsFromUrl = url => url.split('?')[0];

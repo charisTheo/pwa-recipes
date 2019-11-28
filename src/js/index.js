@@ -31,10 +31,6 @@ import {
     removeElements,
     findUrlInCache
 } from "../global/util";
-import { 
-    navigationTabSelected,
-    renderHtmlForTabSelected
-} from "./tabs";
 
 const SERVICE_WORKER_SCOPE = '/';
 let installPwaCard = document.querySelector('.install-pwa-card');
@@ -50,7 +46,7 @@ window.addEventListener('load', async () => {
     registerServiceWorker();
     attachEventListeners();
     // * load the html based on the initially selected tab
-    renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo);
+    import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo));
 
     if (!navigator.onLine) {
         handleOfflineEvent();
@@ -89,10 +85,11 @@ export const markOfflineAvailableContent = () => {
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');
-        console.log("showOfflineAvailablePages -> url", url);
-        const cachedItems = await findUrlInCache(url);
-        console.log("showOfflineAvailablePages -> cachedItems", cachedItems);
-        if (cachedItems.length) {
+        // console.log("showOfflineAvailablePages -> url", url);
+        const pageIsCached = await findUrlInCache(url);
+        // console.log("showOfflineAvailablePages -> pageIsCached", pageIsCached);
+
+        if (pageIsCached) {
             // * show available offline icon
             page.querySelector('.available-offline-icon').hidden = false;
         } else {
@@ -184,7 +181,9 @@ const attachEventListeners = () => {
     };
 
     // ? Navigation
-    tabbedNavigation.addEventListener('iron-select', navigationTabSelected);
+    tabbedNavigation.addEventListener('iron-select', event => {
+        import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.navigationTabSelected(event));
+    });
 }
 
 let deferredPromptEvent;

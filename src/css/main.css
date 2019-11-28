@@ -118,6 +118,9 @@ main > a:nth-child(2) img {
 .offline-available-page paper-item-body {
     padding-left: 8px;
 }
+.offline-available-page .cache-delete-button {
+    color: var(--paper-red-600);
+}
 
 footer a {
     color: var(--accent-color);

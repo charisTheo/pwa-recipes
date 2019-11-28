@@ -17,7 +17,7 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkOnly()
 );
 
-workbox.precaching.precacheAndRoute(self.__precacheManifest || ['index.html', 'pushExamples.js', PAGE_ICON_URL]);
+workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,
@@ -53,7 +53,8 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
   // * data received from server (dataPushOptions)
   const data = event.notification.data;
-
+  console.log("Push Notification was clicked! Data object from server:", data);
+  
   if (!event.action) {
       // ? Was a normal notification click
       return;

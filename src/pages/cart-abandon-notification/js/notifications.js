@@ -16,8 +16,12 @@ const notificationsRequestButton = document.getElementById('notifications-reques
 // * Possible values: 'prompt', 'denied', or 'granted'
 const getNotificationPermission = async () => {
     const registration = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_SCOPE);
-    const permission = await registration.pushManager.permissionState({ userVisibleOnly: true });
-    return permission;
+    if (registration) {
+        const permission = await registration.pushManager.permissionState({ userVisibleOnly: true });
+        return permission;
+    } else {
+        return 'unknown';
+    }
 }
 
 // ! ask for permission only when the user clicks

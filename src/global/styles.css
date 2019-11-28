@@ -73,7 +73,7 @@ main {
     grid-gap: 15px;
     grid-auto-flow: row;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
     width: 100%;
     max-width: 1000px;
     box-sizing: border-box;
