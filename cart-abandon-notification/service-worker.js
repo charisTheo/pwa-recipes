@@ -1,7 +1,8 @@
-importScripts("precache-manifest.db3631942da128ab0414861212591739.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.866127b28d179d41311b7cd9ca6f99c0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png'; // precaching this in __precacheManifest file
+// precaching these images in the __precacheManifest file
+const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
 const PAGE_ICON_URL = '/cart-abandon-notification/favicon/android-chrome-192x192.png';
 
 if (workbox) {
@@ -10,8 +11,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -34,10 +34,17 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-    /\.(?:js|css)$/,
-    new workbox.strategies.StaleWhileRevalidate()
+  /(index\.html|\/)/g,
+  new workbox.strategies.StaleWhileRevalidate(),
+  'GET'
 );
-  
+
+workbox.routing.registerRoute(
+  /\.(?:css|js)$/,  
+  new workbox.strategies.CacheFirst(),
+  'GET'
+);
+
 workbox.routing.registerRoute(
   /\.(?:webp|png|jpg|jpeg|svg)$/,
   async ({url, event, params}) => {
@@ -60,11 +67,20 @@ workbox.routing.registerRoute(
   }
 );
 
-workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
-  'GET'
-);
+// ! DEBUG ONLY
+// addEventListener('fetch', event => {
+//   console.log(event.request.url);
+//   if (event.request.url.match(/css/g)) {
+//     console.log("TCL: event.request", event.request);
+//     // console.log("TCL: event.request.url", event.request.url)
+//   }
+// });
+// ! DEBUG ONLY
+// self.addEventListener('install', (event) => {
+//   const urls = ['bundle.js'];
+//   const cacheName = workbox.core.cacheNames.runtime;
+//   event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
+// });
 
 self.addEventListener('push', function(event) {
   let options = {};

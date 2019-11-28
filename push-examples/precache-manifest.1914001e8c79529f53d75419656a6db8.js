@@ -62,9 +62,5 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "2d646adfdcfb40930766",
     "url": "pushExamples.js"
-  },
-  {
-    "revision": "5d61f411c39bf99494226d09ada19049",
-    "url": "service-worker.js"
   }
 ]);

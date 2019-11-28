@@ -62,42 +62,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.CacheFirst(), 
+  /(index\.html|\/)$/,
+  new workbox.strategies.StaleWhileRevalidate(),
   'GET'
 );
-
-// addEventListener('push', function(event) {
-//   let options = {};
-//   if (!!event.data) {
-//       const data = event.data.json();
-//       options = {
-//           ...data,
-//           icon: './img/chrome-web-icon-96.png',
-//           chrome_web_icon: './img/chrome-web-icon-96.png',
-//           badge: './img/speech-notification-badge-inverted-48.png',
-//           chrome_web_badge: './img/speech-notification-badge-inverted-48.png',
-//       }
-//       registration.showNotification(data.title, options);
-//   }
-// });
-
-// addEventListener('notificationclick', function(event) {
-//   event.notification.close();
-//   // * data received from server (dataPushOptions)
-//   const data = event.notification.data;
-
-//   if (!event.action) {
-//     // ? Was a normal notification click
-//     return;
-//   }
-
-//   switch (event.action) {
-//     // ? Handle push notification actions here
-
-//     default:
-//         console.warn(`service-worker notificationclick event -> Unknown action clicked: ${event.action}`);
-//     break;
-//   }
-// });
-

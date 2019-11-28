@@ -1,4 +1,4 @@
-importScripts("precache-manifest.125ef998137eeec47999ba512914b203.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.4e9bb63d52d148604f4c68bd13f87f0c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
@@ -12,8 +12,7 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
@@ -33,11 +32,6 @@ workbox.routing.registerRoute(
 workbox.routing.registerRoute(
   /(service-worker\.js)$/,
   new workbox.strategies.NetworkOnly()
-);
-
-workbox.routing.registerRoute(
-  /\.(?:js|css)$/,
-  new workbox.strategies.StaleWhileRevalidate()
 );
 
 workbox.routing.registerRoute(
@@ -63,8 +57,13 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  new RegExp('/.*'), 
-  new workbox.strategies.NetworkFirst(), 
+  /(index\.html|\/)/g,
+  new workbox.strategies.CacheFirst(),
+  'GET'
+);
+workbox.routing.registerRoute(
+  /\.(?:css|js)$/,  
+  new workbox.strategies.CacheFirst(),
   'GET'
 );
 
