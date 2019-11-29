@@ -8,7 +8,8 @@ import {
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';
 const NOTIFICATIONS_NONE_URL = './img/notifications-none.svg';
-const SERVICE_WORKER_SCOPE = window.location.href.match('localhost') ? '/' : '/cart-abandon-notification/';
+const SERVICE_WORKER_SCOPE = '/cart-abandon-notification/';
+// const SERVICE_WORKER_SCOPE = window.location.href.match('localhost') ? '/' : '/cart-abandon-notification/';
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 
 const notificationsRequestButton = document.getElementById('notifications-request-button');

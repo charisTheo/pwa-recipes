@@ -3,7 +3,8 @@ import { showSnackBar } from "./../../../global/snackBar";
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';
 const NOTIFICATIONS_NONE_URL = './img/notifications-none.svg';
-const SERVICE_WORKER_SCOPE = window.location.href.match('localhost') ? '/' : '/offline-requests/';
+const SERVICE_WORKER_SCOPE = '/offline-requests/';
+// const SERVICE_WORKER_SCOPE = window.location.href.match('localhost') ? '/' : '/offline-requests/';
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 
 const notificationsRequestButton = document.getElementById('notifications-request-button');
@@ -11,8 +12,12 @@ const notificationsRequestButton = document.getElementById('notifications-reques
 // * Possible values: 'prompt', 'denied', or 'granted'
 const getNotificationPermission = async () => {
     const registration = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_SCOPE);
-    const permission = await registration.pushManager.permissionState({userVisibleOnly: true});
-    return permission;
+    if (registration) {
+        const permission = await registration.pushManager.permissionState({ userVisibleOnly: true });
+        return permission;
+    } else {
+        return 'unknown';
+    }
 }
 
 // ! ask for permission only when the user clicks
