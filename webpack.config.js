@@ -7,12 +7,14 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const exec = require('child_process').exec;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const OfflineRequestsWebpackConfig = require('./webpack.config.offline-requests');
 const CartAbandonNotificationWebpackConfig = require('./webpack.config.cart-abandon-notification');
 const PushExamplesWebpackConfig = require('./webpack.config.push-examples');
 
 const plugins = [
+  // new BundleAnalyzerPlugin(),
   new HtmlWebpackPlugin({
     filename: 'index.html',
     favicon: 'src/favicon/favicon.ico',
@@ -40,7 +42,7 @@ const plugins = [
   new InjectManifest({
     swSrc: 'src/service-worker.js',
     exclude: [/(service-worker|index)\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
-    chunks: ['home', 'tabs'],
+    chunks: ['home'],
     include: ['\/.js$']
   }),
   new MediaQueryPlugin({
