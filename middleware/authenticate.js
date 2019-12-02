@@ -21,7 +21,7 @@ const authenticate = async (req, res, next) => {
             secure: false,
             httpOnly: true,
             path: '/',
-            sameSite: ''
+            sameSite: 'Lax'
         });
         req.user = newUser;
         
