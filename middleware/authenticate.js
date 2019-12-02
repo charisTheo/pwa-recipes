@@ -18,10 +18,10 @@ const authenticate = async (req, res, next) => {
         
         res.cookie('_id', newUserId.toHexString(), {
             expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-            secure: false,
+            secure: true,
             httpOnly: true,
             path: '/',
-            sameSite: 'Lax'
+            sameSite: 'None'
         });
         req.user = newUser;
         
