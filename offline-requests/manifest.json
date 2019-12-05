@@ -20,7 +20,7 @@
   ],
   "start_url": "/offline-requests/",
   "display": "standalone",
-  "theme_color": "#3367d6",
+  "theme_color": "#0f9d58",
   "background_color": "#444444",
   "serviceworker": {
     "src": "./service-worker.js"
