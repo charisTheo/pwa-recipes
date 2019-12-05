@@ -20,7 +20,7 @@
   ],
   "start_url": "/push-examples/",
   "display": "standalone",
-  "theme_color": "#673ab7",
+  "theme_color": "#ff3d00",
   "background_color": "#444444",
   "serviceworker": {
     "src": "./service-worker.js"
