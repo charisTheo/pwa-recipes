@@ -23,24 +23,68 @@
             position: relative;
         }
         * {
-            color: #afd3f9;
-        }
-        header {
-            padding: 10px;
-        }
-        footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            padding: 10px;
-            text-align: center;
-            width: 100vw;
+            color: #d2e8ff;
             box-sizing: border-box;
         }
-        footer > a {
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            justify-content: space-between;
+            padding: 15px;
+        }
+        h1, h2, h3 {
+            font-size: 1.5rem;
+            text-shadow: -1px 3px 1px #E91E63;
+            margin: 0 0 15px 0;
+        }
+        .offline-pages-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .offline-pages-list > li > a {
+            position: relative;
+        }
+        svg.offline-pin {
+            position: absolute;
+            top: 15px;
+            left: -20px;
+            width: 25px;
+            height: 25px;
+            fill: #0f9d58;
+            padding: 0;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+        .offline-pages-list > li > a:before {
+            background-color: #0f9d58;
+            content: '';
             display: block;
-            margin: 10px 0;
-            padding: 5px;
+            position: absolute;
+            top: 10px;
+            left: -25px;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite ease-in;
+        }
+
+        a {
+            color: #FFEB3B;
+            margin: 0 0 10px 0;
+            padding: 15px;
+            display: inline-block;
+            font-size: 1.3rem;
+            text-decoration-line: underline;
+            text-decoration-color: #E91E63;
+        }
+        footer {
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .offline-status .status {
@@ -85,7 +129,7 @@
             z-index: -1;
         }
         
-        svg {
+        svg.planets {
             width: 100%;
             height: 100%;
             position: absolute;
@@ -94,7 +138,7 @@
             z-index: -1;
         }
 
-        svg > .planet {
+        svg.planets > .planet {
             position: absolute;
             z-index: 2;
             transition-timing-function: ease-out;
@@ -103,33 +147,25 @@
 
         .scale-animation-1 {
             transform-origin: left center;
-            animation: scale-8 5s linear;
+            animation: scale-1 10s linear;
         }
         .scale-animation-2 {
             transform-origin: left bottom;
-            animation: scale-12 5s linear;
+            animation: scale-2 10s linear;
         }
         .scale-animation-3 {
             transform-origin: left top;
-            animation: scale-15 5s linear;
+            animation: scale-3 10s linear;
         }
         .scale-animation-4 {
             transform-origin: right top;
-            animation: scale-18 5s linear;
+            animation: scale-4 10s linear;
         }
         .scale-animation-5 {
             transform-origin: right bottom;
-            animation: scale-23 5s linear;
+            animation: scale-5 10s linear;
         }
-        @keyframes scale-8 {
-            from {
-                transform: scale(0.01);
-            }
-            to {
-                transform: scale(2.4);
-            }
-        }
-        @keyframes scale-12 {
+        @keyframes scale-1 {
             from {
                 transform: scale(0.01);
             }
@@ -137,76 +173,162 @@
                 transform: scale(2.9);
             }
         }
-        @keyframes scale-15 {
+        @keyframes scale-2 {
             from {
                 transform: scale(0.01);
             }
             to {
-                transform: scale(3.2);
+                transform: scale(3.3);
             }
         }
-        @keyframes scale-18 {
+        @keyframes scale-3 {
             from {
                 transform: scale(0.01);
             }
             to {
-                transform: scale(3.7);
+                transform: scale(3.6);
             }
         }
-        @keyframes scale-23 {
+        @keyframes scale-4 {
             from {
                 transform: scale(0.01);
             }
             to {
-                transform: scale(4.2);
+                transform: scale(4);
+            }
+        }
+        @keyframes scale-5 {
+            from {
+                transform: scale(0.01);
+            }
+            to {
+                transform: scale(4.7);
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Oops! you messed up 🤷‍♂</h1>
-        <h2 class="offline-status" hidden>
-            You seem to also be offline!
-            <span class="status"></span>
-        </h2>
-    </header>
 
-    <main>
-        <!-- TODO offline available pages -->
-    </main>
+    <div class="container">
+
+        <header>
+            <h1>Oops! you messed up 🤷‍♂</h1>
+        </header>
+        
+        <h2 class="offline-status" hidden>
+            <span class="status"></span>
+            You seem to be offline!
+        </h2>
+
+        <main>
+            <h3 class="offline-pages-list-title">Here are some pages that you can access offline</h3>
+            <ul class="offline-pages-list">
+
+            </ul>
+        </main>
+
+        <footer>
+            <a target="_blank" rel="noopener noreferrer" href="https://www.vecteezy.com/free-vector/saturn">Saturn Vectors by Vecteezy</a>
+            <a target="_blank" rel="noopener noreferrer" href="https://codepen.io/giana">Starry universe by @giana</a>
+        </footer>
+        
+    </div>
 
     <canvas id="canvas"></canvas>
-
-    <footer>
-        <a target="_blank" rel="noopener noreferrer" href="https://www.vecteezy.com/free-vector/saturn">Saturn Vectors by Vecteezy</a>
-        <a target="_blank" rel="noopener noreferrer" href="https://codepen.io/giana">Starry universe by @giana</a>
-    </footer>
 
     <script>
         var planets1, planets2;
         var animatePlanets1Interval, animatePlanets2Interval;
-        var offlineStatus = document.getElementsByClassName('offline-status')[0];
+        var offlineStatus, offlinePagesList;
+        
+        window.addEventListener('load', async () => {
+            offlineStatus = document.querySelector('.offline-status');
+            offlinePagesList = document.querySelector('.offline-pages-list');
 
-        window.addEventListener('load', () => {
             if (!navigator.onLine) {
                 offlineStatus.hidden = false;
             }
 
+            const offlinePages = await getOfflineAvailablePages();
+            renderOfflineAvailablePages(offlinePages);
+            
             const planetsArr = Array.from(document.querySelectorAll('.planet'));
             planets1 = planetsArr.splice(0, planetsArr.length / 2);
             planets2 = planetsArr.splice(planetsArr.length / 2, planetsArr.length);
             
             animatePlanets1Interval = setInterval(() => {
                 planets1.map(updatePosition);
-            }, 20000);
+            }, 30000);
             animatePlanets2Interval = setInterval(() => {
                 planets2.map(updatePosition);
-            }, 10000);
+            }, 20000);
 
             planets1.map(updatePosition);
         });
+
+        const renderOfflineAvailablePages = offlinePages => {
+            if (!offlinePages || !offlinePages.length) {
+                // ! no offline available pages
+                document.querySelector('.offline-pages-list-title').hidden = true;
+                return;
+            } else {
+                document.querySelector('.offline-pages-list-title').hidden = false;
+            }
+
+            var offlinePagesListItems = '';
+
+            offlinePages.map(({url, title}) => {
+                // ! check for page title duplicates
+                if (offlinePagesListItems.indexOf(title) === -1) {
+                    offlinePagesListItems += `
+                        <li>
+                            <a href="${url}">
+                                ${title}
+                                <svg class="offline-pin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" width="24" height="24"><defs><path id="a" d="M0 0h24v24H0V0z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path clip-path="url(#b)" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm5 16H7v-2h10v2zm-6.7-4L7 10.7l1.4-1.4 1.9 1.9 5.3-5.3L17 7.3 10.3 14z"/></svg>
+                            </a>
+                        </li>
+                    `;
+                }
+            });
+
+            offlinePagesList.innerHTML = offlinePagesListItems;
+        };
         
+        const getOfflineAvailablePages = () => {
+            return new Promise(async (resolve, reject) => {
+                // Get a list of all of the caches for this origin
+                const cacheNames = await caches.keys();
+
+                const results = await Promise.all(cacheNames.map(async cacheName => {
+                    const cache = await caches.open(cacheName);
+                    const cachedResources = await cache.keys();
+                    
+                    // * Check for any html files inside each cache under item's name
+                    for (const request of cachedResources) {
+                        if (request.url.match(`(index\.html)|\/$`)) {
+                            // * return the cached page and exit
+                            return {
+                                url: request.url,
+                                title: request.url.match(/(\/\w+\-\w+)/g)[0]
+                            }
+                        }
+                    }
+
+                    return false;
+                }));
+                const cachedRequests = results.filter(request => !!request);
+                const homepageRequest = await caches.match('/');
+                if (!!homepageRequest) {
+                    // * add homepage as first entry
+                    cachedRequests.unshift({
+                        url: homepageRequest.url,
+                        title: 'Home'
+                    });
+                }
+                resolve(cachedRequests);
+            });
+        }
+
         const updatePosition = planet => {
             planet.classList.remove(planet.classList[1]);
             const boundsX = window.innerWidth / 4;
@@ -340,7 +462,7 @@
     </script>
 
     <?xml version="1.0" encoding="utf-8"?>
-    <svg x="0px" y="0px" viewBox="0 0 1400 980" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+    <svg class="planets" x="0px" y="0px" viewBox="0 0 1400 980" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
         <style type="text/css">
             .st1{fill:none;}
             .st2{fill:#FCEBBF;}
