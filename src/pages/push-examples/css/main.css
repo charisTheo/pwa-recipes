@@ -6,6 +6,9 @@
     --dark-orange: #ff3d00;
     --purple: #673ab7;
     --dark-purple: #4a1a9e;
+
+    --primary-color: var(--purple);
+    --accent-color: var(--orange);
 }
 body, html {
     min-height: 100vh;
@@ -116,7 +119,7 @@ main section {
     grid-auto-flow: row;
 }
 
-button {
+.container button {
     background-color: var(--purple);
     color: white;
     padding: 4px 8px;
@@ -138,22 +141,31 @@ a {
 }
 
 a:focus,
-button:focus {
+.container button:focus {
     border: 3px solid var(--yellow);
 }
 
 a:focus,
 a:hover,
-button:focus,
-button:hover {
+.container button:focus,
+.container button:hover {
     outline: none;
     box-shadow: 0 0 15px var(--purple);
 }
 a:active,
-button:active {
+.container button:active {
     outline: none;
     box-shadow: none;
     background-color: var(--dark-purple);
+}
+
+/* ! DUPLICATE in global styles.css */
+.focus-outline:focus,
+.focus-outline.yellow-outline:focus {
+    outline: 3px solid var(--yellow);
+}
+.focus-outline.accent-outline:focus {
+    outline: 3px solid var(--accent-color);
 }
 
 .unavailable-offline {
@@ -166,8 +178,6 @@ button:active {
 .arrow-down {
     grid-column: 1 / -1;
 }
-
-
 
 footer {
     grid-area: footer;
@@ -186,7 +196,6 @@ footer a {
     display: inline-block;
     padding: 10px 0;
 }
-
 
 .arrow-right {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' style='width:24px;height:24px' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff3d00' d='M11,16H3V8H11V2L21,12L11,22V16M13,7V10H5V14H13V17L18,12L13,7Z' /%3E%3C/svg%3E");

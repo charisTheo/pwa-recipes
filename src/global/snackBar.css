@@ -1,0 +1,104 @@
+.snackbar-container {
+    position: fixed;
+    z-index: 15;
+    transition: bottom 0.5s ease-out;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    will-change: bottom;
+    transform: translateZ(0);
+}
+.snackbar {
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    background-color: #323232;
+    color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    padding: 10px;
+    margin: 8px auto;
+    font-weight: 300;
+    font-size: 14px;
+    transition: transform 0.5s ease-out;
+}
+.snackbar-dismiss-button {
+    padding: 6px 18px;
+    white-space: nowrap;
+    align-self: center;
+    color: var(--accent-color);
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: inherit;
+    font-weight: 800;
+}
+.snackbar.hidding {
+    transform: translateY(200px);
+    z-index: -1;
+}
+.snackbar.animate-hidding {
+    transform: scale(0);
+    transform-origin: center center;
+    animation: bounce-hide-animation 0.6s cubic-bezier(0.9, 0.01, 1, 1) 0s;
+}
+.snackbar .snackbar-refresh-button {
+    color: var(--accent-color); 
+    font-size: 17px;
+    margin: 0;
+    padding: 5px 9px;
+    text-decoration: none;
+    transition: all 0.35s ease-out;
+}
+
+@keyframes bounce-hide-animation {
+    0% {
+        transform: scale(1);   
+    }
+    30% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+
+@media (min-width: 767px) {
+    .snackbar {
+        width: 65%;
+    }
+    .snackbar-container {
+        bottom: 170px;
+    }
+}
+@media (min-width: 1023px) {
+    .snackbar {
+        width: 35%;
+    }
+}
+
+/* ? REMOVED
+@media (max-width: 320px) {
+    .snackbar {
+        left: calc(50% - 150px);
+        width: 280px;
+    }
+}
+@media (min-width: 410px) {
+    .snackbar {
+        left: calc(50% - 190px);
+        width: 360px;
+    }
+}
+@media (min-width: 767px) {
+    .snackbar {
+        width: 400px;
+        left: calc(50% - 195px);
+    }
+} */

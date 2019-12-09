@@ -1,21 +1,39 @@
-const snackBar = document.getElementById('snackbar');
+import './snackBar.css';
 
-var hideSnackBarTimeout;
-const showSnackBar = message => {
-    if (hideSnackBarTimeout) {
-        clearTimeout(hideSnackBarTimeout);
-    } 
-    if (snackBar.innerHTML !== '') {
-        snackBar.innerHTML += '\n' + message;
-    } else {
-        snackBar.innerHTML = message;
+const snackbarContainer = document.querySelector('.snackbar-container');
+
+var showSnackBar = (message, noDismissButton) => {
+    const snackbar = document.createElement('div');
+    snackbar.classList.add('snackbar');
+
+    let hideSnackBarTimeout = setTimeout(() => dismissSnackbar(snackbar), 5000);
+    snackbar.innerHTML += message;
+
+    if (!noDismissButton) {
+        const snackbarDismissButton = document.createElement('button');
+        snackbarDismissButton.setAttribute('aria-label', 'Dismiss button');
+        snackbarDismissButton.classList.add('snackbar-dismiss-button', 'focus-outline', 'accent-outline');
+        snackbarDismissButton.innerText = 'Got it';
+        snackbarDismissButton.addEventListener('click', () => dismissSnackbar(snackbar, hideSnackBarTimeout, true));
+        snackbar.appendChild(snackbarDismissButton);
     }
-
-    snackBar.classList.add('show');
-    hideSnackBarTimeout = setTimeout(() => {
-        snackBar.classList.remove('show');
-        snackBar.innerHTML = '';
-    }, 5000);
+    snackbar.classList.add('show');
+    snackbarContainer.append(snackbar);
 }
+
+const dismissSnackbar = (snackbar, timeout, animate) => {
+    if (timeout) {
+        clearTimeout(timeout);
+    }
+    if (animate) {
+        snackbar.classList.add('animate-hidding');
+        snackbar.addEventListener('animationend', snackbar.remove);
+    } else {
+        snackbar.classList.add('hidding');
+        snackbar.addEventListener('transitionend', snackbar.remove);
+    }
+}
+
+window.showSnackBar = showSnackBar;
 
 export { showSnackBar }

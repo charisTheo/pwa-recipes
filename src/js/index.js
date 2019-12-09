@@ -115,7 +115,10 @@ const registerServiceWorker = () => {
             window.updateServiceWorker = updateServiceWorker;
         
             setTimeout(() => 
-                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                showSnackBar(
+                    'A new version is available <a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button focus-outline">Refresh</a>',
+                    true
+                )
                 , 0
             );
         });

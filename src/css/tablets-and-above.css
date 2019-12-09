@@ -29,13 +29,6 @@
     nav paper-tabs iron-icon {
         --iron-icon-fill-color: var(--accent-color);
     }
-    #snackbar {
-        width: 400px;
-        left: calc(50% - 195px);
-    }
-    #snackbar.show {
-        bottom: 120px;
-    }
     .flex-stretch-tablets-and-above {
         flex: 1;
     }

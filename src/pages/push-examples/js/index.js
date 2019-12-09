@@ -1,11 +1,11 @@
+import { showSnackBar } from "./../../../global/snackBar";
+
 import './../css/main.css';
 
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const SERVICE_WORKER_SCOPE = '/push-examples/';
 // const SERVICE_WORKER_SCOPE = window.location.href.match('localhost') ? '/' : '/push-examples/';
-
-const snackBar = document.getElementById('snackbar');
 
 window.addEventListener('load', () => {
     if ('serviceWorker' in navigator) {
@@ -177,24 +177,6 @@ window.addEventListener('offline', function() {
 window.addEventListener('online', function() {
     handleOnlineEvent();
 });
-
-var hideSnackBarTimeout;
-const showSnackBar = message => {
-    if (hideSnackBarTimeout) {
-        clearTimeout(hideSnackBarTimeout);
-    } 
-    if (snackBar.innerHTML !== '') {
-        snackBar.innerHTML += '\n' + message;
-    } else {
-        snackBar.innerHTML = message;
-    }
-
-    snackBar.classList.add('show');
-    hideSnackBarTimeout = setTimeout(() => {
-        snackBar.classList.remove('show');
-        snackBar.innerHTML = '';
-    }, 5000);
-}
 
 const getValueFromUrlQueryString = queryString => {
     const queryStringCharactersArr = queryString.split('');
