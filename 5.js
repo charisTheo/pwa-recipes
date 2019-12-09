@@ -1,1 +1,1 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{408:function(n,o,i){"use strict";i.r(o),o.default='<div class="offline-content">\n    <h2>Some information</h2>\n</div>'}}]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{410:function(n,o,i){"use strict";i.r(o),o.default='<div class="offline-content">\n    <h2>Some information</h2>\n</div>'}}]);
