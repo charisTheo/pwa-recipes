@@ -16,7 +16,13 @@
       "src": "./favicon/android-chrome-512x512.png", 
       "sizes": "512x512", 
       "type": "image/png" 
-    } 
+    },
+    {
+      "src": "./favicon/maskable_icon.png",
+      "sizes": "196x196",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ],
   "start_url": "/push-examples/",
   "display": "standalone",

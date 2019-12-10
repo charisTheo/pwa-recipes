@@ -28,6 +28,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon.ico"
   },
   {
+    "revision": "8fc31d1b49c3eed7dcdb70d67767262e",
+    "url": "favicon/maskable_icon.png"
+  },
+  {
     "revision": "7616f2454346cd2eb7fc4cfdc1688921",
     "url": "img/chrome-web-icon-96.png"
   },
@@ -56,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "index.html"
   },
   {
-    "revision": "fddd3cf9d9036735dc4b56e3057bc427",
+    "revision": "d9535606322735a18d9a3130d8e6780b",
     "url": "manifest.json"
   },
   {
