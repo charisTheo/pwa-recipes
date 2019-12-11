@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "057553ea4416c9a30dc6",
+    "revision": "f0cc1e6032a3d468ca54",
     "url": "cartAbandonNotification.js"
   },
   {
@@ -96,7 +96,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "884ceb838f0f36d52d157f8beaad984e",
+    "revision": "d8247f2f08df152dd68b9c8c7105d3fd",
     "url": "index.html"
   },
   {

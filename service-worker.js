@@ -1,4 +1,4 @@
-importScripts("precache-manifest.6b47fee404aebef4730e7382a5be0c68.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.4ee71f9248ea959f430e8fc092f55f9c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 // workbox.precaching.precacheAndRoute((self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]));

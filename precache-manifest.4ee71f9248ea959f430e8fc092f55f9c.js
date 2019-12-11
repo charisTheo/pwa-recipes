@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "3.js"
   },
   {
-    "revision": "c7eaade1591d8cfc3076",
+    "revision": "cf158c027ec56490555a",
     "url": "4.js"
   },
   {
-    "revision": "66e2f9cc2d37d9832cd0",
+    "revision": "f2d83d1ec3521b69fbb8",
     "url": "5.js"
   },
   {
-    "revision": "edcb3ead103008ab8a0b",
+    "revision": "6ec9344e9a3b4230ff21",
     "url": "6.js"
   },
   {
@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/maskable_icon.png"
   },
   {
-    "revision": "4809e7daa7602f49e4ed",
+    "revision": "2ee13fe90d110b30f43b",
     "url": "home.js"
   },
   {
@@ -116,7 +116,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "offline.html"
   },
   {
-    "revision": "878dd367e52ff56b4aa0",
+    "revision": "46fca0c860db2d5a5b28",
     "url": "tabs.js"
   }
 ]);

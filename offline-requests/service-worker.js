@@ -1,4 +1,4 @@
-importScripts("precache-manifest.cbca85b7d1c80233bf842330598dccd8.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.dc9a1075c81982f139df4375023c11cb.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
