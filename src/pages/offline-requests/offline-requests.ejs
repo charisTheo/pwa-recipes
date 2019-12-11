@@ -48,6 +48,8 @@
         </div>
       </paper-toolbar>
 
+      <div class="top-dialog-container" role="banner" aria-live="polite"></div>
+
       <main>        
         <h2 class="page-title">Handle offline requests 📴</h2>
         <h3 class="page-description">A demo with shopping cart offline support using the 
@@ -139,18 +141,5 @@
 
     <div class="snackbar-container" aria-live="polite"></div>
     
-    <!-- <script>
-      (function() {
-        document.addEventListener('WebComponentsReady', function componentsReady() {
-          document.removeEventListener('WebComponentsReady', componentsReady, false);
-          var script = document.createElement('script');
-          script.src = '<%= htmlWebpackPlugin.files.js[0] %>';
-          var refScript = document.getElementsByTagName('script')[0];
-          refScript.parentNode.insertBefore(script, refScript);
-        }, false);
-      })();
-    </script>
-    <script src="./../../bower_components/webcomponentsjs/webcomponents-loader.js"></script>   -->
-
   </body>
 </html>

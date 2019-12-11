@@ -1,0 +1,46 @@
+.top-dialog-container {
+    z-index: 15;
+    transition: top 0.5s ease-out;
+    /* top: var(--calculated-paper-toolbar-sm-height, 56px); */
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    will-change: top;
+    transform: translateZ(0);
+}
+.top-dialog {
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--accent-color, #3367d6);
+    color: #000000;
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+    padding: 2px 0 4px 16px;
+    font-weight: 300;
+    font-size: 12px;
+    transition: transform 0.5s ease-out;
+}
+.top-dialog-text-content {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 700;
+}
+.top-dialog-dismiss-button {
+    padding: 0px 16px;
+    color: var(--primary-color, #ffffff);
+    background-color: transparent;
+    outline: none;
+    border: none;
+    font-size: inherit;
+    font-weight: 800;
+}
+.top-dialog.hidding {
+    transform: translateY(-200px);
+    z-index: -1;
+}

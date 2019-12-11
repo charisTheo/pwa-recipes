@@ -23,7 +23,7 @@ var showSnackBar = (message, dismissButtonElement) => {
     }
     
     snackbar.appendChild(snackbarDismissButton);
-    snackbar.classList.add('show');
+    snackbar.classList.add('show'); // TODO check if this is needed
     snackbarContainer.append(snackbar);
 }
 

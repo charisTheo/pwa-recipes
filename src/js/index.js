@@ -21,7 +21,8 @@ import '@polymer/paper-item/paper-item';
 import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
 
-import { showSnackBar } from "../global/snackBar";
+// import { showSnackBar } from "../global/snackBar";
+import { showTopDialog } from "../global/topDialog";
 import { sharePage } from "./webShare";
 import { 
     isIos,
@@ -58,12 +59,12 @@ window.addEventListener('load', async () => {
 
 // * shows an offline prompt and marks the offline available content
 const handleOfflineEvent = () => {
-    showSnackBar('You are offline 📴');
+    showTopDialog('You are offline 📴');
     markOfflineAvailableContent();
 };
 // * shows an online prompt and unmarks offline avaialble content
 const handleOnlineEvent = () => {
-    showSnackBar('You are back online! 🎉');
+    showTopDialog('You are back online! 🎉', { timeout: 2000 });
     unmarkOfflineAvailableContent();
 };
 
@@ -116,18 +117,14 @@ const registerServiceWorker = () => {
                 workBox.messageSW({ type: 'NEW_VERSION'});
             };
         
-            setTimeout(() => {
-                const reloadButton = document.createElement('button');
-                reloadButton.addEventListener('click', updateServiceWorker);
-                reloadButton.setAttribute('aria-label', 'Reload the page to see the new version');
-                reloadButton.classList.add('snackbar-refresh-button', 'focus-outline');
-                reloadButton.textContent = 'Refresh';
-
-                showSnackBar(
-                    'A new version is available 🆕',
-                    reloadButton
-                )
-            }, 0);
+            setTimeout(() => showTopDialog(
+                'New version available 🆕 Tap to reload.',
+                {
+                    eventListener: updateServiceWorker,
+                    eventListenerLabel: 'Press this dialog to reload the page'
+                }
+                ,
+            ), 0);
         });
 
         workBox.register();

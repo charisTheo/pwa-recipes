@@ -6,7 +6,6 @@ import { Workbox } from 'workbox-window';
 
 import './../css/main.css';
 import './../../../global/styles.css';
-import './../css/offline-theme-dark.css';
 
 import '@polymer/paper-card/paper-card';
 import '@polymer/paper-button/paper-button';
@@ -17,8 +16,8 @@ import '@polymer/paper-item/paper-item';
 import '@polymer/paper-item/paper-item-body';
 import '@polymer/paper-item/paper-icon-item';
 
-import "./offline.min";
 import { showSnackBar } from "./../../../global/snackBar";
+import { showTopDialog } from "./../../../global/topDialog";
 import {
     getNotificationPermission,
     requestNotificationPermission
@@ -79,18 +78,11 @@ const registerServiceWorker = async () => {
                 workBox.messageSW({ type: 'NEW_VERSION'});
             };
             
-            setTimeout(() => {
-                const reloadButton = document.createElement('button');
-                reloadButton.addEventListener('click', updateServiceWorker);
-                reloadButton.setAttribute('aria-label', 'Reload the page to see the new version');
-                reloadButton.classList.add('snackbar-refresh-button', 'focus-outline');
-                reloadButton.textContent = 'Refresh';
-
-                showSnackBar(
-                    'A new version is available 🆕',
-                    reloadButton
-                )
-            }, 0);
+            setTimeout(() => showTopDialog(
+                'New version available 🆕 Tap to reload.',
+                updateServiceWorker,
+                'Press this dialog to reload the page'
+            ), 0);
         });
 
         workBox.register();
@@ -122,7 +114,7 @@ const checkout = async event => {
 }
 
 window.addEventListener('offline', async () => {
-    showSnackBar('You are offline 📴');
+    showTopDialog('You are offline 📴');
     configureLocalDatabase();
     const registration = await navigator.serviceWorker.getRegistration(SERVICE_WORKER_SCOPE);
     // * register Background Sync event
@@ -130,13 +122,6 @@ window.addEventListener('offline', async () => {
 });
 
 window.addEventListener('online', function() {
-    showSnackBar('You are back online! 🎉');
+    showTopDialog('You are back online! 🎉', { timeout: 2000 });
     // TODO use background sync to add or remove items from IndexDB to the API
 });
-
-if (window.Offline) {
-    window.Offline.options = {
-        checkOnLoad: true,
-        requests: true
-    }
-}
