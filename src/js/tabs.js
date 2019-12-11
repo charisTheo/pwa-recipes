@@ -166,6 +166,8 @@ export const renderHtmlForTabSelected = async navigateTo => {
 
     // ? Accessibility focus on the current tab title
     document.querySelector('main > h2').focus();
+    // ? Scroll to top as changing of tabs forces the page to scroll to bottom of the added dynamic HTML
+    window.scrollTo(0,0);
 }
 
 const removePageFromOfflineContent = async (url, elementId) => {

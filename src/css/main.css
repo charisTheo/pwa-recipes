@@ -57,6 +57,12 @@ main > a:nth-child(2) img {
     transform: rotate(-10deg);
 }
 
+main > iframe {
+    width: 100%;
+    min-height: 500px;
+    border-radius: 4px;
+}
+
 .page-card-link {
     color: var(--accent-color);
     position: relative;
