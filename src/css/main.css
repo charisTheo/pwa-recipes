@@ -92,7 +92,7 @@ main > iframe {
     color: var(--google-green-500);
 }
 .offline-content {
-    grid-row: 2;
+    grid-row: 3;
     justify-self: center;
     width: 100%;
     max-width: 500px;

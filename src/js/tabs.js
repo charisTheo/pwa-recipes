@@ -194,5 +194,5 @@ const removePageFromOfflineContent = async (url, elementId) => {
 
     // * remove list item from the DOM
     removeElements(document.getElementById(elementId));
-    showSnackBar(`${url} is no longer available offline!`);
+    showSnackBar(`<strong>${url}</strong> is no longer available offline! <div style="flex: 1"></div>`);
 };

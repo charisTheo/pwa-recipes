@@ -6,6 +6,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
+    color: var(--light-theme-text-color);
 }
 .container {
     min-height: 100vh;
@@ -78,8 +79,12 @@ main {
     max-width: 1000px;
     box-sizing: border-box;
 }
-main .page-title {
+main .page-title,
+main .page-description {
     grid-column: 1 / -1;
+}
+main .page-description {
+    color: var(--light-theme-secondary-color);
 }
 main paper-card {
     display: flex;
@@ -151,10 +156,17 @@ paper-toolbar paper-button {
 
 .focus-outline:focus,
 .focus-outline.yellow-outline:focus {
-    outline: 3px solid var(--yellow);
+    outline: 2px solid var(--yellow, var(--accent-color));
 }
 .focus-outline.accent-outline:focus {
-    outline: 3px solid var(--accent-color);
+    outline: 2px solid var(--accent-color);
+}
+
+strong {
+    color: var(--accent-color, #f4b400);
+    display: inline-block;
+    margin: 0;
+    padding: 0;
 }
 
 @media (max-width: 600px) {

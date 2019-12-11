@@ -13,11 +13,12 @@
     transform: translateZ(0);
 }
 .snackbar {
+    width: 96%;
     box-sizing: border-box;
     align-items: center;
     display: flex;
     justify-content: space-between;
-    width: 96%;
+    text-align: left;
     background-color: #323232;
     color: #ffffff;
     border-radius: 5px;

@@ -127,14 +127,19 @@ const registerServiceWorker = () => {
             var updateServiceWorker = event => {
                 workBox.messageSW({ type: 'NEW_VERSION'});
             };
-            window.updateServiceWorker = updateServiceWorker;
-        
-            setTimeout(() => 
-                showSnackBar('A new version is available <button aria-label="Reload the page to see the new version" onclick="updateServiceWorker();" class="snackbar-refresh-button focus-outline">Refresh</button>',
-                    true
+            
+            setTimeout(() => {
+                const reloadButton = document.createElement('button');
+                reloadButton.addEventListener('click', updateServiceWorker);
+                reloadButton.setAttribute('aria-label', 'Reload the page to see the new version');
+                reloadButton.classList.add('snackbar-refresh-button', 'focus-outline');
+                reloadButton.textContent = 'Refresh';
+
+                showSnackBar(
+                    'A new version is available 🆕',
+                    reloadButton
                 )
-                , 0
-            );
+            }, 0);
         });
 
         workBox.register();

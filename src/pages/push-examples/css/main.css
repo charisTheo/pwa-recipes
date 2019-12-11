@@ -162,10 +162,10 @@ a:active,
 /* ! DUPLICATE in global styles.css */
 .focus-outline:focus,
 .focus-outline.yellow-outline:focus {
-    outline: 3px solid var(--yellow);
+    outline: 2px solid var(--yellow, var(--accent-color));
 }
 .focus-outline.accent-outline:focus {
-    outline: 3px solid var(--accent-color);
+    outline: 2px solid var(--accent-color);
 }
 
 .unavailable-offline {

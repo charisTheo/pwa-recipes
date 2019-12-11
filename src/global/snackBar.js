@@ -2,21 +2,27 @@ import './snackBar.css';
 
 const snackbarContainer = document.querySelector('.snackbar-container');
 
-var showSnackBar = (message, noDismissButton) => {
+var showSnackBar = (message, dismissButtonElement) => {
     const snackbar = document.createElement('div');
-    snackbar.classList.add('snackbar');
-
     let hideSnackBarTimeout = setTimeout(() => dismissSnackbar(snackbar), 5000);
-    snackbar.innerHTML += message;
-
-    if (!noDismissButton) {
-        const snackbarDismissButton = document.createElement('button');
+    let snackbarDismissButton;
+    
+    snackbar.classList.add('snackbar');
+    snackbar.innerHTML += `<div>${message}<div>`;
+    
+    if (dismissButtonElement) {
+        snackbarDismissButton = dismissButtonElement;
+        
+    } else {
+        snackbarDismissButton = document.createElement('button');
         snackbarDismissButton.setAttribute('aria-label', 'Dismiss button');
         snackbarDismissButton.classList.add('snackbar-dismiss-button', 'focus-outline', 'accent-outline');
         snackbarDismissButton.innerText = 'Got it';
         snackbarDismissButton.addEventListener('click', () => dismissSnackbar(snackbar, hideSnackBarTimeout, true));
-        snackbar.appendChild(snackbarDismissButton);
+
     }
+    
+    snackbar.appendChild(snackbarDismissButton);
     snackbar.classList.add('show');
     snackbarContainer.append(snackbar);
 }
