@@ -47,9 +47,11 @@
 #ios-install-banner > #ios-install-banner-dismiss-button {
     position: absolute;
     bottom: 5px;
-    right: 15px;
+    right: 6px;
     font-size: 14px;
     color: #004ba0;
+    background: none;
+    border: none;
 }
 
 @media (max-width: 320px) {

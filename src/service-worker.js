@@ -1,5 +1,4 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
-// ? Both images are precached in the __precacheManifest file
 const OFFLINE_PAGE_URL = '/offline.html';
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
 const PAGE_ICON_URL = '/favicon/android-chrome-192x192.png';
@@ -16,6 +15,7 @@ addEventListener('activate', event => {
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
+    // console.warn("TCL: message = NEW_VERSION | event", event);
     skipWaiting();
   }
 });
@@ -45,8 +45,7 @@ addEventListener('fetch', async event => {
     }
 });
 
-self.__precacheManifest = (self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]);
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
+workbox.precaching.precacheAndRoute((self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]));
 
 workbox.routing.registerRoute(
   /(https:\/\/fonts\.(googleapis|gstatic)\.com)/,

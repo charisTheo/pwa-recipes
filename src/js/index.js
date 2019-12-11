@@ -40,6 +40,7 @@ const pageShareButton = document.querySelector('.page-share-button');
 const iosInstallBanner = document.querySelector('#ios-install-banner');
 const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
 const tabbedNavigation = document.querySelector('paper-tabs');
+var previouslyFocusedElement;
 
 window.addEventListener('load', async () => {
     applyMediaQueriesOnDeviceWidth();
@@ -47,6 +48,8 @@ window.addEventListener('load', async () => {
     attachEventListeners();
     // * load the html based on the initially selected tab
     import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo));
+    // ? Accessibility focus on navigation
+    setTimeout(() => tabbedNavigation.selectedItem.focus(), 100);
 
     if (!navigator.onLine) {
         handleOfflineEvent();
@@ -115,8 +118,7 @@ const registerServiceWorker = () => {
             window.updateServiceWorker = updateServiceWorker;
         
             setTimeout(() => 
-                showSnackBar(
-                    'A new version is available <a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button focus-outline">Refresh</a>',
+                showSnackBar('A new version is available <button aria-label="Reload the page to see the new version" onclick="updateServiceWorker();" class="snackbar-refresh-button focus-outline">Refresh</button>',
                     true
                 )
                 , 0
@@ -150,6 +152,10 @@ export const dismissInstallPwaButtons = () => {
         installPwaCard = document.querySelector('.install-pwa-card');
         removeElements(installPwaCard);
 
+    }
+
+    if (previouslyFocusedElement) {
+        previouslyFocusedElement.focus();
     }
 }
 
@@ -208,7 +214,9 @@ window.addEventListener('beforeinstallprompt', function(e) {
             }, 1000);
         } else {
             if (getCookie('IOS_INSTALL_BANNER_DISMISSED') !== 'true') {
+                previouslyFocusedElement = document.activeElement;
                 iosInstallBanner.hidden = false;
+                iosInstallBanner.focus();
             }
         }
     }

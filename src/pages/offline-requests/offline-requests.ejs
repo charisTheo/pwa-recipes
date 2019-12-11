@@ -22,11 +22,16 @@
     <div class="container">
       <paper-toolbar>
         <div slot="top" style="max-width: 40px;max-height: 40px">
-            <paper-icon-button id="notifications-request-button" src="./img/notifications-none.svg"></paper-icon-button>
+            <paper-icon-button id="notifications-request-button" aria-label="Request for push notifications permission" src="./img/notifications-none.svg"></paper-icon-button>
         </div>
         <div slot="top" class="shopping-cart-button-container">
-            <paper-icon-button id="shopping-cart-button" icon="shopping-cart"></paper-icon-button>
-            <span hidden id="number-of-cart-items"></span>
+            <paper-icon-button 
+              id="shopping-cart-button" 
+              aria-label="Show your shopping cart" 
+              icon="shopping-cart"
+              aria-controls="cart-items-container"
+            ></paper-icon-button>
+            <span hidden id="number-of-cart-items" aria-label="Number of items in your shopping cart"></span>
         </div>
         
         <div slot="top">
@@ -50,6 +55,7 @@
             <div class="card-actions">
               <paper-button
                 class="add-to-cart-button"
+                aria-label="Add to cart"
                 data-item='{"name": "Playstation 4 console", "price": 200, "image": "ps4.jpg"}' 
                 raised
               >Add to Cart</paper-button>
@@ -61,7 +67,9 @@
             <div class="card-actions">
               <paper-button
                 class="add-to-cart-button"
+                aria-label="Add to cart"
                 data-item='{"name": "Smart watch", "price": 60, "image": "smart-watch.jpg"}'
+                raised
               >Add to Cart</paper-button>
             </div>
           </paper-card>
@@ -70,7 +78,9 @@
             <div class="card-actions">
               <paper-button
                 class="add-to-cart-button"
+                aria-label="Add to cart"
                 data-item='{"name": "Headphones", "price": 30, "image": "headphones.jpg"}'
+                raised
               >Add to Cart</paper-button>
             </div>
           </paper-card>
@@ -84,7 +94,7 @@
               <!-- ? Items are added from index.js on page load or on new item added to cart -->
             </div>
             
-            <paper-button id="checkout-button">Checkout</paper-button>
+            <paper-button id="checkout-button" aria-label="Checkout" raised>Checkout</paper-button>
           </div>
 
       </main>

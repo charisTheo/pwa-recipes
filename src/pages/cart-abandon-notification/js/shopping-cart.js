@@ -11,6 +11,7 @@ import {
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const numberOfCartItemsEl = document.getElementById('number-of-cart-items');
 const cartItemsContainer = document.getElementById('cart-items-container');
+const checkoutButton = document.getElementById('checkout-button');
 
 const addToCart = async (event, forceDb) => {
     const item = JSON.parse(event.target.getAttribute('data-item'));
@@ -115,13 +116,13 @@ const deleteItemFromCart = async (item, forceDb) => {
 window.deleteItemFromCart = deleteItemFromCart;
 
 const addItemDescriptionToShoppingCart = item => {
-    const html = ` <paper-icon-item id="shopping-cart-item-${item.name.split(' ').join('_')}">
+    const html = ` <paper-icon-item id="shopping-cart-item-${item.name.split(' ').join('_')}" aria-label="${item.name}">
         <div class="avatar" style="background-image: url(./img/products/${item.image})" slot="item-icon"></div>
         <paper-item-body two-line>
             <div>${item.name}</div>
-            <div secondary>${item.price}</div>
+            <div secondary>£${item.price}</div>
         </paper-item-body>
-        <paper-icon-button onclick='deleteItemFromCart(${JSON.stringify(item).toString()})' icon="delete" alt="remove item from shopping cart"></paper-icon-button>
+        <paper-icon-button onclick='deleteItemFromCart(${JSON.stringify(item).toString()})' icon="delete" alt="remove ${item.name} from shopping cart"></paper-icon-button>
     </paper-icon-item>`;
 
     document.getElementById('cart-items').innerHTML += html;
@@ -197,12 +198,23 @@ const updateNumberOfCartItems = numberOfCartItems => {
     
     if (numberOfCartItems === 0) {
         numberOfCartItemsEl.hidden = true;
+        document.querySelector('#cart-items').innerHTML = '<p tabindex="0" class="no-items-description">There are no items in your shopping cart</p>';
+        checkoutButton.hidden = true;
+
     } else {
+        const noItemsDescriptionParagraph = document.querySelector('.no-items-description');
+        if (noItemsDescriptionParagraph) {
+            noItemsDescriptionParagraph.remove();
+        }
+
         numberOfCartItemsEl.innerText = numberOfCartItems;
         numberOfCartItemsEl.hidden = false;
+        checkoutButton.hidden = false;
+
     }
 }
 
+var previouslyFocusedElement;
 const toggleShoppingCart = force => {
     if (typeof force === 'boolean') {
         if (force) {
@@ -210,8 +222,23 @@ const toggleShoppingCart = force => {
         } else {
             cartItemsContainer.classList.remove('show');
         }
+        
     } else {
         cartItemsContainer.classList.toggle('show');
+
+    }
+    
+    if (cartItemsContainer.classList.contains('show')) {
+        document.querySelectorAll('#cart-items-container [tabindex]').forEach(el => el.setAttribute('tabindex', '0'));
+        cartItemsContainer.setAttribute('aria-hidden', 'false');
+        previouslyFocusedElement = document.activeElement;
+        document.querySelector('#cart-items [tabindex]').focus();
+
+    } else {
+        document.querySelectorAll('#cart-items-container [tabindex]').forEach(el => el.setAttribute('tabindex', '-1'));
+        cartItemsContainer.setAttribute('aria-hidden', 'true');
+        previouslyFocusedElement.focus();
+
     }
 }
 

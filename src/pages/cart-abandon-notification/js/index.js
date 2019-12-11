@@ -130,7 +130,9 @@ const registerServiceWorker = () => {
             window.updateServiceWorker = updateServiceWorker;
         
             setTimeout(() => 
-                showSnackBar('A new version is available <span style="font-size:17px;margin-left:5px">👉</span><a href="#" onclick="updateServiceWorker();" class="snackbar-refresh-button">&#x21BB;</a>')
+                showSnackBar('A new version is available <button aria-label="Reload the page to see the new version" onclick="updateServiceWorker();" class="snackbar-refresh-button focus-outline">Refresh</button>',
+                    true
+                )
                 , 0
             );
         });
@@ -140,18 +142,26 @@ const registerServiceWorker = () => {
 }
 
 const checkout = async event => {
-    const response = await fetch(`${API_URL}/checkout`, { 
-        method: 'GET',
-        credentials: 'include'
-    });
-    const items = await response.json();
-    console.log("checkout: items", items);
-    
-    if (response.status === 200) {
-        removeAllItemsDescriptionsFromShoppingCart();
-        showSnackBar(`🤟 Yeayy!! Checkout 🛒! 🤟`);
-    } else {
+    try {
+        const response = await fetch(`${API_URL}/checkout`, { 
+            method: 'GET', 
+            credentials: 'include'
+        });
+        // const items = await response.json();
+        
+        if (response.status !== 200) {
+            throw new Error(response.statusText);
+
+        } else {
+            removeAllItemsDescriptionsFromShoppingCart();
+            showSnackBar(`🤟 Yeayy!! Checkout 🛒! 🤟`);
+
+        }
+
+    } catch (error) {
+        console.warn("checkout: error", error);
         showSnackBar(`There was an error during the checkout of your cart 😕`);
+    
     }
 }
 

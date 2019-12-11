@@ -38,6 +38,7 @@
     border: none;
     font-size: inherit;
     font-weight: 800;
+    text-transform: uppercase;
 }
 .snackbar.hidding {
     transform: translateY(200px);
@@ -55,6 +56,8 @@
     padding: 5px 9px;
     text-decoration: none;
     transition: all 0.35s ease-out;
+    background: none;
+    border: none;
 }
 
 @keyframes bounce-hide-animation {

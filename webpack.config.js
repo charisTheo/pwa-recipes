@@ -40,9 +40,8 @@ const plugins = [
   ]),
   new InjectManifest({
     swSrc: 'src/service-worker.js',
-    exclude: [/(service-worker|index)\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
-    chunks: ['home'],
-    include: ['\/.js$']
+    exclude: [/service-worker\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
+    // include: ['\/.js$']
   }),
   new MediaQueryPlugin({
     include: true,

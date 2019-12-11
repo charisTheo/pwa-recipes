@@ -19,6 +19,7 @@ const offlineContentHtml = import(`!!raw-loader!./../partials/offline-content.ht
 const infoHtml = import(`!!raw-loader!./../partials/info.html`);
 
 const pageMainElement = document.querySelector('main');
+const iosInstallBannerDismissButton = document.querySelector('#ios-install-banner-dismiss-button');
 
 export const navigationTabSelected = async event => {
     const navigateTo = event.detail.item.getAttribute('data-navigate-to');
@@ -87,11 +88,20 @@ export const renderHtmlForTabSelected = async navigateTo => {
             break;
     }
     pageMainElement.innerHTML = html.default;
+
     if (navigateTo === 'apps') {
         // TODO
-        if (!isIos && !isInStandaloneMode) {
-            // * navigated to apps tab AND is not launched as a PWA AND is not an iOS
-            document.querySelector('.install-pwa-card').hidden = false;
+        if (!isInStandaloneMode) {
+            // * navigated to apps tab AND is not launched as a PWA
+            if (isIos) {
+                iosInstallBannerDismissButton.addEventListener('click', dismissInstallPwaButtons);
+                const iosInstallBanner = document.querySelector('#ios-install-banner');
+                if (iosInstallBanner) {
+                    iosInstallBanner.focus();
+                }
+            } else {
+                document.querySelector('.install-pwa-card').hidden = false;
+            }
         }
 
         // TODO
@@ -153,6 +163,9 @@ export const renderHtmlForTabSelected = async navigateTo => {
             offlineContentTitle.innerHTML = 'Offline available pages';
         }
     }
+
+    // ? Accessibility focus on the current tab title
+    document.querySelector('main > h2').focus();
 }
 
 const removePageFromOfflineContent = async (url, elementId) => {
