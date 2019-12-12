@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[2,14],{353:function(e,a,p){"use strict";p.r(a);p(367),p(373);var r=p(365),t=p(366),o=p(363),i=p(362);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[12],{356:function(e,a,p){"use strict";p.r(a);p(362),p(372),p(381),p(367);var r=p(365),o=p(366),t=p(363);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -9,110 +9,182 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-Object(r.a)({_template:o.a`
+Object(r.a)({_template:t.a`
     <style>
       :host {
-        @apply --layout-inline;
-        @apply --layout-center-center;
+        --calculated-paper-toolbar-height: var(--paper-toolbar-height, 64px);
+        --calculated-paper-toolbar-sm-height: var(--paper-toolbar-sm-height, 56px);
+        display: block;
         position: relative;
-
-        vertical-align: middle;
-
-        fill: var(--iron-icon-fill-color, currentcolor);
-        stroke: var(--iron-icon-stroke-color, none);
-
-        width: var(--iron-icon-width, 24px);
-        height: var(--iron-icon-height, 24px);
-        @apply --iron-icon;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: var(--calculated-paper-toolbar-height);
+        background: var(--paper-toolbar-background, var(--primary-color));
+        color: var(--paper-toolbar-color, var(--dark-theme-text-color));
+        @apply --paper-toolbar;
       }
 
-      :host([hidden]) {
-        display: none;
+      :host(.animate) {
+        transition: var(--paper-toolbar-transition, height 0.18s ease-in);
       }
-    </style>
-`,is:"iron-icon",properties:{icon:{type:String},theme:{type:String},src:{type:String},_meta:{value:i.a.create("iron-meta",{type:"iconset"})}},observers:["_updateIcon(_meta, isAttached)","_updateIcon(theme, isAttached)","_srcChanged(src, isAttached)","_iconChanged(icon, isAttached)"],_DEFAULT_ICONSET:"icons",_iconChanged:function(e){var a=(e||"").split(":");this._iconName=a.pop(),this._iconsetName=a.pop()||this._DEFAULT_ICONSET,this._updateIcon()},_srcChanged:function(e){this._updateIcon()},_usesIconset:function(){return this.icon||!this.src},_updateIcon:function(){this._usesIconset()?(this._img&&this._img.parentNode&&Object(t.a)(this.root).removeChild(this._img),""===this._iconName?this._iconset&&this._iconset.removeIcon(this):this._iconsetName&&this._meta&&(this._iconset=this._meta.byKey(this._iconsetName),this._iconset?(this._iconset.applyIcon(this,this._iconName,this.theme),this.unlisten(window,"iron-iconset-added","_updateIcon")):this.listen(window,"iron-iconset-added","_updateIcon"))):(this._iconset&&this._iconset.removeIcon(this),this._img||(this._img=document.createElement("img"),this._img.style.width="100%",this._img.style.height="100%",this._img.draggable=!1),this._img.src=this.src,Object(t.a)(this.root).appendChild(this._img))}})},355:function(e,a,p){"use strict";p.r(a);p(362),p(353),p(372);var r=p(376),t=p(374),o=p(382);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},n=[r.a,t.a,o.a,i];var l=p(365),c=p(363);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-Object(l.a)({is:"paper-icon-button",_template:c.a`
-    <style>
-      :host {
-        display: inline-block;
+
+      :host(.medium-tall) {
+        height: calc(var(--calculated-paper-toolbar-height) * 2);
+        @apply --paper-toolbar-medium;
+      }
+
+      :host(.tall) {
+        height: calc(var(--calculated-paper-toolbar-height) * 3);
+        @apply --paper-toolbar-tall;
+      }
+
+      .toolbar-tools {
         position: relative;
-        padding: 8px;
-        outline: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        cursor: pointer;
-        z-index: 0;
-        line-height: 1;
-
-        width: 40px;
-        height: 40px;
-
-        /*
-          NOTE: Both values are needed, since some phones require the value to
-          be \`transparent\`.
-        */
-        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-        -webkit-tap-highlight-color: transparent;
-
-        /* Because of polymer/2558, this style has lower specificity than * */
-        box-sizing: border-box !important;
-
-        @apply --paper-icon-button;
-      }
-
-      :host #ink {
-        color: var(--paper-icon-button-ink-color, var(--primary-text-color));
-        opacity: 0.6;
-      }
-
-      :host([disabled]) {
-        color: var(--paper-icon-button-disabled-text, var(--disabled-text-color));
+        height: var(--calculated-paper-toolbar-height);
+        padding: 0 16px;
         pointer-events: none;
-        cursor: auto;
-
-        @apply --paper-icon-button-disabled;
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --paper-toolbar-content;
       }
 
-      :host([hidden]) {
-        display: none !important;
+      /*
+       * TODO: Where should media query breakpoints live so they can be shared between elements?
+       */
+
+      @media (max-width: 600px) {
+        :host {
+          height: var(--calculated-paper-toolbar-sm-height);
+        }
+
+        :host(.medium-tall) {
+          height: calc(var(--calculated-paper-toolbar-sm-height) * 2);
+        }
+
+        :host(.tall) {
+          height: calc(var(--calculated-paper-toolbar-sm-height) * 3);
+        }
+
+        .toolbar-tools {
+          height: var(--calculated-paper-toolbar-sm-height);
+        }
       }
 
-      :host(:hover) {
-        @apply --paper-icon-button-hover;
+      #topBar {
+        position: relative;
       }
 
-      iron-icon {
-        --iron-icon-width: 100%;
-        --iron-icon-height: 100%;
+      /* middle bar */
+      #middleBar {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+      }
+
+      :host(.tall) #middleBar,
+      :host(.medium-tall) #middleBar {
+        -webkit-transform: translateY(100%);
+        transform: translateY(100%);
+      }
+
+      /* bottom bar */
+      #bottomBar {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      /*
+       * make elements (e.g. buttons) respond to mouse/touch events
+       *
+       * \`.toolbar-tools\` disables touch events so multiple toolbars can stack and not
+       * absorb events. All children must have pointer events re-enabled to work as
+       * expected.
+       */
+      .toolbar-tools > ::slotted(*:not([disabled])) {
+        pointer-events: auto;
+      }
+
+      .toolbar-tools > ::slotted(.title) {
+        @apply --paper-font-common-base;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 1;
+        pointer-events: none;
+        @apply --layout-flex;
+      }
+
+      .toolbar-tools > ::slotted(.title) {
+        margin-left: 56px;
+      }
+
+      .toolbar-tools > ::slotted(paper-icon-button + .title) {
+        margin-left: 0;
+      }
+
+      /**
+       * The --paper-toolbar-title mixin is applied here instead of above to
+       * fix the issue with margin-left being ignored due to css ordering.
+       */
+      .toolbar-tools > ::slotted(.title) {
+        @apply --paper-toolbar-title;
+      }
+
+      .toolbar-tools > ::slotted(paper-icon-button[icon=menu]) {
+        margin-right: 24px;
+      }
+
+      .toolbar-tools > ::slotted(.fit) {
+        position: absolute;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: auto;
+        margin: 0;
+      }
+
+      /* TODO(noms): Until we have a better solution for classes that don't use
+       * /deep/ create our own.
+       */
+      .start-justified {
+        @apply --layout-start-justified;
+      }
+
+      .center-justified {
+        @apply --layout-center-justified;
+      }
+
+      .end-justified {
+        @apply --layout-end-justified;
+      }
+
+      .around-justified {
+        @apply --layout-around-justified;
+      }
+
+      .justified {
+        @apply --layout-justified;
       }
     </style>
 
-    <iron-icon id="icon" src="[[src]]" icon="[[icon]]"
-               alt$="[[alt]]"></iron-icon>
-  `,hostAttributes:{role:"button",tabindex:"0"},behaviors:[n],registered:function(){this._template.setAttribute("strip-whitespace","")},properties:{src:{type:String},icon:{type:String},alt:{type:String,observer:"_altChanged"}},_altChanged:function(e,a){var p=this.getAttribute("aria-label");p&&a!=p||this.setAttribute("aria-label",e)}})},370:function(e,a,p){"use strict";p(362);
+    <div id="topBar" class\$="toolbar-tools [[_computeBarExtraClasses(justify)]]">
+      <slot name="top"></slot>
+    </div>
+
+    <div id="middleBar" class\$="toolbar-tools [[_computeBarExtraClasses(middleJustify)]]">
+      <slot name="middle"></slot>
+    </div>
+
+    <div id="bottomBar" class\$="toolbar-tools [[_computeBarExtraClasses(bottomJustify)]]">
+      <slot name="bottom"></slot>
+    </div>
+`,is:"paper-toolbar",hostAttributes:{role:"toolbar"},properties:{bottomJustify:{type:String,value:""},justify:{type:String,value:""},middleJustify:{type:String,value:""}},ready:function(){console.warn(this.is,"is deprecated. Please use app-layout instead!")},attached:function(){this._observer=this._observe(this),this._updateAriaLabelledBy()},detached:function(){this._observer&&this._observer.disconnect()},_observe:function(e){var a=new MutationObserver(function(){this._updateAriaLabelledBy()}.bind(this));return a.observe(e,{childList:!0,subtree:!0}),a},_updateAriaLabelledBy:function(){Object(o.b)();for(var e,a=[],p=Array.prototype.slice.call(Object(o.a)(this.root).querySelectorAll("slot")).concat(Array.prototype.slice.call(Object(o.a)(this.root).querySelectorAll("content"))),r=0;e=p[r];r++)for(var t,l=Object(o.a)(e).getDistributedNodes(),i=0;t=l[i];i++)if(t.classList&&t.classList.contains("title"))if(t.id)a.push(t.id);else{var n="paper-toolbar-label-"+Math.floor(1e4*Math.random());t.id=n,a.push(n)}a.length>0&&this.setAttribute("aria-labelledby",a.join(" "))},_computeBarExtraClasses:function(e){return e?e+("justified"===e?"":"-justified"):""}})},370:function(e,a,p){"use strict";p(362);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -513,7 +585,17 @@ const r=p(363).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},373:function(e,a,p){"use strict";p.d(a,"a",(function(){return t}));p(362);var r=p(365);
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},381:function(e,a,p){"use strict";p(362);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/if(!window.polymerSkipLoadingFontRoboto){const e=document.createElement("link");e.rel="stylesheet",e.type="text/css",e.crossOrigin="anonymous",e.href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,300,300italic,400italic,500,500italic,700,700italic",document.head.appendChild(e)}
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -524,4 +606,160 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,p=this.key;a&&p&&(a=t.types[a]=t.types[a]||{},null==e?delete a[p]:a[p]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(r.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,p){var r=new t({type:e,key:a});return void 0!==p&&p!==r.value?r.value=p:this.value!==r.value&&(this.value=r.value),r},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})}}]);
+const r=p(363).a`<custom-style>
+  <style is="custom-style">
+    html {
+
+      /* Shared Styles */
+      --paper-font-common-base: {
+        font-family: 'Roboto', 'Noto', sans-serif;
+        -webkit-font-smoothing: antialiased;
+      };
+
+      --paper-font-common-code: {
+        font-family: 'Roboto Mono', 'Consolas', 'Menlo', monospace;
+        -webkit-font-smoothing: antialiased;
+      };
+
+      --paper-font-common-expensive-kerning: {
+        text-rendering: optimizeLegibility;
+      };
+
+      --paper-font-common-nowrap: {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      };
+
+      /* Material Font Styles */
+
+      --paper-font-display4: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 112px;
+        font-weight: 300;
+        letter-spacing: -.044em;
+        line-height: 120px;
+      };
+
+      --paper-font-display3: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 56px;
+        font-weight: 400;
+        letter-spacing: -.026em;
+        line-height: 60px;
+      };
+
+      --paper-font-display2: {
+        @apply --paper-font-common-base;
+
+        font-size: 45px;
+        font-weight: 400;
+        letter-spacing: -.018em;
+        line-height: 48px;
+      };
+
+      --paper-font-display1: {
+        @apply --paper-font-common-base;
+
+        font-size: 34px;
+        font-weight: 400;
+        letter-spacing: -.01em;
+        line-height: 40px;
+      };
+
+      --paper-font-headline: {
+        @apply --paper-font-common-base;
+
+        font-size: 24px;
+        font-weight: 400;
+        letter-spacing: -.012em;
+        line-height: 32px;
+      };
+
+      --paper-font-title: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 28px;
+      };
+
+      --paper-font-subhead: {
+        @apply --paper-font-common-base;
+
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+      };
+
+      --paper-font-body2: {
+        @apply --paper-font-common-base;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+      };
+
+      --paper-font-body1: {
+        @apply --paper-font-common-base;
+
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+      };
+
+      --paper-font-caption: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 0.011em;
+        line-height: 20px;
+      };
+
+      --paper-font-menu: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 24px;
+      };
+
+      --paper-font-button: {
+        @apply --paper-font-common-base;
+        @apply --paper-font-common-nowrap;
+
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.018em;
+        line-height: 24px;
+        text-transform: uppercase;
+      };
+
+      --paper-font-code2: {
+        @apply --paper-font-common-code;
+
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 20px;
+      };
+
+      --paper-font-code1: {
+        @apply --paper-font-common-code;
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+      };
+
+    }
+
+  </style>
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)}}]);

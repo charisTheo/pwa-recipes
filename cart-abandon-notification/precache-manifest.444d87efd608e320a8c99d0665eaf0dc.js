@@ -1,34 +1,38 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "6b77d26cef319c107bb8",
+    "url": "cartAbandonNotification.js"
+  },
+  {
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon.ico"
   },
   {
-    "revision": "a4d680aca3b2322207ade82213b9d01c",
+    "revision": "db8de568835d37a7e19a240cdfb504fe",
     "url": "favicon/android-chrome-192x192.png"
   },
   {
-    "revision": "68d07494c05d1f8fed0614b4f4c419ae",
+    "revision": "0b14c98f83e8eac028f6d77adb68b486",
     "url": "favicon/android-chrome-512x512.png"
   },
   {
-    "revision": "e05ab28febe419e56c7b30369d556efe",
+    "revision": "02a6c2b1021dd44a59bded6837a2a552",
     "url": "favicon/apple-touch-icon.png"
   },
   {
-    "revision": "df80aaf70ec51b386d5e95c2913ab4a1",
+    "revision": "f142430e8755cdb92e119365f38fd1f4",
     "url": "favicon/favicon-16x16.png"
   },
   {
-    "revision": "edcfef953c61f72b766db69b1fe0c885",
+    "revision": "e6d03c5c1c15b32a5bcfc96e5f544f59",
     "url": "favicon/favicon-32x32.png"
   },
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "5bfa8435cf20ed8d8901396746e2ba76",
+    "revision": "24d50372964a066df5517be3a0d17a2b",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -64,12 +68,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/headphones.jpg"
   },
   {
+    "revision": "bd8b9d046a6aae041919c536fc4f106f",
+    "url": "img/products/headphones.webp"
+  },
+  {
     "revision": "b836a0fb9910a14603841bdb74473962",
     "url": "img/products/ps4.jpg"
   },
   {
+    "revision": "df6b315bd8af9901b20a1efbde705934",
+    "url": "img/products/ps4.webp"
+  },
+  {
     "revision": "ec7acaaefd0037d5bc125be230730fa0",
     "url": "img/products/smart-watch.jpg"
+  },
+  {
+    "revision": "a339abc1cb99d8e9dbcb8e1533ec8fbb",
+    "url": "img/products/smart-watch.webp"
   },
   {
     "revision": "ce1a303cf8c6fdf8dfad494bb4507f08",
@@ -80,15 +96,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "22698b67c8c6d51acdd490ce412a899e",
+    "revision": "0260437ae2d0baaa002fd0b5bd7d2b11",
     "url": "index.html"
   },
   {
-    "revision": "1285fd1e27b7f42d35f1e517e88e2387",
+    "revision": "6603560321c43b2d266fa31b5ca77ecb",
     "url": "manifest.json"
-  },
-  {
-    "revision": "1caf0cc40dbab383ba7b",
-    "url": "offlineRequests.js"
   }
 ]);
