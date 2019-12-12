@@ -8,20 +8,14 @@ import './../global/iosInstallBanner.css';
 
 import { Workbox } from 'workbox-window';
 
-import '@polymer/paper-card/paper-card';
-import '@polymer/paper-button/paper-button';
-import '@polymer/paper-toolbar/paper-toolbar';
-import '@polymer/paper-fab/paper-fab';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/iron-icon/iron-icon';
-import '@polymer/paper-tabs/paper-tabs';
-import '@polymer/paper-tabs/paper-tab';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-item/paper-item-body';
-import '@polymer/paper-item/paper-icon-item';
+// import '@polymer/paper-toolbar/paper-toolbar';
+// import '@polymer/paper-tabs/paper-tabs';
+// import '@polymer/paper-tabs/paper-tab';
+// import '@polymer/iron-icons/iron-icons';
+// import '@polymer/iron-icon/iron-icon';
+// import '@polymer/paper-icon-button/paper-icon-button';
+// import '@polymer/paper-fab/paper-fab';
 
-// import { showSnackBar } from "../global/snackBar";
 import { showTopDialog } from "../global/topDialog";
 import { sharePage } from "./webShare";
 import { 
@@ -44,6 +38,13 @@ const tabbedNavigation = document.querySelector('paper-tabs');
 var previouslyFocusedElement;
 
 window.addEventListener('load', async () => {
+    await import('@polymer/paper-toolbar/paper-toolbar');
+    await import('@polymer/paper-tabs/paper-tabs');
+    await import('@polymer/paper-tabs/paper-tab');
+    import('@polymer/iron-icons/iron-icons');
+    import('@polymer/iron-icon/iron-icon');
+    import('@polymer/paper-icon-button/paper-icon-button');
+
     applyMediaQueriesOnDeviceWidth();
     registerServiceWorker();
     attachEventListeners();
@@ -147,7 +148,7 @@ export const dismissInstallPwaButtons = () => {
         removeElements(iosInstallBanner);
         const expiryDate = new Date();
         expiryDate.setDate(expiryDate.getDate() + 7); // * expire in 7 days
-        setCookie('IOS_INSTALL_BANNER_DISMISSED', `true;expires=${expiryDate.toGMTString()}`);
+        setCookie('IOS_INSTALL_BANNER_DISMISSED', 'true;expires=' + expiryDate.toGMTString());
 
     } else {
         // TODO
@@ -181,7 +182,7 @@ const attachEventListeners = () => {
     } catch (error) {
 
     }
-    pageShareButton.addEventListener('click', sharePage);
+    import('@polymer/paper-fab/paper-fab').then(() => pageShareButton.addEventListener('click', sharePage));
 
     // ? Window
     window.addEventListener('resize', applyMediaQueriesOnDeviceWidth);

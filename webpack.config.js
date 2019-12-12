@@ -1,10 +1,12 @@
+const path = require('path');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MediaQueryPlugin = require('media-query-plugin');
-// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
-const path = require('path');
+
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+// const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 // const WebpackShellPlugin = require('webpack-shell-plugin');
 // const exec = require('child_process').exec;
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -41,7 +43,6 @@ const plugins = [
   new InjectManifest({
     swSrc: 'src/service-worker.js',
     exclude: [/service-worker\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
-    // include: ['\/.js$']
   }),
   new MediaQueryPlugin({
     include: true,
@@ -60,7 +61,7 @@ module.exports = [
     // Tell Webpack which file kicks off our app.
     entry: {
       home: path.resolve(__dirname, 'src/js/index.js'),
-      // tabs: path.resolve(__dirname, 'src/js/tabs.js'),
+      // ? importing from inside of home.js chunk -> tabs: path.resolve(__dirname, 'src/js/tabs.js'),
     },
     // Tell Weback to output our bundle.js
     output: {
