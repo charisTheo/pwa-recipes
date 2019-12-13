@@ -43,7 +43,7 @@ main paper-card {
 }
 main paper-card img {
     width: 50%;
-    height: 50%;
+    /* height: 50%; */
     order: -1;
     margin: 30px auto 0;
     object-fit: contain;
