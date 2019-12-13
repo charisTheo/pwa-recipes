@@ -24,7 +24,6 @@
     "@polymer/paper-item": "^3.0.1",
     "@polymer/paper-tabs": "^3.1.0",
     "@polymer/paper-toggle-button": "^3.0.1",
-    "@polymer/paper-toolbar": "^3.0.1",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
     "date-fns": "^2.8.1",

@@ -215,7 +215,11 @@ const updateNumberOfCartItems = numberOfCartItems => {
 }
 
 var previouslyFocusedElement;
-const toggleShoppingCart = force => {
+const toggleShoppingCart = async force => {
+    await import('@polymer/paper-item/paper-item');
+    await import('@polymer/paper-item/paper-item-body');
+    await import('@polymer/paper-item/paper-icon-item');
+
     if (typeof force === 'boolean') {
         if (force) {
             cartItemsContainer.classList.add('show');

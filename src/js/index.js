@@ -8,14 +8,6 @@ import './../global/iosInstallBanner.css';
 
 import { Workbox } from 'workbox-window';
 
-// import '@polymer/paper-toolbar/paper-toolbar';
-// import '@polymer/paper-tabs/paper-tabs';
-// import '@polymer/paper-tabs/paper-tab';
-// import '@polymer/iron-icons/iron-icons';
-// import '@polymer/iron-icon/iron-icon';
-// import '@polymer/paper-icon-button/paper-icon-button';
-// import '@polymer/paper-fab/paper-fab';
-
 import { showTopDialog } from "../global/topDialog";
 import { sharePage } from "./webShare";
 import { 
@@ -38,7 +30,6 @@ const tabbedNavigation = document.querySelector('paper-tabs');
 var previouslyFocusedElement;
 
 window.addEventListener('load', async () => {
-    await import('@polymer/paper-toolbar/paper-toolbar');
     await import('@polymer/paper-tabs/paper-tabs');
     await import('@polymer/paper-tabs/paper-tab');
     import('@polymer/iron-icons/iron-icons');

@@ -14,10 +14,6 @@ body {
     background-color: #e7f0fc;
 }
 
-paper-toolbar paper-icon-button {
-    --iron-icon-fill-color: var(--accent-color);
-}
-
 nav {
     background-color: #ffffff;
     width: 100vw;

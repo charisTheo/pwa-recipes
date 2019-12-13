@@ -17,32 +17,10 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%3367d6' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-#fork-me-banner > svg > path:not(:first-child) {
-    fill: var(--primary-color);
+header paper-icon-button {
+    --iron-icon-fill-color: #ffffff;
 }
-
-/* paper-toolbar paper-icon-button {
-    --iron-icon-fill-color: var(--accent-color);
-} */
-
-main paper-card .header {
-    border-bottom: 1px solid #e8e8e8;
-}
-main paper-card .header .title-text {
-    color: var(--primary-color);
-}
-
-paper-button {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-footer a {
-    color: var(--google-blue-500);
-}
-
 .shopping-cart-button-container {
-    margin-right: 40px;
     position: relative;
 }
 #number-of-cart-items {
@@ -57,6 +35,21 @@ footer a {
     color: var(--dark-orange);
     border-radius: 8px;
     box-shadow: 0px 2px 10px rgba(0,0,0,0.35);
+}
+#fork-me-banner > svg > path:not(:first-child) {
+    fill: var(--primary-color);
+}
+
+main paper-card .header {
+    border-bottom: 1px solid #e8e8e8;
+}
+main paper-card .header .title-text {
+    color: var(--primary-color);
+}
+
+paper-button {
+    background-color: var(--primary-color);
+    color: white;
 }
 
 #cart-items-container {
@@ -103,6 +96,10 @@ paper-icon-item paper-icon-button {
 
 .cart-close-button-container {
     text-align: right;
+}
+
+footer a {
+    color: var(--google-blue-500);
 }
 
 @media (min-width: 767px) {

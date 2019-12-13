@@ -44,3 +44,9 @@
     transform: translateY(-200px);
     z-index: -1;
 }
+
+@media screen and (max-width: 320px) {
+    .top-dialog {
+        padding: 2px 0 4px 5px;
+    }
+}

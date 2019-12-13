@@ -7,16 +7,6 @@ import { Workbox } from 'workbox-window';
 import './../css/main.css';
 import './../../../global/styles.css';
 
-import '@polymer/paper-card/paper-card';
-import '@polymer/paper-button/paper-button';
-import '@polymer/paper-toolbar/paper-toolbar';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-item/paper-item-body';
-import '@polymer/paper-item/paper-icon-item';
-import '@polymer/paper-toggle-button/paper-toggle-button';
-
 import { showSnackBar } from "./../../../global/snackBar";
 import { showTopDialog } from "./../../../global/topDialog";
 import {
@@ -49,7 +39,13 @@ const pageVisibilityPushToggleButton = document.getElementById('page-visibility-
 
 var pageVisibilityPushIsEnabled = true;
 
-window.addEventListener('load', async () => {
+window.addEventListener('load', async () => {    
+    import('@polymer/paper-card/paper-card');
+    import('@polymer/paper-button/paper-button');
+    import('@polymer/paper-icon-button/paper-icon-button');
+    import('@polymer/iron-icons/iron-icons');
+    import('@polymer/paper-toggle-button/paper-toggle-button');
+
     // * register service worker
     registerServiceWorker();
 
@@ -131,8 +127,11 @@ const registerServiceWorker = () => {
             
             setTimeout(() => showTopDialog(
                 'New version available 🆕 Tap to reload.',
-                updateServiceWorker,
-                'Press this dialog to reload the page'
+                {
+                    eventListener: updateServiceWorker,
+                    eventListenerLabel: 'Press this dialog to reload the page'
+                }
+                ,
             ), 0);
         });
 

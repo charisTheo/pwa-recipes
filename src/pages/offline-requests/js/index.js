@@ -7,15 +7,6 @@ import { Workbox } from 'workbox-window';
 import './../css/main.css';
 import './../../../global/styles.css';
 
-import '@polymer/paper-card/paper-card';
-import '@polymer/paper-button/paper-button';
-import '@polymer/paper-toolbar/paper-toolbar';
-import '@polymer/paper-icon-button/paper-icon-button';
-import '@polymer/iron-icons/iron-icons';
-import '@polymer/paper-item/paper-item';
-import '@polymer/paper-item/paper-item-body';
-import '@polymer/paper-item/paper-icon-item';
-
 import { showSnackBar } from "./../../../global/snackBar";
 import { showTopDialog } from "./../../../global/topDialog";
 import {
@@ -44,6 +35,11 @@ const checkoutButton = document.getElementById('checkout-button');
 const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
 
 window.addEventListener('load', async () => {
+    import('@polymer/paper-card/paper-card');
+    import('@polymer/paper-button/paper-button');
+    import('@polymer/paper-icon-button/paper-icon-button');
+    import('@polymer/iron-icons/iron-icons');
+    
     // * register service worker
     registerServiceWorker();
 
@@ -80,8 +76,11 @@ const registerServiceWorker = async () => {
             
             setTimeout(() => showTopDialog(
                 'New version available 🆕 Tap to reload.',
-                updateServiceWorker,
-                'Press this dialog to reload the page'
+                {
+                    eventListener: updateServiceWorker,
+                    eventListenerLabel: 'Press this dialog to reload the page'
+                }
+                ,
             ), 0);
         });
 

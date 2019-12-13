@@ -9,6 +9,8 @@
 
     --primary-color: var(--purple);
     --accent-color: var(--orange);
+
+    --header-height: 54px;
 }
 body, html {
     min-height: 100vh;
@@ -19,10 +21,17 @@ body {
     padding: 0;
     color: white;
     text-align: center;
-    /* TODO */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%ff6333' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-    background-color: #ffeae9;
+    background-color: #ede0fb;
 }
+body.cool .container,
+body.not-cool .container {
+    filter: blur(5px);
+}
+body.cool .cool-dialog,
+body.not-cool .not-cool-dialog {
+    transform: scale(1);
+}
+
 .container {
     min-height: 100vh;
     display: grid;
@@ -35,48 +44,39 @@ body {
     align-content: space-between;
 }
 
-body.cool .container,
-body.not-cool .container {
-    filter: blur(5px);
+header {
+    width: 100vw;
+    overflow: hidden;
+    display: grid;
+    grid-area: header;
+    grid-template-columns: auto 1fr;
+    align-content: center;
+    background-color: var(--purple);
+    box-shadow: var(--shadow-elevation-16dp_-_box-shadow);
+    padding: 4px 15px;
+    margin: 0;
 }
-
-body.cool .cool-dialog,
-body.not-cool .not-cool-dialog {
-    transform: scale(1);
+header .title {
+    text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
+    display: inline-block;
+    margin: 0;
+    font-size: 18px;
 }
-
+header,
+#fork-me-banner,
+#fork-me-banner > svg {
+    height: var(--header-height, 64px);
+    box-sizing: border-box;
+}
 #fork-me-banner {
+    width: var(--header-height, 64px);
     position: absolute;
     top: 0;
     right: 0;
     z-index: 9;
 }
-#fork-me-banner,
-#fork-me-banner > svg {
-    width: 75px;
-    height: 75px;
-    box-sizing: border-box;
-}
 #fork-me-banner > svg > path:not(:first-child) {
     fill: var(--purple);
-}
-
-header {
-    grid-area: header;
-    min-height: 40px;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-content: space-between;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    padding: 10px 20px;
-    background-color: var(--purple);
-    margin: 0;
-}
-
-header h3 {
-    text-shadow: 0px 2px 0px rgba(0,0,0,0.5);
-    text-align: left;
-    margin: 20px 0 10px;
 }
 
 #wipe-data-btn {
@@ -214,6 +214,11 @@ span[class^="arrow"] {
     background-position: center center;
 }
 
+@media (min-width: 600px) {
+    :root {
+        --header-height: 64px;
+    }
+}
 @media all and (display-mode: browser) {
     body {
         font-family: 'Open Sans', sans-serif;
