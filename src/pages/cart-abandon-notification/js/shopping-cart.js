@@ -25,9 +25,9 @@ const addToCart = async (event, forceDb) => {
 
         addItemToObjectStore('toAdd', item).then(() => {
             if (!navigator.onLine) {
-                showSnackBar(`You are offline, but ${name} has been saved for later checkout! 🎊🛒`);
+                showSnackBar(`You are offline, but <strong>${name}</strong> has been saved for later checkout! 🎊🛒`);
             } else if (forceDb) {
-                showSnackBar(`There was an error while syncing with the database. ${name} has been saved for later checkout! 🎊🛒`);
+                showSnackBar(`There was an error while syncing with the database. <strong>${name}</strong> has been saved for later checkout! 🎊🛒`);
             }
             // * Update the number of cart items
             addItemDescriptionToShoppingCart(item);
@@ -36,7 +36,7 @@ const addToCart = async (event, forceDb) => {
             if (error.target && error.target.error.message === 'Key already exists in the object store.') {
                 // ! IndexDB does not take duplicates
                 // TODO increment item quantity in shopping cart
-                showSnackBar(`${name} is already in your cart!`);
+                showSnackBar(`<strong>${name}</strong> is already in your cart!`);
             }
         });
 
@@ -78,7 +78,7 @@ const deleteItemFromCart = async (item, forceDb) => {
 
         removeItemDescriptionFromShoppingCart(item.name);
         updateNumberOfCartItems();
-        showSnackBar(`${item.name} has been removed from your cart! 🗑🛒`);
+        showSnackBar(`<strong>${item.name}</strong> has been removed from your cart! 🗑🛒`);
         // also remove item from the toAdd collection in IndexDB
         removeItemFromObjectStore('toAdd', item);
         
@@ -102,7 +102,7 @@ const deleteItemFromCart = async (item, forceDb) => {
 
             removeItemDescriptionFromShoppingCart(name);
             updateNumberOfCartItems(totalCartItems);
-            showSnackBar(`${name} has been removed from your cart! 🗑🛒`);
+            showSnackBar(`<strong>${name}</strong> has been removed from your cart! 🗑🛒`);
             
 
         } catch (error) {
