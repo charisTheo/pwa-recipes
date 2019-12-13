@@ -1,6 +1,50 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6b77d26cef319c107bb8",
+    "revision": "a45b4556c5888d4faae9",
+    "url": "0.js"
+  },
+  {
+    "revision": "f3924edd4e3573408c52",
+    "url": "1.js"
+  },
+  {
+    "revision": "d43fb214e4b9ed83c635",
+    "url": "10.js"
+  },
+  {
+    "revision": "915fc520da00f925fee2",
+    "url": "11.js"
+  },
+  {
+    "revision": "8fd70f199812f0b7b03c",
+    "url": "2.js"
+  },
+  {
+    "revision": "d8559bb027f1e6ef90dc",
+    "url": "4.js"
+  },
+  {
+    "revision": "8202612b5491651e4f11",
+    "url": "5.js"
+  },
+  {
+    "revision": "6ee634055cab9e5029fe",
+    "url": "6.js"
+  },
+  {
+    "revision": "2640cb7a33378474cd61",
+    "url": "7.js"
+  },
+  {
+    "revision": "bb43d37325ff6b5dd130",
+    "url": "8.js"
+  },
+  {
+    "revision": "cd37e286537e9b2d8c44",
+    "url": "9.js"
+  },
+  {
+    "revision": "06d6692fef6dda6d1329",
     "url": "cartAbandonNotification.js"
   },
   {
@@ -28,11 +72,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon-32x32.png"
   },
   {
+    "revision": "921bb28cdb604c3dce6be3b00a4c30d1",
+    "url": "favicon/favicon-64x64.png"
+  },
+  {
     "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "24d50372964a066df5517be3a0d17a2b",
+    "revision": "db62ff3e53c0115860f0e7f36eebb76c",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -96,11 +144,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "0260437ae2d0baaa002fd0b5bd7d2b11",
+    "revision": "e7f7da0c13f54db473a69b217fe8d90c",
     "url": "index.html"
   },
   {
-    "revision": "6603560321c43b2d266fa31b5ca77ecb",
+    "revision": "dd526f50c2c41e4ea69f4ffa30273fbe",
     "url": "manifest.json"
   }
 ]);

@@ -1,5 +1,45 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
+    "revision": "d2ef18ac00ad8c890512",
+    "url": "0.js"
+  },
+  {
+    "revision": "007f20dd0189aed2bb5f",
+    "url": "1.js"
+  },
+  {
+    "revision": "bae1e29c4cbd9d2c5acc",
+    "url": "10.js"
+  },
+  {
+    "revision": "5f5a78982441c79a1429",
+    "url": "2.js"
+  },
+  {
+    "revision": "f04e09a09b432cbe0d16",
+    "url": "4.js"
+  },
+  {
+    "revision": "bed398465e81d9687c77",
+    "url": "5.js"
+  },
+  {
+    "revision": "0f4550bd63094827f489",
+    "url": "6.js"
+  },
+  {
+    "revision": "481b92729f6448947398",
+    "url": "7.js"
+  },
+  {
+    "revision": "11879e3077eb43513b60",
+    "url": "8.js"
+  },
+  {
+    "revision": "fe7abbfbd2b1f848e6b5",
+    "url": "9.js"
+  },
+  {
     "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
     "url": "favicon.ico"
   },
@@ -24,11 +64,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon-32x32.png"
   },
   {
+    "revision": "ee2042af7431392c3834792e61d7198c",
+    "url": "favicon/favicon-64x64.png"
+  },
+  {
     "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "5bfa8435cf20ed8d8901396746e2ba76",
+    "revision": "c8b20bd17a32fcbb56044c7badc9d17e",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -80,15 +124,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "67a39a0327466de7e1d7d7fb087505b0",
+    "revision": "25822ec94da0dd2020789f0927e22f4f",
     "url": "index.html"
   },
   {
-    "revision": "1285fd1e27b7f42d35f1e517e88e2387",
+    "revision": "2ddcdd11d0c7984946eb99896fabba2a",
     "url": "manifest.json"
   },
   {
-    "revision": "66c45c1717d6946e27e3",
+    "revision": "d9d9e6587a12ea71b5b5",
     "url": "offlineRequests.js"
   }
 ]);

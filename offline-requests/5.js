@@ -1,4 +1,73 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{370:function(e,a,p){"use strict";p(361);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{354:function(e,a,p){"use strict";p.r(a);p(358),p(367);var r=p(361),t=p(359),o=p(372);
+/**
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+*/
+Object(r.a)({_template:t.a`
+    <style>
+      :host {
+        display: inline-block;
+        overflow: hidden;
+        position: relative;
+      }
+
+      #baseURIAnchor {
+        display: none;
+      }
+
+      #sizedImgDiv {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+
+        display: none;
+      }
+
+      #img {
+        display: block;
+        width: var(--iron-image-width, auto);
+        height: var(--iron-image-height, auto);
+      }
+
+      :host([sizing]) #sizedImgDiv {
+        display: block;
+      }
+
+      :host([sizing]) #img {
+        display: none;
+      }
+
+      #placeholder {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+
+        background-color: inherit;
+        opacity: 1;
+
+        @apply --iron-image-placeholder;
+      }
+
+      #placeholder.faded-out {
+        transition: opacity 0.5s linear;
+        opacity: 0;
+      }
+    </style>
+
+    <a id="baseURIAnchor" href="#"></a>
+    <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
+    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" crossorigin$="[[crossorigin]]" on-load="_imgOnLoad" on-error="_imgOnError">
+    <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
+`,is:"iron-image",properties:{src:{type:String,value:""},alt:{type:String,value:null},crossorigin:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:"center"},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:"_placeholderChanged"},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:"_widthChanged",type:Number,value:null},height:{observer:"_heightChanged",type:Number,value:null}},observers:["_transformChanged(sizing, position)","_loadStateObserver(src, preventLoad)"],created:function(){this._resolvedSrc=""},_imgOnLoad:function(){this.$.img.src===this._resolveSrc(this.src)&&(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src===this._resolveSrc(this.src)&&(this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?"faded-out":""},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return""===this.alt?"true":void 0},_computeImgDivARIALabel:function(){return null!==this.alt?this.alt:""===this.src?"":this._resolveSrc(this.src).replace(/[?|#].*/g,"").split("/").pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+"px"},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+"px"},_loadStateObserver:function(e,a){var p=this._resolveSrc(e);p!==this._resolvedSrc&&(this._resolvedSrc="",this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",""===e||a?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this._resolvedSrc=p,this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':""},_transformChanged:function(){var e=this.$.sizedImgDiv.style,a=this.$.placeholder.style;e.backgroundSize=a.backgroundSize=this.sizing,e.backgroundPosition=a.backgroundPosition=this.sizing?this.position:"",e.backgroundRepeat=a.backgroundRepeat=this.sizing?"no-repeat":""},_resolveSrc:function(e){var a=Object(o.c)(e,this.$.baseURIAnchor.href);return a.length>=2&&"/"===a[0]&&"/"!==a[1]&&(a=(location.origin||location.protocol+"//"+location.host)+a),a}});p(384),p(370);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -9,7 +78,112 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(362).a`
+Object(r.a)({_template:t.a`
+    <style include="paper-material-styles">
+      :host {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        background-color: var(--paper-card-background-color, var(--primary-background-color));
+        border-radius: 2px;
+
+        @apply --paper-font-common-base;
+        @apply --paper-card;
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      :host([hidden]), [hidden] {
+        display: none !important;
+      }
+
+      .header {
+        position: relative;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        overflow: hidden;
+
+        @apply --paper-card-header;
+      }
+
+      .header iron-image {
+        display: block;
+        width: 100%;
+        --iron-image-width: 100%;
+        pointer-events: none;
+
+        @apply --paper-card-header-image;
+      }
+
+      .header .title-text {
+        padding: 16px;
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--paper-card-header-color, #000);
+
+        @apply --paper-card-header-text;
+      }
+
+      .header .title-text.over-image {
+        position: absolute;
+        bottom: 0px;
+
+        @apply --paper-card-header-image-text;
+      }
+
+      :host ::slotted(.card-content) {
+        padding: 16px;
+        position:relative;
+
+        @apply --paper-card-content;
+      }
+
+      :host ::slotted(.card-actions) {
+        border-top: 1px solid #e8e8e8;
+        padding: 5px 16px;
+        position:relative;
+
+        @apply --paper-card-actions;
+      }
+
+      :host([elevation="1"]) {
+        @apply --paper-material-elevation-1;
+      }
+
+      :host([elevation="2"]) {
+        @apply --paper-material-elevation-2;
+      }
+
+      :host([elevation="3"]) {
+        @apply --paper-material-elevation-3;
+      }
+
+      :host([elevation="4"]) {
+        @apply --paper-material-elevation-4;
+      }
+
+      :host([elevation="5"]) {
+        @apply --paper-material-elevation-5;
+      }
+    </style>
+
+    <div class="header">
+      <iron-image hidden\$="[[!image]]" aria-hidden\$="[[_isHidden(image)]]" src="[[image]]" alt="[[alt]]" placeholder="[[placeholderImage]]" preload="[[preloadImage]]" fade="[[fadeImage]]"></iron-image>
+      <div hidden\$="[[!heading]]" class\$="title-text [[_computeHeadingClass(image)]]">[[heading]]</div>
+    </div>
+
+    <slot></slot>
+`,is:"paper-card",properties:{heading:{type:String,value:"",observer:"_headingChanged"},image:{type:String,value:""},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:"_computeAnimated(animatedShadow)"}},_isHidden:function(e){return e?"false":"true"},_headingChanged:function(e){var a=this.getAttribute("heading"),p=this.getAttribute("aria-label");"string"==typeof p&&p!==a||this.setAttribute("aria-label",e)},_computeHeadingClass:function(e){return e?" over-image":""},_computeAnimated:function(e){return e}})},368:function(e,a,p){"use strict";p(358);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const r=p(359).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -332,7 +506,7 @@ const r=p(362).a`
 
   </style>
 </custom-style>
-`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},374:function(e,a,p){"use strict";p(361),p(370);
+`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},370:function(e,a,p){"use strict";p(358),p(368);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -343,7 +517,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(362).a`
+const r=p(359).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -399,7 +573,7 @@ const r=p(362).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},383:function(e,a,p){"use strict";p(361);var r=p(362);
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},384:function(e,a,p){"use strict";p(358);var r=p(359);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -571,286 +745,4 @@ const o=r.a`
       }
     </style>
   </template>
-</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)},389:function(e,a,p){"use strict";p.d(a,"b",(function(){return i})),p.d(a,"a",(function(){return l}));p(361);var r=p(375),t=p(372),o=p(380);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const i={properties:{elevation:{type:Number,reflectToAttribute:!0,readOnly:!0}},observers:["_calculateElevation(focused, disabled, active, pressed, receivedFocusFromKeyboard)","_computeKeyboardClass(receivedFocusFromKeyboard)"],hostAttributes:{role:"button",tabindex:"0",animated:!0},_calculateElevation:function(){var e=1;this.disabled?e=0:this.active||this.pressed?e=4:this.receivedFocusFromKeyboard&&(e=3),this._setElevation(e)},_computeKeyboardClass:function(e){this.toggleClass("keyboard-focus",e)},_spaceKeyDownHandler:function(e){r.b._spaceKeyDownHandler.call(this,e),this.hasRipple()&&this.getRipple().ripples.length<1&&this._ripple.uiDownAction()},_spaceKeyUpHandler:function(e){r.b._spaceKeyUpHandler.call(this,e),this.hasRipple()&&this._ripple.uiUpAction()}},l=[r.a,t.a,o.a,i]},409:function(e,a,p){"use strict";p(366),p(383);var r=p(389),t=p(364);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const o=p(361).b`
-  <style include="paper-material-styles">
-    /* Need to specify the same specificity as the styles imported from paper-material. */
-    :host {
-      @apply --layout-inline;
-      @apply --layout-center-center;
-      position: relative;
-      box-sizing: border-box;
-      min-width: 5.14em;
-      margin: 0 0.29em;
-      background: transparent;
-      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-      -webkit-tap-highlight-color: transparent;
-      font: inherit;
-      text-transform: uppercase;
-      outline-width: 0;
-      border-radius: 3px;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -webkit-user-select: none;
-      user-select: none;
-      cursor: pointer;
-      z-index: 0;
-      padding: 0.7em 0.57em;
-
-      @apply --paper-font-common-base;
-      @apply --paper-button;
-    }
-
-    :host([elevation="1"]) {
-      @apply --paper-material-elevation-1;
-    }
-
-    :host([elevation="2"]) {
-      @apply --paper-material-elevation-2;
-    }
-
-    :host([elevation="3"]) {
-      @apply --paper-material-elevation-3;
-    }
-
-    :host([elevation="4"]) {
-      @apply --paper-material-elevation-4;
-    }
-
-    :host([elevation="5"]) {
-      @apply --paper-material-elevation-5;
-    }
-
-    :host([hidden]) {
-      display: none !important;
-    }
-
-    :host([raised].keyboard-focus) {
-      font-weight: bold;
-      @apply --paper-button-raised-keyboard-focus;
-    }
-
-    :host(:not([raised]).keyboard-focus) {
-      font-weight: bold;
-      @apply --paper-button-flat-keyboard-focus;
-    }
-
-    :host([disabled]) {
-      background: none;
-      color: #a8a8a8;
-      cursor: auto;
-      pointer-events: none;
-
-      @apply --paper-button-disabled;
-    }
-
-    :host([disabled][raised]) {
-      background: #eaeaea;
-    }
-
-
-    :host([animated]) {
-      @apply --shadow-transition;
-    }
-
-    paper-ripple {
-      color: var(--paper-button-ink-color);
-    }
-  </style>
-
-  <slot></slot>`;o.setAttribute("strip-whitespace",""),Object(t.a)({_template:o,is:"paper-button",behaviors:[r.a],properties:{raised:{type:Boolean,reflectToAttribute:!0,value:!1,observer:"_calculateElevation"}},_calculateElevation:function(){this.raised?r.b._calculateElevation.apply(this):this._setElevation(0)}})},415:function(e,a,p){"use strict";p(361),p(366);var r=p(364),t=p(362),o=p(377);
-/**
-@license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-Object(r.a)({_template:t.a`
-    <style>
-      :host {
-        display: inline-block;
-        overflow: hidden;
-        position: relative;
-      }
-
-      #baseURIAnchor {
-        display: none;
-      }
-
-      #sizedImgDiv {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-
-        display: none;
-      }
-
-      #img {
-        display: block;
-        width: var(--iron-image-width, auto);
-        height: var(--iron-image-height, auto);
-      }
-
-      :host([sizing]) #sizedImgDiv {
-        display: block;
-      }
-
-      :host([sizing]) #img {
-        display: none;
-      }
-
-      #placeholder {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-
-        background-color: inherit;
-        opacity: 1;
-
-        @apply --iron-image-placeholder;
-      }
-
-      #placeholder.faded-out {
-        transition: opacity 0.5s linear;
-        opacity: 0;
-      }
-    </style>
-
-    <a id="baseURIAnchor" href="#"></a>
-    <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
-    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" crossorigin$="[[crossorigin]]" on-load="_imgOnLoad" on-error="_imgOnError">
-    <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
-`,is:"iron-image",properties:{src:{type:String,value:""},alt:{type:String,value:null},crossorigin:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:"center"},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:"_placeholderChanged"},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:"_widthChanged",type:Number,value:null},height:{observer:"_heightChanged",type:Number,value:null}},observers:["_transformChanged(sizing, position)","_loadStateObserver(src, preventLoad)"],created:function(){this._resolvedSrc=""},_imgOnLoad:function(){this.$.img.src===this._resolveSrc(this.src)&&(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src===this._resolveSrc(this.src)&&(this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?"faded-out":""},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return""===this.alt?"true":void 0},_computeImgDivARIALabel:function(){return null!==this.alt?this.alt:""===this.src?"":this._resolveSrc(this.src).replace(/[?|#].*/g,"").split("/").pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+"px"},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+"px"},_loadStateObserver:function(e,a){var p=this._resolveSrc(e);p!==this._resolvedSrc&&(this._resolvedSrc="",this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",""===e||a?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this._resolvedSrc=p,this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':""},_transformChanged:function(){var e=this.$.sizedImgDiv.style,a=this.$.placeholder.style;e.backgroundSize=a.backgroundSize=this.sizing,e.backgroundPosition=a.backgroundPosition=this.sizing?this.position:"",e.backgroundRepeat=a.backgroundRepeat=this.sizing?"no-repeat":""},_resolveSrc:function(e){var a=Object(o.c)(e,this.$.baseURIAnchor.href);return a.length>=2&&"/"===a[0]&&"/"!==a[1]&&(a=(location.origin||location.protocol+"//"+location.host)+a),a}});p(383),p(374);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-Object(r.a)({_template:t.a`
-    <style include="paper-material-styles">
-      :host {
-        display: inline-block;
-        position: relative;
-        box-sizing: border-box;
-        background-color: var(--paper-card-background-color, var(--primary-background-color));
-        border-radius: 2px;
-
-        @apply --paper-font-common-base;
-        @apply --paper-card;
-      }
-
-      /* IE 10 support for HTML5 hidden attr */
-      :host([hidden]), [hidden] {
-        display: none !important;
-      }
-
-      .header {
-        position: relative;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-        overflow: hidden;
-
-        @apply --paper-card-header;
-      }
-
-      .header iron-image {
-        display: block;
-        width: 100%;
-        --iron-image-width: 100%;
-        pointer-events: none;
-
-        @apply --paper-card-header-image;
-      }
-
-      .header .title-text {
-        padding: 16px;
-        font-size: 24px;
-        font-weight: 400;
-        color: var(--paper-card-header-color, #000);
-
-        @apply --paper-card-header-text;
-      }
-
-      .header .title-text.over-image {
-        position: absolute;
-        bottom: 0px;
-
-        @apply --paper-card-header-image-text;
-      }
-
-      :host ::slotted(.card-content) {
-        padding: 16px;
-        position:relative;
-
-        @apply --paper-card-content;
-      }
-
-      :host ::slotted(.card-actions) {
-        border-top: 1px solid #e8e8e8;
-        padding: 5px 16px;
-        position:relative;
-
-        @apply --paper-card-actions;
-      }
-
-      :host([elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-
-      :host([elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-
-      :host([elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-
-      :host([elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-
-      :host([elevation="5"]) {
-        @apply --paper-material-elevation-5;
-      }
-    </style>
-
-    <div class="header">
-      <iron-image hidden\$="[[!image]]" aria-hidden\$="[[_isHidden(image)]]" src="[[image]]" alt="[[alt]]" placeholder="[[placeholderImage]]" preload="[[preloadImage]]" fade="[[fadeImage]]"></iron-image>
-      <div hidden\$="[[!heading]]" class\$="title-text [[_computeHeadingClass(image)]]">[[heading]]</div>
-    </div>
-
-    <slot></slot>
-`,is:"paper-card",properties:{heading:{type:String,value:"",observer:"_headingChanged"},image:{type:String,value:""},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:"_computeAnimated(animatedShadow)"}},_isHidden:function(e){return e?"false":"true"},_headingChanged:function(e){var a=this.getAttribute("heading"),p=this.getAttribute("aria-label");"string"==typeof p&&p!==a||this.setAttribute("aria-label",e)},_computeHeadingClass:function(e){return e?" over-image":""},_computeAnimated:function(e){return e}})}}]);
+</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)}}]);

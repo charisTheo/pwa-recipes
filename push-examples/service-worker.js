@@ -1,4 +1,4 @@
-importScripts("precache-manifest.383d054230319e6003b5eb2c127ab023.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.1ce417c39ff073e749799c1a30dfd06e.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';

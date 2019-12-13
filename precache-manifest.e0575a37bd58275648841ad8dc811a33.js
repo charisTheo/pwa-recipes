@@ -1,62 +1,58 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7c4d44e30c059bb2e28b",
+    "revision": "1b4e11ccbcb72c1b08f6",
     "url": "0.js"
   },
   {
-    "revision": "55de2549a9ae0f92d81f",
+    "revision": "b32d088c9f0ae9491014",
     "url": "1.js"
   },
   {
-    "revision": "1f3bbc7050595337871d",
+    "revision": "c288d086c9113781bbc2",
     "url": "10.js"
   },
   {
-    "revision": "3f78d362f17503f1e227",
+    "revision": "466cd820b6dcf0ab933c",
     "url": "11.js"
   },
   {
-    "revision": "c263d22765a5669192e9",
+    "revision": "4caefafa7bec144b4022",
     "url": "12.js"
   },
   {
-    "revision": "fe0fdaa5f06192872e06",
+    "revision": "85ca9c4a9c9ee24725c1",
     "url": "13.js"
   },
   {
-    "revision": "fe9cf0fceae608617cd7",
+    "revision": "28bec7519b44579f5384",
     "url": "14.js"
   },
   {
-    "revision": "1717fdbfd3f8b965f3fc",
+    "revision": "25ca6023e47ee03e1c9f",
     "url": "15.js"
   },
   {
-    "revision": "9d1240524a9e1953f32d",
+    "revision": "d7a20b8a3bf925267d6f",
     "url": "16.js"
   },
   {
-    "revision": "b8ed69019704f5fb2221",
+    "revision": "914aeb30fbf8fc0843c5",
     "url": "17.js"
   },
   {
-    "revision": "beca06b3ab061fb34f63",
+    "revision": "197c3197c98245760fb7",
     "url": "18.js"
   },
   {
-    "revision": "cc7e2c9b513ef6214505",
+    "revision": "c8dd4d3dead74f1af809",
     "url": "19.js"
   },
   {
-    "revision": "01bc167b13591c617fde",
+    "revision": "2441f54cc92696239fa7",
     "url": "2.js"
   },
   {
-    "revision": "47d267bf680ca0d7a654",
-    "url": "20.js"
-  },
-  {
-    "revision": "a2f2953abade4c9d4fa9",
+    "revision": "47dac0acfc2172f8c80a",
     "url": "apps.js"
   },
   {
@@ -104,7 +100,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/maskable_icon.png"
   },
   {
-    "revision": "288555328c323c1879ed",
+    "revision": "ef64dc2aced2a92c1998",
     "url": "home.js"
   },
   {
@@ -148,11 +144,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "ba30f1d75c00850f32c1008e5eaaae40",
+    "revision": "c0c794d7aeaecc2a1cadb39acf55cbf3",
     "url": "index.html"
   },
   {
-    "revision": "d34bac2ef33042bb355b",
+    "revision": "79c89817b544e68fabf7",
     "url": "info.js"
   },
   {
@@ -160,7 +156,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "manifest.json"
   },
   {
-    "revision": "3d3603c9ca871db4e534",
+    "revision": "3a58939a53ac3cd1abc4",
     "url": "offline-content.js"
   },
   {
@@ -168,15 +164,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "offline.html"
   },
   {
-    "revision": "1a6d20318b7eebfcd1b8",
+    "revision": "149c6516378b9fc647b9",
     "url": "tabs.js"
   },
   {
-    "revision": "3e03012f1eebee728c35",
+    "revision": "1fcb722e2e096c49f6ad",
     "url": "vendors~apps.js"
   },
   {
-    "revision": "ef46206fff81d136d8a6",
+    "revision": "10606dd955a919f9f8bb",
     "url": "vendors~offline-content.js"
   }
 ]);

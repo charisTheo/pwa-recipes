@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10,13],{353:function(e,a,p){"use strict";p.r(a);p(366),p(371);var r=p(364),t=p(365),o=p(362),i=p(361);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{351:function(e,a,p){"use strict";p.r(a);p(359),p(386),p(369);var r=p(387),t=p(362),o=p(360);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -9,28 +9,67 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-Object(r.a)({_template:o.a`
+Object(t.a)({is:"paper-icon-button",_template:o.a`
     <style>
       :host {
-        @apply --layout-inline;
-        @apply --layout-center-center;
+        display: inline-block;
         position: relative;
+        padding: 8px;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 0;
+        line-height: 1;
 
-        vertical-align: middle;
+        width: 40px;
+        height: 40px;
 
-        fill: var(--iron-icon-fill-color, currentcolor);
-        stroke: var(--iron-icon-stroke-color, none);
+        /*
+          NOTE: Both values are needed, since some phones require the value to
+          be \`transparent\`.
+        */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
 
-        width: var(--iron-icon-width, 24px);
-        height: var(--iron-icon-height, 24px);
-        @apply --iron-icon;
+        /* Because of polymer/2558, this style has lower specificity than * */
+        box-sizing: border-box !important;
+
+        @apply --paper-icon-button;
+      }
+
+      :host #ink {
+        color: var(--paper-icon-button-ink-color, var(--primary-text-color));
+        opacity: 0.6;
+      }
+
+      :host([disabled]) {
+        color: var(--paper-icon-button-disabled-text, var(--disabled-text-color));
+        pointer-events: none;
+        cursor: auto;
+
+        @apply --paper-icon-button-disabled;
       }
 
       :host([hidden]) {
-        display: none;
+        display: none !important;
+      }
+
+      :host(:hover) {
+        @apply --paper-icon-button-hover;
+      }
+
+      iron-icon {
+        --iron-icon-width: 100%;
+        --iron-icon-height: 100%;
       }
     </style>
-`,is:"iron-icon",properties:{icon:{type:String},theme:{type:String},src:{type:String},_meta:{value:i.a.create("iron-meta",{type:"iconset"})}},observers:["_updateIcon(_meta, isAttached)","_updateIcon(theme, isAttached)","_srcChanged(src, isAttached)","_iconChanged(icon, isAttached)"],_DEFAULT_ICONSET:"icons",_iconChanged:function(e){var a=(e||"").split(":");this._iconName=a.pop(),this._iconsetName=a.pop()||this._DEFAULT_ICONSET,this._updateIcon()},_srcChanged:function(e){this._updateIcon()},_usesIconset:function(){return this.icon||!this.src},_updateIcon:function(){this._usesIconset()?(this._img&&this._img.parentNode&&Object(t.a)(this.root).removeChild(this._img),""===this._iconName?this._iconset&&this._iconset.removeIcon(this):this._iconsetName&&this._meta&&(this._iconset=this._meta.byKey(this._iconsetName),this._iconset?(this._iconset.applyIcon(this,this._iconName,this.theme),this.unlisten(window,"iron-iconset-added","_updateIcon")):this.listen(window,"iron-iconset-added","_updateIcon"))):(this._iconset&&this._iconset.removeIcon(this),this._img||(this._img=document.createElement("img"),this._img.style.width="100%",this._img.style.height="100%",this._img.draggable=!1),this._img.src=this.src,Object(t.a)(this.root).appendChild(this._img))}})},359:function(e,a,p){"use strict";p.r(a);p(361),p(366),p(353),p(383),p(370),p(374);var r=p(389),t=p(364);
+
+    <iron-icon id="icon" src="[[src]]" icon="[[icon]]"
+               alt$="[[alt]]"></iron-icon>
+  `,hostAttributes:{role:"button",tabindex:"0"},behaviors:[r.a],registered:function(){this._template.setAttribute("strip-whitespace","")},properties:{src:{type:String},icon:{type:String},alt:{type:String,observer:"_altChanged"}},_altChanged:function(e,a){var p=this.getAttribute("aria-label");p&&a!=p||this.setAttribute("aria-label",e)}})},365:function(e,a,p){"use strict";p(359);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -41,108 +80,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const o=p(362).a`
-  <style include="paper-material-styles">
-    :host {
-      @apply --layout-vertical;
-      @apply --layout-center-center;
-
-      background: var(--paper-fab-background, var(--accent-color));
-      border-radius: 50%;
-      box-sizing: border-box;
-      color: var(--text-primary-color);
-      cursor: pointer;
-      height: 56px;
-      min-width: 0;
-      outline: none;
-      padding: 16px;
-      position: relative;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      -webkit-user-select: none;
-      user-select: none;
-      width: 56px;
-      z-index: 0;
-
-      /* NOTE: Both values are needed, since some phones require the value \`transparent\`. */
-      -webkit-tap-highlight-color: rgba(0,0,0,0);
-      -webkit-tap-highlight-color: transparent;
-
-      @apply --paper-fab;
-    }
-
-    [hidden] {
-      display: none !important;
-    }
-
-    :host([mini]) {
-      width: 40px;
-      height: 40px;
-      padding: 8px;
-
-      @apply --paper-fab-mini;
-    }
-
-    :host([disabled]) {
-      color: var(--paper-fab-disabled-text, var(--paper-grey-500));
-      background: var(--paper-fab-disabled-background, var(--paper-grey-300));
-
-      @apply --paper-fab-disabled;
-    }
-
-    iron-icon {
-      @apply --paper-fab-iron-icon;
-    }
-
-    span {
-      width: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      text-align: center;
-
-      @apply --paper-fab-label;
-    }
-
-    :host(.keyboard-focus) {
-      background: var(--paper-fab-keyboard-focus-background, var(--paper-pink-900));
-    }
-
-    :host([elevation="1"]) {
-      @apply --paper-material-elevation-1;
-    }
-
-    :host([elevation="2"]) {
-      @apply --paper-material-elevation-2;
-    }
-
-    :host([elevation="3"]) {
-      @apply --paper-material-elevation-3;
-    }
-
-    :host([elevation="4"]) {
-      @apply --paper-material-elevation-4;
-    }
-
-    :host([elevation="5"]) {
-      @apply --paper-material-elevation-5;
-    }
-  </style>
-
-  <iron-icon id="icon" hidden\$="{{!_computeIsIconFab(icon, src)}}" src="[[src]]" icon="[[icon]]"></iron-icon>
-  <span hidden\$="{{_computeIsIconFab(icon, src)}}">{{label}}</span>
-`;o.setAttribute("strip-whitespace",""),Object(t.a)({_template:o,is:"paper-fab",behaviors:[r.a],properties:{src:{type:String,value:""},icon:{type:String,value:""},mini:{type:Boolean,value:!1,reflectToAttribute:!0},label:{type:String,observer:"_labelChanged"}},_labelChanged:function(){this.setAttribute("aria-label",this.label)},_computeIsIconFab:function(e,a){return e.length>0||a.length>0}})},370:function(e,a,p){"use strict";p(361);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const r=p(362).a`
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -465,7 +403,7 @@ const r=p(362).a`
 
   </style>
 </custom-style>
-`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},371:function(e,a,p){"use strict";p.d(a,"a",(function(){return t}));p(361);var r=p(364);
+`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},369:function(e,a,p){"use strict";p(359),p(365);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -476,18 +414,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,p=this.key;a&&p&&(a=t.types[a]=t.types[a]||{},null==e?delete a[p]:a[p]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(r.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,p){var r=new t({type:e,key:a});return void 0!==p&&p!==r.value?r.value=p:this.value!==r.value&&(this.value=r.value),r},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},374:function(e,a,p){"use strict";p(361),p(370);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const r=p(362).a`
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -543,7 +470,7 @@ const r=p(362).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},383:function(e,a,p){"use strict";p(361);var r=p(362);
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},374:function(e,a,p){"use strict";p.d(a,"a",(function(){return t}));p(359);var r=p(362);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -554,74 +481,10 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const t=r.a`
-<custom-style>
-  <style is="custom-style">
-    html {
-
-      --shadow-transition: {
-        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      };
-
-      --shadow-none: {
-        box-shadow: none;
-      };
-
-      /* from http://codepen.io/shyndman/pen/c5394ddf2e8b2a5c9185904b57421cdb */
-
-      --shadow-elevation-2dp: {
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      };
-
-      --shadow-elevation-3dp: {
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 8px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 3px -2px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-4dp: {
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 10px 0 rgba(0, 0, 0, 0.12),
-                    0 2px 4px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-6dp: {
-        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 18px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 5px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-8dp: {
-        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                    0 3px 14px 2px rgba(0, 0, 0, 0.12),
-                    0 5px 5px -3px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-12dp: {
-        box-shadow: 0 12px 16px 1px rgba(0, 0, 0, 0.14),
-                    0 4px 22px 3px rgba(0, 0, 0, 0.12),
-                    0 6px 7px -4px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-16dp: {
-        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
-                    0  6px 30px 5px rgba(0, 0, 0, 0.12),
-                    0  8px 10px -5px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-24dp: {
-        box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
-                    0 9px 46px 8px rgba(0, 0, 0, 0.12),
-                    0 11px 15px -7px rgba(0, 0, 0, 0.4);
-      };
-    }
-  </style>
-</custom-style>`;t.setAttribute("style","display: none;"),document.head.appendChild(t.content);
+class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,p=this.key;a&&p&&(a=t.types[a]=t.types[a]||{},null==e?delete a[p]:a[p]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(r.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,p){var r=new t({type:e,key:a});return void 0!==p&&p!==r.value?r.value=p:this.value!==r.value&&(this.value=r.value),r},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},386:function(e,a,p){"use strict";p(368),p(374);var r=p(362),t=p(366),o=p(360),i=p(359);
 /**
 @license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at
 http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
 http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
@@ -629,93 +492,28 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const o=r.a`
-<dom-module id="paper-material-styles">
-  <template>
+Object(r.a)({_template:o.a`
     <style>
-      html {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      .paper-material {
-        @apply --paper-material;
-      }
-      .paper-material[elevation="1"] {
-        @apply --paper-material-elevation-1;
-      }
-      .paper-material[elevation="2"] {
-        @apply --paper-material-elevation-2;
-      }
-      .paper-material[elevation="3"] {
-        @apply --paper-material-elevation-3;
-      }
-      .paper-material[elevation="4"] {
-        @apply --paper-material-elevation-4;
-      }
-      .paper-material[elevation="5"] {
-        @apply --paper-material-elevation-5;
+      :host {
+        @apply --layout-inline;
+        @apply --layout-center-center;
+        position: relative;
+
+        vertical-align: middle;
+
+        fill: var(--iron-icon-fill-color, currentcolor);
+        stroke: var(--iron-icon-stroke-color, none);
+
+        width: var(--iron-icon-width, 24px);
+        height: var(--iron-icon-height, 24px);
+        @apply --iron-icon;
       }
 
-      /* Duplicate the styles because of https://github.com/webcomponents/shadycss/issues/193 */
-      :host {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      :host(.paper-material) {
-        @apply --paper-material;
-      }
-      :host(.paper-material[elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-      :host(.paper-material[elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-      :host(.paper-material[elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-      :host(.paper-material[elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-      :host(.paper-material[elevation="5"]) {
-        @apply --paper-material-elevation-5;
+      :host([hidden]) {
+        display: none;
       }
     </style>
-  </template>
-</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)},389:function(e,a,p){"use strict";p.d(a,"b",(function(){return i})),p.d(a,"a",(function(){return l}));p(361);var r=p(375),t=p(372),o=p(380);
+`,is:"iron-icon",properties:{icon:{type:String},theme:{type:String},src:{type:String},_meta:{value:i.a.create("iron-meta",{type:"iconset"})}},observers:["_updateIcon(_meta, isAttached)","_updateIcon(theme, isAttached)","_srcChanged(src, isAttached)","_iconChanged(icon, isAttached)"],_DEFAULT_ICONSET:"icons",_iconChanged:function(e){var a=(e||"").split(":");this._iconName=a.pop(),this._iconsetName=a.pop()||this._DEFAULT_ICONSET,this._updateIcon()},_srcChanged:function(e){this._updateIcon()},_usesIconset:function(){return this.icon||!this.src},_updateIcon:function(){this._usesIconset()?(this._img&&this._img.parentNode&&Object(t.a)(this.root).removeChild(this._img),""===this._iconName?this._iconset&&this._iconset.removeIcon(this):this._iconsetName&&this._meta&&(this._iconset=this._meta.byKey(this._iconsetName),this._iconset?(this._iconset.applyIcon(this,this._iconName,this.theme),this.unlisten(window,"iron-iconset-added","_updateIcon")):this.listen(window,"iron-iconset-added","_updateIcon"))):(this._iconset&&this._iconset.removeIcon(this),this._img||(this._img=document.createElement("img"),this._img.style.width="100%",this._img.style.height="100%",this._img.draggable=!1),this._img.src=this.src,Object(t.a)(this.root).appendChild(this._img))}})},387:function(e,a,p){"use strict";p.d(a,"a",(function(){return n}));p(359);var r=p(373),t=p(372),o=p(377);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -726,4 +524,4 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const i={properties:{elevation:{type:Number,reflectToAttribute:!0,readOnly:!0}},observers:["_calculateElevation(focused, disabled, active, pressed, receivedFocusFromKeyboard)","_computeKeyboardClass(receivedFocusFromKeyboard)"],hostAttributes:{role:"button",tabindex:"0",animated:!0},_calculateElevation:function(){var e=1;this.disabled?e=0:this.active||this.pressed?e=4:this.receivedFocusFromKeyboard&&(e=3),this._setElevation(e)},_computeKeyboardClass:function(e){this.toggleClass("keyboard-focus",e)},_spaceKeyDownHandler:function(e){r.b._spaceKeyDownHandler.call(this,e),this.hasRipple()&&this.getRipple().ripples.length<1&&this._ripple.uiDownAction()},_spaceKeyUpHandler:function(e){r.b._spaceKeyUpHandler.call(this,e),this.hasRipple()&&this._ripple.uiUpAction()}},l=[r.a,t.a,o.a,i]}}]);
+const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},n=[r.a,t.a,o.a,i]}}]);

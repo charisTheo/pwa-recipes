@@ -24,11 +24,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon-32x32.png"
   },
   {
+    "revision": "c3922dca1cdc36b58d4c13b4eb0916c3",
+    "url": "favicon/favicon-64x64.png"
+  },
+  {
     "revision": "c7d1d544f23717242046802b50ad58e8",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "8fc31d1b49c3eed7dcdb70d67767262e",
+    "revision": "d705ba66006394ff2993b8e33b6da44d",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -56,15 +60,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "c50fb4357a48a0a388135aec09d1c202",
+    "revision": "56f4b1523a5211ab173b01e7e5c2414c",
     "url": "index.html"
   },
   {
-    "revision": "d9535606322735a18d9a3130d8e6780b",
+    "revision": "6286c8b12d2865469974a3993d1e3e83",
     "url": "manifest.json"
   },
   {
-    "revision": "b8617d5f02680b241633",
+    "revision": "891dc1a9ba42a3c92b0b",
     "url": "pushExamples.js"
   }
 ]);
