@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "9.js"
   },
   {
-    "revision": "06d6692fef6dda6d1329",
+    "revision": "0a2def60ac6245fad2dd",
     "url": "cartAbandonNotification.js"
   },
   {

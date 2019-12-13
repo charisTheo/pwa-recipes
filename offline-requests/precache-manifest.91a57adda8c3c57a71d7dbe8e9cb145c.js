@@ -132,7 +132,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "manifest.json"
   },
   {
-    "revision": "d9d9e6587a12ea71b5b5",
+    "revision": "43c279139087105006ea",
     "url": "offlineRequests.js"
   }
 ]);

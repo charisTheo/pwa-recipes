@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "16.js"
   },
   {
-    "revision": "914aeb30fbf8fc0843c5",
+    "revision": "c1e85c00edcd751186de",
     "url": "17.js"
   },
   {
@@ -100,7 +100,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/maskable_icon.png"
   },
   {
-    "revision": "ef64dc2aced2a92c1998",
+    "revision": "33254f37c080a4b3551a",
     "url": "home.js"
   },
   {
@@ -114,6 +114,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "e503834e8032fa06845c83d1bfee3fb8",
     "url": "img/cool.png"
+  },
+  {
+    "revision": "20caa73cf4a7ff5e9ea29fd2f99f9395",
+    "url": "img/no-offline.png"
   },
   {
     "revision": "e4aa6274b86adf1c42b288e5b9008553",
