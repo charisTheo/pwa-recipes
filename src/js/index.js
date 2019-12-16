@@ -51,14 +51,20 @@ window.addEventListener('load', async () => {
 
 // * shows an offline prompt and marks the offline available content
 const handleOfflineEvent = () => {
-    showTopDialog('You are offline 📴');
+    showTopDialog('You are offline 📴', { classList: ['offline-top-dialog'] });
     markOfflineAvailableContent();
 };
 // * shows an online prompt and unmarks offline avaialble content
 const handleOnlineEvent = () => {
     showTopDialog('You are back online! 🎉', { timeout: 2000 });
+    removeOfflineTopDialogs();
     unmarkOfflineAvailableContent();
 };
+
+const removeOfflineTopDialogs = () => {
+    const offlineTopDialogs = Array.from(document.querySelectorAll('.offline-top-dialog'));
+    offlineTopDialogs.map(dialog => dialog.remove());
+}
 
 const unmarkOfflineAvailableContent = () => {
     const icons = document.querySelectorAll('.available-offline-icon');

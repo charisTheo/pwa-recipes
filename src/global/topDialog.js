@@ -2,6 +2,15 @@ import './topDialog.css';
 
 const topDialogContainer = document.querySelector('.top-dialog-container');
 
+/**
+ * Creates and appends a new top dialog element to the page
+ * @param {String} message 
+ * @param {Object} options
+ * @property {Array} options.classList
+ * @property {Number} options.timeout
+ * @property {Function} options.eventListener
+ * @property {String} options.eventListenerLabel
+ */
 var showTopDialog = (message, options) => {
     options = options || {};
     const dialog = document.createElement('div');
@@ -19,6 +28,10 @@ var showTopDialog = (message, options) => {
                 dismissDialog(dialog);
             }
         }, options.timeout);
+    }
+
+    if (options.classList) {
+        dialog.classList.add(options.classList);
     }
 
     dialogDismissButton = document.createElement('button');
