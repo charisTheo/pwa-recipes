@@ -7,6 +7,10 @@
     --dark-purple: #4a1a9e;
 
     --primary-color: var(--purple);
+    --paper-card-header-color: var(--primary-color);
+    --paper-card-background-color: var(--light-theme-background-color);
+
+    --tab-icon-color: var(--primary-color);
 }
 body {
     color: black;
@@ -39,7 +43,7 @@ main {
 }
 main paper-card {
     height: 100%;
-    --paper-card-header-color: var(--primary-color);
+    color: var(--paper-card-header-color);
 }
 main paper-card img {
     width: 50%;
@@ -57,6 +61,7 @@ main > iframe {
     width: 100%;
     min-height: 500px;
     border-radius: 4px;
+    grid-column: 1 / -1;
 }
 
 .page-card-link {
@@ -89,6 +94,7 @@ main > iframe {
 }
 .offline-content {
     grid-row: 3;
+    grid-column: 1 / -1;
     justify-self: center;
     width: 100%;
     max-width: 500px;
@@ -147,4 +153,22 @@ paper-fab.page-share-button.keyboard-focus {
 }
 .flex-stretch {
     flex: 1;
+}
+@media screen and (max-width: 767px) and (prefers-color-scheme: dark) {
+    paper-tabs {
+        background-color: #000000;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    .page-card-link {
+        color: var(--primary-color);
+    }
+    
+    paper-tabs iron-icon {
+        --tab-icon-color: var(--text-color);
+    }
+
+    .dark-mode-high-contrast-filter {
+        filter: contrast(0.2) saturate(3);
+    }
 }

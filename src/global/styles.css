@@ -1,5 +1,15 @@
 :root {
     --header-height: 54px;
+
+    --background-color: var(--light-theme-background-color);
+    --background-color-light: var(--light-theme-disabled-color);
+    --background-color-lighter: var(--light-theme-divider-color);
+    
+    --text-color: var(--light-theme-text-color);
+    --text-color-light: var(--light-theme-secondary-color);
+
+    --footer-background-color: var(--primary-text-color);
+    --footer-text-color: var(--background-color-lighter);
 }
 
 body, html {
@@ -10,7 +20,8 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    color: var(--light-theme-text-color);
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 .container {
     min-height: 100vh;
@@ -102,7 +113,7 @@ main .page-description {
     grid-column: 1 / -1;
 }
 main .page-description {
-    color: var(--light-theme-secondary-color);
+    color: var(--text-color-light);
 }
 main paper-card {
     display: flex;
@@ -125,8 +136,8 @@ main paper-card .card-actions {
 
 footer {
     text-align: left;
-    background-color: #333333;
-    color: var(--google-grey-500);
+    background-color: var(--footer-background-color);
+    color: var(--footer-text-color);
     padding: 25px;
     display: grid;
     grid-gap: 30px;
@@ -192,7 +203,27 @@ strong {
         --header-height: 64px;
     }
 }
+@media (prefers-color-scheme: dark) {
+    body {
+        --background-color: var(--dark-theme-divider-color);
+        --background-color-light: var(--dark-theme-disabled-color);
+        --background-color-lighter: var(--dark-theme-secondary-color);
+        
+        --text-color: var(--dark-theme-text-color);
+        --text-color-light: var(--dark-theme-secondary-color);
 
+        --footer-background-color: var(--dark-theme-background-color);
+        --footer-text-color: var(--text-color-light);
+
+        --paper-card-background-color: var(--dark-theme-background-color);
+        --paper-card-header-color: var(--accent-color);
+    }
+
+    .unavailable-offline paper-card {
+        opacity: 0.5;
+        background-color: #000000;
+    }
+}
 @media all and (display-mode: browser) {
     body {
         font-family: 'Open Sans', sans-serif;
