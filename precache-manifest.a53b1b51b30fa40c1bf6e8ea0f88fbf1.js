@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "16.js"
   },
   {
-    "revision": "c1e85c00edcd751186de",
+    "revision": "92a0b828946937f9559f",
     "url": "17.js"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "18.js"
   },
   {
-    "revision": "c8dd4d3dead74f1af809",
+    "revision": "62224d02c8235f8867be",
     "url": "19.js"
   },
   {
@@ -100,7 +100,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/maskable_icon.png"
   },
   {
-    "revision": "33254f37c080a4b3551a",
+    "revision": "8b2811e78264958c0304",
     "url": "home.js"
   },
   {
@@ -148,7 +148,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "c0c794d7aeaecc2a1cadb39acf55cbf3",
+    "revision": "935221fa76187034ae57778694d0e83a",
     "url": "index.html"
   },
   {
@@ -164,7 +164,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "offline-content.js"
   },
   {
-    "revision": "5c4f79598bc1fc3c5f65d2664b23cee9",
+    "revision": "99769a1d72cf5e1c0c870066c1f7de24",
     "url": "offline.html"
   },
   {

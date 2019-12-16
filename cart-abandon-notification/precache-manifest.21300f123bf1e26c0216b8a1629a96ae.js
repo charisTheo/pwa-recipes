@@ -1,78 +1,86 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d2ef18ac00ad8c890512",
+    "revision": "a45b4556c5888d4faae9",
     "url": "0.js"
   },
   {
-    "revision": "007f20dd0189aed2bb5f",
+    "revision": "f3924edd4e3573408c52",
     "url": "1.js"
   },
   {
-    "revision": "bae1e29c4cbd9d2c5acc",
+    "revision": "d43fb214e4b9ed83c635",
     "url": "10.js"
   },
   {
-    "revision": "5f5a78982441c79a1429",
+    "revision": "915fc520da00f925fee2",
+    "url": "11.js"
+  },
+  {
+    "revision": "8fd70f199812f0b7b03c",
     "url": "2.js"
   },
   {
-    "revision": "f04e09a09b432cbe0d16",
+    "revision": "d8559bb027f1e6ef90dc",
     "url": "4.js"
   },
   {
-    "revision": "bed398465e81d9687c77",
+    "revision": "8202612b5491651e4f11",
     "url": "5.js"
   },
   {
-    "revision": "0f4550bd63094827f489",
+    "revision": "6ee634055cab9e5029fe",
     "url": "6.js"
   },
   {
-    "revision": "481b92729f6448947398",
+    "revision": "2640cb7a33378474cd61",
     "url": "7.js"
   },
   {
-    "revision": "11879e3077eb43513b60",
+    "revision": "bb43d37325ff6b5dd130",
     "url": "8.js"
   },
   {
-    "revision": "fe7abbfbd2b1f848e6b5",
+    "revision": "cd37e286537e9b2d8c44",
     "url": "9.js"
   },
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "345c59830482c747ef4f",
+    "url": "cartAbandonNotification.js"
+  },
+  {
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon.ico"
   },
   {
-    "revision": "a4d680aca3b2322207ade82213b9d01c",
+    "revision": "db8de568835d37a7e19a240cdfb504fe",
     "url": "favicon/android-chrome-192x192.png"
   },
   {
-    "revision": "68d07494c05d1f8fed0614b4f4c419ae",
+    "revision": "0b14c98f83e8eac028f6d77adb68b486",
     "url": "favicon/android-chrome-512x512.png"
   },
   {
-    "revision": "e05ab28febe419e56c7b30369d556efe",
+    "revision": "02a6c2b1021dd44a59bded6837a2a552",
     "url": "favicon/apple-touch-icon.png"
   },
   {
-    "revision": "df80aaf70ec51b386d5e95c2913ab4a1",
+    "revision": "f142430e8755cdb92e119365f38fd1f4",
     "url": "favicon/favicon-16x16.png"
   },
   {
-    "revision": "edcfef953c61f72b766db69b1fe0c885",
+    "revision": "e6d03c5c1c15b32a5bcfc96e5f544f59",
     "url": "favicon/favicon-32x32.png"
   },
   {
-    "revision": "ee2042af7431392c3834792e61d7198c",
+    "revision": "921bb28cdb604c3dce6be3b00a4c30d1",
     "url": "favicon/favicon-64x64.png"
   },
   {
-    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
+    "revision": "51e256e1ad295a9b965f79bed334c3fe",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "c8b20bd17a32fcbb56044c7badc9d17e",
+    "revision": "db62ff3e53c0115860f0e7f36eebb76c",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -108,12 +116,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/headphones.jpg"
   },
   {
+    "revision": "bd8b9d046a6aae041919c536fc4f106f",
+    "url": "img/products/headphones.webp"
+  },
+  {
     "revision": "b836a0fb9910a14603841bdb74473962",
     "url": "img/products/ps4.jpg"
   },
   {
+    "revision": "df6b315bd8af9901b20a1efbde705934",
+    "url": "img/products/ps4.webp"
+  },
+  {
     "revision": "ec7acaaefd0037d5bc125be230730fa0",
     "url": "img/products/smart-watch.jpg"
+  },
+  {
+    "revision": "a339abc1cb99d8e9dbcb8e1533ec8fbb",
+    "url": "img/products/smart-watch.webp"
   },
   {
     "revision": "ce1a303cf8c6fdf8dfad494bb4507f08",
@@ -124,15 +144,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "25822ec94da0dd2020789f0927e22f4f",
+    "revision": "e7f7da0c13f54db473a69b217fe8d90c",
     "url": "index.html"
   },
   {
-    "revision": "2ddcdd11d0c7984946eb99896fabba2a",
+    "revision": "dd526f50c2c41e4ea69f4ffa30273fbe",
     "url": "manifest.json"
-  },
-  {
-    "revision": "43c279139087105006ea",
-    "url": "offlineRequests.js"
   }
 ]);
