@@ -87,9 +87,7 @@ export const markOfflineAvailableContent = () => {
     const pagesArr = Array.from(pageCardLinks);
     pagesArr.map(async page => {
         const url = page.getAttribute('href');
-        // console.log("showOfflineAvailablePages -> url", url);
         const pageIsCached = await findUrlInCache(url);
-        // console.log("showOfflineAvailablePages -> pageIsCached", pageIsCached);
 
         if (pageIsCached) {
             // * show available offline icon

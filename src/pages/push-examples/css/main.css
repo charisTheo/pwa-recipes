@@ -9,7 +9,10 @@
 
     --primary-color: var(--purple);
     --accent-color: var(--orange);
-
+    --background-color: #ede0fb;
+    --text-color: #ffffff;
+    --heading-text-color: #000000;
+    
     --header-height: 54px;
 }
 body, html {
@@ -19,9 +22,9 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    color: white;
+    color: var(--text-color);
     text-align: center;
-    background-color: #ede0fb;
+    background-color: var(--background-color);
 }
 body.cool .container,
 body.not-cool .container {
@@ -106,7 +109,7 @@ main h2 {
     border: 2px solid var(--orange);
     border-radius: 8px;
     padding: 10px 15px;
-    color: black;
+    color: var(--heading-text-color);
     justify-self: center;
     align-self: center;
 }
@@ -180,12 +183,13 @@ a:active,
 }
 
 footer {
-    grid-area: footer;
-    background-color: #333333;
-    padding: 25px;
     display: grid;
+    grid-area: footer;
     grid-gap: 30px;
     grid-template-rows: repeat(auto-fit, minmax(30px, 1fr));
+    min-height: 100px;
+    padding: 25px;
+    background-color: #212121;
 }
 footer span {
     text-align: left;
@@ -217,6 +221,12 @@ span[class^="arrow"] {
 @media (min-width: 600px) {
     :root {
         --header-height: 64px;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #3c3c3c;
+        --heading-text-color: #ffffff;
     }
 }
 @media all and (display-mode: browser) {

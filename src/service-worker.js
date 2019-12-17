@@ -1,6 +1,6 @@
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 // workbox.precaching.precacheAndRoute((self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]));
-// const OFFLINE_PAGE_URL = '/offline.html';
+const OFFLINE_PAGE_URL = '/offline.html';
 // const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
 // const PAGE_ICON_URL = '/favicon/android-chrome-192x192.png';
 
@@ -16,7 +16,6 @@ addEventListener('activate', event => {
 
 addEventListener('message', event => {
   if (event.data && event.data.type === 'NEW_VERSION') {
-    // console.warn("TCL: message = NEW_VERSION | event", event);
     skipWaiting();
   }
 });

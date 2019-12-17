@@ -47,8 +47,9 @@ paper-button {
 
 #cart-items-container {
     box-shadow: 0px -2px 10px rgba(0,0,0,0.25);
-    background-color: #ffffff;
-    border: 1px solid #e5e5e5;
+    color: var(--text-color);
+    background-color: var(--cart-container-background-color);
+    border: 1px solid var(--cart-container-background-color);
     box-sizing: border-box;
     position: fixed;
     bottom: 0;
@@ -64,7 +65,8 @@ paper-button {
     transform: translateY(0);
 }
 paper-icon-item {
-    background-color: #ffffff;
+    --paper-item-body-secondary-color: var(--accent-color);
+    background-color: var(--cart-container-background-color);
 }
 paper-icon-item .avatar {
     display: inline-block;
@@ -85,6 +87,9 @@ paper-icon-item paper-icon-button {
 }
 #cart-items-container #checkout-button {
     margin: 20px auto;
+}
+.no-items-description {
+    padding-bottom: 20px;
 }
 .cart-close-button-container {
     text-align: right;

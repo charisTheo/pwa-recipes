@@ -25,6 +25,14 @@ export const removeElements = elements => {
 // check by cache name
 export const findUrlInCache = page => {
     return new Promise(async (resolve, reject) => {
+        if (page === '/offline.html') {
+            const offlinePageRequest = await caches.match(page, { ignoreSearch: true });
+            if (!!offlinePageRequest) {
+                resolve(offlinePageRequest);
+                return;
+            }
+        }
+
         // Get a list of all of the caches for this origin
         const pageCaches = await getPageCaches(page);
 

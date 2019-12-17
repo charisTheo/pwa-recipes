@@ -11,6 +11,7 @@
     --paper-card-background-color: var(--light-theme-background-color);
 
     --tab-icon-color: var(--primary-color);
+    --offline-available-page-link-color: var(--google-green-700);
 }
 body {
     color: black;
@@ -109,7 +110,7 @@ main > iframe {
     text-align: left;
     position: relative;
     margin: 20px 0;
-    background-color: var(--google-green-100);
+    background-color: var(--cart-container-background-color);
     transition: box-shadow 0.35s ease-out;
     box-shadow: var(--shadow-elevation-4dp_-_box-shadow);
 }
@@ -123,11 +124,15 @@ main > iframe {
     background-size: contain;
     background-repeat: no-repeat no-repeat;
 }
+.offline-available-page a {
+    color: var(--offline-available-page-link-color);
+}
 .offline-available-page paper-item-body {
     padding-left: 8px;
 }
 .offline-available-page .cache-delete-button {
     color: var(--paper-red-600);
+    margin-left: auto;
 }
 
 footer a {
@@ -151,10 +156,16 @@ paper-fab.page-share-button.keyboard-focus {
     transition: transform 0.35s ease-out;
     transform: scale(0);
 }
-.flex-stretch {
-    flex: 1;
+@media screen and (max-width: 767px) {
+    .snackbar-container {
+        /* ! fix for showing above the bottom nav */
+        bottom: 55px !important;
+    }
 }
 @media screen and (max-width: 767px) and (prefers-color-scheme: dark) {
+    :root {
+        --offline-available-page-link-color: var(--google-green-100);
+    }
     paper-tabs {
         background-color: #000000;
     }

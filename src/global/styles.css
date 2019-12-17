@@ -10,6 +10,11 @@
 
     --footer-background-color: var(--primary-text-color);
     --footer-text-color: var(--background-color-lighter);
+
+    --snackbar-background-color: var(--dark-theme-divider-color);
+    --snackbar-text-color: var(--footer-text-color);
+
+    --cart-container-background-color: #ffffff;
 }
 
 body, html {
@@ -191,6 +196,10 @@ paper-toolbar paper-button {
     outline: 2px solid var(--accent-color);
 }
 
+.flex-stretch {
+    flex: 1;
+}
+
 strong {
     color: var(--accent-color, #f4b400);
     display: inline-block;
@@ -203,7 +212,21 @@ strong {
         --header-height: 64px;
     }
 }
+@media screen and (min-width: 767px) {
+    .container {
+        justify-content: start;
+    }
+    main {
+        padding: 20px 100px;
+    }
+}
 @media (prefers-color-scheme: dark) {
+    :root {
+        --snackbar-text-color: var(--dark-theme-text-color);
+
+        --cart-container-background-color: var(--dark-theme-background-color);
+    }
+
     body {
         --background-color: var(--dark-theme-divider-color);
         --background-color-light: var(--dark-theme-disabled-color);

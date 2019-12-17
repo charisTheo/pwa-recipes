@@ -1,10 +1,4 @@
 @media screen and (min-width: 767px) {
-    .container {
-        justify-content: start;
-    }
-    main {
-        padding: 20px 100px;
-    }
     nav {
         position: relative;
         order: initial;
