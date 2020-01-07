@@ -15,13 +15,13 @@ import {
 } from "./notifications";
 import {
     configureLocalDatabase
-} from './indexDB';
+} from './../../../global/indexDB';
 import {
     addToCart,
     removeAllItemsDescriptionsFromShoppingCart,
     initialiseNumberOfCartItems,
     toggleShoppingCart
-} from './shopping-cart';
+} from './../../../global/shopping-cart';
 
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';

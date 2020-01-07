@@ -8,6 +8,25 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Cart Abandonment 🛒">
+    <meta name="description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time." />
+    <meta name="author" content="www.github.com/charisTheo">
+    
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="app">
+    <meta name="twitter:title" content="Cart Abandonment 🛒">
+    <meta name="twitter:description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time.">
+    <meta name="twitter:creator" content="@charisTheo_dev">
+    <meta name="twitter:image" content="https://www.pwa.recipes/cart-abandon-notification/favicon/android-chrome-512x512.png">
+    
+    <!-- Open Graph data -->
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content="Cart Abandonment 🛒" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pwa.recipes/cart-abandon-notification/" />
+    <meta property="og:image" content="https://www.pwa.recipes/cart-abandon-notification/favicon/android-chrome-512x512.png" />
+    <meta property="og:description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time." />
+    <meta property="og:site_name" content="Cart Abandonment 🛒" />
+
     <!-- Origin trial -->
     <meta http-equiv="origin-trial" content="AmJZKL5+ZtrSo4CbE3V18Ki5W40sTQYZBAWphV0oydLomR0Z0uzmyAOIrTXNZew3a7NCFX3WMZEIXSGRJ5djRAYAAABOeyJvcmlnaW4iOiJodHRwczovL3B3YS5yZWNpcGVzOjQ0MyIsImZlYXR1cmUiOiJCYWRnaW5nVjIiLCJleHBpcnkiOjE1ODIwMjI0OTV9">
 
@@ -19,6 +38,16 @@
     <link rel="preconnect" href="https://ecommerce-pwa.herokuapp.com" crossorigin />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" media="all and (display-mode: browser)" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135267871-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-135267871-3');
+    </script>
   </head>
 
   <body>
@@ -42,7 +71,7 @@
               tabindex="0"
               id="fork-me-banner"
               href="https://github.com/charisTheo/cart-abandon-notification" 
-              aria-label="View source on GitHub" 
+              aria-label="View source on GitHub"
               rel="noopener noreferrer" 
               target="_blank"
             >

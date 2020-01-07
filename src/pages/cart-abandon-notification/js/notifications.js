@@ -3,7 +3,7 @@ import {
     addItemDescriptionToShoppingCart,
     clearShoppingCart,
     toggleShoppingCart    
-} from "./shopping-cart";
+} from "../../../global/shopping-cart";
 
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const NOTIFICATIONS_ACTIVE_URL = './img/notifications-active.svg';

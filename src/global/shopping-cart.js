@@ -1,4 +1,4 @@
-import { showSnackBar } from './../../../global/snackBar';
+import { showSnackBar } from './snackBar';
 import { 
     db, 
     configureLocalDatabase,
@@ -7,7 +7,6 @@ import {
     getAllItemsInObjectStore
 } from "./indexDB";
 
-// const API_URL = 'http://localhost:3000';
 const API_URL = 'https://ecommerce-pwa.herokuapp.com';
 const numberOfCartItemsEl = document.getElementById('number-of-cart-items');
 const cartItemsContainer = document.getElementById('cart-items-container');
@@ -53,13 +52,13 @@ const addToCart = async (event, forceDb) => {
             if (response.status === 200) {
                 addItemDescriptionToShoppingCart(item);        
                 updateNumberOfCartItems(totalCartItems);
-                showSnackBar(`${name} has been added to your cart! 🎊🛒`);
+                showSnackBar(`<strong>${name}</strong> has been added to your cart! 🎊🛒`);
             } else {
                 throw new Error(`Request [POST] to [/cart] returned status [${response.status}]`);
             }
         } catch (error) {
             console.warn("addToCart -> error", error);
-            // showSnackBar(`There was an error while adding ${name} to your cart 😕`);
+            // showSnackBar(`There was an error while adding <strong>${name}</strong> to your cart 😕`);
             addToCart(event, true); // ! forceDb - force adding it to the offline database
         }
     }
@@ -107,7 +106,7 @@ const deleteItemFromCart = async (item, forceDb) => {
 
         } catch (error) {
             console.warn("deleteItemFromCart -> error", error);
-            // showSnackBar(`There was an error while removing ${name} from your cart 😕`);
+            // showSnackBar(`There was an error while removing <strong>${name}</strong> from your cart 😕`);
             deleteItemFromCart(item, true);
 
         }
@@ -206,7 +205,7 @@ const updateNumberOfCartItems = numberOfCartItems => {
         if (noItemsDescriptionParagraph) {
             noItemsDescriptionParagraph.remove();
         }
-
+        
         numberOfCartItemsEl.innerText = numberOfCartItems;
         numberOfCartItemsEl.hidden = false;
         checkoutButton.hidden = false;
@@ -226,7 +225,7 @@ const toggleShoppingCart = async force => {
         } else {
             cartItemsContainer.classList.remove('show');
         }
-        
+
     } else {
         cartItemsContainer.classList.toggle('show');
 
