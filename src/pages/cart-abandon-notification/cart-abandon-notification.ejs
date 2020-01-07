@@ -8,6 +8,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Cart Abandonment 🛒">
+    <!-- Origin trial -->
+    <meta http-equiv="origin-trial" content="AmJZKL5+ZtrSo4CbE3V18Ki5W40sTQYZBAWphV0oydLomR0Z0uzmyAOIrTXNZew3a7NCFX3WMZEIXSGRJ5djRAYAAABOeyJvcmlnaW4iOiJodHRwczovL3B3YS5yZWNpcGVzOjQ0MyIsImZlYXR1cmUiOiJCYWRnaW5nVjIiLCJleHBpcnkiOjE1ODIwMjI0OTV9">
 
     <link rel="shortcut icon" href="./favicon/favicon.ico" />
     <link rel="apple-touch-icon" href="./favicon/apple-touch-icon.png" />
@@ -17,7 +19,6 @@
     <link rel="preconnect" href="https://ecommerce-pwa.herokuapp.com" crossorigin />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" media="all and (display-mode: browser)" />
-
   </head>
 
   <body>
@@ -64,7 +65,7 @@
               target="_blank" 
               aria-label="The Page Visibility API Docs"
             >
-              <paper-icon-button tabindex="-1" class="small" icon="open-in-new"></paper-icon-button>
+              <paper-icon-button tabindex="-1" class="small primary" icon="open-in-new"></paper-icon-button>
             </a>
           </h3>
 
@@ -152,6 +153,9 @@
                 padding: 0;
                 top: -6px;
               }
+              paper-icon-button.primary {
+                color: var(--accent-color);
+              }
             </style>
           </custom-style>
           <a 
@@ -161,7 +165,7 @@
             aria-label="Lovely backgrounds by Hero Patterns dot com"
           >
             Hero Patterns
-            <paper-icon-button tabindex="-1" class="small" icon="open-in-new"></paper-icon-button>
+            <paper-icon-button tabindex="-1" class="small primary" icon="open-in-new"></paper-icon-button>
           </a>
           👈 Lovely backgrounds
         </span>
