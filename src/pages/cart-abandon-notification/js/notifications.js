@@ -13,15 +13,10 @@ const SERVICE_WORKER_SCOPE = '/cart-abandon-notification/';
 const VAPID_PUBLIC_KEY = 'BCvnBFnsPt6MPzwX_LOgKqVFG5ToFJ5Yl0qDfwrT-_lqG0PqgwhFijMq_E-vgkkLli7RWHZCYxANy_l0oxz0Nzs';
 
 const notificationsRequestButton = document.getElementById('notifications-request-button');
-var unread = 0;
+let unread = 0;
 
-navigator.serviceWorker.addEventListener('push', event => {
-    increamentAppBadge();
-});
-
-navigator.serviceWorker.addEventListener('notificationclose', event => {
-    decreamentAppBadge();
-});
+navigator.serviceWorker.addEventListener('push', increamentAppBadge);
+navigator.serviceWorker.addEventListener('notificationclose', decreamentAppBadge);
 
 // * Possible values: 'prompt', 'denied', or 'granted'
 const getNotificationPermission = async () => {
@@ -163,6 +158,7 @@ const checkPushNotificationActions = (searchQuery) => {
 const increamentAppBadge = async (number = 1) => {
     unread = unread + number;
     await navigator.setExperimentalAppBadge(unread);
+    console.log("increamentAppBadge -> unread", unread)
     return unread; 
 }
 
@@ -174,6 +170,7 @@ const decreamentAppBadge = async (number = 1) => {
     } else {
         await navigator.setExperimentalAppBadge(unread);
     }
+    console.log("increamentAppBadge -> unread", unread)
 
     return unread;
 }
