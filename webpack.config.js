@@ -89,7 +89,7 @@ module.exports = [
           test: /\.html$/,
           // This is an example of chained loaders in Webpack.
           // Chained loaders run last to first. So it will run
-          // polymer-webpack-loader, and hand the output to
+          // raw-loader, then polymer-webpack-loader and finally hand the output to
           // babel-loader. This let's us transpile JS in our `<script>` elements.
           use: [
             { loader: 'babel-loader' },

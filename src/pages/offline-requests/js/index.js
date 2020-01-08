@@ -35,13 +35,15 @@ const checkoutButton = document.getElementById('checkout-button');
 const addToCartButtons = document.querySelectorAll('.add-to-cart-button');
 
 window.addEventListener('load', async () => {
+    if ('serviceWorker' in navigator) {
+        import(/* webpackChunkName: "sw-util" */ './../../../global/sw-util.js')
+            .then(util => util.registerServiceWorker('/offline-requests/service-worker.js', SERVICE_WORKER_SCOPE));
+    }
+
     import('@polymer/paper-card/paper-card');
     import('@polymer/paper-button/paper-button');
     import('@polymer/paper-icon-button/paper-icon-button');
     import('@polymer/iron-icons/iron-icons');
-    
-    // * register service worker
-    registerServiceWorker();
 
     attachClickEventListeners();
     initialiseNumberOfCartItems();
@@ -58,34 +60,6 @@ const attachClickEventListeners = () => {
     cartCloseButton.addEventListener('click', toggleShoppingCart);
     checkoutButton.addEventListener('click', checkout);
     notificationsRequestButton.addEventListener('click', requestNotificationPermission);
-}
-
-var workBox;
-const registerServiceWorker = async () => {
-    if ('serviceWorker' in navigator) {
-        workBox = new Workbox('./service-worker.js', { scope: SERVICE_WORKER_SCOPE });
-
-        workBox.addEventListener('controlling', () => {
-            window.location.reload();
-        });
-
-        workBox.addEventListener('waiting' , () => {
-            var updateServiceWorker = event => {
-                workBox.messageSW({ type: 'NEW_VERSION'});
-            };
-            
-            setTimeout(() => showTopDialog(
-                'New version available 🆕 Tap to reload.',
-                {
-                    eventListener: updateServiceWorker,
-                    eventListenerLabel: 'Press this dialog to reload the page'
-                }
-                ,
-            ), 0);
-        });
-
-        workBox.register();
-    }
 }
 
 const checkout = async event => {

@@ -6,9 +6,7 @@ import './../css/main.css';
 import './../global/styles.css';
 import './../global/iosInstallBanner.css';
 
-import { Workbox } from 'workbox-window';
-
-import { showTopDialog } from "../global/topDialog";
+import { showTopDialog } from "./../global/topDialog";
 import { sharePage } from "./webShare";
 import { 
     isIos,
@@ -30,6 +28,14 @@ const tabbedNavigation = document.querySelector('paper-tabs');
 var previouslyFocusedElement;
 
 window.addEventListener('load', async () => {
+    if ('serviceWorker' in navigator) {
+        import(/* webpackChunkName: "sw-util" */ './../global/sw-util.js')
+            .then(util => util.registerServiceWorker('/service-worker.js', SERVICE_WORKER_SCOPE));
+        // ? OR
+        // const util = await import(/* webpackChunkName: "sw-util" */ './../global/sw-util.js');
+        // await util.registerServiceWorker();
+    }
+    
     await import('@polymer/paper-tabs/paper-tabs');
     await import('@polymer/paper-tabs/paper-tab');
     import('@polymer/iron-icons/iron-icons');
@@ -37,10 +43,10 @@ window.addEventListener('load', async () => {
     import('@polymer/paper-icon-button/paper-icon-button');
 
     applyMediaQueriesOnDeviceWidth();
-    registerServiceWorker();
     attachEventListeners();
-    // * load the html based on the initially selected tab
-    import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.renderHtmlForTabSelected(tabbedNavigation.selectedItem.dataset.navigateTo));
+
+    // * render default tab html
+    import(/* webpackChunkName: "tabs" */ './tabs').then(tabs => tabs.renderHtmlForSelectedTab(tabbedNavigation.selectedItem.dataset.navigateTo));
     // ? Accessibility focus on navigation
     setTimeout(() => tabbedNavigation.selectedItem.focus(), 100);
 
@@ -98,34 +104,6 @@ export const markOfflineAvailableContent = () => {
         }
     });
 };
-
-var workBox;
-const registerServiceWorker = () => {
-    if ('serviceWorker' in navigator) {
-        workBox = new Workbox('./service-worker.js', { scope: SERVICE_WORKER_SCOPE });
-
-        workBox.addEventListener('controlling', () => {
-            window.location.reload();
-        });
-
-        workBox.addEventListener('waiting' , () => {
-            var updateServiceWorker = event => {
-                workBox.messageSW({ type: 'NEW_VERSION'});
-            };
-        
-            setTimeout(() => showTopDialog(
-                'New version available 🆕 Tap to reload.',
-                {
-                    eventListener: updateServiceWorker,
-                    eventListenerLabel: 'Press this dialog to reload the page'
-                }
-                ,
-            ), 0);
-        });
-
-        workBox.register();
-    }
-}
 
 export const installPwa = async () => {
     // hide install prompt

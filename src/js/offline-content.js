@@ -19,7 +19,7 @@ export const init = async () => {
     const offlineContentContainer = document.querySelector('.offline-content');
     const pagesUrlArr = ['/cart-abandon-notification/', '/offline-requests/', '/push-examples/'];
     const promises = pagesUrlArr.map(async url => {
-        // console.log("renderHtmlForTabSelected -> url", url);
+        // console.log("renderHtmlForSelectedTab -> url", url);
         const cachedRequest = await findUrlInCache(url);
         // console.log("TCL: cachedRequest", cachedRequest)
         

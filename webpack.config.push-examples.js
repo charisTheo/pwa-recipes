@@ -5,7 +5,7 @@ const path = require('path');
 
 const INPUT_DIRECTORY = 'src/pages/push-examples';
 const OUTPUT_DIRECTORY = 'build/push-examples';
-const TEMPLATE_FILE_NAME = 'push-notifications';
+const TEMPLATE_FILE_NAME = 'push-examples';
 const CHUNK_NAME = 'pushExamples';
 
 const plugins = [

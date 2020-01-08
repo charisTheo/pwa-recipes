@@ -40,14 +40,16 @@ const pageVisibilityPushToggleButton = document.getElementById('page-visibility-
 var pageVisibilityPushIsEnabled = true;
 
 window.addEventListener('load', async () => {    
+    if ('serviceWorker' in navigator) {
+        import(/* webpackChunkName: "sw-util" */ './../../../global/sw-util.js')
+            .then(util => util.registerServiceWorker('/cart-abandon-notification/service-worker.js', SERVICE_WORKER_SCOPE));
+    }
+
     import('@polymer/paper-card/paper-card');
     import('@polymer/paper-button/paper-button');
     import('@polymer/paper-icon-button/paper-icon-button');
     import('@polymer/iron-icons/iron-icons');
     import('@polymer/paper-toggle-button/paper-toggle-button');
-
-    // * register service worker
-    registerServiceWorker();
 
     // * handle URL queries from push notification action clicks 
     const searchQuery = document.location.search;

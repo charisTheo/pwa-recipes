@@ -10,6 +10,8 @@ const SERVICE_WORKER_SCOPE = '/push-examples/';
 window.addEventListener('load', () => {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./service-worker.js', { scope: SERVICE_WORKER_SCOPE });
+        // TODO  import(/* webpackChunkName: "sw-util" */ './../../../global/sw-util.js')
+        // TODO      .then(util => util.registerServiceWorker('/push-examples/service-worker.js', SERVICE_WORKER_SCOPE));
     }
 
     if (!navigator.onLine) {

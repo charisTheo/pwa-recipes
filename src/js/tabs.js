@@ -11,7 +11,7 @@ export const navigationTabSelected = async event => {
     // console.log("animation started:", window.performance.now());
     await animatePageEnter(0);
     
-    renderHtmlForTabSelected(navigateTo);
+    renderHtmlForSelectedTab(navigateTo);
 
     // animate page enter
     await animatePageLeave(90);
@@ -56,7 +56,7 @@ export const animatePageLeave = degrees => {
  * Renders the html partial file, from the name supplied (navigateTo), into the <main> element
  * @param {String} navigateTo - the name of the html file to load
  */
-export const renderHtmlForTabSelected = async navigateTo => {
+export const renderHtmlForSelectedTab = async navigateTo => {
     let html;
 
     switch(navigateTo) {
@@ -76,7 +76,7 @@ export const renderHtmlForTabSelected = async navigateTo => {
             import(/* webpackChunkName: "info" */ './info').then(info => info.init());
         break;
         default:
-            console.warn(`renderHtmlForTabSelected: HTML for tab ${navigateTo} was not found!`);
+            console.warn(`renderHtmlForSelectedTab: HTML for tab ${navigateTo} was not found!`);
             return;
     }
 
