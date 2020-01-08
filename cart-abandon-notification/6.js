@@ -1,178 +1,197 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{358:function(e,a,p){"use strict";p.r(a);p(359),p(368);var r=p(362),t=p(360),o=p(375);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{356:function(e,a,r){"use strict";r.r(a);r(360),r(369),r(366),r(370);
 /**
 @license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const p={properties:{name:{type:String},value:{notify:!0,type:String},required:{type:Boolean,value:!1}},attached:function(){},detached:function(){}};var t=r(375);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/let o=null;const i={properties:{validator:{type:String},invalid:{notify:!0,reflectToAttribute:!0,type:Boolean,value:!1,observer:"_invalidChanged"}},registered:function(){o=new t.a({type:"validator"})},_invalidChanged:function(){this.invalid?this.setAttribute("aria-invalid","true"):this.removeAttribute("aria-invalid")},get _validator(){return o&&o.byKey(this.validator)},hasValidator:function(){return null!=this._validator},validate:function(e){return void 0===e&&void 0!==this.value?this.invalid=!this._getValidity(this.value):this.invalid=!this._getValidity(e),!this.invalid},_getValidity:function(e){return!this.hasValidator()||this._validator.validate(e)}},l={properties:{checked:{type:Boolean,value:!1,reflectToAttribute:!0,notify:!0,observer:"_checkedChanged"},toggles:{type:Boolean,value:!0,reflectToAttribute:!0},value:{type:String,value:"on",observer:"_valueChanged"}},observers:["_requiredChanged(required)"],created:function(){this._hasIronCheckedElementBehavior=!0},_getValidity:function(e){return this.disabled||!this.required||this.checked},_requiredChanged:function(){this.required?this.setAttribute("aria-required","true"):this.removeAttribute("aria-required")},_checkedChanged:function(){this.active=this.checked,this.fire("iron-change")},_valueChanged:function(){void 0!==this.value&&null!==this.value||(this.value="on")}},n=[p,i,l];
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/var c=r(388),d=r(378);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const g={_checkedChanged:function(){l._checkedChanged.call(this),this.hasRipple()&&(this.checked?this._ripple.setAttribute("checked",""):this._ripple.removeAttribute("checked"))},_buttonStateChanged:function(){d.a._buttonStateChanged.call(this),this.disabled||this.isAttached&&(this.checked=this.active)}},f=[c.a,n,g];var s=r(363),b=r(386),u=r(361),h=r(397);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
 The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-Object(r.a)({_template:t.a`
+const y=u.a`
+
     <style>
       :host {
         display: inline-block;
-        overflow: hidden;
-        position: relative;
+        @apply --layout-horizontal;
+        @apply --layout-center;
+        @apply --paper-font-common-base;
       }
 
-      #baseURIAnchor {
-        display: none;
+      :host([disabled]) {
+        pointer-events: none;
       }
 
-      #sizedImgDiv {
+      :host(:focus) {
+        outline:none;
+      }
+
+      .toggle-bar {
         position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        height: 100%;
+        width: 100%;
+        border-radius: 8px;
+        pointer-events: none;
+        opacity: 0.4;
+        transition: background-color linear .08s;
+        background-color: var(--paper-toggle-button-unchecked-bar-color, #000000);
 
-        display: none;
+        @apply --paper-toggle-button-unchecked-bar;
       }
 
-      #img {
-        display: block;
-        width: var(--iron-image-width, auto);
-        height: var(--iron-image-height, auto);
-      }
-
-      :host([sizing]) #sizedImgDiv {
-        display: block;
-      }
-
-      :host([sizing]) #img {
-        display: none;
-      }
-
-      #placeholder {
+      .toggle-button {
         position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+        top: -3px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border-radius: 50%;
+        box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
+        transition: -webkit-transform linear .08s, background-color linear .08s;
+        transition: transform linear .08s, background-color linear .08s;
+        will-change: transform;
+        background-color: var(--paper-toggle-button-unchecked-button-color, var(--paper-grey-50));
 
-        background-color: inherit;
+        @apply --paper-toggle-button-unchecked-button;
+      }
+
+      .toggle-button.dragging {
+        -webkit-transition: none;
+        transition: none;
+      }
+
+      :host([checked]:not([disabled])) .toggle-bar {
+        opacity: 0.5;
+        background-color: var(--paper-toggle-button-checked-bar-color, var(--primary-color));
+
+        @apply --paper-toggle-button-checked-bar;
+      }
+
+      :host([disabled]) .toggle-bar {
+        background-color: #000;
+        opacity: 0.12;
+      }
+
+      :host([checked]) .toggle-button {
+        -webkit-transform: translate(16px, 0);
+        transform: translate(16px, 0);
+      }
+
+      :host([checked]:not([disabled])) .toggle-button {
+        background-color: var(--paper-toggle-button-checked-button-color, var(--primary-color));
+
+        @apply --paper-toggle-button-checked-button;
+      }
+
+      :host([disabled]) .toggle-button {
+        background-color: #bdbdbd;
         opacity: 1;
-
-        @apply --iron-image-placeholder;
       }
 
-      #placeholder.faded-out {
-        transition: opacity 0.5s linear;
-        opacity: 0;
-      }
-    </style>
+      .toggle-ink {
+        position: absolute;
+        top: -14px;
+        left: -14px;
+        right: auto;
+        bottom: auto;
+        width: 48px;
+        height: 48px;
+        opacity: 0.5;
+        pointer-events: none;
+        color: var(--paper-toggle-button-unchecked-ink-color, var(--primary-text-color));
 
-    <a id="baseURIAnchor" href="#"></a>
-    <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
-    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" crossorigin$="[[crossorigin]]" on-load="_imgOnLoad" on-error="_imgOnError">
-    <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
-`,is:"iron-image",properties:{src:{type:String,value:""},alt:{type:String,value:null},crossorigin:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:"center"},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:"_placeholderChanged"},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:"_widthChanged",type:Number,value:null},height:{observer:"_heightChanged",type:Number,value:null}},observers:["_transformChanged(sizing, position)","_loadStateObserver(src, preventLoad)"],created:function(){this._resolvedSrc=""},_imgOnLoad:function(){this.$.img.src===this._resolveSrc(this.src)&&(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src===this._resolveSrc(this.src)&&(this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?"faded-out":""},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return""===this.alt?"true":void 0},_computeImgDivARIALabel:function(){return null!==this.alt?this.alt:""===this.src?"":this._resolveSrc(this.src).replace(/[?|#].*/g,"").split("/").pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+"px"},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+"px"},_loadStateObserver:function(e,a){var p=this._resolveSrc(e);p!==this._resolvedSrc&&(this._resolvedSrc="",this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",""===e||a?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this._resolvedSrc=p,this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':""},_transformChanged:function(){var e=this.$.sizedImgDiv.style,a=this.$.placeholder.style;e.backgroundSize=a.backgroundSize=this.sizing,e.backgroundPosition=a.backgroundPosition=this.sizing?this.position:"",e.backgroundRepeat=a.backgroundRepeat=this.sizing?"no-repeat":""},_resolveSrc:function(e){var a=Object(o.c)(e,this.$.baseURIAnchor.href);return a.length>=2&&"/"===a[0]&&"/"!==a[1]&&(a=(location.origin||location.protocol+"//"+location.host)+a),a}});p(388),p(369);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-Object(r.a)({_template:t.a`
-    <style include="paper-material-styles">
-      :host {
+        @apply --paper-toggle-button-unchecked-ink;
+      }
+
+      :host([checked]) .toggle-ink {
+        color: var(--paper-toggle-button-checked-ink-color, var(--primary-color));
+
+        @apply --paper-toggle-button-checked-ink;
+      }
+
+      .toggle-container {
         display: inline-block;
         position: relative;
-        box-sizing: border-box;
-        background-color: var(--paper-card-background-color, var(--primary-background-color));
-        border-radius: 2px;
-
-        @apply --paper-font-common-base;
-        @apply --paper-card;
+        width: 36px;
+        height: 14px;
+        /* The toggle button has an absolute position of -3px; The extra 1px
+        /* accounts for the toggle button shadow box. */
+        margin: 4px 1px;
       }
 
-      /* IE 10 support for HTML5 hidden attr */
-      :host([hidden]), [hidden] {
-        display: none !important;
-      }
-
-      .header {
+      .toggle-label {
         position: relative;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-        overflow: hidden;
-
-        @apply --paper-card-header;
-      }
-
-      .header iron-image {
-        display: block;
-        width: 100%;
-        --iron-image-width: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: var(--paper-toggle-button-label-spacing, 8px);
         pointer-events: none;
-
-        @apply --paper-card-header-image;
+        color: var(--paper-toggle-button-label-color, var(--primary-text-color));
       }
 
-      .header .title-text {
-        padding: 16px;
-        font-size: 24px;
-        font-weight: 400;
-        color: var(--paper-card-header-color, #000);
-
-        @apply --paper-card-header-text;
+      /* invalid state */
+      :host([invalid]) .toggle-bar {
+        background-color: var(--paper-toggle-button-invalid-bar-color, var(--error-color));
       }
 
-      .header .title-text.over-image {
-        position: absolute;
-        bottom: 0px;
-
-        @apply --paper-card-header-image-text;
+      :host([invalid]) .toggle-button {
+        background-color: var(--paper-toggle-button-invalid-button-color, var(--error-color));
       }
 
-      :host ::slotted(.card-content) {
-        padding: 16px;
-        position:relative;
-
-        @apply --paper-card-content;
-      }
-
-      :host ::slotted(.card-actions) {
-        border-top: 1px solid #e8e8e8;
-        padding: 5px 16px;
-        position:relative;
-
-        @apply --paper-card-actions;
-      }
-
-      :host([elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-
-      :host([elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-
-      :host([elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-
-      :host([elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-
-      :host([elevation="5"]) {
-        @apply --paper-material-elevation-5;
+      :host([invalid]) .toggle-ink {
+        color: var(--paper-toggle-button-invalid-ink-color, var(--error-color));
       }
     </style>
 
-    <div class="header">
-      <iron-image hidden\$="[[!image]]" aria-hidden\$="[[_isHidden(image)]]" src="[[image]]" alt="[[alt]]" placeholder="[[placeholderImage]]" preload="[[preloadImage]]" fade="[[fadeImage]]"></iron-image>
-      <div hidden\$="[[!heading]]" class\$="title-text [[_computeHeadingClass(image)]]">[[heading]]</div>
+    <div class="toggle-container">
+      <div id="toggleBar" class="toggle-bar"></div>
+      <div id="toggleButton" class="toggle-button"></div>
     </div>
 
-    <slot></slot>
-`,is:"paper-card",properties:{heading:{type:String,value:"",observer:"_headingChanged"},image:{type:String,value:""},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:"_computeAnimated(animatedShadow)"}},_isHidden:function(e){return e?"false":"true"},_headingChanged:function(e){var a=this.getAttribute("heading"),p=this.getAttribute("aria-label");"string"==typeof p&&p!==a||this.setAttribute("aria-label",e)},_computeHeadingClass:function(e){return e?" over-image":""},_computeAnimated:function(e){return e}})},365:function(e,a,p){"use strict";p(359);
+    <div class="toggle-label"><slot></slot></div>
+
+  `;y.setAttribute("strip-whitespace",""),Object(s.a)({_template:y,is:"paper-toggle-button",behaviors:[f],hostAttributes:{role:"button","aria-pressed":"false",tabindex:0},properties:{},listeners:{track:"_ontrack"},attached:function(){Object(h.a)(this,(function(){Object(b.c)(this,"pan-y")}))},_ontrack:function(e){var a=e.detail;"start"===a.state?this._trackStart(a):"track"===a.state?this._trackMove(a):"end"===a.state&&this._trackEnd(a)},_trackStart:function(e){this._width=this.$.toggleBar.offsetWidth/2,this._trackChecked=this.checked,this.$.toggleButton.classList.add("dragging")},_trackMove:function(e){var a=e.dx;this._x=Math.min(this._width,Math.max(0,this._trackChecked?this._width+a:a)),this.translate3d(this._x+"px",0,0,this.$.toggleButton),this._userActivate(this._x>this._width/2)},_trackEnd:function(e){this.$.toggleButton.classList.remove("dragging"),this.transform("",this.$.toggleButton)},_createRipple:function(){this._rippleContainer=this.$.toggleButton;var e=d.a._createRipple();return e.id="ink",e.setAttribute("recenters",""),e.classList.add("circle","toggle-ink"),e}})},366:function(e,a,r){"use strict";r(360);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -183,7 +202,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(360).a`
+const p=r(361).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -506,7 +525,7 @@ const r=p(360).a`
 
   </style>
 </custom-style>
-`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},369:function(e,a,p){"use strict";p(359),p(365);
+`;p.setAttribute("style","display: none;"),document.head.appendChild(p.content)},370:function(e,a,r){"use strict";r(360),r(366);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -517,7 +536,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(360).a`
+const p=r(361).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -573,7 +592,7 @@ const r=p(360).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},388:function(e,a,p){"use strict";p(359);var r=p(360);
+</custom-style>`;p.setAttribute("style","display: none;"),document.head.appendChild(p.content)},375:function(e,a,r){"use strict";r.d(a,"a",(function(){return t}));r(360);var p=r(363);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -584,74 +603,10 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const t=r.a`
-<custom-style>
-  <style is="custom-style">
-    html {
-
-      --shadow-transition: {
-        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      };
-
-      --shadow-none: {
-        box-shadow: none;
-      };
-
-      /* from http://codepen.io/shyndman/pen/c5394ddf2e8b2a5c9185904b57421cdb */
-
-      --shadow-elevation-2dp: {
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      };
-
-      --shadow-elevation-3dp: {
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 8px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 3px -2px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-4dp: {
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 10px 0 rgba(0, 0, 0, 0.12),
-                    0 2px 4px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-6dp: {
-        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 18px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 5px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-8dp: {
-        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                    0 3px 14px 2px rgba(0, 0, 0, 0.12),
-                    0 5px 5px -3px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-12dp: {
-        box-shadow: 0 12px 16px 1px rgba(0, 0, 0, 0.14),
-                    0 4px 22px 3px rgba(0, 0, 0, 0.12),
-                    0 6px 7px -4px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-16dp: {
-        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
-                    0  6px 30px 5px rgba(0, 0, 0, 0.12),
-                    0  8px 10px -5px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-24dp: {
-        box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
-                    0 9px 46px 8px rgba(0, 0, 0, 0.12),
-                    0 11px 15px -7px rgba(0, 0, 0, 0.4);
-      };
-    }
-  </style>
-</custom-style>`;t.setAttribute("style","display: none;"),document.head.appendChild(t.content);
+class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,r=this.key;a&&r&&(a=t.types[a]=t.types[a]||{},null==e?delete a[r]:a[r]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(p.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,r){var p=new t({type:e,key:a});return void 0!==r&&r!==p.value?p.value=r:this.value!==p.value&&(this.value=p.value),p},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},388:function(e,a,r){"use strict";r.d(a,"a",(function(){return l}));r(360);var p=r(374),t=r(373),o=r(378);
 /**
 @license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at
 http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
 http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
@@ -659,90 +614,4 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const o=r.a`
-<dom-module id="paper-material-styles">
-  <template>
-    <style>
-      html {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      .paper-material {
-        @apply --paper-material;
-      }
-      .paper-material[elevation="1"] {
-        @apply --paper-material-elevation-1;
-      }
-      .paper-material[elevation="2"] {
-        @apply --paper-material-elevation-2;
-      }
-      .paper-material[elevation="3"] {
-        @apply --paper-material-elevation-3;
-      }
-      .paper-material[elevation="4"] {
-        @apply --paper-material-elevation-4;
-      }
-      .paper-material[elevation="5"] {
-        @apply --paper-material-elevation-5;
-      }
-
-      /* Duplicate the styles because of https://github.com/webcomponents/shadycss/issues/193 */
-      :host {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      :host(.paper-material) {
-        @apply --paper-material;
-      }
-      :host(.paper-material[elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-      :host(.paper-material[elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-      :host(.paper-material[elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-      :host(.paper-material[elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-      :host(.paper-material[elevation="5"]) {
-        @apply --paper-material-elevation-5;
-      }
-    </style>
-  </template>
-</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)}}]);
+const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},l=[p.a,t.a,o.a,i]}}]);

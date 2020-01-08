@@ -1,178 +1,86 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{354:function(e,a,p){"use strict";p.r(a);p(358),p(367);var r=p(361),t=p(359),o=p(372);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{357:function(e,a,p){"use strict";p.r(a);p(359),p(384),p(371);var r=p(375),t=p(372),o=p(398);
 /**
 @license
-Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
 */
-Object(r.a)({_template:t.a`
+const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},n=[r.a,t.a,o.a,i];var l=p(362),c=p(360);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+Object(l.a)({is:"paper-icon-button",_template:c.a`
     <style>
       :host {
         display: inline-block;
-        overflow: hidden;
         position: relative;
+        padding: 8px;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 0;
+        line-height: 1;
+
+        width: 40px;
+        height: 40px;
+
+        /*
+          NOTE: Both values are needed, since some phones require the value to
+          be \`transparent\`.
+        */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+        /* Because of polymer/2558, this style has lower specificity than * */
+        box-sizing: border-box !important;
+
+        @apply --paper-icon-button;
       }
 
-      #baseURIAnchor {
-        display: none;
+      :host #ink {
+        color: var(--paper-icon-button-ink-color, var(--primary-text-color));
+        opacity: 0.6;
       }
 
-      #sizedImgDiv {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
+      :host([disabled]) {
+        color: var(--paper-icon-button-disabled-text, var(--disabled-text-color));
+        pointer-events: none;
+        cursor: auto;
 
-        display: none;
+        @apply --paper-icon-button-disabled;
       }
 
-      #img {
-        display: block;
-        width: var(--iron-image-width, auto);
-        height: var(--iron-image-height, auto);
-      }
-
-      :host([sizing]) #sizedImgDiv {
-        display: block;
-      }
-
-      :host([sizing]) #img {
-        display: none;
-      }
-
-      #placeholder {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-        bottom: 0px;
-        left: 0px;
-
-        background-color: inherit;
-        opacity: 1;
-
-        @apply --iron-image-placeholder;
-      }
-
-      #placeholder.faded-out {
-        transition: opacity 0.5s linear;
-        opacity: 0;
-      }
-    </style>
-
-    <a id="baseURIAnchor" href="#"></a>
-    <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
-    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" crossorigin$="[[crossorigin]]" on-load="_imgOnLoad" on-error="_imgOnError">
-    <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
-`,is:"iron-image",properties:{src:{type:String,value:""},alt:{type:String,value:null},crossorigin:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:"center"},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:"_placeholderChanged"},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:"_widthChanged",type:Number,value:null},height:{observer:"_heightChanged",type:Number,value:null}},observers:["_transformChanged(sizing, position)","_loadStateObserver(src, preventLoad)"],created:function(){this._resolvedSrc=""},_imgOnLoad:function(){this.$.img.src===this._resolveSrc(this.src)&&(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src===this._resolveSrc(this.src)&&(this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?"faded-out":""},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return""===this.alt?"true":void 0},_computeImgDivARIALabel:function(){return null!==this.alt?this.alt:""===this.src?"":this._resolveSrc(this.src).replace(/[?|#].*/g,"").split("/").pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+"px"},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+"px"},_loadStateObserver:function(e,a){var p=this._resolveSrc(e);p!==this._resolvedSrc&&(this._resolvedSrc="",this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",""===e||a?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this._resolvedSrc=p,this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':""},_transformChanged:function(){var e=this.$.sizedImgDiv.style,a=this.$.placeholder.style;e.backgroundSize=a.backgroundSize=this.sizing,e.backgroundPosition=a.backgroundPosition=this.sizing?this.position:"",e.backgroundRepeat=a.backgroundRepeat=this.sizing?"no-repeat":""},_resolveSrc:function(e){var a=Object(o.c)(e,this.$.baseURIAnchor.href);return a.length>=2&&"/"===a[0]&&"/"!==a[1]&&(a=(location.origin||location.protocol+"//"+location.host)+a),a}});p(384),p(370);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-Object(r.a)({_template:t.a`
-    <style include="paper-material-styles">
-      :host {
-        display: inline-block;
-        position: relative;
-        box-sizing: border-box;
-        background-color: var(--paper-card-background-color, var(--primary-background-color));
-        border-radius: 2px;
-
-        @apply --paper-font-common-base;
-        @apply --paper-card;
-      }
-
-      /* IE 10 support for HTML5 hidden attr */
-      :host([hidden]), [hidden] {
+      :host([hidden]) {
         display: none !important;
       }
 
-      .header {
-        position: relative;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-        overflow: hidden;
-
-        @apply --paper-card-header;
+      :host(:hover) {
+        @apply --paper-icon-button-hover;
       }
 
-      .header iron-image {
-        display: block;
-        width: 100%;
-        --iron-image-width: 100%;
-        pointer-events: none;
-
-        @apply --paper-card-header-image;
-      }
-
-      .header .title-text {
-        padding: 16px;
-        font-size: 24px;
-        font-weight: 400;
-        color: var(--paper-card-header-color, #000);
-
-        @apply --paper-card-header-text;
-      }
-
-      .header .title-text.over-image {
-        position: absolute;
-        bottom: 0px;
-
-        @apply --paper-card-header-image-text;
-      }
-
-      :host ::slotted(.card-content) {
-        padding: 16px;
-        position:relative;
-
-        @apply --paper-card-content;
-      }
-
-      :host ::slotted(.card-actions) {
-        border-top: 1px solid #e8e8e8;
-        padding: 5px 16px;
-        position:relative;
-
-        @apply --paper-card-actions;
-      }
-
-      :host([elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-
-      :host([elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-
-      :host([elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-
-      :host([elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-
-      :host([elevation="5"]) {
-        @apply --paper-material-elevation-5;
+      iron-icon {
+        --iron-icon-width: 100%;
+        --iron-icon-height: 100%;
       }
     </style>
 
-    <div class="header">
-      <iron-image hidden\$="[[!image]]" aria-hidden\$="[[_isHidden(image)]]" src="[[image]]" alt="[[alt]]" placeholder="[[placeholderImage]]" preload="[[preloadImage]]" fade="[[fadeImage]]"></iron-image>
-      <div hidden\$="[[!heading]]" class\$="title-text [[_computeHeadingClass(image)]]">[[heading]]</div>
-    </div>
-
-    <slot></slot>
-`,is:"paper-card",properties:{heading:{type:String,value:"",observer:"_headingChanged"},image:{type:String,value:""},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:"_computeAnimated(animatedShadow)"}},_isHidden:function(e){return e?"false":"true"},_headingChanged:function(e){var a=this.getAttribute("heading"),p=this.getAttribute("aria-label");"string"==typeof p&&p!==a||this.setAttribute("aria-label",e)},_computeHeadingClass:function(e){return e?" over-image":""},_computeAnimated:function(e){return e}})},368:function(e,a,p){"use strict";p(358);
+    <iron-icon id="icon" src="[[src]]" icon="[[icon]]"
+               alt$="[[alt]]"></iron-icon>
+  `,hostAttributes:{role:"button",tabindex:"0"},behaviors:[n],registered:function(){this._template.setAttribute("strip-whitespace","")},properties:{src:{type:String},icon:{type:String},alt:{type:String,observer:"_altChanged"}},_altChanged:function(e,a){var p=this.getAttribute("aria-label");p&&a!=p||this.setAttribute("aria-label",e)}})},369:function(e,a,p){"use strict";p(359);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -183,7 +91,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(359).a`
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -506,7 +414,7 @@ const r=p(359).a`
 
   </style>
 </custom-style>
-`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},370:function(e,a,p){"use strict";p(358),p(368);
+`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},371:function(e,a,p){"use strict";p(359),p(369);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -517,7 +425,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=p(359).a`
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -573,7 +481,7 @@ const r=p(359).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},384:function(e,a,p){"use strict";p(358);var r=p(359);
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},378:function(e,a,p){"use strict";p.d(a,"a",(function(){return t}));p(359);var r=p(362);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -584,74 +492,10 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const t=r.a`
-<custom-style>
-  <style is="custom-style">
-    html {
-
-      --shadow-transition: {
-        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-      };
-
-      --shadow-none: {
-        box-shadow: none;
-      };
-
-      /* from http://codepen.io/shyndman/pen/c5394ddf2e8b2a5c9185904b57421cdb */
-
-      --shadow-elevation-2dp: {
-        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
-      };
-
-      --shadow-elevation-3dp: {
-        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 8px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 3px -2px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-4dp: {
-        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 10px 0 rgba(0, 0, 0, 0.12),
-                    0 2px 4px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-6dp: {
-        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
-                    0 1px 18px 0 rgba(0, 0, 0, 0.12),
-                    0 3px 5px -1px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-8dp: {
-        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                    0 3px 14px 2px rgba(0, 0, 0, 0.12),
-                    0 5px 5px -3px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-12dp: {
-        box-shadow: 0 12px 16px 1px rgba(0, 0, 0, 0.14),
-                    0 4px 22px 3px rgba(0, 0, 0, 0.12),
-                    0 6px 7px -4px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-16dp: {
-        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
-                    0  6px 30px 5px rgba(0, 0, 0, 0.12),
-                    0  8px 10px -5px rgba(0, 0, 0, 0.4);
-      };
-
-      --shadow-elevation-24dp: {
-        box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
-                    0 9px 46px 8px rgba(0, 0, 0, 0.12),
-                    0 11px 15px -7px rgba(0, 0, 0, 0.4);
-      };
-    }
-  </style>
-</custom-style>`;t.setAttribute("style","display: none;"),document.head.appendChild(t.content);
+class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,p=this.key;a&&p&&(a=t.types[a]=t.types[a]||{},null==e?delete a[p]:a[p]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(r.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,p){var r=new t({type:e,key:a});return void 0!==p&&p!==r.value?r.value=p:this.value!==r.value&&(this.value=r.value),r},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},384:function(e,a,p){"use strict";p(368),p(378);var r=p(362),t=p(365),o=p(360),i=p(359);
 /**
 @license
-Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at
 http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
 http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
@@ -659,90 +503,25 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const o=r.a`
-<dom-module id="paper-material-styles">
-  <template>
+Object(r.a)({_template:o.a`
     <style>
-      html {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      .paper-material {
-        @apply --paper-material;
-      }
-      .paper-material[elevation="1"] {
-        @apply --paper-material-elevation-1;
-      }
-      .paper-material[elevation="2"] {
-        @apply --paper-material-elevation-2;
-      }
-      .paper-material[elevation="3"] {
-        @apply --paper-material-elevation-3;
-      }
-      .paper-material[elevation="4"] {
-        @apply --paper-material-elevation-4;
-      }
-      .paper-material[elevation="5"] {
-        @apply --paper-material-elevation-5;
+      :host {
+        @apply --layout-inline;
+        @apply --layout-center-center;
+        position: relative;
+
+        vertical-align: middle;
+
+        fill: var(--iron-icon-fill-color, currentcolor);
+        stroke: var(--iron-icon-stroke-color, none);
+
+        width: var(--iron-icon-width, 24px);
+        height: var(--iron-icon-height, 24px);
+        @apply --iron-icon;
       }
 
-      /* Duplicate the styles because of https://github.com/webcomponents/shadycss/issues/193 */
-      :host {
-        --paper-material: {
-          display: block;
-          position: relative;
-        };
-        --paper-material-elevation-1: {
-          @apply --shadow-elevation-2dp;
-        };
-        --paper-material-elevation-2: {
-          @apply --shadow-elevation-4dp;
-        };
-        --paper-material-elevation-3: {
-          @apply --shadow-elevation-6dp;
-        };
-        --paper-material-elevation-4: {
-          @apply --shadow-elevation-8dp;
-        };
-        --paper-material-elevation-5: {
-          @apply --shadow-elevation-16dp;
-        };
-      }
-      :host(.paper-material) {
-        @apply --paper-material;
-      }
-      :host(.paper-material[elevation="1"]) {
-        @apply --paper-material-elevation-1;
-      }
-      :host(.paper-material[elevation="2"]) {
-        @apply --paper-material-elevation-2;
-      }
-      :host(.paper-material[elevation="3"]) {
-        @apply --paper-material-elevation-3;
-      }
-      :host(.paper-material[elevation="4"]) {
-        @apply --paper-material-elevation-4;
-      }
-      :host(.paper-material[elevation="5"]) {
-        @apply --paper-material-elevation-5;
+      :host([hidden]) {
+        display: none;
       }
     </style>
-  </template>
-</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)}}]);
+`,is:"iron-icon",properties:{icon:{type:String},theme:{type:String},src:{type:String},_meta:{value:i.a.create("iron-meta",{type:"iconset"})}},observers:["_updateIcon(_meta, isAttached)","_updateIcon(theme, isAttached)","_srcChanged(src, isAttached)","_iconChanged(icon, isAttached)"],_DEFAULT_ICONSET:"icons",_iconChanged:function(e){var a=(e||"").split(":");this._iconName=a.pop(),this._iconsetName=a.pop()||this._DEFAULT_ICONSET,this._updateIcon()},_srcChanged:function(e){this._updateIcon()},_usesIconset:function(){return this.icon||!this.src},_updateIcon:function(){this._usesIconset()?(this._img&&this._img.parentNode&&Object(t.a)(this.root).removeChild(this._img),""===this._iconName?this._iconset&&this._iconset.removeIcon(this):this._iconsetName&&this._meta&&(this._iconset=this._meta.byKey(this._iconsetName),this._iconset?(this._iconset.applyIcon(this,this._iconName,this.theme),this.unlisten(window,"iron-iconset-added","_updateIcon")):this.listen(window,"iron-iconset-added","_updateIcon"))):(this._iconset&&this._iconset.removeIcon(this),this._img||(this._img=document.createElement("img"),this._img.style.width="100%",this._img.style.height="100%",this._img.draggable=!1),this._img.src=this.src,Object(t.a)(this.root).appendChild(this._img))}})}}]);

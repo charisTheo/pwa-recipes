@@ -1,4 +1,4 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{355:function(e,a,r){"use strict";r.r(a);r(359),r(368),r(365),r(369);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{352:function(e,a,p){"use strict";p.r(a);p(360),p(387),p(370);var r=p(388),t=p(363),o=p(361);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -9,189 +9,67 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const p={properties:{name:{type:String},value:{notify:!0,type:String},required:{type:Boolean,value:!1}},attached:function(){},detached:function(){}};var t=r(374);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/let o=null;const i={properties:{validator:{type:String},invalid:{notify:!0,reflectToAttribute:!0,type:Boolean,value:!1,observer:"_invalidChanged"}},registered:function(){o=new t.a({type:"validator"})},_invalidChanged:function(){this.invalid?this.setAttribute("aria-invalid","true"):this.removeAttribute("aria-invalid")},get _validator(){return o&&o.byKey(this.validator)},hasValidator:function(){return null!=this._validator},validate:function(e){return void 0===e&&void 0!==this.value?this.invalid=!this._getValidity(this.value):this.invalid=!this._getValidity(e),!this.invalid},_getValidity:function(e){return!this.hasValidator()||this._validator.validate(e)}},l={properties:{checked:{type:Boolean,value:!1,reflectToAttribute:!0,notify:!0,observer:"_checkedChanged"},toggles:{type:Boolean,value:!0,reflectToAttribute:!0},value:{type:String,value:"on",observer:"_valueChanged"}},observers:["_requiredChanged(required)"],created:function(){this._hasIronCheckedElementBehavior=!0},_getValidity:function(e){return this.disabled||!this.required||this.checked},_requiredChanged:function(){this.required?this.setAttribute("aria-required","true"):this.removeAttribute("aria-required")},_checkedChanged:function(){this.active=this.checked,this.fire("iron-change")},_valueChanged:function(){void 0!==this.value&&null!==this.value||(this.value="on")}},n=[p,i,l];
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/var c=r(387),d=r(377);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/
-const g={_checkedChanged:function(){l._checkedChanged.call(this),this.hasRipple()&&(this.checked?this._ripple.setAttribute("checked",""):this._ripple.removeAttribute("checked"))},_buttonStateChanged:function(){d.a._buttonStateChanged.call(this),this.disabled||this.isAttached&&(this.checked=this.active)}},f=[c.a,n,g];var s=r(362),b=r(385),u=r(360),h=r(396);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
-*/
-const y=u.a`
-
+Object(t.a)({is:"paper-icon-button",_template:o.a`
     <style>
       :host {
         display: inline-block;
-        @apply --layout-horizontal;
-        @apply --layout-center;
-        @apply --paper-font-common-base;
+        position: relative;
+        padding: 8px;
+        outline: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: pointer;
+        z-index: 0;
+        line-height: 1;
+
+        width: 40px;
+        height: 40px;
+
+        /*
+          NOTE: Both values are needed, since some phones require the value to
+          be \`transparent\`.
+        */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
+
+        /* Because of polymer/2558, this style has lower specificity than * */
+        box-sizing: border-box !important;
+
+        @apply --paper-icon-button;
+      }
+
+      :host #ink {
+        color: var(--paper-icon-button-ink-color, var(--primary-text-color));
+        opacity: 0.6;
       }
 
       :host([disabled]) {
+        color: var(--paper-icon-button-disabled-text, var(--disabled-text-color));
         pointer-events: none;
+        cursor: auto;
+
+        @apply --paper-icon-button-disabled;
       }
 
-      :host(:focus) {
-        outline:none;
+      :host([hidden]) {
+        display: none !important;
       }
 
-      .toggle-bar {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        border-radius: 8px;
-        pointer-events: none;
-        opacity: 0.4;
-        transition: background-color linear .08s;
-        background-color: var(--paper-toggle-button-unchecked-bar-color, #000000);
-
-        @apply --paper-toggle-button-unchecked-bar;
+      :host(:hover) {
+        @apply --paper-icon-button-hover;
       }
 
-      .toggle-button {
-        position: absolute;
-        top: -3px;
-        left: 0;
-        height: 20px;
-        width: 20px;
-        border-radius: 50%;
-        box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.6);
-        transition: -webkit-transform linear .08s, background-color linear .08s;
-        transition: transform linear .08s, background-color linear .08s;
-        will-change: transform;
-        background-color: var(--paper-toggle-button-unchecked-button-color, var(--paper-grey-50));
-
-        @apply --paper-toggle-button-unchecked-button;
-      }
-
-      .toggle-button.dragging {
-        -webkit-transition: none;
-        transition: none;
-      }
-
-      :host([checked]:not([disabled])) .toggle-bar {
-        opacity: 0.5;
-        background-color: var(--paper-toggle-button-checked-bar-color, var(--primary-color));
-
-        @apply --paper-toggle-button-checked-bar;
-      }
-
-      :host([disabled]) .toggle-bar {
-        background-color: #000;
-        opacity: 0.12;
-      }
-
-      :host([checked]) .toggle-button {
-        -webkit-transform: translate(16px, 0);
-        transform: translate(16px, 0);
-      }
-
-      :host([checked]:not([disabled])) .toggle-button {
-        background-color: var(--paper-toggle-button-checked-button-color, var(--primary-color));
-
-        @apply --paper-toggle-button-checked-button;
-      }
-
-      :host([disabled]) .toggle-button {
-        background-color: #bdbdbd;
-        opacity: 1;
-      }
-
-      .toggle-ink {
-        position: absolute;
-        top: -14px;
-        left: -14px;
-        right: auto;
-        bottom: auto;
-        width: 48px;
-        height: 48px;
-        opacity: 0.5;
-        pointer-events: none;
-        color: var(--paper-toggle-button-unchecked-ink-color, var(--primary-text-color));
-
-        @apply --paper-toggle-button-unchecked-ink;
-      }
-
-      :host([checked]) .toggle-ink {
-        color: var(--paper-toggle-button-checked-ink-color, var(--primary-color));
-
-        @apply --paper-toggle-button-checked-ink;
-      }
-
-      .toggle-container {
-        display: inline-block;
-        position: relative;
-        width: 36px;
-        height: 14px;
-        /* The toggle button has an absolute position of -3px; The extra 1px
-        /* accounts for the toggle button shadow box. */
-        margin: 4px 1px;
-      }
-
-      .toggle-label {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        padding-left: var(--paper-toggle-button-label-spacing, 8px);
-        pointer-events: none;
-        color: var(--paper-toggle-button-label-color, var(--primary-text-color));
-      }
-
-      /* invalid state */
-      :host([invalid]) .toggle-bar {
-        background-color: var(--paper-toggle-button-invalid-bar-color, var(--error-color));
-      }
-
-      :host([invalid]) .toggle-button {
-        background-color: var(--paper-toggle-button-invalid-button-color, var(--error-color));
-      }
-
-      :host([invalid]) .toggle-ink {
-        color: var(--paper-toggle-button-invalid-ink-color, var(--error-color));
+      iron-icon {
+        --iron-icon-width: 100%;
+        --iron-icon-height: 100%;
       }
     </style>
 
-    <div class="toggle-container">
-      <div id="toggleBar" class="toggle-bar"></div>
-      <div id="toggleButton" class="toggle-button"></div>
-    </div>
-
-    <div class="toggle-label"><slot></slot></div>
-
-  `;y.setAttribute("strip-whitespace",""),Object(s.a)({_template:y,is:"paper-toggle-button",behaviors:[f],hostAttributes:{role:"button","aria-pressed":"false",tabindex:0},properties:{},listeners:{track:"_ontrack"},attached:function(){Object(h.a)(this,(function(){Object(b.c)(this,"pan-y")}))},_ontrack:function(e){var a=e.detail;"start"===a.state?this._trackStart(a):"track"===a.state?this._trackMove(a):"end"===a.state&&this._trackEnd(a)},_trackStart:function(e){this._width=this.$.toggleBar.offsetWidth/2,this._trackChecked=this.checked,this.$.toggleButton.classList.add("dragging")},_trackMove:function(e){var a=e.dx;this._x=Math.min(this._width,Math.max(0,this._trackChecked?this._width+a:a)),this.translate3d(this._x+"px",0,0,this.$.toggleButton),this._userActivate(this._x>this._width/2)},_trackEnd:function(e){this.$.toggleButton.classList.remove("dragging"),this.transform("",this.$.toggleButton)},_createRipple:function(){this._rippleContainer=this.$.toggleButton;var e=d.a._createRipple();return e.id="ink",e.setAttribute("recenters",""),e.classList.add("circle","toggle-ink"),e}})},365:function(e,a,r){"use strict";r(359);
+    <iron-icon id="icon" src="[[src]]" icon="[[icon]]"
+               alt$="[[alt]]"></iron-icon>
+  `,hostAttributes:{role:"button",tabindex:"0"},behaviors:[r.a],registered:function(){this._template.setAttribute("strip-whitespace","")},properties:{src:{type:String},icon:{type:String},alt:{type:String,observer:"_altChanged"}},_altChanged:function(e,a){var p=this.getAttribute("aria-label");p&&a!=p||this.setAttribute("aria-label",e)}})},366:function(e,a,p){"use strict";p(360);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -202,7 +80,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const p=r(360).a`
+const r=p(361).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -525,7 +403,7 @@ const p=r(360).a`
 
   </style>
 </custom-style>
-`;p.setAttribute("style","display: none;"),document.head.appendChild(p.content)},369:function(e,a,r){"use strict";r(359),r(365);
+`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},370:function(e,a,p){"use strict";p(360),p(366);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -536,7 +414,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const p=r(360).a`
+const r=p(361).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -592,7 +470,7 @@ const p=r(360).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;p.setAttribute("style","display: none;"),document.head.appendChild(p.content)},374:function(e,a,r){"use strict";r.d(a,"a",(function(){return t}));r(359);var p=r(362);
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},375:function(e,a,p){"use strict";p.d(a,"a",(function(){return t}));p(360);var r=p(363);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -603,7 +481,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,r=this.key;a&&r&&(a=t.types[a]=t.types[a]||{},null==e?delete a[r]:a[r]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(p.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,r){var p=new t({type:e,key:a});return void 0!==r&&r!==p.value?p.value=r:this.value!==p.value&&(this.value=p.value),p},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},387:function(e,a,r){"use strict";r.d(a,"a",(function(){return l}));r(359);var p=r(373),t=r(372),o=r(377);
+class t{constructor(e){t[" "](e),this.type=e&&e.type||"default",this.key=e&&e.key,e&&"value"in e&&(this.value=e.value)}get value(){var e=this.type,a=this.key;if(e&&a)return t.types[e]&&t.types[e][a]}set value(e){var a=this.type,p=this.key;a&&p&&(a=t.types[a]=t.types[a]||{},null==e?delete a[p]:a[p]=e)}get list(){if(this.type){var e=t.types[this.type];return e?Object.keys(e).map((function(e){return o[this.type][e]}),this):[]}}byKey(e){return this.key=e,this.value}}t[" "]=function(){},t.types={};var o=t.types;Object(r.a)({is:"iron-meta",properties:{type:{type:String,value:"default"},key:{type:String},value:{type:String,notify:!0},self:{type:Boolean,observer:"_selfChanged"},__meta:{type:Boolean,computed:"__computeMeta(type, key, value)"}},hostAttributes:{hidden:!0},__computeMeta:function(e,a,p){var r=new t({type:e,key:a});return void 0!==p&&p!==r.value?r.value=p:this.value!==r.value&&(this.value=r.value),r},get list(){return this.__meta&&this.__meta.list},_selfChanged:function(e){e&&(this.value=this)},byKey:function(e){return new t({type:this.type,key:e}).value}})},387:function(e,a,p){"use strict";p(369),p(375);var r=p(363),t=p(367),o=p(361),i=p(360);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -614,4 +492,36 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},l=[p.a,t.a,o.a,i]}}]);
+Object(r.a)({_template:o.a`
+    <style>
+      :host {
+        @apply --layout-inline;
+        @apply --layout-center-center;
+        position: relative;
+
+        vertical-align: middle;
+
+        fill: var(--iron-icon-fill-color, currentcolor);
+        stroke: var(--iron-icon-stroke-color, none);
+
+        width: var(--iron-icon-width, 24px);
+        height: var(--iron-icon-height, 24px);
+        @apply --iron-icon;
+      }
+
+      :host([hidden]) {
+        display: none;
+      }
+    </style>
+`,is:"iron-icon",properties:{icon:{type:String},theme:{type:String},src:{type:String},_meta:{value:i.a.create("iron-meta",{type:"iconset"})}},observers:["_updateIcon(_meta, isAttached)","_updateIcon(theme, isAttached)","_srcChanged(src, isAttached)","_iconChanged(icon, isAttached)"],_DEFAULT_ICONSET:"icons",_iconChanged:function(e){var a=(e||"").split(":");this._iconName=a.pop(),this._iconsetName=a.pop()||this._DEFAULT_ICONSET,this._updateIcon()},_srcChanged:function(e){this._updateIcon()},_usesIconset:function(){return this.icon||!this.src},_updateIcon:function(){this._usesIconset()?(this._img&&this._img.parentNode&&Object(t.a)(this.root).removeChild(this._img),""===this._iconName?this._iconset&&this._iconset.removeIcon(this):this._iconsetName&&this._meta&&(this._iconset=this._meta.byKey(this._iconsetName),this._iconset?(this._iconset.applyIcon(this,this._iconName,this.theme),this.unlisten(window,"iron-iconset-added","_updateIcon")):this.listen(window,"iron-iconset-added","_updateIcon"))):(this._iconset&&this._iconset.removeIcon(this),this._img||(this._img=document.createElement("img"),this._img.style.width="100%",this._img.style.height="100%",this._img.draggable=!1),this._img.src=this.src,Object(t.a)(this.root).appendChild(this._img))}})},388:function(e,a,p){"use strict";p.d(a,"a",(function(){return n}));p(360);var r=p(374),t=p(373),o=p(378);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const i={observers:["_focusedChanged(receivedFocusFromKeyboard)"],_focusedChanged:function(e){e&&this.ensureRipple(),this.hasRipple()&&(this._ripple.holdDown=e)},_createRipple:function(){var e=o.a._createRipple();return e.id="ink",e.setAttribute("center",""),e.classList.add("circle"),e}},n=[r.a,t.a,o.a,i]}}]);

@@ -1,48 +1,73 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{352:function(e,p,a){"use strict";a.r(p);a(358),a(367),a(370),a(379);var r=a(361),o=a(359);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[6],{355:function(e,a,p){"use strict";p.r(a);p(359),p(368);var r=p(362),t=p(360),o=p(373);
 /**
 @license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 */
-Object(r.a)({_template:o.a`
+Object(r.a)({_template:t.a`
     <style>
       :host {
-        overflow: hidden; /* needed for text-overflow: ellipsis to work on ff */
-        @apply --layout-vertical;
-        @apply --layout-center-justified;
-        @apply --layout-flex;
-      }
-
-      :host([two-line]) {
-        min-height: var(--paper-item-body-two-line-min-height, 72px);
-      }
-
-      :host([three-line]) {
-        min-height: var(--paper-item-body-three-line-min-height, 88px);
-      }
-
-      :host > ::slotted(*) {
+        display: inline-block;
         overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        position: relative;
       }
 
-      :host > ::slotted([secondary]) {
-        @apply --paper-font-body1;
+      #baseURIAnchor {
+        display: none;
+      }
 
-        color: var(--paper-item-body-secondary-color, var(--secondary-text-color));
+      #sizedImgDiv {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
 
-        @apply --paper-item-body-secondary;
+        display: none;
+      }
+
+      #img {
+        display: block;
+        width: var(--iron-image-width, auto);
+        height: var(--iron-image-height, auto);
+      }
+
+      :host([sizing]) #sizedImgDiv {
+        display: block;
+      }
+
+      :host([sizing]) #img {
+        display: none;
+      }
+
+      #placeholder {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+
+        background-color: inherit;
+        opacity: 1;
+
+        @apply --iron-image-placeholder;
+      }
+
+      #placeholder.faded-out {
+        transition: opacity 0.5s linear;
+        opacity: 0;
       }
     </style>
 
-    <slot></slot>
-`,is:"paper-item-body"})},368:function(e,p,a){"use strict";a(358);
+    <a id="baseURIAnchor" href="#"></a>
+    <div id="sizedImgDiv" role="img" hidden$="[[_computeImgDivHidden(sizing)]]" aria-hidden$="[[_computeImgDivARIAHidden(alt)]]" aria-label$="[[_computeImgDivARIALabel(alt, src)]]"></div>
+    <img id="img" alt$="[[alt]]" hidden$="[[_computeImgHidden(sizing)]]" crossorigin$="[[crossorigin]]" on-load="_imgOnLoad" on-error="_imgOnError">
+    <div id="placeholder" hidden$="[[_computePlaceholderHidden(preload, fade, loading, loaded)]]" class$="[[_computePlaceholderClassName(preload, fade, loading, loaded)]]"></div>
+`,is:"iron-image",properties:{src:{type:String,value:""},alt:{type:String,value:null},crossorigin:{type:String,value:null},preventLoad:{type:Boolean,value:!1},sizing:{type:String,value:null,reflectToAttribute:!0},position:{type:String,value:"center"},preload:{type:Boolean,value:!1},placeholder:{type:String,value:null,observer:"_placeholderChanged"},fade:{type:Boolean,value:!1},loaded:{notify:!0,readOnly:!0,type:Boolean,value:!1},loading:{notify:!0,readOnly:!0,type:Boolean,value:!1},error:{notify:!0,readOnly:!0,type:Boolean,value:!1},width:{observer:"_widthChanged",type:Number,value:null},height:{observer:"_heightChanged",type:Number,value:null}},observers:["_transformChanged(sizing, position)","_loadStateObserver(src, preventLoad)"],created:function(){this._resolvedSrc=""},_imgOnLoad:function(){this.$.img.src===this._resolveSrc(this.src)&&(this._setLoading(!1),this._setLoaded(!0),this._setError(!1))},_imgOnError:function(){this.$.img.src===this._resolveSrc(this.src)&&(this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",this._setLoading(!1),this._setLoaded(!1),this._setError(!0))},_computePlaceholderHidden:function(){return!this.preload||!this.fade&&!this.loading&&this.loaded},_computePlaceholderClassName:function(){return this.preload&&this.fade&&!this.loading&&this.loaded?"faded-out":""},_computeImgDivHidden:function(){return!this.sizing},_computeImgDivARIAHidden:function(){return""===this.alt?"true":void 0},_computeImgDivARIALabel:function(){return null!==this.alt?this.alt:""===this.src?"":this._resolveSrc(this.src).replace(/[?|#].*/g,"").split("/").pop()},_computeImgHidden:function(){return!!this.sizing},_widthChanged:function(){this.style.width=isNaN(this.width)?this.width:this.width+"px"},_heightChanged:function(){this.style.height=isNaN(this.height)?this.height:this.height+"px"},_loadStateObserver:function(e,a){var p=this._resolveSrc(e);p!==this._resolvedSrc&&(this._resolvedSrc="",this.$.img.removeAttribute("src"),this.$.sizedImgDiv.style.backgroundImage="",""===e||a?(this._setLoading(!1),this._setLoaded(!1),this._setError(!1)):(this._resolvedSrc=p,this.$.img.src=this._resolvedSrc,this.$.sizedImgDiv.style.backgroundImage='url("'+this._resolvedSrc+'")',this._setLoading(!0),this._setLoaded(!1),this._setError(!1)))},_placeholderChanged:function(){this.$.placeholder.style.backgroundImage=this.placeholder?'url("'+this.placeholder+'")':""},_transformChanged:function(){var e=this.$.sizedImgDiv.style,a=this.$.placeholder.style;e.backgroundSize=a.backgroundSize=this.sizing,e.backgroundPosition=a.backgroundPosition=this.sizing?this.position:"",e.backgroundRepeat=a.backgroundRepeat=this.sizing?"no-repeat":""},_resolveSrc:function(e){var a=Object(o.c)(e,this.$.baseURIAnchor.href);return a.length>=2&&"/"===a[0]&&"/"!==a[1]&&(a=(location.origin||location.protocol+"//"+location.host)+a),a}});p(385),p(371);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -53,7 +78,112 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=a(359).a`
+Object(r.a)({_template:t.a`
+    <style include="paper-material-styles">
+      :host {
+        display: inline-block;
+        position: relative;
+        box-sizing: border-box;
+        background-color: var(--paper-card-background-color, var(--primary-background-color));
+        border-radius: 2px;
+
+        @apply --paper-font-common-base;
+        @apply --paper-card;
+      }
+
+      /* IE 10 support for HTML5 hidden attr */
+      :host([hidden]), [hidden] {
+        display: none !important;
+      }
+
+      .header {
+        position: relative;
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+        overflow: hidden;
+
+        @apply --paper-card-header;
+      }
+
+      .header iron-image {
+        display: block;
+        width: 100%;
+        --iron-image-width: 100%;
+        pointer-events: none;
+
+        @apply --paper-card-header-image;
+      }
+
+      .header .title-text {
+        padding: 16px;
+        font-size: 24px;
+        font-weight: 400;
+        color: var(--paper-card-header-color, #000);
+
+        @apply --paper-card-header-text;
+      }
+
+      .header .title-text.over-image {
+        position: absolute;
+        bottom: 0px;
+
+        @apply --paper-card-header-image-text;
+      }
+
+      :host ::slotted(.card-content) {
+        padding: 16px;
+        position:relative;
+
+        @apply --paper-card-content;
+      }
+
+      :host ::slotted(.card-actions) {
+        border-top: 1px solid #e8e8e8;
+        padding: 5px 16px;
+        position:relative;
+
+        @apply --paper-card-actions;
+      }
+
+      :host([elevation="1"]) {
+        @apply --paper-material-elevation-1;
+      }
+
+      :host([elevation="2"]) {
+        @apply --paper-material-elevation-2;
+      }
+
+      :host([elevation="3"]) {
+        @apply --paper-material-elevation-3;
+      }
+
+      :host([elevation="4"]) {
+        @apply --paper-material-elevation-4;
+      }
+
+      :host([elevation="5"]) {
+        @apply --paper-material-elevation-5;
+      }
+    </style>
+
+    <div class="header">
+      <iron-image hidden\$="[[!image]]" aria-hidden\$="[[_isHidden(image)]]" src="[[image]]" alt="[[alt]]" placeholder="[[placeholderImage]]" preload="[[preloadImage]]" fade="[[fadeImage]]"></iron-image>
+      <div hidden\$="[[!heading]]" class\$="title-text [[_computeHeadingClass(image)]]">[[heading]]</div>
+    </div>
+
+    <slot></slot>
+`,is:"paper-card",properties:{heading:{type:String,value:"",observer:"_headingChanged"},image:{type:String,value:""},alt:{type:String},preloadImage:{type:Boolean,value:!1},fadeImage:{type:Boolean,value:!1},placeholderImage:{type:String,value:null},elevation:{type:Number,value:1,reflectToAttribute:!0},animatedShadow:{type:Boolean,value:!1},animated:{type:Boolean,reflectToAttribute:!0,readOnly:!0,computed:"_computeAnimated(animatedShadow)"}},_isHidden:function(e){return e?"false":"true"},_headingChanged:function(e){var a=this.getAttribute("heading"),p=this.getAttribute("aria-label");"string"==typeof p&&p!==a||this.setAttribute("aria-label",e)},_computeHeadingClass:function(e){return e?" over-image":""},_computeAnimated:function(e){return e}})},369:function(e,a,p){"use strict";p(359);
+/**
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -376,7 +506,7 @@ const r=a(359).a`
 
   </style>
 </custom-style>
-`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},370:function(e,p,a){"use strict";a(358),a(368);
+`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},371:function(e,a,p){"use strict";p(359),p(369);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -387,7 +517,7 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=a(359).a`
+const r=p(360).a`
 <custom-style>
   <style is="custom-style">
     html {
@@ -443,17 +573,7 @@ const r=a(359).a`
       --default-primary-color: var(--primary-color);
     }
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},379:function(e,p,a){"use strict";a(358);
-/**
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at
-http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
-http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
-found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
-part of the polymer project is also subject to an additional IP rights grant
-found at http://polymer.github.io/PATENTS.txt
-*/if(!window.polymerSkipLoadingFontRoboto){const e=document.createElement("link");e.rel="stylesheet",e.type="text/css",e.crossOrigin="anonymous",e.href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700|Roboto:400,300,300italic,400italic,500,500italic,700,700italic",document.head.appendChild(e)}
+</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)},385:function(e,a,p){"use strict";p(359);var r=p(360);
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
@@ -464,160 +584,165 @@ found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
 part of the polymer project is also subject to an additional IP rights grant
 found at http://polymer.github.io/PATENTS.txt
 */
-const r=a(359).a`<custom-style>
+const t=r.a`
+<custom-style>
   <style is="custom-style">
     html {
 
-      /* Shared Styles */
-      --paper-font-common-base: {
-        font-family: 'Roboto', 'Noto', sans-serif;
-        -webkit-font-smoothing: antialiased;
+      --shadow-transition: {
+        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       };
 
-      --paper-font-common-code: {
-        font-family: 'Roboto Mono', 'Consolas', 'Menlo', monospace;
-        -webkit-font-smoothing: antialiased;
+      --shadow-none: {
+        box-shadow: none;
       };
 
-      --paper-font-common-expensive-kerning: {
-        text-rendering: optimizeLegibility;
+      /* from http://codepen.io/shyndman/pen/c5394ddf2e8b2a5c9185904b57421cdb */
+
+      --shadow-elevation-2dp: {
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                    0 1px 5px 0 rgba(0, 0, 0, 0.12),
+                    0 3px 1px -2px rgba(0, 0, 0, 0.2);
       };
 
-      --paper-font-common-nowrap: {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+      --shadow-elevation-3dp: {
+        box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14),
+                    0 1px 8px 0 rgba(0, 0, 0, 0.12),
+                    0 3px 3px -2px rgba(0, 0, 0, 0.4);
       };
 
-      /* Material Font Styles */
-
-      --paper-font-display4: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 112px;
-        font-weight: 300;
-        letter-spacing: -.044em;
-        line-height: 120px;
+      --shadow-elevation-4dp: {
+        box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+                    0 1px 10px 0 rgba(0, 0, 0, 0.12),
+                    0 2px 4px -1px rgba(0, 0, 0, 0.4);
       };
 
-      --paper-font-display3: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 56px;
-        font-weight: 400;
-        letter-spacing: -.026em;
-        line-height: 60px;
+      --shadow-elevation-6dp: {
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14),
+                    0 1px 18px 0 rgba(0, 0, 0, 0.12),
+                    0 3px 5px -1px rgba(0, 0, 0, 0.4);
       };
 
-      --paper-font-display2: {
-        @apply --paper-font-common-base;
-
-        font-size: 45px;
-        font-weight: 400;
-        letter-spacing: -.018em;
-        line-height: 48px;
+      --shadow-elevation-8dp: {
+        box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                    0 3px 14px 2px rgba(0, 0, 0, 0.12),
+                    0 5px 5px -3px rgba(0, 0, 0, 0.4);
       };
 
-      --paper-font-display1: {
-        @apply --paper-font-common-base;
-
-        font-size: 34px;
-        font-weight: 400;
-        letter-spacing: -.01em;
-        line-height: 40px;
+      --shadow-elevation-12dp: {
+        box-shadow: 0 12px 16px 1px rgba(0, 0, 0, 0.14),
+                    0 4px 22px 3px rgba(0, 0, 0, 0.12),
+                    0 6px 7px -4px rgba(0, 0, 0, 0.4);
       };
 
-      --paper-font-headline: {
-        @apply --paper-font-common-base;
-
-        font-size: 24px;
-        font-weight: 400;
-        letter-spacing: -.012em;
-        line-height: 32px;
+      --shadow-elevation-16dp: {
+        box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14),
+                    0  6px 30px 5px rgba(0, 0, 0, 0.12),
+                    0  8px 10px -5px rgba(0, 0, 0, 0.4);
       };
 
-      --paper-font-title: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 28px;
+      --shadow-elevation-24dp: {
+        box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+                    0 9px 46px 8px rgba(0, 0, 0, 0.12),
+                    0 11px 15px -7px rgba(0, 0, 0, 0.4);
       };
-
-      --paper-font-subhead: {
-        @apply --paper-font-common-base;
-
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 24px;
-      };
-
-      --paper-font-body2: {
-        @apply --paper-font-common-base;
-
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 24px;
-      };
-
-      --paper-font-body1: {
-        @apply --paper-font-common-base;
-
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 20px;
-      };
-
-      --paper-font-caption: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 12px;
-        font-weight: 400;
-        letter-spacing: 0.011em;
-        line-height: 20px;
-      };
-
-      --paper-font-menu: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 13px;
-        font-weight: 500;
-        line-height: 24px;
-      };
-
-      --paper-font-button: {
-        @apply --paper-font-common-base;
-        @apply --paper-font-common-nowrap;
-
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: 0.018em;
-        line-height: 24px;
-        text-transform: uppercase;
-      };
-
-      --paper-font-code2: {
-        @apply --paper-font-common-code;
-
-        font-size: 14px;
-        font-weight: 700;
-        line-height: 20px;
-      };
-
-      --paper-font-code1: {
-        @apply --paper-font-common-code;
-
-        font-size: 14px;
-        font-weight: 500;
-        line-height: 20px;
-      };
-
     }
-
   </style>
-</custom-style>`;r.setAttribute("style","display: none;"),document.head.appendChild(r.content)}}]);
+</custom-style>`;t.setAttribute("style","display: none;"),document.head.appendChild(t.content);
+/**
+@license
+Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
+*/
+const o=r.a`
+<dom-module id="paper-material-styles">
+  <template>
+    <style>
+      html {
+        --paper-material: {
+          display: block;
+          position: relative;
+        };
+        --paper-material-elevation-1: {
+          @apply --shadow-elevation-2dp;
+        };
+        --paper-material-elevation-2: {
+          @apply --shadow-elevation-4dp;
+        };
+        --paper-material-elevation-3: {
+          @apply --shadow-elevation-6dp;
+        };
+        --paper-material-elevation-4: {
+          @apply --shadow-elevation-8dp;
+        };
+        --paper-material-elevation-5: {
+          @apply --shadow-elevation-16dp;
+        };
+      }
+      .paper-material {
+        @apply --paper-material;
+      }
+      .paper-material[elevation="1"] {
+        @apply --paper-material-elevation-1;
+      }
+      .paper-material[elevation="2"] {
+        @apply --paper-material-elevation-2;
+      }
+      .paper-material[elevation="3"] {
+        @apply --paper-material-elevation-3;
+      }
+      .paper-material[elevation="4"] {
+        @apply --paper-material-elevation-4;
+      }
+      .paper-material[elevation="5"] {
+        @apply --paper-material-elevation-5;
+      }
+
+      /* Duplicate the styles because of https://github.com/webcomponents/shadycss/issues/193 */
+      :host {
+        --paper-material: {
+          display: block;
+          position: relative;
+        };
+        --paper-material-elevation-1: {
+          @apply --shadow-elevation-2dp;
+        };
+        --paper-material-elevation-2: {
+          @apply --shadow-elevation-4dp;
+        };
+        --paper-material-elevation-3: {
+          @apply --shadow-elevation-6dp;
+        };
+        --paper-material-elevation-4: {
+          @apply --shadow-elevation-8dp;
+        };
+        --paper-material-elevation-5: {
+          @apply --shadow-elevation-16dp;
+        };
+      }
+      :host(.paper-material) {
+        @apply --paper-material;
+      }
+      :host(.paper-material[elevation="1"]) {
+        @apply --paper-material-elevation-1;
+      }
+      :host(.paper-material[elevation="2"]) {
+        @apply --paper-material-elevation-2;
+      }
+      :host(.paper-material[elevation="3"]) {
+        @apply --paper-material-elevation-3;
+      }
+      :host(.paper-material[elevation="4"]) {
+        @apply --paper-material-elevation-4;
+      }
+      :host(.paper-material[elevation="5"]) {
+        @apply --paper-material-elevation-5;
+      }
+    </style>
+  </template>
+</dom-module>`;o.setAttribute("style","display: none;"),document.head.appendChild(o.content)}}]);
