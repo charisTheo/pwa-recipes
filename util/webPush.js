@@ -15,7 +15,7 @@ const simplePushOptions = {
 const imagePushOptions = {
     title: `Image Notification`,
     body: `If on mobile expand 👌 this to view the image`,
-    image: '/img/push-examples/funny-cat.jpg',
+    image: '/push-examples/img/funny-cat.jpg',
     tag: "image-push"
 };
 
