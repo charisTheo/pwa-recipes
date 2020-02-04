@@ -1,4 +1,4 @@
-importScripts("precache-manifest.09c63693793016cad9a0de79e84047f1.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.bbc807876fc7cb088b1a73deaa6c6afd.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PAGE_ICON_URL = '/push-examples/favicon/android-chrome-192x192.png';
@@ -11,7 +11,12 @@ if (workbox) {
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
-  skipWaiting();
+});
+
+addEventListener('message', event => {
+  if (event.data && event.data.type === 'NEW_VERSION') {
+      skipWaiting();
+  }
 });
 
 workbox.routing.registerRoute(

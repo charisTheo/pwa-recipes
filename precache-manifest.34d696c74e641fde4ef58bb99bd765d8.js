@@ -96,6 +96,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "favicon/favicon.ico"
   },
   {
+    "revision": "06b61cdd9767db6ba17edf9bfa75f84f",
+    "url": "favicon/logo.svg"
+  },
+  {
     "revision": "03421408406a61e28d608441f5c84c5d",
     "url": "favicon/maskable_icon.png"
   },
@@ -148,7 +152,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "82e0d6664c00b03a8e83dc37cb4108f8",
+    "revision": "895edc4e8f902084d26b805ab4826520",
     "url": "index.html"
   },
   {

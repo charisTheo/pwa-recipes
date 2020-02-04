@@ -1,4 +1,4 @@
-importScripts("precache-manifest.ea6ef92e54088d22b2199f6ee1b6788a.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.6d816168eb47d28c1bee2b9fa550d0e0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 // precaching these images in the __precacheManifest file
