@@ -123,8 +123,16 @@
     <div class="not-cool-dialog">👎</div>
 
     <div class="snackbar-container" aria-live="polite"></div>
+
+    <mwc-pwa-reload
+      sw-url="./service-worker.js"
+      sw-scope="/push-examples/"
+      reload-text-color="#673ab7"
+    ></mwc-pwa-reload>
   </body>
   
+  <script defer type="module" src="https://unpkg.com/mwc-pwa-reload"></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135267871-3"></script>
   <script>

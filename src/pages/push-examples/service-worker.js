@@ -9,7 +9,12 @@ if (workbox) {
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
-  skipWaiting();
+});
+
+addEventListener('message', event => {
+  if (event.data && event.data.type === 'NEW_VERSION') {
+      skipWaiting();
+  }
 });
 
 workbox.routing.registerRoute(

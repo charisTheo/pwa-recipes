@@ -22,17 +22,23 @@ window.addEventListener('load', () => {
 
     if (!!queryString) {
         // ? get push-notifications-are-cool parameter from the URL bar
-        const pushNotificationsAreCool = getValueFromUrlQueryString(queryString);
+        const urlQueryObject = getUrlQueryObject(queryString);
+        console.log("TCL: urlQueryObject", urlQueryObject)
 
-        document.body.classList.remove('cool', 'not-cool');
-        void document.body.offsetWidth; // * trigger reflow event
-        document.body.classList.add(pushNotificationsAreCool ? 'cool' : 'not-cool');
-        
-        // remove class after animation has ended (1.5s)
-        setTimeout(() => {
+        if (
+            urlQueryObject.hasOwnProperty('push-notifications-are-cool') &&
+            urlQueryObject['push-notifications-are-cool'] === "true"
+        ) {
             document.body.classList.remove('cool', 'not-cool');
-            window.history.replaceState({}, document.title, '/');
-        }, 2500);
+            void document.body.offsetWidth; // * trigger reflow event
+            document.body.classList.add(urlQueryObject ? 'cool' : 'not-cool');
+            
+            // remove class after animation has ended (1.5s) and clean up search bar
+            setTimeout(() => {
+                document.body.classList.remove('cool', 'not-cool');
+                window.history.replaceState({}, document.title, document.location.pathname);
+            }, 2500);
+        }
     }
 });
 
@@ -180,13 +186,16 @@ window.addEventListener('online', function() {
     handleOnlineEvent();
 });
 
-const getValueFromUrlQueryString = queryString => {
+const getUrlQueryObject = queryString => {
     const queryStringCharactersArr = queryString.split('');
     // ? remove the ? character
     queryStringCharactersArr.splice(0, 1); 
     const sanitisedQueryString = queryStringCharactersArr.join('');
     const pair = sanitisedQueryString.split('=');
-    return decodeURIComponent(pair[1]) === 'true' ? true : false;
+    const key = decodeURIComponent(pair[0]);
+    const value = decodeURIComponent(pair[1]);
+
+    return {[key]: value};
 }
 
 const urlBase64ToUint8Array = base64String => {
