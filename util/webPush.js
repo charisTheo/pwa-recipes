@@ -52,7 +52,7 @@ const getCartAbandonPushOptions = items => {
     const options = {
         title: `You have ${items.length} goodie(s) in your cart 🛒`,
         body: `👉 Checkout now by tapping on this notification 👈`,
-        image: `/img/products/${items[0].image}`,
+        image: `/cart-abandon-notification/img/products/${items[0].image}`,
         tag: "cart-abandoned",
         data: {
             items
@@ -61,12 +61,12 @@ const getCartAbandonPushOptions = items => {
             {
                 action: 'checkout',
                 title: 'Checkout',
-                icon: "./img/money-with-wings.png"
+                icon: "/cart-abandon-notification/img/money-with-wings.png"
             },
             {
                 action: 'clear',
                 title: 'Clear cart',
-                icon: "./img/bin.png"
+                icon: "/cart-abandon-notification/img/bin.png"
             }
         ]
     }
