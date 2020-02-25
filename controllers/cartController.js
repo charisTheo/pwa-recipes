@@ -3,7 +3,8 @@ const {
     simplePushOptions,
     imagePushOptions, 
     actionPushOptions,
-    dataPushOptions
+    dataPushOptions,
+    handleCartAbandoned
 } = require('../util/webPush');
 
 // * GET /user/push/:type
@@ -75,6 +76,11 @@ exports.addItemToCart = async (req, res) => {
         }
         
         await user.save();
+        setTimeout(() => {
+            const _user = user;
+            handleCartAbandoned(_user);
+        }, 5000);
+
         res.status(200).send(user.cart_items.length.toString());
 
     } catch (error) {
