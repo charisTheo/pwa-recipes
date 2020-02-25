@@ -79,7 +79,7 @@ exports.addItemToCart = async (req, res) => {
         setTimeout(() => {
             const _user = user;
             handleCartAbandoned(_user);
-        }, 5000);
+        }, 8000);
 
         res.status(200).send(user.cart_items.length.toString());
 
