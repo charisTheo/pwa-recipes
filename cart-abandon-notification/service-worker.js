@@ -1,4 +1,4 @@
-importScripts("precache-manifest.6d816168eb47d28c1bee2b9fa550d0e0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.48c3135932cec650c88e0b50bb1035e0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 // precaching these images in the __precacheManifest file
@@ -10,6 +10,12 @@ if (workbox) {
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
+
+workbox.googleAnalytics.initialize({
+  parameterOverrides: {
+    cd1: 'offline'
+  }
+});
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 

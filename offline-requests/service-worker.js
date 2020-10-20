@@ -1,4 +1,4 @@
-importScripts("precache-manifest.d89a553caf898873b535fab7d883069b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.46703f5d85afa88e9163258e5a672cf0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 const PLACEHOLDER_IMAGE_URL = '/img/placeholder-image.png';
@@ -11,6 +11,12 @@ if (workbox) {
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
+
+workbox.googleAnalytics.initialize({
+  parameterOverrides: {
+    cd1: 'offline'
+  }
+});
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 

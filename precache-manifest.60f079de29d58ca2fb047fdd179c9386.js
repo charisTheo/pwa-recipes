@@ -152,7 +152,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "81e19c259d9a8b263772956a641700a7",
+    "revision": "bb2c7a324180ccc89e60ac93f584eaab",
     "url": "index.html"
   },
   {
@@ -168,7 +168,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "offline-content.js"
   },
   {
-    "revision": "99769a1d72cf5e1c0c870066c1f7de24",
+    "revision": "e7ba195b74387f3d28729c457963cd0d",
     "url": "offline.html"
   },
   {

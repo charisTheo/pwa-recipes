@@ -60,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "e4170288dacbc3f94116f9255f239238",
+    "revision": "6067ef03d51e940f1405ccc18e365d8e",
     "url": "index.html"
   },
   {

@@ -1,4 +1,4 @@
-importScripts("precache-manifest.9c84e925e0e9a638af388540bdf13665.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("precache-manifest.60f079de29d58ca2fb047fdd179c9386.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // https://developers.google.com/web/tools/workbox/guides/configure-workbox
 // workbox.precaching.precacheAndRoute((self.__precacheManifest || []).concat([PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL, OFFLINE_PAGE_URL]));
@@ -11,6 +11,12 @@ if (workbox) {
 } else {
   console.log(`Boo! Workbox didn't load 😬`);
 }
+
+workbox.googleAnalytics.initialize({
+  parameterOverrides: {
+    cd1: 'offline'
+  }
+});
 
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
