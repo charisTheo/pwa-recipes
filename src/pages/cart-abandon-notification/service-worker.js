@@ -9,6 +9,12 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+workbox.googleAnalytics.initialize({
+  parameterOverrides: {
+    cd1: 'offline'
+  }
+});
+
 workbox.precaching.precacheAndRoute(self.__precacheManifest || [PLACEHOLDER_IMAGE_URL, PAGE_ICON_URL]);
 
 addEventListener('activate', event => {

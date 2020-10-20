@@ -203,7 +203,13 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'UA-135267871-3');
+    gtag('config', 'UA-135267871-3', {
+      custom_map: {
+        dimension1: "NetworkStatus"
+      }
+    });
+
+    gtag('event', 'NetworkStatus_changed', {'NetworkStatus': 'online'});
   </script>
   
 </html>

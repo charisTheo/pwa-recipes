@@ -7,6 +7,12 @@ if (workbox) {
   console.log(`Boo! Workbox didn't load 😬`);
 }
 
+workbox.googleAnalytics.initialize({
+  parameterOverrides: {
+    cd1: 'offline'
+  }
+});
+
 addEventListener('activate', event => {
   event.waitUntil(clients.claim());
 });
