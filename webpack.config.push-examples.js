@@ -3,8 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
 
-const INPUT_DIRECTORY = 'src/pages/push-examples';
-const OUTPUT_DIRECTORY = 'build/push-examples';
+const INPUT_DIRECTORY = './src/pages/push-examples';
+const OUTPUT_DIRECTORY = './build/push-examples';
 const TEMPLATE_FILE_NAME = 'push-examples';
 const CHUNK_NAME = 'pushExamples';
 
@@ -81,7 +81,7 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
-            options: { 
+            options: {
               insert: 'head',
               injectType: 'singletonStyleTag'
             },

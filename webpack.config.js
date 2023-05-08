@@ -18,7 +18,7 @@ const PushExamplesWebpackConfig = require('./webpack.config.push-examples');
 const plugins = [
   new HtmlWebpackPlugin({
     filename: 'index.html',
-    favicon: 'src/favicon/favicon.ico',
+    favicon: './src/favicon/favicon.ico',
     template: path.resolve(__dirname, 'src/index.ejs'),
     chunks: ['home'],
     inlineSource: 'src\/css\/.css$'
@@ -36,12 +36,11 @@ const plugins = [
       from: path.resolve(__dirname, 'src/favicon'),
       to: path.resolve(__dirname, 'build/favicon'),
     },
-    'src/offline.html',
-    'src/manifest.json',
-    'src/CNAME'
+    './src/offline.html',
+    './src/manifest.json',
   ]),
   new InjectManifest({
-    swSrc: 'src/service-worker.js',
+    swSrc: './src/service-worker.js',
     exclude: [/service-worker\.js/, /\.DS_Store$/, /\/unoptimised\/.+\.jpg/, /CNAME/, /\/pages\//],
   }),
   new MediaQueryPlugin({
@@ -107,7 +106,7 @@ module.exports = [
           use: [
             {
               loader: 'style-loader',
-              options: { 
+              options: {
                 insert: 'head',
                 injectType: 'singletonStyleTag'
               },
@@ -139,13 +138,13 @@ module.exports = [
 //       switch (chunk.name) {
 //         case 'offlineRequests':
 //           return 'offline-requests/[name].js'
-//         default: 
+//         default:
 //         case 'cartAbandonNotification':
 //           return 'cart-abandon-notification/[name].js'
-//         default: 
+//         default:
 //         case 'pushExamples':
 //           return 'push-examples/[name].js'
-//         default: 
+//         default:
 //           return '[name].js';
 //       }
 //     },

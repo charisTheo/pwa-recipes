@@ -3,8 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
 
-const INPUT_DIRECTORY = 'src/pages/offline-requests';
-const OUTPUT_DIRECTORY = 'build/offline-requests';
+const INPUT_DIRECTORY = './src/pages/offline-requests';
+const OUTPUT_DIRECTORY = './build/offline-requests';
 const TEMPLATE_FILE_NAME = 'offline-requests';
 const CHUNK_NAME = 'offlineRequests';
 
@@ -82,7 +82,7 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
-            options: { 
+            options: {
               insert: 'head',
               injectType: 'singletonStyleTag'
             },

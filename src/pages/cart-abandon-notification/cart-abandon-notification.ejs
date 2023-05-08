@@ -10,20 +10,20 @@
     <meta name="apple-mobile-web-app-title" content="Cart Abandonment 🛒">
     <meta name="description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time." />
     <meta name="author" content="www.github.com/charisTheo">
-    
+
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="app">
     <meta name="twitter:title" content="Cart Abandonment 🛒">
     <meta name="twitter:description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time.">
     <meta name="twitter:creator" content="@charisTheo_dev">
-    <meta name="twitter:image" content="https://www.pwa.recipes/cart-abandon-notification/favicon/android-chrome-512x512.png">
-    
+    <meta name="twitter:image" content="https://charistheo.github.io/pwa-recipes/cart-abandon-notification/favicon/android-chrome-512x512.png">
+
     <!-- Open Graph data -->
     <meta property="og:locale" content="en_GB" />
     <meta property="og:title" content="Cart Abandonment 🛒" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pwa.recipes/cart-abandon-notification/" />
-    <meta property="og:image" content="https://www.pwa.recipes/cart-abandon-notification/favicon/android-chrome-512x512.png" />
+    <meta property="og:url" content="https://charistheo.github.io/pwa-recipes/cart-abandon-notification/" />
+    <meta property="og:image" content="https://charistheo.github.io/pwa-recipes/cart-abandon-notification/favicon/android-chrome-512x512.png" />
     <meta property="og:description" content="An example PWA that notifies the user if any items in the shopping cart have been abandoned and the user is not on the page for some time." />
     <meta property="og:site_name" content="Cart Abandonment 🛒" />
 
@@ -46,24 +46,24 @@
       <header>
         <div class="header-container">
           <paper-icon-button id="notifications-request-button" aria-label="Request for push notifications permission" src="./img/notifications-none.svg"></paper-icon-button>
-          
+
           <div class="shopping-cart-button-container">
-              <paper-icon-button 
-                id="shopping-cart-button" 
-                aria-label="Show your shopping cart" 
+              <paper-icon-button
+                id="shopping-cart-button"
+                aria-label="Show your shopping cart"
                 icon="shopping-cart"
                 aria-controls="cart-items-container"
               ></paper-icon-button>
               <span hidden id="number-of-cart-items" aria-label="Number of items in your shopping cart"></span>
           </div>
-          <div style="flex: 1"></div>          
+          <div style="flex: 1"></div>
           <div>
-            <a 
+            <a
               tabindex="0"
               id="fork-me-banner"
-              href="https://github.com/charisTheo/cart-abandon-notification" 
+              href="https://github.com/charisTheo/cart-abandon-notification"
               aria-label="View source on GitHub"
-              rel="noopener noreferrer" 
+              rel="noopener noreferrer"
               target="_blank"
             >
               <svg tabIndex="-1" viewBox="0 0 250 250" aria-hidden="true" style="fill:#ffffff"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm" style="transform-origin:130px 106px"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"></path></svg>
@@ -71,18 +71,18 @@
           </div>
         </div>
       </header>
-    
+
       <div class="top-dialog-container" role="banner" aria-live="polite"></div>
 
-      <main>        
+      <main>
           <h2 class="page-title">Cart Abandon Notification 🛒</h2>
-          <h3 class="page-description">A demo PWA that notifies the user after shopping cart items were abandoned 👀 Uses the 
+          <h3 class="page-description">A demo PWA that notifies the user after shopping cart items were abandoned 👀 Uses the
             Page Visibility API
-            <a 
+            <a
               class="focus-outline"
               href="https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API"
-              rel="noopener noreferrer" 
-              target="_blank" 
+              rel="noopener noreferrer"
+              target="_blank"
               aria-label="The Page Visibility API Docs"
             >
               <paper-icon-button tabindex="-1" class="small primary" icon="open-in-new"></paper-icon-button>
@@ -94,7 +94,7 @@
               <paper-button
                 class="add-to-cart-button"
                 aria-label="Add to cart"
-                data-item='{"name": "Playstation 4 console", "price": 200, "image": "ps4.jpg"}' 
+                data-item='{"name": "Playstation 4 console", "price": 200, "image": "ps4.jpg"}'
                 raised
               >Add to Cart</paper-button>
             </div>
@@ -124,9 +124,9 @@
 
           <div id="cart-items-container" role="listbox" aria-hidden="true">
             <div class="cart-close-button-container" tabindex="-1">
-              <paper-icon-button 
-                id="cart-close-button" 
-                icon="close" 
+              <paper-icon-button
+                id="cart-close-button"
+                icon="close"
                 alt="close shopping cart"
                 aria-controls="cart-items-container"
               ></paper-icon-button>
@@ -135,7 +135,7 @@
             <div id="cart-items">
               <!-- ? Items are added from index.js on page load or on new item added to cart -->
             </div>
-            
+
             <paper-button id="checkout-button" aria-label="Checkout" raised>Checkout</paper-button>
           </div>
 
@@ -144,10 +144,10 @@
       <div class="flex-stretch"></div>
 
       <footer>
-        <paper-toggle-button 
+        <paper-toggle-button
           id="page-visibility-push-toggle-button"
-          checked 
-          aria-label="Toggle page visibility checks for sending notifications" 
+          checked
+          aria-label="Toggle page visibility checks for sending notifications"
         >
         <custom-style>
           <style is="custom-style">
@@ -178,10 +178,10 @@
               }
             </style>
           </custom-style>
-          <a 
-            href="https://www.heropatterns.com/" 
-            rel="noopener noreferrer" 
-            target="_blank" 
+          <a
+            href="https://www.heropatterns.com/"
+            rel="noopener noreferrer"
+            target="_blank"
             aria-label="Lovely backgrounds by Hero Patterns dot com"
           >
             Hero Patterns
@@ -211,5 +211,5 @@
 
     gtag('event', 'NetworkStatus_changed', {'NetworkStatus': 'online'});
   </script>
-  
+
 </html>

@@ -3,8 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { InjectManifest } = require('workbox-webpack-plugin');
 const path = require('path');
 
-const INPUT_DIRECTORY = 'src/pages/cart-abandon-notification';
-const OUTPUT_DIRECTORY = 'build/cart-abandon-notification';
+const INPUT_DIRECTORY = './src/pages/cart-abandon-notification';
+const OUTPUT_DIRECTORY = './build/cart-abandon-notification';
 const TEMPLATE_FILE_NAME = 'cart-abandon-notification';
 const CHUNK_NAME = 'cartAbandonNotification';
 
@@ -82,7 +82,7 @@ module.exports = {
         use: [
           {
             loader: 'style-loader',
-            options: { 
+            options: {
               insert: 'head',
               injectType: 'singletonStyleTag'
             },

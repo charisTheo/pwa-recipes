@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.html",
-  "homepage": "https://pwa.recipes",
+  "homepage": "https://charistheo.github.io/pwa-recipes/",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "build": "rm -r build && webpack --mode=production",
+    "build": "rm -r -f build && webpack --mode=production",
     "predeploy": "npm run build",
     "deploy": "gh-pages --dist build/"
   },
