@@ -1,86 +1,78 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "14339e6f682ce9bb7ed1",
+    "revision": "467af0d05ef5c4e7269c",
     "url": "0.js"
   },
   {
-    "revision": "ae72498ba184fe729e1b",
+    "revision": "1ae2868fc7b5f0addc65",
     "url": "1.js"
   },
   {
-    "revision": "3419d918c9fdc668e278",
+    "revision": "6f2cae292728cea7074a",
     "url": "10.js"
   },
   {
-    "revision": "885fb3bf8d3339bc15cf",
+    "revision": "6882f171d05fe4ba095c",
     "url": "11.js"
   },
   {
-    "revision": "9aabbdd3b292084bdc08",
-    "url": "12.js"
-  },
-  {
-    "revision": "d758737d8a16fe82d161",
+    "revision": "12be1bcdec1a51a12a53",
     "url": "2.js"
   },
   {
-    "revision": "d6bf25a95e52f80c949b",
+    "revision": "6fe09fba93ca215ec211",
     "url": "5.js"
   },
   {
-    "revision": "0065282c883c1145684c",
+    "revision": "257247e5c834658dd998",
     "url": "6.js"
   },
   {
-    "revision": "6826238bed91fc7d32ec",
+    "revision": "949f57f03ddd2cd42f71",
     "url": "7.js"
   },
   {
-    "revision": "ed4eeeb49c88430441b0",
+    "revision": "10fb1339bd50bb7083e2",
     "url": "8.js"
   },
   {
-    "revision": "f4a07063c22e4132f9fc",
+    "revision": "fb3600f2b62c88df1c89",
     "url": "9.js"
   },
   {
-    "revision": "740fd9fcbc4e4fd5f91b",
-    "url": "cartAbandonNotification.js"
-  },
-  {
-    "revision": "51e256e1ad295a9b965f79bed334c3fe",
+    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
     "url": "favicon.ico"
   },
   {
-    "revision": "db8de568835d37a7e19a240cdfb504fe",
+    "revision": "a4d680aca3b2322207ade82213b9d01c",
     "url": "favicon/android-chrome-192x192.png"
   },
   {
-    "revision": "0b14c98f83e8eac028f6d77adb68b486",
+    "revision": "68d07494c05d1f8fed0614b4f4c419ae",
     "url": "favicon/android-chrome-512x512.png"
   },
   {
-    "revision": "02a6c2b1021dd44a59bded6837a2a552",
+    "revision": "e05ab28febe419e56c7b30369d556efe",
     "url": "favicon/apple-touch-icon.png"
   },
   {
-    "revision": "f142430e8755cdb92e119365f38fd1f4",
+    "revision": "df80aaf70ec51b386d5e95c2913ab4a1",
     "url": "favicon/favicon-16x16.png"
   },
   {
-    "revision": "e6d03c5c1c15b32a5bcfc96e5f544f59",
+    "revision": "edcfef953c61f72b766db69b1fe0c885",
     "url": "favicon/favicon-32x32.png"
   },
   {
-    "revision": "921bb28cdb604c3dce6be3b00a4c30d1",
+    "revision": "ee2042af7431392c3834792e61d7198c",
     "url": "favicon/favicon-64x64.png"
   },
   {
-    "revision": "51e256e1ad295a9b965f79bed334c3fe",
+    "revision": "b16f3cdc9fe56b5519c8bcbe71e6dea6",
     "url": "favicon/favicon.ico"
   },
   {
-    "revision": "db62ff3e53c0115860f0e7f36eebb76c",
+    "revision": "c8b20bd17a32fcbb56044c7badc9d17e",
     "url": "favicon/maskable_icon.png"
   },
   {
@@ -116,24 +108,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/products/headphones.jpg"
   },
   {
-    "revision": "bd8b9d046a6aae041919c536fc4f106f",
-    "url": "img/products/headphones.webp"
-  },
-  {
     "revision": "b836a0fb9910a14603841bdb74473962",
     "url": "img/products/ps4.jpg"
   },
   {
-    "revision": "df6b315bd8af9901b20a1efbde705934",
-    "url": "img/products/ps4.webp"
-  },
-  {
     "revision": "ec7acaaefd0037d5bc125be230730fa0",
     "url": "img/products/smart-watch.jpg"
-  },
-  {
-    "revision": "a339abc1cb99d8e9dbcb8e1533ec8fbb",
-    "url": "img/products/smart-watch.webp"
   },
   {
     "revision": "ce1a303cf8c6fdf8dfad494bb4507f08",
@@ -144,15 +124,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/speech-notification-badge-inverted-48.png"
   },
   {
-    "revision": "74dd88ac05223ac2bffc677d3ad69886",
+    "revision": "b940b0766e7605409602ed602e96bd98",
     "url": "index.html"
   },
   {
-    "revision": "dd526f50c2c41e4ea69f4ffa30273fbe",
+    "revision": "2ddcdd11d0c7984946eb99896fabba2a",
     "url": "manifest.json"
   },
   {
-    "revision": "110aabdb2aae11718271",
+    "revision": "8d6e387634bd2860bcdb",
+    "url": "offlineRequests.js"
+  },
+  {
+    "revision": "3953931ee59f1b92193f",
     "url": "sw-util.js"
   }
 ]);

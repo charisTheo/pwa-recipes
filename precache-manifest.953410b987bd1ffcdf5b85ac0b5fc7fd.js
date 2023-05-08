@@ -152,7 +152,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "img/share-24px.svg"
   },
   {
-    "revision": "bf8943e0cda9a17d846524f45f92e87f",
+    "revision": "16adc4616b1089c1841f934dda791e20",
     "url": "index.html"
   },
   {
